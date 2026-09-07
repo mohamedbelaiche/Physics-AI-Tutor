@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المدرس الشخصي للفيزياء</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>المدرس الشخصي للفيزياء</h1>
+    <p>ملخصات الوحدات الدراسية</p>
+  </header>
+
+  <main>
+    <section id="home-view" class="view">
+      <h2 class="section-title">اختر الوحدة</h2>
+      <div id="units-container" class="cards-grid">
+        <p id="loading">جاري التحميل...</p>
+      </div>
+    </section>
+
+    <section id="reader-view" class="view hidden">
+      <button id="back-btn" class="back-btn">→ العودة إلى الوحدات</button>
+      <h2 id="reader-title" class="reader-title"></h2>
+      <div id="pdf-container" class="pdf-container">
+        <iframe id="pdf-frame" title="ملخص الوحدة"></iframe>
+        <p id="pdf-error" class="pdf-error hidden"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>تطبيق عرض ملخصات الفيزياء</p>
+  </footer>
+
+  <button id="chat-btn" class="chat-btn" aria-label="اسأل المدرس الذكي">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+    <span>اسأل المدرس</span>
+  </button>
+
+  <div id="chat-panel" class="chat-panel hidden">
+    <div class="chat-header">
+      <strong>المدرس الذكي</strong>
+      <button id="chat-close" class="chat-close" aria-label="إغلاق">×</button>
+    </div>
+    <div id="chat-messages" class="chat-messages">
+      <div class="chat-msg bot">
+        <p>مرحباً! أنا المدرس الذكي. اسألني عن أي سؤال في الفيزياء أو الكيمياء.</p>
+      </div>
+    </div>
+    <form id="chat-form" class="chat-form">
+      <input id="chat-input" type="text" placeholder="اكتب سؤالك هنا..." autocomplete="off">
+      <button type="submit" class="chat-send">إرسال</button>
+    </form>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
