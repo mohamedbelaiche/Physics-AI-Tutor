@@ -6,8 +6,5 @@
   "scripts": {
     "start": "node server.js",
     "sync:data": "node scripts/sync-data.js"
-  },
-  "dependencies": {
-    "pdf-parse": "^2.4.5"
   }
 }

@@ -5,38 +5,28 @@ const DATA_ROOT = path.join(__dirname, 'data');
 const MAX_TEXT_PER_FILE = 22000;
 const MAX_TOTAL = 60000;
 
-let PDFParse = null;
-try {
-  ({ PDFParse } = require('pdf-parse'));
-} catch (err) {
-  PDFParse = null;
-}
-
-const cache = {};
 let contextPromise = null;
 
-async function extractPdfText(filePath) {
-  if (cache[filePath] !== undefined) return cache[filePath];
-  cache[filePath] = '';
-  if (!PDFParse) return '';
+function listMarkdownFiles(dir, out) {
+  out = out || [];
+  let entries;
   try {
-    const buf = fs.readFileSync(filePath);
-    const parser = new PDFParse({ data: buf });
-    const res = await parser.getText();
-    const text = (res && res.text) || '';
-    const len = text.length;
-    const arabic = (text.match(/[\u0600-\u06FF]/g) || []).length;
-    if (arabic > 50 && arabic / Math.max(len, 1) > 0.05) {
-      cache[filePath] = text;
-      return text;
-    }
-    return '';
+    entries = fs.readdirSync(dir, { withFileTypes: true });
   } catch (err) {
-    return '';
+    return out;
   }
+  for (const entry of entries) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      listMarkdownFiles(full, out);
+    } else if (entry.isFile() && /\.md$/i.test(entry.name)) {
+      out.push(full);
+    }
+  }
+  return out;
 }
 
-async function readUnits() {
+function readUnits() {
   try {
     const raw = fs.readFileSync(path.join(DATA_ROOT, 'units.json'), 'utf8');
     const data = JSON.parse(raw);
@@ -47,30 +37,36 @@ async function readUnits() {
 }
 
 async function buildContext() {
-  const units = await readUnits();
+  const units = readUnits();
+  const files = listMarkdownFiles(DATA_ROOT);
   const parts = [];
+
   parts.push('الوحدات الدراسية المتوفرة في المشروع وملخصاتها:');
 
-  for (const unit of units) {
-    const files = Array.isArray(unit.files) ? unit.files : [];
-    if (!files.length) {
-      parts.push('الوحدة "' + unit.title + '" (' + (unit.description || 'بدون وصف') + '): لا يوجد ملفات.');
+  for (const file of files) {
+    let content;
+    try {
+      content = fs.readFileSync(file, 'utf8');
+    } catch (err) {
       continue;
     }
-    parts.push('الوحدة "' + unit.title + '" (' + (unit.description || '') + '):');
-    for (const file of files) {
-      const absPath = path.join(DATA_ROOT, file.path);
-      if (!fs.existsSync(absPath)) {
-        parts.push(' - ' + (file.label || file.path) + ': الملف غير موجود.');
-        continue;
-      }
-      const text = await extractPdfText(absPath);
-      if (text) {
-        parts.push('(ملخص: ' + (file.label || file.path) + ')');
-        parts.push(text.slice(0, MAX_TEXT_PER_FILE));
-      } else {
-        parts.push(' - ' + (file.label || file.path) + ': يتوفر الملف لكن لا يمكن استخراج نص مقروء منه.');
-      }
+
+    const rel = path.relative(DATA_ROOT, file);
+    const folder = path.basename(path.dirname(file));
+    const unit = units.find(function (u) {
+      return folder === unitFolder(u) || folder === u.title;
+    }) || units.find(function (u) {
+      return (u.files || []).some(function (f) {
+        return rel.indexOf(String(f.path || '')) !== -1;
+      });
+    });
+
+    parts.push('## الوحدة: ' + (unit ? unit.title : rel));
+    const body = content.trim();
+    if (body) {
+      parts.push(body.slice(0, MAX_TEXT_PER_FILE));
+    } else {
+      parts.push('(ملف فارغ)');
     }
   }
 
@@ -79,6 +75,17 @@ async function buildContext() {
     ctx = ctx.slice(0, MAX_TOTAL) + '\n...(مقتطع لضيق المساحة)';
   }
   return ctx;
+}
+
+function unitFolder(unit) {
+  const p = String(unit.folder || '');
+  if (p) return p;
+  const files = Array.isArray(unit.files) ? unit.files : [];
+  for (const f of files) {
+    const parts = String((f && f.path) || '').split(/[\\/]/);
+    if (parts.length > 1) return parts[parts.length - 2];
+  }
+  return unit.title || '';
 }
 
 function getProjectContext() {
