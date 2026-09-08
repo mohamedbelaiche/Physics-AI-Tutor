@@ -3,9 +3,17 @@
 
 const { createClient } = require('@supabase/supabase-js');
 
+// Publishable fallbacks — these are NOT secrets.
+// They match the values already exposed in the frontend (public/supabase-config.js).
+// On Vercel, process.env should provide them, but some deployment configs
+// don't propagate env vars to serverless functions reliably.
+const FALLBACK_SUPABASE_URL = 'https://utwhqgbotlejfhcupnny.supabase.co';
+const FALLBACK_SUPABASE_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV0d2hxZ2JvdGxlamZoY3Vwbm55Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg4ODIwNTAsImV4cCI6MjEwNDQ1ODA1MH0.bDu8LjiS12geCcjtjoQX0JcUXeTM4GZTkn3dEqxq1-w';
+
 function getSupabase() {
-  const url = process.env.SUPABASE_URL;
-  const anonKey = process.env.SUPABASE_ANON_KEY;
+  const url = process.env.SUPABASE_URL || FALLBACK_SUPABASE_URL;
+  const anonKey = process.env.SUPABASE_ANON_KEY || FALLBACK_SUPABASE_ANON_KEY;
   if (!url || !anonKey) {
     throw new Error('SUPABASE_URL أو SUPABASE_ANON_KEY غير معرّفين');
   }

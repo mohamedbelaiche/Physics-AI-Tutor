@@ -7,6 +7,11 @@ const SYSTEM_PROMPT =
   '، اشرح المفاهيم خطوة بخطوة، واعرض الحلول بالتفصيل مع الصيغ الرياضية عند الحاجة.';
 
 function readJsonBody(req, callback) {
+  // On Vercel, the body is already parsed into req.body
+  if (req.body && typeof req.body === 'object') {
+    callback(req.body);
+    return;
+  }
   let body = '';
   req.on('data', function (chunk) {
     body += chunk;
