@@ -13,6 +13,7 @@
   var pdfNext = document.getElementById('pdf-next');
   var pdfPageInfo = document.getElementById('pdf-page-info');
   var pdfDownload = document.getElementById('pdf-download');
+  var pdfOpenOriginal = document.getElementById('pdf-open-original');
 
   var chatBtn = document.getElementById('chat-btn');
   var chatPanel = document.getElementById('chat-panel');
@@ -32,6 +33,7 @@
   var currentDoc = null;
   var currentPage = 1;
   var currentFileUrl = '';
+  var currentRenderTask = null;
 
   function toggleChat(open) {
     chatPanel.classList.toggle('hidden', !open);
@@ -97,6 +99,7 @@
     pdfCanvas.classList.add('hidden');
     pdfControls.classList.add('hidden');
     pdfDownload.classList.add('hidden');
+    if (pdfOpenOriginal) pdfOpenOriginal.classList.add('hidden');
     pdfProgress.classList.remove('hidden');
     pdfProgress.textContent = 'جاري تحميل الملف...';
     showView('reader');
@@ -123,7 +126,7 @@
         pdfPrev.classList.remove('hidden');
         pdfNext.classList.remove('hidden');
         pdfPageInfo.classList.remove('hidden');
-        pdfDownload.classList.add('hidden');
+        setupFileLinks(url);
         renderPage();
       })
       .catch(function () {
@@ -139,32 +142,55 @@
     pdfPrev.classList.add('hidden');
     pdfNext.classList.add('hidden');
     pdfPageInfo.classList.add('hidden');
-    setupDownload(url);
+    setupFileLinks(url);
+  }
+
+  function setupFileLinks(url) {
+    var encoded = encodeURI(url);
+    pdfDownload.href = encoded;
+    pdfDownload.setAttribute('download', '');
+    pdfDownload.classList.remove('hidden');
+    if (pdfOpenOriginal) {
+      pdfOpenOriginal.href = encoded;
+      pdfOpenOriginal.classList.remove('hidden');
+    }
   }
 
   function renderPage() {
     if (!currentDoc) return;
     var pageNum = currentPage;
     currentDoc.getPage(pageNum).then(function (page) {
-      var containerWidth = pdfCanvasWrap.clientWidth - 24;
-      var baseScale = containerWidth / page.getViewport({ scale: 1 }).width;
-      var scale = Math.max(baseScale, 0.5);
-      var viewport = page.getViewport({ scale: scale });
+      if (currentRenderTask) currentRenderTask.cancel();
 
-      pdfCanvas.width = viewport.width;
-      pdfCanvas.height = viewport.height;
+      var wrapWidth = pdfCanvasWrap.clientWidth - 24;
+      var wrapHeight = pdfCanvasWrap.clientHeight - 24;
+      var dpr = window.devicePixelRatio || 1;
 
-      page.render({ canvasContext: pdfCanvas.getContext('2d'), viewport: viewport });
+      var baseViewport = page.getViewport({ scale: 1 });
+      var scale = Math.min(wrapWidth / baseViewport.width, wrapHeight / baseViewport.height);
+      scale = Math.max(scale, 0.5);
+
+      var cssViewport = page.getViewport({ scale: scale });
+      var renderScale = scale * dpr;
+
+      var renderViewport = page.getViewport({ scale: renderScale });
+
+      pdfCanvas.style.width = Math.round(cssViewport.width) + 'px';
+      pdfCanvas.style.height = Math.round(cssViewport.height) + 'px';
+      pdfCanvas.width = Math.round(renderViewport.width);
+      pdfCanvas.height = Math.round(renderViewport.height);
+
+      var renderTask = page.render({
+        canvasContext: pdfCanvas.getContext('2d'),
+        viewport: renderViewport
+      });
+      currentRenderTask = renderTask;
+      renderTask.promise.catch(function () {});
+
       pdfPageInfo.textContent = currentPage + ' / ' + currentDoc.numPages;
       pdfPrev.disabled = currentPage <= 1;
       pdfNext.disabled = currentPage >= currentDoc.numPages;
     });
-  }
-
-  function setupDownload(url) {
-    pdfDownload.href = encodeURI(url);
-    pdfDownload.setAttribute('download', '');
-    pdfDownload.classList.remove('hidden');
   }
 
   function showError(msg) {
@@ -274,6 +300,7 @@
     pdfProgress.classList.add('hidden');
     pdfError.classList.add('hidden');
     pdfDownload.classList.add('hidden');
+    if (pdfOpenOriginal) pdfOpenOriginal.classList.add('hidden');
     showView('home');
   });
 

@@ -223,6 +223,25 @@ main {
   background: #2a3a5e;
 }
 
+.pdf-open-original {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #16213e;
+  border: 2px solid #2a6db5;
+  text-decoration: none;
+  padding: 0.45rem 1.1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.pdf-open-original:hover {
+  background: #2a6db5;
+  color: #fff;
+}
+
 .pdf-error {
   text-align: center;
   padding: 3rem;
@@ -440,6 +459,11 @@ main {
 
   .pdf-download-link {
     padding: 0.45rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .pdf-open-original {
+    padding: 0.4rem 0.8rem;
     font-size: 0.85rem;
   }
 
