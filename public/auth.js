@@ -150,20 +150,30 @@
 
   // Ensure config is fetched and client is created before anything else.
   function bootstrap() {
-    return fetchConfig().then(function (cfg) {
-      initSupabase(cfg.url, cfg.anonKey);
-
-      // Restore session from storage if any
-      return getSession().then(function (session) {
-        if (session && session.user) {
-          currentUser = session.user;
-          return loadProfile().catch(function () {
-            currentProfile = null;
-          });
+    return fetchConfig()
+      .catch(function (err) {
+        // Fall back to the static (publishable) config embedded in supabase-config.js
+        var fallback = window.__SUPABASE_CONFIG__ || {};
+        if (fallback.url && fallback.anonKey) {
+          console.warn('/api/config فشل، استخدام التكوين المضمّن:', err && err.message);
+          return { url: fallback.url, anonKey: fallback.anonKey };
         }
-        return null;
+        throw err;
+      })
+      .then(function (cfg) {
+        initSupabase(cfg.url, cfg.anonKey);
+
+        // Restore session from storage if any
+        return getSession().then(function (session) {
+          if (session && session.user) {
+            currentUser = session.user;
+            return loadProfile().catch(function () {
+              currentProfile = null;
+            });
+          }
+          return null;
+        });
       });
-    });
   }
 
   // Call bootstrap once (when this script loads).
