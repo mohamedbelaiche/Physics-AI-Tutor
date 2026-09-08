@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const chatHandler = require('./api/chat');
+const configHandler = require('./api/config');
 
 const ROOT = __dirname;
 const PORT = process.env.PORT || 5500;
@@ -49,6 +50,11 @@ const server = http.createServer((req, res) => {
 
   if (urlPath === '/api/chat') {
     chatHandler(req, res);
+    return;
+  }
+
+  if (urlPath === '/api/config') {
+    configHandler(req, res);
     return;
   }
 

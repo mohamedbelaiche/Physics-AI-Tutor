@@ -1,4 +1,5 @@
 const { getProjectContext } = require('./context');
+const { requireUser } = require('./supabase-server');
 
 const SYSTEM_PROMPT =
   'أنت "المدرس الشخصي للفيزياء"، مدرس فيزياء وعلوم خبير باللغة العربية. ' +
@@ -27,12 +28,21 @@ async function handler(req, res) {
     return;
   }
 
+  const auth = await requireUser(req, res);
+  if (!auth) return;
+
   readJsonBody(req, function (data) {
-    handleChat(data, res);
+    handleChat(data, res, auth).catch(function (err) {
+      console.error('Unhandled chat error:', err);
+      if (!res.headersSent) {
+        res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ error: 'خطأ داخلي في الخادم.' }));
+      }
+    });
   });
 }
 
-async function handleChat(data, res) {
+async function handleChat(data, res, auth) {
   if (data.__invalid) {
     res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({ error: 'طلب غير صالح: ' + data.message }));

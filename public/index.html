@@ -9,8 +9,15 @@
 </head>
 <body>
   <header class="site-header">
-    <h1>المدرس الشخصي للفيزياء</h1>
-    <p>ملخصات الوحدات الدراسية</p>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>المدرس الشخصي للفيزياء</h1>
+        <p>ملخصات الوحدات الدراسية</p>
+      </div>
+      <div id="auth-area" class="auth-area">
+        <button id="auth-btn" class="auth-btn hidden"></button>
+      </div>
+    </div>
   </header>
 
   <main>
@@ -52,10 +59,40 @@
     <span>اسأل المدرس</span>
   </button>
 
+  <div id="auth-modal" class="auth-modal hidden">
+    <div class="auth-card">
+      <button id="auth-modal-close" class="auth-modal-close" aria-label="إغلاق">×</button>
+      <h2 id="auth-modal-title">تسجيل الدخول</h2>
+      <p id="auth-modal-sub" class="auth-sub">ادخل بحسابك لاستخدام المدرّس الذكي</p>
+
+      <div id="auth-google-wrap">
+        <button id="auth-google" class="btn-google">تسجيل الدخول بأمان عن طريق جوجل</button>
+        <div class="auth-divider"><span>أو</span></div>
+      </div>
+
+      <form id="auth-form">
+        <input id="auth-email" type="email" placeholder="البريد الإلكتروني" autocomplete="email" required>
+        <input id="auth-password" type="password" placeholder="كلمة المرور" autocomplete="current-password" required>
+        <input id="auth-name" type="text" placeholder="الاسم الكامل (اختياري عند التسجيل)" autocomplete="name" class="hidden">
+        <p id="auth-error" class="auth-error hidden"></p>
+        <button type="submit" id="auth-submit" class="btn-primary">دخول</button>
+      </form>
+
+      <p class="auth-switch">
+        <span id="auth-switch-text">ليس لديك حساب؟</span>
+        <button id="auth-switch-btn" class="link-btn">إنشاء حساب جديد</button>
+      </p>
+    </div>
+  </div>
+
   <div id="chat-panel" class="chat-panel hidden">
     <div class="chat-header">
       <strong>المدرس الذكي</strong>
       <button id="chat-close" class="chat-close" aria-label="إغلاق">×</button>
+    </div>
+    <div id="chat-gate" class="chat-gate">
+      <p>سجّل الدخول لاستخدام المدرّس الذكي</p>
+      <button id="chat-gate-login" class="btn-primary">تسجيل الدخول</button>
     </div>
     <div id="chat-messages" class="chat-messages">
       <div class="chat-msg bot">
@@ -68,6 +105,9 @@
     </form>
   </div>
 
+  <script src="vendor/supabase.js"></script>
+  <script src="supabase-config.js"></script>
+  <script src="auth.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

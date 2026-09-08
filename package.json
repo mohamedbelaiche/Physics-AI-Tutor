@@ -6,5 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "sync:data": "node scripts/sync-data.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.116.0"
   }
 }

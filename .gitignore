@@ -3,3 +3,13 @@ node_modules/
 .vercel/
 *.log
 .DS_Store
+
+# Local tooling files (not part of the project)
+.agents/
+.claude/
+agent/
+skills-lock.json
+
+# Sync payload cache
+sync_payload/
+*.tmp
