@@ -13,10 +13,13 @@
   var pdfNext = document.getElementById('pdf-next');
   var pdfPageInfo = document.getElementById('pdf-page-info');
   var pdfDownload = document.getElementById('pdf-download');
+  var pdfFullscreen = document.getElementById('pdf-fullscreen');
+  var pdfViewer = document.getElementById('pdf-viewer');
 
   var chatBtn = document.getElementById('chat-btn');
   var chatPanel = document.getElementById('chat-panel');
   var chatClose = document.getElementById('chat-close');
+  var chatFullscreen = document.getElementById('chat-fullscreen');
   var chatForm = document.getElementById('chat-form');
   var chatInput = document.getElementById('chat-input');
   var chatMessages = document.getElementById('chat-messages');
@@ -32,6 +35,43 @@
   var currentDoc = null;
   var currentPage = 1;
   var currentFileUrl = '';
+  var currentRenderTask = null;
+
+  function isFullscreen() {
+    return (
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.mozFullScreenElement
+    );
+  }
+
+  function toggleFullscreen(el) {
+    if (isFullscreen()) {
+      if (document.exitFullscreen) document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+    } else {
+      if (el.requestFullscreen) el.requestFullscreen();
+      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+    }
+  }
+
+  function supportsFullscreen() {
+    var el = document.documentElement;
+    return !!(
+      el.requestFullscreen ||
+      el.webkitRequestFullscreen ||
+      el.mozRequestFullScreen
+    );
+  }
+
+  function updateFullscreenIcons() {
+    if (!supportsFullscreen()) return;
+    var fs = isFullscreen();
+    if (pdfFullscreen) pdfFullscreen.classList.toggle('fs-active', fs);
+    if (chatFullscreen) chatFullscreen.classList.toggle('fs-active', fs);
+  }
 
   function toggleChat(open) {
     chatPanel.classList.toggle('hidden', !open);
@@ -146,15 +186,33 @@
     if (!currentDoc) return;
     var pageNum = currentPage;
     currentDoc.getPage(pageNum).then(function (page) {
-      var containerWidth = pdfCanvasWrap.clientWidth - 24;
-      var baseScale = containerWidth / page.getViewport({ scale: 1 }).width;
-      var scale = Math.max(baseScale, 0.5);
-      var viewport = page.getViewport({ scale: scale });
+      if (currentRenderTask) currentRenderTask.cancel();
 
-      pdfCanvas.width = viewport.width;
-      pdfCanvas.height = viewport.height;
+      var wrapWidth = pdfCanvasWrap.clientWidth - 24;
+      var wrapHeight = pdfCanvasWrap.clientHeight - 24;
+      var dpr = window.devicePixelRatio || 1;
 
-      page.render({ canvasContext: pdfCanvas.getContext('2d'), viewport: viewport });
+      var baseViewport = page.getViewport({ scale: 1 });
+      var scaleByWidth = wrapWidth / baseViewport.width;
+      var scaleByHeight = wrapHeight / baseViewport.height;
+      var scale = Math.min(scaleByWidth, scaleByHeight);
+      scale = Math.max(scale, 0.5);
+
+      var cssViewport = page.getViewport({ scale: scale });
+      var renderViewport = page.getViewport({ scale: scale * dpr });
+
+      pdfCanvas.style.width = Math.round(cssViewport.width) + 'px';
+      pdfCanvas.style.height = Math.round(cssViewport.height) + 'px';
+      pdfCanvas.width = Math.round(renderViewport.width);
+      pdfCanvas.height = Math.round(renderViewport.height);
+
+      var renderTask = page.render({
+        canvasContext: pdfCanvas.getContext('2d'),
+        viewport: renderViewport
+      });
+      currentRenderTask = renderTask;
+      renderTask.promise.catch(function () {});
+
       pdfPageInfo.textContent = currentPage + ' / ' + currentDoc.numPages;
       pdfPrev.disabled = currentPage <= 1;
       pdfNext.disabled = currentPage >= currentDoc.numPages;
@@ -260,6 +318,35 @@
       currentPage++;
       renderPage();
     }
+  });
+
+  if (pdfFullscreen) {
+    pdfFullscreen.addEventListener('click', function () {
+      toggleFullscreen(pdfViewer);
+    });
+  }
+  if (chatFullscreen) {
+    chatFullscreen.addEventListener('click', function () {
+      toggleFullscreen(chatPanel);
+    });
+  }
+
+  if (!supportsFullscreen()) {
+    if (pdfFullscreen) pdfFullscreen.classList.add('hidden');
+    if (chatFullscreen) chatFullscreen.classList.add('hidden');
+  }
+
+  document.addEventListener('fullscreenchange', function () {
+    updateFullscreenIcons();
+    if (currentDoc) renderPage();
+  });
+  document.addEventListener('webkitfullscreenchange', function () {
+    updateFullscreenIcons();
+    if (currentDoc) renderPage();
+  });
+  document.addEventListener('mozfullscreenchange', function () {
+    updateFullscreenIcons();
+    if (currentDoc) renderPage();
   });
 
   window.addEventListener('resize', function () {
