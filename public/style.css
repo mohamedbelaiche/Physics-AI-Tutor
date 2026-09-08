@@ -21,8 +21,12 @@ body {
 }
 
 .site-header h1 {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
   margin-bottom: 0.25rem;
+}
+
+.site-header p {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
 }
 
 .site-header p {
@@ -47,6 +51,19 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.25rem;
+}
+
+@media (min-width: 700px) and (max-width: 1024px) {
+  .cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
 .unit-card {
@@ -314,4 +331,106 @@ main {
 
 .chat-send:hover {
   background: #1f5390;
+}
+
+@media (max-width: 600px) {
+  .site-header {
+    padding: 1.25rem 0.75rem;
+  }
+
+  main {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .unit-card {
+    padding: 1.1rem;
+  }
+
+  .unit-card h3 {
+    font-size: 1.05rem;
+  }
+
+  .back-btn {
+    padding: 0.55rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .pdf-container {
+    height: 60vh;
+  }
+
+  .chat-btn {
+    left: 12px;
+    bottom: 12px;
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 35px;
+  }
+
+  .chat-panel {
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    width: auto;
+    max-width: 380px;
+    margin: 0 auto;
+    height: min(70vh, calc(100vh - 16px));
+    border-radius: 14px;
+  }
+
+  .chat-msg {
+    max-width: 95%;
+    font-size: 0.9rem;
+  }
+
+  .chat-form {
+    padding: 0.5rem;
+  }
+
+  .chat-send {
+    padding: 0.6rem 0.8rem;
+  }
+
+  #chat-input {
+    font-size: 0.9rem;
+    padding: 0.55rem 0.7rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .chat-btn span {
+    display: none;
+  }
+
+  .chat-btn {
+    width: 52px;
+    height: 52px;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 0;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+  main {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .pdf-container {
+    height: 68vh;
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .chat-panel {
+    height: min(85vh, calc(100vh - 16px));
+  }
+
+  .pdf-container {
+    height: 70vh;
+  }
 }
