@@ -4,8 +4,15 @@
   var unitsContainer = document.getElementById('units-container');
   var backBtn = document.getElementById('back-btn');
   var readerTitle = document.getElementById('reader-title');
-  var pdfFrame = document.getElementById('pdf-frame');
   var pdfError = document.getElementById('pdf-error');
+  var pdfCanvasWrap = document.getElementById('pdf-canvas-wrap');
+  var pdfCanvas = document.getElementById('pdf-canvas');
+  var pdfProgress = document.getElementById('pdf-progress');
+  var pdfControls = document.getElementById('pdf-controls');
+  var pdfPrev = document.getElementById('pdf-prev');
+  var pdfNext = document.getElementById('pdf-next');
+  var pdfPageInfo = document.getElementById('pdf-page-info');
+  var pdfDownload = document.getElementById('pdf-download');
 
   var chatBtn = document.getElementById('chat-btn');
   var chatPanel = document.getElementById('chat-panel');
@@ -16,6 +23,15 @@
 
   var units = [];
   var chatHistory = [];
+
+  if (window.pdfjsLib && window.pdfjsLib.GlobalWorkerOptions) {
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  }
+
+  var currentDoc = null;
+  var currentPage = 1;
+  var currentFileUrl = '';
 
   function toggleChat(open) {
     chatPanel.classList.toggle('hidden', !open);
@@ -76,16 +92,85 @@
       return;
     }
     readerTitle.textContent = unit.title + (unit.description ? ' — ' + unit.description : '');
-    pdfFrame.src = file.path;
+    currentFileUrl = file.path;
     pdfError.classList.add('hidden');
-    pdfFrame.classList.remove('hidden');
+    pdfCanvas.classList.add('hidden');
+    pdfControls.classList.add('hidden');
+    pdfDownload.classList.add('hidden');
+    pdfProgress.classList.remove('hidden');
+    pdfProgress.textContent = 'جاري تحميل الملف...';
     showView('reader');
+    loadPdf(file.path);
+  }
+
+  function loadPdf(url) {
+    if (!window.pdfjsLib) {
+      pdfCanvas.classList.add('hidden');
+      pdfProgress.classList.add('hidden');
+      showError('متصفحك لا يدعم عرض الملفات هنا. استخدم زر "تحميل الملف" بالأسفل، أو حدّث المتصفح لنسخة أحدث.');
+      showDownloadFallback(url);
+      return;
+    }
+
+    window.pdfjsLib
+      .getDocument(encodeURI(url))
+      .promise.then(function (doc) {
+        currentDoc = doc;
+        currentPage = 1;
+        pdfProgress.classList.add('hidden');
+        pdfCanvas.classList.remove('hidden');
+        pdfControls.classList.remove('hidden');
+        pdfPrev.classList.remove('hidden');
+        pdfNext.classList.remove('hidden');
+        pdfPageInfo.classList.remove('hidden');
+        pdfDownload.classList.add('hidden');
+        renderPage();
+      })
+      .catch(function () {
+        pdfCanvas.classList.add('hidden');
+        pdfProgress.classList.add('hidden');
+        showError('تعذر تحميل الملف. اضغط زر "تحميل الملف" بالأسفل لفتحه مباشرة.');
+        showDownloadFallback(url);
+      });
+  }
+
+  function showDownloadFallback(url) {
+    pdfControls.classList.remove('hidden');
+    pdfPrev.classList.add('hidden');
+    pdfNext.classList.add('hidden');
+    pdfPageInfo.classList.add('hidden');
+    setupDownload(url);
+  }
+
+  function renderPage() {
+    if (!currentDoc) return;
+    var pageNum = currentPage;
+    currentDoc.getPage(pageNum).then(function (page) {
+      var containerWidth = pdfCanvasWrap.clientWidth - 24;
+      var baseScale = containerWidth / page.getViewport({ scale: 1 }).width;
+      var scale = Math.max(baseScale, 0.5);
+      var viewport = page.getViewport({ scale: scale });
+
+      pdfCanvas.width = viewport.width;
+      pdfCanvas.height = viewport.height;
+
+      page.render({ canvasContext: pdfCanvas.getContext('2d'), viewport: viewport });
+      pdfPageInfo.textContent = currentPage + ' / ' + currentDoc.numPages;
+      pdfPrev.disabled = currentPage <= 1;
+      pdfNext.disabled = currentPage >= currentDoc.numPages;
+    });
+  }
+
+  function setupDownload(url) {
+    pdfDownload.href = encodeURI(url);
+    pdfDownload.setAttribute('download', '');
+    pdfDownload.classList.remove('hidden');
   }
 
   function showError(msg) {
     pdfError.textContent = msg;
     pdfError.classList.remove('hidden');
-    pdfFrame.classList.add('hidden');
+    pdfCanvas.classList.add('hidden');
     showView('reader');
   }
 
@@ -164,8 +249,31 @@
     sendChat();
   });
 
+  pdfPrev.addEventListener('click', function () {
+    if (currentPage > 1) {
+      currentPage--;
+      renderPage();
+    }
+  });
+  pdfNext.addEventListener('click', function () {
+    if (currentDoc && currentPage < currentDoc.numPages) {
+      currentPage++;
+      renderPage();
+    }
+  });
+
+  window.addEventListener('resize', function () {
+    if (currentDoc) renderPage();
+  });
+
   backBtn.addEventListener('click', function () {
-    pdfFrame.src = '';
+    currentDoc = null;
+    currentPage = 1;
+    pdfCanvas.classList.add('hidden');
+    pdfControls.classList.add('hidden');
+    pdfProgress.classList.add('hidden');
+    pdfError.classList.add('hidden');
+    pdfDownload.classList.add('hidden');
     showView('home');
   });
 

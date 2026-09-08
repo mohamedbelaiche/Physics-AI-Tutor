@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>المدرس الشخصي للفيزياء</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -24,8 +25,17 @@
       <button id="back-btn" class="back-btn">→ العودة إلى الوحدات</button>
       <h2 id="reader-title" class="reader-title"></h2>
       <div id="pdf-container" class="pdf-container">
-        <iframe id="pdf-frame" title="ملخص الوحدة"></iframe>
+        <div id="pdf-canvas-wrap">
+          <canvas id="pdf-canvas"></canvas>
+          <div id="pdf-progress" class="pdf-progress hidden">جاري تحميل الملف...</div>
+        </div>
         <p id="pdf-error" class="pdf-error hidden"></p>
+      </div>
+      <div id="pdf-controls" class="pdf-controls hidden">
+        <button id="pdf-prev" class="pdf-nav">السابق</button>
+        <span id="pdf-page-info" class="pdf-page-info">1 / 1</span>
+        <button id="pdf-next" class="pdf-nav">التالي</button>
+        <a id="pdf-download" class="pdf-download-link hidden" download>تحميل الملف</a>
       </div>
     </section>
   </main>
