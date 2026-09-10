@@ -1,5 +1,10 @@
 const { getProjectContext } = require('./context');
-const { requireUser } = require('./supabase-server');
+const { requireUser, getSupabaseConfig } = require('./supabase-server');
+
+const ACADEMIC_INSTRUCTION =
+  'إذا وُجد "الملف الأكاديمي للطالب" أعلاه، حسّن الجواب بناءً عليه: ' +
+  'ابدأ من النقطة الموصى بها "recommended_start"، وركّز على تقوية المهارات الأضعف من "skill_map"، ' +
+  'واشرح بحجم يناسب مستوى الطالب دون الكشف عن أرقام التقييم للمستخدم مباشرة.';
 
 const SYSTEM_PROMPT =
   'أنت "المدرس الشخصي للفيزياء"، مدرس فيزياء وعلوم خبير باللغة العربية. ' +
@@ -47,6 +52,32 @@ async function handler(req, res) {
   });
 }
 
+// Fetch the student's diagnostic academic profile (per-skill map, levels,
+// recommended starting point) so the AI can personalize answers. Returns null
+// when the student has no assessment yet or the lookup fails.
+async function getAcademicContext(auth) {
+  try {
+    const { url, anonKey } = getSupabaseConfig();
+    const res = await fetch(url + '/rest/v1/rpc/get_student_diagnostic_context', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: anonKey,
+        Authorization: 'Bearer ' + auth.token
+      },
+      body: '{}'
+    });
+    if (!res.ok) return null;
+    let data = await res.json();
+    if (Array.isArray(data)) data = data[0];
+    if (!data || typeof data !== 'object' || Object.keys(data).length === 0) return null;
+    return data;
+  } catch (err) {
+    console.warn('diagnostic context unavailable:', err && err.message);
+    return null;
+  }
+}
+
 async function handleChat(data, res, auth) {
   if (data.__invalid) {
     res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
@@ -75,12 +106,18 @@ async function handleChat(data, res, auth) {
   }
 
   const context = await getProjectContext();
+  const academic = await getAcademicContext(auth);
+  const academicSection = academic
+    ? '## الملف الأكاديمي للطالب (من التقييم التشخيصي)\n' + JSON.stringify(academic, null, 2)
+    : '';
   const systemContent =
     SYSTEM_PROMPT +
     '\n\n## بيانات المشروع (الوحدات والملخصات)\n' +
     context +
+    (academicSection ? '\n\n' + academicSection : '') +
     '\n\nأجب مستندا أولا إلى بيانات المشروع أعلاه. وإن ورد سؤال خارجها أو لم تجد إجابته، قل ذلك بوضوح ثم أجب من معلوماتك العامة.' +
-    '\nلا تذكر للمستخدم أنك تستند إلى ملفات، فقط أجب من المحتوى بشكل طبيعي.';
+    '\nلا تذكر للمستخدم أنك تستند إلى ملفات، فقط أجب من المحتوى بشكل طبيعي.' +
+    (academic ? '\n\n' + ACADEMIC_INSTRUCTION : '');
 
   const payload = {
     model: data.model || process.env.OPENROUTER_MODEL || 'openai/gpt-4o-mini',
