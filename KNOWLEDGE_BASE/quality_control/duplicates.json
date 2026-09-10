@@ -1,0 +1,21 @@
+{
+  "$schema_description": "Identical raw files found by SHA-256 during Phase A inventory. Raw files are immutable; duplicates are recorded here, not deleted.",
+  "method": "SHA-256 of every file under api/data/البيانات computed on [2026-09-10] via Get-FileHash.",
+  "groups": [
+    {
+      "group_id": 1,
+      "hash": "E52F73E71F852850C8520711C93DF2DB685656D6FAF533CDA5961B0B72C9E142",
+      "size": 357997,
+      "type": "pdf",
+      "description": "الملخص الشامل للوحدة الأولى (المتابعة الزمنية لتحول كيميائي في وسط مائي) — نفس الملف منسوخ في مكانين.",
+      "files": [
+        "api/data/البيانات/الوحدة الأولى/ملخص المتابعة الزمنية لتحول كيميائي.pdf",
+        "api/data/البيانات/الوحدة الأولى/الملخص/ملخص المتابعة الزمنية لتحول كيميائي.pdf"
+      ],
+      "recommendation": "احتفظ بمسار واحد في المعرّفات (record id: src-summary-u1)؛ النسخة المكررة لا تُحتسب كمصدر منفصل."
+    }
+  ],
+  "total_duplicate_files": 2,
+  "unique_groups": 1,
+  "note": "لا حذف لأي ملف خام. التكرار يُعالَج فقط داخل قواعد المعرفة (دلاليًا لا ماديًا)."
+}

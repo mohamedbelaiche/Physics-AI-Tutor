@@ -1,0 +1,235 @@
+{
+  "$schema_description": "محاور المفاهيم الأساسية عبر الوحدات. concept_id يُستعمل في سجلات concepts/ وrelationships.",
+  "concepts": [
+    {
+      "concept_id": "redox_pair",
+      "unit": "unit1",
+      "title": "الثنائية المؤكسد/المرجع (Ox/Red) والأكسدة-الإرجاع",
+      "kind": "core",
+      "links_to": ["redox_equation_writing", "half_reaction_balance"]
+    },
+    {
+      "concept_id": "redox_equation_writing",
+      "unit": "unit1",
+      "title": "كتابة المعادلات نصف التفاعلية وتوازنها",
+      "kind": "method",
+      "links_to": ["oxidation_reduction_reaction"]
+    },
+    {
+      "concept_id": "oxidation_reduction_reaction",
+      "unit": "unit1",
+      "title": "تفاعل أكسدة-إرجاع وشرط التلقائية",
+      "kind": "core"
+    },
+    {
+      "concept_id": "progress_table",
+      "unit": "unit1",
+      "title": "الجدول الوصفي للتقدم (advancement table)",
+      "kind": "method",
+      "links_to": ["progress", "rate_of_reaction"]
+    },
+    {
+      "concept_id": "reaction_rate",
+      "unit": "unit1",
+      "title": "سرعة التفاعل والسرعة الحجمية",
+      "kind": "core",
+      "links_to": ["half_reaction_time"]
+    },
+    {
+      "concept_id": "half_reaction_time",
+      "unit": "unit1",
+      "title": "زمن نصف التفاعل",
+      "kind": "core"
+    },
+    {
+      "concept_id": "kinetic_factors",
+      "unit": "unit1",
+      "title": "العوامل الحركية (التركيز، الحرارة، المحفز)",
+      "kind": "supporting",
+      "links_to": ["reaction_rate"]
+    },
+    {
+      "concept_id": "nuclide_notation",
+      "unit": "unit2",
+      "title": "رمز النواة (A,Z) والنظائر",
+      "kind": "core"
+    },
+    {
+      "concept_id": "radioactive_decay",
+      "unit": "unit2",
+      "title": "التفكك التلقائي وأنواع الإشعاعات",
+      "kind": "core",
+      "links_to": ["decay_law"]
+    },
+    {
+      "concept_id": "decay_law",
+      "unit": "unit2",
+      "title": "قانون التفكك التناقصي دالة أسية",
+      "kind": "core",
+      "links_to": ["half_life", "activity"]
+    },
+    {
+      "concept_id": "half_life",
+      "unit": "unit2",
+      "title": "نصف العمر t1/2",
+      "kind": "core"
+    },
+    {
+      "concept_id": "activity",
+      "unit": "unit2",
+      "title": "النشاط الإشعاعي A والوحدة البيكريل",
+      "kind": "core",
+      "links_to": ["radiocarbon_dating"]
+    },
+    {
+      "concept_id": "radiocarbon_dating",
+      "unit": "unit2",
+      "title": "التأريخ بالكربون 14",
+      "kind": "application"
+    },
+    {
+      "concept_id": "capacitor",
+      "unit": "unit3",
+      "title": "المكثفة: التعريف والسعة والشحنة",
+      "kind": "core",
+      "links_to": ["rc_dipole", "capacitor_energy"]
+    },
+    {
+      "concept_id": "capacitor_energy",
+      "unit": "unit3",
+      "title": "الطاقة المخزنة في المكثفة",
+      "kind": "core"
+    },
+    {
+      "concept_id": "rc_dipole",
+      "unit": "unit3",
+      "title": "ثنائي القطب RC: شحن/تفريغ والمعادلة التفاضلية",
+      "kind": "core",
+      "links_to": ["time_constant_rc"]
+    },
+    {
+      "concept_id": "time_constant_rc",
+      "unit": "unit3",
+      "title": "ثابت الزمن τ=RC وطرق تعيينه",
+      "kind": "method"
+    },
+    {
+      "concept_id": "coil",
+      "unit": "unit3",
+      "title": "الوشيعة: ذاتية L ومقاومة r وتوترها",
+      "kind": "core",
+      "links_to": ["rl_dipole", "coil_energy"]
+    },
+    {
+      "concept_id": "coil_energy",
+      "unit": "unit3",
+      "title": "الطاقة المخزنة في الوشيعة",
+      "kind": "core"
+    },
+    {
+      "concept_id": "rl_dipole",
+      "unit": "unit3",
+      "title": "ثنائي القطب RL: ظهور/انقطاع التيار",
+      "kind": "core",
+      "links_to": ["time_constant_rl"]
+    },
+    {
+      "concept_id": "time_constant_rl",
+      "unit": "unit3",
+      "title": "ثابت الزمن τ=L/(R+r)",
+      "kind": "method"
+    },
+    {
+      "concept_id": "limited_vs_complete_reaction",
+      "unit": "unit4",
+      "title": "التفاعل المحدود مقابل التفاعل التام",
+      "kind": "core",
+      "links_to": ["final_progress_ratio", "equilibrium_constant"]
+    },
+    {
+      "concept_id": "final_progress_ratio",
+      "unit": "unit4",
+      "title": "نسبة التقدم النهائي τf",
+      "kind": "core",
+      "links_to": ["acid_base_strength"]
+    },
+    {
+      "concept_id": "equilibrium_constant",
+      "unit": "unit4",
+      "title": "ثابت التوازن K وثابت الفصل Ka (أو الانحلال الحمضي)",
+      "kind": "core"
+    },
+    {
+      "concept_id": "acid_base_strength",
+      "unit": "unit4",
+      "title": "مقارنة قوة الأحماض والأسس",
+      "kind": "core",
+      "links_to": ["ph_measurement"]
+    },
+    {
+      "concept_id": "ph_measurement",
+      "unit": "unit4",
+      "title": "قياس pH وحساب تركيز الأنواع",
+      "kind": "application",
+      "links_to": ["conductivity"]
+    },
+    {
+      "concept_id": "conductivity",
+      "unit": "unit4",
+      "title": "الناقلية وقياسها (خلية قياس)",
+      "kind": "application"
+    },
+    {
+      "concept_id": "dominant_species",
+      "unit": "unit4",
+      "title": "الصفة الغالبة للثنائية ومجال التغلب",
+      "kind": "supporting"
+    },
+    {
+      "concept_id": "momentum_impulse",
+      "unit": "unit5",
+      "title": "كمية الحركة والدفع",
+      "kind": "core",
+      "links_to": ["newton_laws"]
+    },
+    {
+      "concept_id": "newton_laws",
+      "unit": "unit5",
+      "title": "قوانين نيوتن (خاصة القانون الثاني)",
+      "kind": "core",
+      "links_to": ["projectile_motion"]
+    },
+    {
+      "concept_id": "straight_line_motion",
+      "unit": "unit5",
+      "title": "الحركة المستقيمة (منتظمة/متغيرة)",
+      "kind": "core",
+      "links_to": ["projectile_motion"]
+    },
+    {
+      "concept_id": "projectile_motion",
+      "unit": "unit5",
+      "title": "الحركة المنحنية - القذيفة والسقوط",
+      "kind": "core",
+      "links_to": ["circular_orbit"]
+    },
+    {
+      "concept_id": "circular_orbit",
+      "unit": "unit5",
+      "title": "الحركة الدائرية - القمر الاصطناعي",
+      "kind": "core",
+      "links_to": ["kepler_relation"]
+    },
+    {
+      "concept_id": "kepler_relation",
+      "unit": "unit5",
+      "title": "دور القمر وعلاقة T²/r³",
+      "kind": "application"
+    }
+  ],
+  "cross_unit_links": [
+    {"from": "reaction_rate", "to": "final_progress_ratio", "how": "سرعة التفاعل تحدد زمن الوصول للتقدم النهائي في الكيمياء الحركية والتوازن"},
+    {"from": "decay_law", "to": "half_life", "how": "نصف التفكك = تقدم نووي أسّي مماثل لنصف التفاعل الكيميائي"},
+    {"from": "rc_dipole", "to": "rl_dipole", "how": "نفس منهجية كتابة المعادلة التفاضلية وحلها (قانون جمع التوترات + أوم)"}
+  ]
+}

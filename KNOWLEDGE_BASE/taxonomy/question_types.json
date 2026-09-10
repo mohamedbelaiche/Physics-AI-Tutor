@@ -1,0 +1,141 @@
+{
+  "$schema_description": "تصنيف أنواع الأسئلة المطلوبة في تمارين البكالوريا (مستند إلى تحليل التجميعيات المتاحة: الوحدة 3 والوحدة 4). question_type_id يُستعمل في سجلات exercises.",
+  "question_types": [
+    {
+      "id": "qt_ox2red_half",
+      "title_ar": "كتابة المعادلة النصف تفاعلية وموازنتها",
+      "title_en": "Write and balance the half-equation",
+      "used_in": ["unit1"]
+    },
+    {
+      "id": "qt_global_reaction",
+      "title_ar": "إيجاد معادلة التفاعل الكلي (مع توازن الشحنات والذرات)",
+      "title_en": "Write the global balanced redox/chemical equation",
+      "used_in": ["unit1", "unit4", "unit2"]
+    },
+    {
+      "id": "qt_progress_table",
+      "title_ar": "إنشاء جدول التقدم وتسمية الأعمدة/الحالات",
+      "title_en": "Construct the advancement (progress) table",
+      "used_in": ["unit1", "unit4"]
+    },
+    {
+      "id": "qt_differential_equation",
+      "title_ar": "إقامة المعادلة التفاضلية (قانون جمع التوترات + أوم)",
+      "title_en": "Establish the differential equation",
+      "used_in": ["unit3"]
+    },
+    {
+      "id": "qt_verify_solution",
+      "title_ar": "إثبات أن عبارة معطاة هي حل للمعادلة التفاضلية",
+      "title_en": "Verify a proposed solution of the differential equation",
+      "used_in": ["unit3", "unit4"]
+    },
+    {
+      "id": "qt_calculate",
+      "title_ar": "حساب قيمة فيزيائية/كيميائية من معطيات (نصي أو بياني)",
+      "title_en": "Compute a physical quantity from data",
+      "used_in": ["unit1", "unit2", "unit3", "unit4", "unit5"]
+    },
+    {
+      "id": "qt_units",
+      "title_ar": "تحديد وحدة قياس والمتجانسية (تحليل الأبعاد)",
+      "title_en": "Determine the unit / dimensional analysis",
+      "used_in": ["unit3", "unit2", "unit4", "unit5"]
+    },
+    {
+      "id": "qt_graph",
+      "title_ar": "رسم بياني من جدول قياسات (بلحظ المقياس المناسب)",
+      "title_en": "Plot a graph from a measurements table",
+      "used_in": ["unit1", "unit3"]
+    },
+    {
+      "id": "qt_graph_exploit",
+      "title_ar": "استغلال بيان: تعيين ميل/مساحة/تقاطع واشتقاق كمية",
+      "title_en": "Exploit a graph (slope/area/intercept) to derive a quantity",
+      "used_in": ["unit1", "unit3", "unit5"]
+    },
+    {
+      "id": "qt_time_constant",
+      "title_ar": "تعيين ثابت الزمن بيانيًا (طريقة 63%/المماس/5τ)",
+      "title_en": "Determine the time constant graphically",
+      "used_in": ["unit3"]
+    },
+    {
+      "id": "qt_energy",
+      "title_ar": "حساب الطاقة (مخزنة/مبددة) والعبارة الزمنية لها",
+      "title_en": "Energy: stored/dissipated and time expressions",
+      "used_in": ["unit3", "unit5"]
+    },
+    {
+      "id": "qt_ratio_tau",
+      "title_ar": "استنتاج نسبة التقدم النهائي τf وثابت التوازن K",
+      "title_en": "Deduce final progress ratio τf and equilibrium constant K",
+      "used_in": ["unit4"]
+    },
+    {
+      "id": "qt_ph",
+      "title_ar": "حساب pH وتركيزات الأنواع عند التوازن من قياس",
+      "title_en": "Compute pH / concentrations at equilibrium",
+      "used_in": ["unit4"]
+    },
+    {
+      "id": "qt_conductivity",
+      "title_ar": "استغلال قياس الناقلية (ثابت الخلية، الناقلية النوعية)",
+      "title_en": "Exploit conductivity measurement with cell constant",
+      "used_in": ["unit4"]
+    },
+    {
+      "id": "qt_strength_compare",
+      "title_ar": "مقارنة قوة حمضين/أساسين (Ka, pKa, τf, pH)",
+      "title_en": "Compare acid/base strength",
+      "used_in": ["unit4"]
+    },
+    {
+      "id": "qt_species_dominate",
+      "title_ar": "تحديد الصفة الغالبة لثنائية وبيان مجال التغلب",
+      "title_en": "Identify the dominant species of a pair",
+      "used_in": ["unit4"]
+    },
+    {
+      "id": "qt_decay_law",
+      "title_ar": "تطبيق قانون التناقص الإشعاعي وحساب الزمن/النشاط",
+      "title_en": "Apply radioactive decay law (N, A, t, half-life)",
+      "used_in": ["unit2"]
+    },
+    {
+      "id": "qt_dating",
+      "title_ar": "التأريخ الإشعاعي من نسب الأنوية المتبقية",
+      "title_en": "Radiometric dating from remaining nuclei ratios",
+      "used_in": ["unit2"]
+    },
+    {
+      "id": "qt_particle_motion",
+      "title_ar": "دراسة حركة جسم (سقوط/قذيفة) بالتحليل في معلم",
+      "title_en": "Study projectile/free-fall motion in a frame",
+      "used_in": ["unit5"]
+    },
+    {
+      "id": "qt_satellite",
+      "title_ar": "قمر اصطناعي: قوة الجاذبية، سرعة، دور، الطاقة",
+      "title_en": "Satellite: gravity force, orbital speed, period, energy",
+      "used_in": ["unit5"]
+    },
+    {
+      "id": "qt_experiment_setup",
+      "title_ar": "تركيب تجريبي وشرح الإجراء (دارات/أجهزة، قاطعة، بادلة)",
+      "title_en": "Experimental setup and procedure",
+      "used_in": ["unit3", "unit1", "unit4"]
+    },
+    {
+      "id": "qt_justify",
+      "title_ar": "تفسير ظاهرة وبرهان تلقائية/عدم تلقائية تفاعل",
+      "title_en": "Justify / explain a phenomenon or spontaneity",
+      "used_in": ["unit1", "unit4"]
+    }
+  ],
+  "notes": [
+    "الأسئلة مأخوذة من أنماط التمرينات الفعلية في تجميعي الوحدة 4 (نظيفة) والوحدة 3 (نص سليم).",
+    "سجلات التمارين تُوسم بعناصر هذه القائمة في حقل question_types."
+  ]
+}

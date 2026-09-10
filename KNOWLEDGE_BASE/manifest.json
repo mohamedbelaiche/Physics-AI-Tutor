@@ -1,0 +1,3480 @@
+{
+  "version": "1.0",
+  "generated_at": "2026-09-10T17:02:07.142Z",
+  "generator": "scripts/build-knowledge-base.js",
+  "total_items": 203,
+  "counts": {
+    "by_type": {
+      "concept": 34,
+      "exercise": 82,
+      "formula": 36,
+      "lesson": 5,
+      "solution": 46
+    },
+    "by_status": {
+      "verified": 88,
+      "needs_review": 111,
+      "uncertain": 1,
+      "extraction_failed": 3
+    },
+    "raw_files_total": 19,
+    "raw_files_unique_by_hash": 18,
+    "source_refs_unique": 14
+  },
+  "lessons": [
+    {
+      "id": "lesson/unit_01_chemical_kinetics",
+      "type": "lesson",
+      "path": "lessons/unit_01_chemical_kinetics.md",
+      "unit": "unit1",
+      "title_ar": "المتابعة الزمنية لتحول كيميائي في وسط مائي",
+      "status": "verified",
+      "concepts": [
+        "concept/redox_pair",
+        "concept/redox_equation_writing",
+        "concept/oxidation_reduction_reaction",
+        "concept/progress_table",
+        "concept/reaction_rate",
+        "concept/half_reaction_time",
+        "concept/kinetic_factors"
+      ],
+      "related_formulas": [],
+      "skills": [
+        "sk_modelize",
+        "sk_apply_law",
+        "sk_graph",
+        "sk_protocol",
+        "sk_justify",
+        "sk_units",
+        "sk_calculate"
+      ]
+    },
+    {
+      "id": "lesson/unit_02_nuclear_transformations",
+      "type": "lesson",
+      "path": "lessons/unit_02_nuclear_transformations.md",
+      "unit": "unit2",
+      "title_ar": "التحويلات النووية",
+      "status": "verified",
+      "concepts": [
+        "concept/nuclide_notation",
+        "concept/radioactive_decay",
+        "concept/decay_law",
+        "concept/half_life",
+        "concept/activity",
+        "concept/radiocarbon_dating"
+      ],
+      "related_formulas": [],
+      "skills": [
+        "sk_modelize",
+        "sk_apply_law",
+        "sk_justify",
+        "sk_units",
+        "sk_calculate"
+      ]
+    },
+    {
+      "id": "lesson/unit_03_electric_phenomena",
+      "type": "lesson",
+      "path": "lessons/unit_03_electric_phenomena.md",
+      "unit": "unit3",
+      "title_ar": "دراسة الظواهر الكهربائية",
+      "status": "needs_review",
+      "concepts": [
+        "concept/capacitor",
+        "concept/capacitor_energy",
+        "concept/rc_dipole",
+        "concept/time_constant_rc",
+        "concept/coil",
+        "concept/coil_energy",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "related_formulas": [],
+      "skills": [
+        "sk_modelize",
+        "sk_apply_law",
+        "sk_graph",
+        "sk_protocol",
+        "sk_justify",
+        "sk_units",
+        "sk_calculate"
+      ]
+    },
+    {
+      "id": "lesson/unit_04_chemical_equilibrium",
+      "type": "lesson",
+      "path": "lessons/unit_04_chemical_equilibrium.md",
+      "unit": "unit4",
+      "title_ar": "تطور جملة كيميائية نحو حالة التوازن",
+      "status": "verified",
+      "concepts": [
+        "concept/limited_vs_complete_reaction",
+        "concept/final_progress_ratio",
+        "concept/equilibrium_constant",
+        "concept/acid_base_strength",
+        "concept/ph_measurement",
+        "concept/conductivity",
+        "concept/dominant_species"
+      ],
+      "related_formulas": [],
+      "skills": [
+        "sk_modelize",
+        "sk_apply_law",
+        "sk_graph",
+        "sk_protocol",
+        "sk_justify",
+        "sk_units",
+        "sk_calculate"
+      ]
+    },
+    {
+      "id": "lesson/unit_05_mechanics",
+      "type": "lesson",
+      "path": "lessons/unit_05_mechanics.md",
+      "unit": "unit5",
+      "title_ar": "تطور جملة ميكانيكية (الميكانيك)",
+      "status": "verified",
+      "concepts": [
+        "concept/momentum_impulse",
+        "concept/newton_laws",
+        "concept/straight_line_motion",
+        "concept/projectile_motion",
+        "concept/circular_orbit",
+        "concept/kepler_relation"
+      ],
+      "related_formulas": [],
+      "skills": [
+        "sk_modelize",
+        "sk_apply_law",
+        "sk_graph",
+        "sk_justify",
+        "sk_units",
+        "sk_calculate"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "id": "concept/acid_base_strength",
+      "type": "concept",
+      "path": "concepts/acid_base_strength.md",
+      "unit": "unit4",
+      "title_ar": "مقارنة قوة الأحماض والأسس",
+      "status": "verified",
+      "related_concepts": [
+        "concept/equilibrium_constant",
+        "concept/final_progress_ratio",
+        "concept/ph_measurement"
+      ],
+      "related_formulas": [
+        "formula/u4_ka"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/activity",
+      "type": "concept",
+      "path": "concepts/activity.md",
+      "unit": "unit2",
+      "title_ar": "النشاط الإشعاعي A",
+      "status": "verified",
+      "related_concepts": [
+        "concept/decay_law",
+        "concept/radiocarbon_dating"
+      ],
+      "related_formulas": [
+        "formula/u2_activity"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/capacitor",
+      "type": "concept",
+      "path": "concepts/capacitor.md",
+      "unit": "unit3",
+      "title_ar": "المكثفة (التعريف، السعة، الشحنة)",
+      "status": "needs_review",
+      "related_concepts": [
+        "concept/rc_dipole",
+        "concept/capacitor_energy"
+      ],
+      "related_formulas": [
+        "formula/u3_capacitor"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/capacitor_energy",
+      "type": "concept",
+      "path": "concepts/capacitor_energy.md",
+      "unit": "unit3",
+      "title_ar": "الطاقة المخزنة في المكثفة",
+      "status": "needs_review",
+      "related_concepts": [
+        "concept/capacitor",
+        "concept/rc_dipole"
+      ],
+      "related_formulas": [
+        "formula/u3_capacitor_energy"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/circular_orbit",
+      "type": "concept",
+      "path": "concepts/circular_orbit.md",
+      "unit": "unit5",
+      "title_ar": "الحركة الدائرية — قمر اصطناعي وكوكب",
+      "status": "verified",
+      "related_concepts": [
+        "concept/newton_laws",
+        "concept/kepler_relation"
+      ],
+      "related_formulas": [
+        "formula/u5_gravitation",
+        "formula/u5_satellite",
+        "formula/u5_orbital_speed"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/coil",
+      "type": "concept",
+      "path": "concepts/coil.md",
+      "unit": "unit3",
+      "title_ar": "الوشيعة (الذاتية والمقاومة الداخلية)",
+      "status": "needs_review",
+      "related_concepts": [
+        "concept/rl_dipole",
+        "concept/coil_energy"
+      ],
+      "related_formulas": [
+        "formula/u3_coil_voltage"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/coil_energy",
+      "type": "concept",
+      "path": "concepts/coil_energy.md",
+      "unit": "unit3",
+      "title_ar": "الطاقة المخزنة في الوشيعة",
+      "status": "needs_review",
+      "related_concepts": [
+        "concept/coil",
+        "concept/rl_dipole"
+      ],
+      "related_formulas": [
+        "formula/u3_coil_energy"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/conductivity",
+      "type": "concept",
+      "path": "concepts/conductivity.md",
+      "unit": "unit4",
+      "title_ar": "الناقلية وقياسها",
+      "status": "verified",
+      "related_concepts": [
+        "concept/ph_measurement"
+      ],
+      "related_formulas": [
+        "formula/u1_conductance"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/decay_law",
+      "type": "concept",
+      "path": "concepts/decay_law.md",
+      "unit": "unit2",
+      "title_ar": "قانون التناقص الإشعاعي",
+      "status": "verified",
+      "related_concepts": [
+        "concept/radioactive_decay",
+        "concept/half_life",
+        "concept/activity"
+      ],
+      "related_formulas": [
+        "formula/u2_decay_law",
+        "formula/u2_half_life",
+        "formula/u2_time_constant"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/dominant_species",
+      "type": "concept",
+      "path": "concepts/dominant_species.md",
+      "unit": "unit4",
+      "title_ar": "الصفة الغالبة للثنائية",
+      "status": "verified",
+      "related_concepts": [
+        "concept/equilibrium_constant",
+        "concept/acid_base_strength",
+        "concept/ph_measurement",
+        "concept/final_progress_ratio"
+      ],
+      "related_formulas": [
+        "formula/u4_dominant_species"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/equilibrium_constant",
+      "type": "concept",
+      "path": "concepts/equilibrium_constant.md",
+      "unit": "unit4",
+      "title_ar": "ثابت التوازن K وثابت الحموضة Ka",
+      "status": "verified",
+      "related_concepts": [
+        "concept/limited_vs_complete_reaction",
+        "concept/final_progress_ratio",
+        "concept/acid_base_strength",
+        "concept/dominant_species"
+      ],
+      "related_formulas": [
+        "formula/u4_equilibrium_constant",
+        "formula/u4_ka"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/final_progress_ratio",
+      "type": "concept",
+      "path": "concepts/final_progress_ratio.md",
+      "unit": "unit4",
+      "title_ar": "نسبة التقدم النهائي τf",
+      "status": "verified",
+      "related_concepts": [
+        "concept/limited_vs_complete_reaction",
+        "concept/acid_base_strength",
+        "concept/dominant_species"
+      ],
+      "related_formulas": [
+        "formula/u4_final_progress"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/half_life",
+      "type": "concept",
+      "path": "concepts/half_life.md",
+      "unit": "unit2",
+      "title_ar": "زمن عمر النصف t₁/₂",
+      "status": "verified",
+      "related_concepts": [
+        "concept/decay_law"
+      ],
+      "related_formulas": [
+        "formula/u2_half_life"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/half_reaction_time",
+      "type": "concept",
+      "path": "concepts/half_reaction_time.md",
+      "unit": "unit1",
+      "title_ar": "زمن نصف التفاعل t₁/₂",
+      "status": "verified",
+      "related_concepts": [
+        "concept/progress_table",
+        "concept/reaction_rate"
+      ],
+      "related_formulas": [
+        "formula/u1_half_reaction_time"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/kepler_relation",
+      "type": "concept",
+      "path": "concepts/kepler_relation.md",
+      "unit": "unit5",
+      "title_ar": "قوانين كبلر وعلاقة T²/r³",
+      "status": "verified",
+      "related_concepts": [
+        "concept/circular_orbit"
+      ],
+      "related_formulas": [
+        "formula/u5_kepler"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/kinetic_factors",
+      "type": "concept",
+      "path": "concepts/kinetic_factors.md",
+      "unit": "unit1",
+      "title_ar": "العوامل الحركية ومبدأ \"المتابعة الزمنية\"",
+      "status": "verified",
+      "related_concepts": [
+        "concept/reaction_rate",
+        "concept/half_reaction_time"
+      ],
+      "related_formulas": [],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/limited_vs_complete_reaction",
+      "type": "concept",
+      "path": "concepts/limited_vs_complete_reaction.md",
+      "unit": "unit4",
+      "title_ar": "التفاعل المحدود مقابل التفاعل التام",
+      "status": "verified",
+      "related_concepts": [
+        "concept/final_progress_ratio",
+        "concept/equilibrium_constant"
+      ],
+      "related_formulas": [
+        "formula/u4_final_progress"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/momentum_impulse",
+      "type": "concept",
+      "path": "concepts/momentum_impulse.md",
+      "unit": "unit5",
+      "title_ar": "كمية الحركة والدفع (صيغة القوانين الديناميكية)",
+      "status": "uncertain",
+      "related_concepts": [
+        "concept/newton_laws"
+      ],
+      "related_formulas": [],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/newton_laws",
+      "type": "concept",
+      "path": "concepts/newton_laws.md",
+      "unit": "unit5",
+      "title_ar": "قوانين نيوتن",
+      "status": "verified",
+      "related_concepts": [
+        "concept/straight_line_motion",
+        "concept/projectile_motion",
+        "concept/circular_orbit",
+        "concept/momentum_impulse"
+      ],
+      "related_formulas": [
+        "formula/u5_newton"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/nuclide_notation",
+      "type": "concept",
+      "path": "concepts/nuclide_notation.md",
+      "unit": "unit2",
+      "title_ar": "رمز النواة والنظائر",
+      "status": "verified",
+      "related_concepts": [
+        "concept/radioactive_decay"
+      ],
+      "related_formulas": [],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/oxidation_reduction_reaction",
+      "type": "concept",
+      "path": "concepts/oxidation_reduction_reaction.md",
+      "unit": "unit1",
+      "title_ar": "تفاعل أكسدة-إرجاع وشرط التلقائية",
+      "status": "verified",
+      "related_concepts": [
+        "concept/redox_pair",
+        "concept/redox_equation_writing",
+        "concept/progress_table"
+      ],
+      "related_formulas": [],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/ph_measurement",
+      "type": "concept",
+      "path": "concepts/ph_measurement.md",
+      "unit": "unit4",
+      "title_ar": "قياس pH وحساب تركيز الأنواع",
+      "status": "verified",
+      "related_concepts": [
+        "concept/equilibrium_constant",
+        "concept/acid_base_strength",
+        "concept/dominant_species"
+      ],
+      "related_formulas": [
+        "formula/u4_ph",
+        "formula/u4_titration"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/progress_table",
+      "type": "concept",
+      "path": "concepts/progress_table.md",
+      "unit": "unit1",
+      "title_ar": "جدول التقدم (الجدول الوصفي للتقدم)",
+      "status": "verified",
+      "related_concepts": [
+        "concept/oxidation_reduction_reaction",
+        "concept/reaction_rate",
+        "concept/half_reaction_time"
+      ],
+      "related_formulas": [
+        "formula/u1_progress_table"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/projectile_motion",
+      "type": "concept",
+      "path": "concepts/projectile_motion.md",
+      "unit": "unit5",
+      "title_ar": "الحركة المنحنية (القذيفة)",
+      "status": "verified",
+      "related_concepts": [
+        "concept/newton_laws",
+        "concept/straight_line_motion",
+        "concept/circular_orbit"
+      ],
+      "related_formulas": [
+        "formula/u5_projectile",
+        "formula/u5_free_fall"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/radioactive_decay",
+      "type": "concept",
+      "path": "concepts/radioactive_decay.md",
+      "unit": "unit2",
+      "title_ar": "التفكك التلقائي وأنواع الإشعاعات",
+      "status": "verified",
+      "related_concepts": [
+        "concept/nuclide_notation",
+        "concept/decay_law"
+      ],
+      "related_formulas": [],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/radiocarbon_dating",
+      "type": "concept",
+      "path": "concepts/radiocarbon_dating.md",
+      "unit": "unit2",
+      "title_ar": "التأريخ الإشعاعي (الكربون 14)",
+      "status": "verified",
+      "related_concepts": [
+        "concept/decay_law",
+        "concept/activity"
+      ],
+      "related_formulas": [
+        "formula/u2_dating"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/rc_dipole",
+      "type": "concept",
+      "path": "concepts/rc_dipole.md",
+      "unit": "unit3",
+      "title_ar": "ثنائي القطب RC (شحن/تفريغ)",
+      "status": "needs_review",
+      "related_concepts": [
+        "concept/capacitor",
+        "concept/time_constant_rc",
+        "concept/capacitor_energy"
+      ],
+      "related_formulas": [
+        "formula/u3_rc_charging",
+        "formula/u3_rc_discharging"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/reaction_rate",
+      "type": "concept",
+      "path": "concepts/reaction_rate.md",
+      "unit": "unit1",
+      "title_ar": "سرعة التفاعل والسرعة الحجمية",
+      "status": "verified",
+      "related_concepts": [
+        "concept/progress_table",
+        "concept/half_reaction_time",
+        "concept/kinetic_factors"
+      ],
+      "related_formulas": [
+        "formula/u1_reaction_rate"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/redox_equation_writing",
+      "type": "concept",
+      "path": "concepts/redox_equation_writing.md",
+      "unit": "unit1",
+      "title_ar": "كتابة معادلات الأكسدة-الإرجاع وتوازنها",
+      "status": "verified",
+      "related_concepts": [
+        "concept/redox_pair",
+        "concept/oxidation_reduction_reaction"
+      ],
+      "related_formulas": [],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/redox_pair",
+      "type": "concept",
+      "path": "concepts/redox_pair.md",
+      "unit": "unit1",
+      "title_ar": "الثنائية المؤكسد/المرجع (Ox/Red)",
+      "status": "verified",
+      "related_concepts": [
+        "concept/redox_equation_writing",
+        "concept/oxidation_reduction_reaction"
+      ],
+      "related_formulas": [],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/rl_dipole",
+      "type": "concept",
+      "path": "concepts/rl_dipole.md",
+      "unit": "unit3",
+      "title_ar": "ثنائي القطب RL (ظهور/انقطاع التيار)",
+      "status": "needs_review",
+      "related_concepts": [
+        "concept/coil",
+        "concept/time_constant_rl",
+        "concept/coil_energy"
+      ],
+      "related_formulas": [
+        "formula/u3_rl_establishment",
+        "formula/u3_rl_interruption"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/straight_line_motion",
+      "type": "concept",
+      "path": "concepts/straight_line_motion.md",
+      "unit": "unit5",
+      "title_ar": "الحركة المستقيمة (منتظمة/متغيرة بانتظام)",
+      "status": "verified",
+      "related_concepts": [
+        "concept/newton_laws",
+        "concept/projectile_motion"
+      ],
+      "related_formulas": [
+        "formula/u5_kinematics",
+        "formula/u5_inclined_plane"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/time_constant_rc",
+      "type": "concept",
+      "path": "concepts/time_constant_rc.md",
+      "unit": "unit3",
+      "title_ar": "ثابت الزمن لثنائي القطب RC",
+      "status": "needs_review",
+      "related_concepts": [
+        "concept/rc_dipole"
+      ],
+      "related_formulas": [
+        "formula/u3_tau_rc"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "concept/time_constant_rl",
+      "type": "concept",
+      "path": "concepts/time_constant_rl.md",
+      "unit": "unit3",
+      "title_ar": "ثابت الزمن لثنائي القطب RL",
+      "status": "needs_review",
+      "related_concepts": [
+        "concept/rl_dipole"
+      ],
+      "related_formulas": [
+        "formula/u3_tau_rl"
+      ],
+      "related_exercises": []
+    }
+  ],
+  "formulas": [
+    {
+      "id": "formula/purity",
+      "type": "formula",
+      "path": "formulas/purity.md",
+      "unit": "sans dimension",
+      "title_ar": "درجة النقاوة",
+      "status": "verified",
+      "symbol": "p = m_pure/m_total",
+      "related_concepts": [
+        "concept/ph_measurement"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u1_conductance",
+      "type": "formula",
+      "path": "formulas/u1_conductance.md",
+      "unit": "S ; S/m",
+      "title_ar": "الناقلية (قانون كولروش-كوهلراوش)",
+      "status": "verified",
+      "symbol": "G, σ",
+      "related_concepts": [
+        "concept/conductivity"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u1_dilution",
+      "type": "formula",
+      "path": "formulas/u1_dilution.md",
+      "unit": "mol",
+      "title_ar": "قانون التمديد (انحفاظ المادة)",
+      "status": "verified",
+      "symbol": "C_A·V_A = C_B·V_B",
+      "related_concepts": [
+        "concept/ph_measurement"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u1_half_reaction_time",
+      "type": "formula",
+      "path": "formulas/u1_half_reaction_time.md",
+      "unit": "s",
+      "title_ar": "زمن نصف التفاعل",
+      "status": "verified",
+      "symbol": "t_{1/2}",
+      "related_concepts": [
+        "concept/half_reaction_time"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u1_progress_table",
+      "type": "formula",
+      "path": "formulas/u1_progress_table.md",
+      "unit": "mol",
+      "title_ar": "جدول التقدم وكميات الأنواع",
+      "status": "verified",
+      "symbol": "n(t) = n0 − a·x",
+      "related_concepts": [
+        "concept/progress_table",
+        "concept/reaction_rate",
+        "concept/half_reaction_time"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u1_reaction_rate",
+      "type": "formula",
+      "path": "formulas/u1_reaction_rate.md",
+      "unit": "mol/s ; mol/(L.s)",
+      "title_ar": "السرعة الحجمية واللحظية للتفاعل",
+      "status": "verified",
+      "symbol": "v, v_vol",
+      "related_concepts": [
+        "concept/reaction_rate"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u2_activity",
+      "type": "formula",
+      "path": "formulas/u2_activity.md",
+      "unit": "Bq",
+      "title_ar": "النشاط الإشعاعي",
+      "status": "verified",
+      "symbol": "A",
+      "related_concepts": [
+        "concept/activity",
+        "concept/decay_law"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u2_dating",
+      "type": "formula",
+      "path": "formulas/u2_dating.md",
+      "unit": "s ; an",
+      "title_ar": "معادلة التأريخ الإشعاعي",
+      "status": "verified",
+      "symbol": "t",
+      "related_concepts": [
+        "concept/radiocarbon_dating"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u2_decay_law",
+      "type": "formula",
+      "path": "formulas/u2_decay_law.md",
+      "unit": "none ; mol/kg",
+      "title_ar": "قانون التناقص الإشعاعي",
+      "status": "verified",
+      "symbol": "N(t) = N0·e^(−λt)",
+      "related_concepts": [
+        "concept/decay_law"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u2_half_life",
+      "type": "formula",
+      "path": "formulas/u2_half_life.md",
+      "unit": "s",
+      "title_ar": "زمن عمر النصف",
+      "status": "verified",
+      "symbol": "t_{1/2}",
+      "related_concepts": [
+        "concept/half_life",
+        "concept/decay_law"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u2_time_constant",
+      "type": "formula",
+      "path": "formulas/u2_time_constant.md",
+      "unit": "s",
+      "title_ar": "ثابت الزمن (متوسط عمر النواة)",
+      "status": "verified",
+      "symbol": "τ",
+      "related_concepts": [
+        "concept/decay_law"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u3_capacitor",
+      "type": "formula",
+      "path": "formulas/u3_capacitor.md",
+      "unit": "F",
+      "title_ar": "علاقة المكثفة Q = C·U وتجميع السعات",
+      "status": "needs_review",
+      "symbol": "C = Q/U",
+      "related_concepts": [
+        "concept/capacitor"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u3_capacitor_energy",
+      "type": "formula",
+      "path": "formulas/u3_capacitor_energy.md",
+      "unit": "J",
+      "title_ar": "الطاقة المخزنة في المكثفة",
+      "status": "needs_review",
+      "symbol": "E_C",
+      "related_concepts": [
+        "concept/capacitor_energy"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u3_coil_energy",
+      "type": "formula",
+      "path": "formulas/u3_coil_energy.md",
+      "unit": "J",
+      "title_ar": "الطاقة المخزنة في الوشيعة",
+      "status": "needs_review",
+      "symbol": "E_L",
+      "related_concepts": [
+        "concept/coil_energy"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u3_coil_voltage",
+      "type": "formula",
+      "path": "formulas/u3_coil_voltage.md",
+      "unit": "V",
+      "title_ar": "التوتر بين طرفي الوشيعة",
+      "status": "needs_review",
+      "symbol": "u_L = r.i + L·di/dt",
+      "related_concepts": [
+        "concept/coil"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u3_rc_charging",
+      "type": "formula",
+      "path": "formulas/u3_rc_charging.md",
+      "unit": "V ; A",
+      "title_ar": "حلول الشحن لثنائي القطب RC",
+      "status": "needs_review",
+      "symbol": "uC(t), i(t), uR(t)",
+      "related_concepts": [
+        "concept/rc_dipole"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u3_rc_discharging",
+      "type": "formula",
+      "path": "formulas/u3_rc_discharging.md",
+      "unit": "V ; A",
+      "title_ar": "حلول التفريغ لثنائي القطب RC",
+      "status": "needs_review",
+      "symbol": "uC(t), i(t), uR(t)",
+      "related_concepts": [
+        "concept/rc_dipole"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u3_rl_establishment",
+      "type": "formula",
+      "path": "formulas/u3_rl_establishment.md",
+      "unit": "A ; V",
+      "title_ar": "حلول ظهور التيار في ثنائي القطب RL",
+      "status": "needs_review",
+      "symbol": "i(t), uL(t), uR(t)",
+      "related_concepts": [
+        "concept/rl_dipole"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u3_rl_interruption",
+      "type": "formula",
+      "path": "formulas/u3_rl_interruption.md",
+      "unit": "A ; V",
+      "title_ar": "حلول انقطاع التيار في ثنائي القطب RL",
+      "status": "needs_review",
+      "symbol": "i(t), uL(t), uR(t)",
+      "related_concepts": [
+        "concept/rl_dipole"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u3_tau_rc",
+      "type": "formula",
+      "path": "formulas/u3_tau_rc.md",
+      "unit": "s",
+      "title_ar": "ثابت الزمن RC",
+      "status": "needs_review",
+      "symbol": "τ = R·C",
+      "related_concepts": [
+        "concept/time_constant_rc"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u3_tau_rl",
+      "type": "formula",
+      "path": "formulas/u3_tau_rl.md",
+      "unit": "s",
+      "title_ar": "ثابت الزمن RL",
+      "status": "needs_review",
+      "symbol": "τ = L/(R+r)",
+      "related_concepts": [
+        "concept/time_constant_rl"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u4_dominant_species",
+      "type": "formula",
+      "path": "formulas/u4_dominant_species.md",
+      "unit": "sans dimension",
+      "title_ar": "علاقة هندرسون-هاسيلبالخ والصفة الغالبة",
+      "status": "verified",
+      "symbol": "pH = pKa + log([A⁻]/[HA])",
+      "related_concepts": [
+        "concept/dominant_species"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u4_equilibrium_constant",
+      "type": "formula",
+      "path": "formulas/u4_equilibrium_constant.md",
+      "unit": "sans dimension",
+      "title_ar": "ثابت التوازن وكسر التفاعل",
+      "status": "verified",
+      "symbol": "K, Q_r",
+      "related_concepts": [
+        "concept/equilibrium_constant"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u4_final_progress",
+      "type": "formula",
+      "path": "formulas/u4_final_progress.md",
+      "unit": "sans dimension",
+      "title_ar": "نسبة التقدم النهائي",
+      "status": "verified",
+      "symbol": "τ_f = X_f/X_max",
+      "related_concepts": [
+        "concept/final_progress_ratio",
+        "concept/limited_vs_complete_reaction"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u4_ka",
+      "type": "formula",
+      "path": "formulas/u4_ka.md",
+      "unit": "sans dimension",
+      "title_ar": "ثابت الحموضة Ka و pKa وكسر الماء",
+      "status": "verified",
+      "symbol": "K_a, pK_a, K_e",
+      "related_concepts": [
+        "concept/equilibrium_constant",
+        "concept/acid_base_strength"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u4_ph",
+      "type": "formula",
+      "path": "formulas/u4_ph.md",
+      "unit": "sans dimension",
+      "title_ar": "علاقة pH بتركيز أيونات الهيدرونيوم",
+      "status": "verified",
+      "symbol": "pH",
+      "related_concepts": [
+        "concept/ph_measurement"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u4_titration",
+      "type": "formula",
+      "path": "formulas/u4_titration.md",
+      "unit": "mol",
+      "title_ar": "المعايرة اللونية وطرق استغلالها",
+      "status": "verified",
+      "symbol": "n_équ",
+      "related_concepts": [
+        "concept/ph_measurement"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u5_free_fall",
+      "type": "formula",
+      "path": "formulas/u5_free_fall.md",
+      "unit": "m/s ; m",
+      "title_ar": "السقوط الحر",
+      "status": "verified",
+      "symbol": "v, y",
+      "related_concepts": [
+        "concept/straight_line_motion",
+        "concept/projectile_motion"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u5_gravitation",
+      "type": "formula",
+      "path": "formulas/u5_gravitation.md",
+      "unit": "N ; m/s²",
+      "title_ar": "قانون التجاذب الكوني والجاذبية",
+      "status": "verified",
+      "symbol": "F, g0, g(h)",
+      "related_concepts": [
+        "concept/circular_orbit"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u5_inclined_plane",
+      "type": "formula",
+      "path": "formulas/u5_inclined_plane.md",
+      "unit": "m/s²",
+      "title_ar": "الجسم على مستو مائل",
+      "status": "verified",
+      "symbol": "a",
+      "related_concepts": [
+        "concept/straight_line_motion",
+        "concept/newton_laws"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u5_kepler",
+      "type": "formula",
+      "path": "formulas/u5_kepler.md",
+      "unit": "s²/m³",
+      "title_ar": "قانون كبلر الثالث",
+      "status": "verified",
+      "symbol": "T²/a³ = k",
+      "related_concepts": [
+        "concept/kepler_relation"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u5_kinematics",
+      "type": "formula",
+      "path": "formulas/u5_kinematics.md",
+      "unit": "m/s ; m",
+      "title_ar": "معادلات الحركة المستقيمة المتغيرة بانتظام",
+      "status": "verified",
+      "symbol": "v(t), x(t)",
+      "related_concepts": [
+        "concept/straight_line_motion"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u5_newton",
+      "type": "formula",
+      "path": "formulas/u5_newton.md",
+      "unit": "N",
+      "title_ar": "قوانين نيوتن",
+      "status": "verified",
+      "symbol": "ΣF, m·a, F_action/réaction",
+      "related_concepts": [
+        "concept/newton_laws"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u5_orbital_speed",
+      "type": "formula",
+      "path": "formulas/u5_orbital_speed.md",
+      "unit": "m/s",
+      "title_ar": "سرعة الدوران للمدار الدائري",
+      "status": "verified",
+      "symbol": "v",
+      "related_concepts": [
+        "concept/circular_orbit"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u5_projectile",
+      "type": "formula",
+      "path": "formulas/u5_projectile.md",
+      "unit": "m",
+      "title_ar": "حركة القذيفة (المسار والنقاط الخاصة)",
+      "status": "verified",
+      "symbol": "x(t), z(t), x_p, z_s",
+      "related_concepts": [
+        "concept/projectile_motion"
+      ],
+      "related_exercises": []
+    },
+    {
+      "id": "formula/u5_satellite",
+      "type": "formula",
+      "path": "formulas/u5_satellite.md",
+      "unit": "s ; m",
+      "title_ar": "دور القمر الاصطناعي وعلاقة r³/T²",
+      "status": "verified",
+      "symbol": "T, r",
+      "related_concepts": [
+        "concept/circular_orbit",
+        "concept/kepler_relation"
+      ],
+      "related_exercises": []
+    }
+  ],
+  "exercises": [
+    {
+      "id": "exercise/unit_03_bac2008_ex01",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex01.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2008 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "year": "2008",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "وشيعة RL",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2008_ex01",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2008_ex02",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex02.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2008 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "year": "2008",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "RC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2008_ex02",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2008_ex03",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex03.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2008 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "year": "2008",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة RC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2008_ex03",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2008_ex04",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex04.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2008 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "year": "2008",
+      "stream": "علوم تجريبية",
+      "topic": "وشيعة RL",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2008_ex04",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2009_ex05",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex05.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2009 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "year": "2009",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "وشيعة RL",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2009_ex05",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2009_ex06",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex06.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2009 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "year": "2009",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "RC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2009_ex06",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2009_ex07",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex07.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2009 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "year": "2009",
+      "stream": "علوم تجريبية",
+      "topic": "RC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2009_ex07",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2009_ex08",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex08.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2009 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "year": "2009",
+      "stream": "علوم تجريبية",
+      "topic": "تفريغ مكثفة RC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2009_ex08",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2010_ex09",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex09.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2010 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "year": "2010",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "شحن مكثفة RC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2010_ex09",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2010_ex10",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex10.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2010 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "year": "2010",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "وشيعة RL",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2010_ex10",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2010_ex11",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex11.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2010 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "year": "2010",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "RC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2010_ex11",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2010_ex12",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex12.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2010 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "year": "2010",
+      "stream": "علوم تجريبية",
+      "topic": "وشيعة RL",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2010_ex12",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2010_ex13",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex13.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2010 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "year": "2010",
+      "stream": "علوم تجريبية",
+      "topic": "RC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2010_ex13",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2011_ex14",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex14.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2011 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "year": "2011",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "RC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2011_ex14",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2011_ex15",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex15.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2011 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "year": "2011",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "وشيعة RL",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2011_ex15",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2011_ex16",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex16.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2011 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "year": "2011",
+      "stream": "علوم تجريبية",
+      "topic": "وشيعة RL",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2011_ex16",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2011_ex17",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex17.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2011 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "year": "2011",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة RC (تفريغ)",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2011_ex17",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2012_ex18",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex18.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2012 – شعبة رياضي + تسيير رياضي",
+      "status": "needs_review",
+      "year": "2012",
+      "stream": "رياضي + تسيير رياضي",
+      "topic": "مكثفة RC (شحن وتفريغ)",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2012_ex18",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2012_ex19",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex19.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2012 – شعبة رياضي + تسيير رياضي",
+      "status": "needs_review",
+      "year": "2012",
+      "stream": "رياضي + تسيير رياضي",
+      "topic": "وشيعة RL",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2012_ex19",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2012_ex20",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex20.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2012 – شعبة رياضي + تسيير رياضي",
+      "status": "needs_review",
+      "year": "2012",
+      "stream": "رياضي + تسيير رياضي",
+      "topic": "وشيعة RL",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2012_ex20",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2012_ex21",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex21.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2012 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "year": "2012",
+      "stream": "علوم تجريبية",
+      "topic": "RL",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2012_ex21",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2012_ex22",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex22.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2012 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "year": "2012",
+      "stream": "علوم تجريبية",
+      "topic": "RL",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2012_ex22",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2013_ex23",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex23.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2013 – شعبة رياضيات + تقني رياضي",
+      "status": "needs_review",
+      "year": "2013",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "RC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2013_ex23",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2013_ex24",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex24.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2013 – شعبة رياضيات + تقني رياضي",
+      "status": "needs_review",
+      "year": "2013",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "RL",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2013_ex24",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2013_ex25",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex25.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2013 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "year": "2013",
+      "stream": "علوم تجريبية",
+      "topic": "RC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2013_ex25",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2013_ex26",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex26.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2013 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "year": "2013",
+      "stream": "علوم تجريبية",
+      "topic": "RL",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2013_ex26",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2014_ex27",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex27.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2014 – شعبة رياضيات + تقني رياضي",
+      "status": "needs_review",
+      "year": "2014",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "RC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2014_ex27",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2014_ex28",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex28.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2014 – شعبة رياضيات + تقني رياضي",
+      "status": "needs_review",
+      "year": "2014",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "RL",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2014_ex28",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2014_ex29",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex29.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2014 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "year": "2014",
+      "stream": "علوم تجريبية",
+      "topic": "RL",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2014_ex29",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2014_ex30",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex30.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2014 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "year": "2014",
+      "stream": "علوم تجريبية",
+      "topic": "RC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2014_ex30",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2015_ex31",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex31.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2015 – شعبة رياضيات + تقني رياضي",
+      "status": "needs_review",
+      "year": "2015",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "RL",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2015_ex31",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2015_ex32",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex32.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2015 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "year": "2015",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "مكثفة RC شحن",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2015_ex32",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2015_ex33",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex33.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2015 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "year": "2015",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة RC شحن",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2015_ex33",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2015_ex34",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex34.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2015 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "year": "2015",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة RC شحن وتفريغ",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2015_ex34",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2016_ex35",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex35.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2016 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "year": "2016",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "مكثفة RC شحن",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2016_ex35",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2016_ex36",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex36.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2016 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "year": "2016",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "مكثفة RC شحن",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2016_ex36",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2016_ex37",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex37.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2016 – شعبة علوم تجريبية (الدورة العادية)",
+      "status": "needs_review",
+      "year": "2016",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة RC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2016_ex37",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2016_ex38",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex38.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2016 – شعبة علوم تجريبية (الدورة العادية)",
+      "status": "needs_review",
+      "year": "2016",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة RC تفريغ",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2016_ex38",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2016_ex39",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex39.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2016 – شعبة علوم تجريبية (الدورة الجزئية)",
+      "status": "needs_review",
+      "year": "2016",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة RC شحن وتفريغ",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2016_ex39",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2016_ex40",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex40.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2016 – شعبة علوم تجريبية (الدورة الجزئية)",
+      "status": "needs_review",
+      "year": "2016",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة RC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2016_ex40",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2017_ex41",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex41.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2017 – شعبة رياضي + تقني رياضي (الدورة العادية)",
+      "status": "needs_review",
+      "year": "2017",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "مكثفة ووشيعة",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2017_ex41",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc",
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2017_ex42",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex42.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2017 – شعبة رياضي + تقني رياضي (الدورة العادية)",
+      "status": "needs_review",
+      "year": "2017",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "RLC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2017_ex42",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc",
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2017_ex43",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex43.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2017 – شعبة رياضي + تقني رياضي (الدورة الإضافية)",
+      "status": "needs_review",
+      "year": "2017",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "RL وشيعة",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2017_ex43",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2017_ex44",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex44.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2017 – شعبة رياضي + تقني رياضي (الدورة الإضافية)",
+      "status": "needs_review",
+      "year": "2017",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "RL، وشيعة، LC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2017_ex44",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2017_ex45",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex45.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2017 – شعبة علوم تجريبية (الدورة العادية)",
+      "status": "needs_review",
+      "year": "2017",
+      "stream": "علوم تجريبية",
+      "topic": "RLC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2017_ex45",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc",
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_03_bac2017_ex46",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex46.md",
+      "unit": "unit3",
+      "title_ar": "بكالوريا 2017 – شعبة علوم تجريبية (الدورة الإضافية)",
+      "status": "needs_review",
+      "year": "2017",
+      "stream": "علوم تجريبية",
+      "topic": "RLC",
+      "answers_set": true,
+      "solutions_ref": "solution/unit_03_bac2017_ex46",
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/capacitor",
+        "concept/rc_dipole",
+        "concept/time_constant_rc",
+        "concept/coil",
+        "concept/rl_dipole",
+        "concept/time_constant_rl"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2008_ex01",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2008_ex01.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2008 – شعبة الرياضيات + التقني رياضي",
+      "status": "verified",
+      "year": "2008",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "ناقلية، ثابت التوازن، pKa – حمض الإيثانويك",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/conductivity",
+        "concept/equilibrium_constant"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2008_ex02",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2008_ex02.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2008 – شعبة الرياضيات + التقني رياضي",
+      "status": "verified",
+      "year": "2008",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "حمض البنزويك وحمض الساليسيليك – τf وK – مقارنة قوة حمضين",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/equilibrium_constant",
+        "concept/final_progress_ratio",
+        "concept/acid_base_strength"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2008_ex03",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2008_ex03.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2008 – شعبة العلوم التجريبية",
+      "status": "verified",
+      "year": "2008",
+      "stream": "علوم تجريبية",
+      "topic": "حمض الإيثانويك مع الماء – K و τf و pKa",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/equilibrium_constant",
+        "concept/final_progress_ratio"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2008_ex04",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2008_ex04.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2008 – شعبة العلوم التجريبية",
+      "status": "verified",
+      "year": "2008",
+      "stream": "علوم تجريبية",
+      "topic": "معايرة حمض اللاكتيك في الحليب – pH-مترية ولونية",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/ph_measurement"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2009_ex05",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2009_ex05.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2009 – شعبة العلوم التجريبية",
+      "status": "verified",
+      "year": "2009",
+      "stream": "علوم تجريبية",
+      "topic": "Ka بدلالة τ – استغلال بياني للجدول",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/equilibrium_constant"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2010_ex06",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2010_ex06.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2010 – شعبة الرياضيات + التقني رياضي",
+      "status": "verified",
+      "year": "2010",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "حمض الإيثانويك – τf و c و Qr والتحقق بالمعايرة",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/ph_measurement",
+        "concept/final_progress_ratio"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2010_ex07",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2010_ex07.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2010 – شعبة الرياضيات + التقني رياضي",
+      "status": "verified",
+      "year": "2010",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "النشادر – τf والتأثير على الحالة الابتدائية وKa",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/equilibrium_constant",
+        "concept/final_progress_ratio"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2010_ex08",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2010_ex08.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2010 – شعبة العلوم التجريبية",
+      "status": "verified",
+      "year": "2010",
+      "stream": "علوم تجريبية",
+      "topic": "حمض الميثانويك – تمديد ومعايرة pH-مترية وتحديد c0",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/ph_measurement"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2010_ex09",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2010_ex09.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2010 – شعبة العلوم التجريبية",
+      "status": "verified",
+      "year": "2010",
+      "stream": "علوم تجريبية",
+      "topic": "معايرة حمض البنزويك في مشروب غازي – جدول التقدم واختيار كاشف",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/ph_measurement",
+        "concept/final_progress_ratio"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2011_ex10",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2011_ex10.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2011 – شعبة الرياضيات + التقني رياضي",
+      "status": "verified",
+      "year": "2011",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "تأثير التركيز على τf وQr – الناقلية النوعية",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/conductivity",
+        "concept/final_progress_ratio"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2011_ex11",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2011_ex11.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2011 – شعبة الرياضيات + التقني رياضي",
+      "status": "verified",
+      "year": "2011",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "معايرة العينة المخبرية (27%, d=1.3) – البروتوكول والتكافؤ",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/ph_measurement"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2011_ex12",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2011_ex12.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2011 – شعبة العلوم التجريبية",
+      "status": "verified",
+      "year": "2011",
+      "stream": "علوم تجريبية",
+      "topic": "حمض الإيثانويك – الناقلية النوعية وK وτf",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/conductivity",
+        "concept/equilibrium_constant",
+        "concept/final_progress_ratio"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2012_ex13",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2012_ex13.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2012 – شعبة الرياضيات + التقني رياضي",
+      "status": "verified",
+      "year": "2012",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "الإيبوبروفين – التحقق من محدودية التفاعل ومعايرة هدروكسيدية",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/ph_measurement",
+        "concept/final_progress_ratio",
+        "concept/limited_vs_complete_reaction"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2012_ex14",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2012_ex14.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2012 – شعبة الرياضيات + التقني رياضي",
+      "status": "verified",
+      "year": "2012",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "حمض البنزويك – تأثير التخفيف على τf",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/final_progress_ratio"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2012_ex15",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2012_ex15.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2012 – شعبة العلوم التجريبية",
+      "status": "verified",
+      "year": "2012",
+      "stream": "علوم تجريبية",
+      "topic": "حمض البنزويك – المعايرة pH-مترية و E و E' و الصفة الغالبة",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/ph_measurement",
+        "concept/dominant_species"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2012_ex16",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2012_ex16.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2012 – شعبة العلوم التجريبية",
+      "status": "verified",
+      "year": "2012",
+      "stream": "علوم تجريبية",
+      "topic": "حمض الإيثانويك – تأثير C على τf وK",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/equilibrium_constant",
+        "concept/final_progress_ratio"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2013_ex17",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2013_ex17.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2013 – شعبة الرياضيات + التقني رياضي",
+      "status": "verified",
+      "year": "2013",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "حمض الإيثانويك + النشادر – τéq بدلالة K",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/equilibrium_constant"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2013_ex18",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2013_ex18.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2013 – شعبة الرياضيات + التقني رياضي",
+      "status": "verified",
+      "year": "2013",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "حمض الإيثانويك – تحديد c وتأكيده بالمعايرة ExAO",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/ph_measurement"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2013_ex19",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2013_ex19.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2013 – شعبة العلوم التجريبية",
+      "status": "verified",
+      "year": "2013",
+      "stream": "علوم تجريبية",
+      "topic": "معايرة حمض البنزويك – التكافؤ وpKa وpH ابتدائي",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/ph_measurement",
+        "concept/equilibrium_constant"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2014_ex20",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2014_ex20.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2014 – شعبة الرياضيات + التقني رياضي",
+      "status": "verified",
+      "year": "2014",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "معايرة النشادر – pKa و K و τf",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/ph_measurement",
+        "concept/equilibrium_constant",
+        "concept/final_progress_ratio"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2014_ex21",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2014_ex21.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2014 – شعبة العلوم التجريبية",
+      "status": "verified",
+      "year": "2014",
+      "stream": "علوم تجريبية",
+      "topic": "pH = f(log([A⁻]/[HA])) للتعرف على الحمض",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/ph_measurement"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2015_ex22",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2015_ex22.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2015 – شعبة الرياضيات + التقني رياضي",
+      "status": "verified",
+      "year": "2015",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "حمض اللاكتيك في منظف – pKa والتحقق من النسبة المئوية",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/equilibrium_constant"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2015_ex23",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2015_ex23.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2015 – شعبة الرياضيات + التقني رياضي",
+      "status": "verified",
+      "year": "2015",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "NH4+ مع HO– – المتفاعل المحدد والتحقق من النسبة الآزوتية",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2015_ex24",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2015_ex24.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2015 – شعبة العلوم التجريبية",
+      "status": "verified",
+      "year": "2015",
+      "stream": "علوم تجريبية",
+      "topic": "معايرة حمض البنزويك – تراكيز عند إضافة 14 mL و τf",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/ph_measurement",
+        "concept/final_progress_ratio"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2015_ex25",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2015_ex25.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2015 – شعبة العلوم التجريبية",
+      "status": "verified",
+      "year": "2015",
+      "stream": "علوم تجريبية",
+      "topic": "HCOOH مقابل C6H5CO2H – مقارنة القوة الحمضية",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/acid_base_strength"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2016_ex26",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2016_ex26.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2016 – شعبة الرياضيات + التقني رياضي",
+      "status": "verified",
+      "year": "2016",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "pH بدلالة τf/(1−τf) – التعرف على الحمض من البيان",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/ph_measurement",
+        "concept/final_progress_ratio"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2016_ex27",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2016_ex27.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2016 – شعبة الرياضيات + التقني رياضي",
+      "status": "verified",
+      "year": "2016",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "التعرف على حمض ضعيف بالمعايرة – K واختيار الكاشف",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/ph_measurement",
+        "concept/equilibrium_constant",
+        "concept/acid_base_strength"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2016_ex28",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2016_ex28.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2016 – شعبة العلوم التجريبية (الدورة العادية)",
+      "status": "verified",
+      "year": "2016",
+      "stream": "علوم تجريبية",
+      "topic": "حمض السولفاميك – نقاوة المنظف وبروتوكول الدستور",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2016_ex29",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2016_ex29.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2016 – شعبة العلوم التجريبية (الدورة العادية)",
+      "status": "verified",
+      "year": "2016",
+      "stream": "علوم تجريبية",
+      "topic": "الأسترة – τf وK وتحديد الكحول؛ مراقبة الحمض المتبقي",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/equilibrium_constant",
+        "concept/final_progress_ratio"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2016_ex30",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2016_ex30.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2016 – شعبة العلوم التجريبية (الدورة الجزئية)",
+      "status": "verified",
+      "year": "2016",
+      "stream": "علوم تجريبية",
+      "topic": "حمض البنزويك – التحضير بالتخفيف و Qr,f وتأثير إضافة الماء",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/final_progress_ratio"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2017_ex31",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2017_ex31.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2017 – شعبة الرياضيات + التقني رياضي (الدورة العادية)",
+      "status": "verified",
+      "year": "2017",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "حمض الإيثانويك بالناقلية – pH و K و Q_r,f",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/conductivity",
+        "concept/ph_measurement",
+        "concept/equilibrium_constant"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2017_ex32",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2017_ex32.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2017 – شعبة الرياضيات + التقني رياضي (الدورة الاستثنائية)",
+      "status": "verified",
+      "year": "2017",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "معايرة حمض قوي وحمض ضعيف – تحديد الحموض والكواشف",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/ph_measurement",
+        "concept/acid_base_strength"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_04_bac2017_ex33",
+      "type": "exercise",
+      "path": "exercises/bac_exercises/unit_04/unit_04_bac2017_ex33.md",
+      "unit": "unit4",
+      "title_ar": "بكالوريا 2017 – شعبة العلوم التجريبية (الدورة الاستثنائية)",
+      "status": "verified",
+      "year": "2017",
+      "stream": "علوم تجريبية",
+      "topic": "روح الملح – المعايرة وتحديد c0 والأسترة (صابونة)",
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [
+        "concept/ph_measurement"
+      ],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_01_bac_exercises_unavailable",
+      "type": "exercise",
+      "path": "exercises/unavailable/unit_01_bac_exercises_unavailable.md",
+      "unit": "unit1",
+      "title_ar": "بكالوريا الوحدة 1 — التجميعية غير متاحة (نص مشوّه الترميز)",
+      "status": "extraction_failed",
+      "year": null,
+      "stream": null,
+      "topic": null,
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_02_bac_exercises_unavailable",
+      "type": "exercise",
+      "path": "exercises/unavailable/unit_02_bac_exercises_unavailable.md",
+      "unit": "unit2",
+      "title_ar": "بكالوريا الوحدة 2 — لا توجد تجميعية في المصادر",
+      "status": "extraction_failed",
+      "year": null,
+      "stream": null,
+      "topic": null,
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [],
+      "concepts_explicit": []
+    },
+    {
+      "id": "exercise/unit_05_bac_exercises_unavailable",
+      "type": "exercise",
+      "path": "exercises/unavailable/unit_05_bac_exercises_unavailable.md",
+      "unit": "unit5",
+      "title_ar": "بكالوريا الوحدة 5 (الميكانيك) — التجميعية غير متاحة (نص مشوّه)",
+      "status": "extraction_failed",
+      "year": null,
+      "stream": null,
+      "topic": null,
+      "answers_set": false,
+      "solutions_ref": null,
+      "difficulty": null,
+      "concepts_derived": [],
+      "concepts_explicit": []
+    }
+  ],
+  "solutions": [
+    {
+      "id": "solution/unit_03_bac2008_ex01",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2008_ex01.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2008 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2008_ex01",
+      "year": "2008",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "وشيعة RL"
+    },
+    {
+      "id": "solution/unit_03_bac2008_ex02",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2008_ex02.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2008 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2008_ex02",
+      "year": "2008",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "RC"
+    },
+    {
+      "id": "solution/unit_03_bac2008_ex03",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2008_ex03.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2008 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2008_ex03",
+      "year": "2008",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة RC"
+    },
+    {
+      "id": "solution/unit_03_bac2008_ex04",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2008_ex04.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2008 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2008_ex04",
+      "year": "2008",
+      "stream": "علوم تجريبية",
+      "topic": "وشيعة RL"
+    },
+    {
+      "id": "solution/unit_03_bac2009_ex05",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2009_ex05.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2009 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2009_ex05",
+      "year": "2009",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "وشيعة RL"
+    },
+    {
+      "id": "solution/unit_03_bac2009_ex06",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2009_ex06.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2009 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2009_ex06",
+      "year": "2009",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "RC"
+    },
+    {
+      "id": "solution/unit_03_bac2009_ex07",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2009_ex07.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2009 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2009_ex07",
+      "year": "2009",
+      "stream": "علوم تجريبية",
+      "topic": "RC"
+    },
+    {
+      "id": "solution/unit_03_bac2009_ex08",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2009_ex08.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2009 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2009_ex08",
+      "year": "2009",
+      "stream": "علوم تجريبية",
+      "topic": "تفريغ مكثفة RC"
+    },
+    {
+      "id": "solution/unit_03_bac2010_ex09",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2010_ex09.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2010 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2010_ex09",
+      "year": "2010",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "مكثفة RC"
+    },
+    {
+      "id": "solution/unit_03_bac2010_ex10",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2010_ex10.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2010 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2010_ex10",
+      "year": "2010",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "وشيعة RL"
+    },
+    {
+      "id": "solution/unit_03_bac2010_ex11",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2010_ex11.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2010 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2010_ex11",
+      "year": "2010",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "مكثفة RC"
+    },
+    {
+      "id": "solution/unit_03_bac2010_ex12",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2010_ex12.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2010 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2010_ex12",
+      "year": "2010",
+      "stream": "علوم تجريبية",
+      "topic": "وشيعة RL"
+    },
+    {
+      "id": "solution/unit_03_bac2010_ex13",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2010_ex13.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2010 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2010_ex13",
+      "year": "2010",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة RC"
+    },
+    {
+      "id": "solution/unit_03_bac2011_ex14",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2011_ex14.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2011 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2011_ex14",
+      "year": "2011",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "مكثفة RC"
+    },
+    {
+      "id": "solution/unit_03_bac2011_ex15",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2011_ex15.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2011 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2011_ex15",
+      "year": "2011",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "وشيعة RL"
+    },
+    {
+      "id": "solution/unit_03_bac2011_ex16",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2011_ex16.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2011 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2011_ex16",
+      "year": "2011",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة RC"
+    },
+    {
+      "id": "solution/unit_03_bac2011_ex17",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2011_ex17.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2011 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2011_ex17",
+      "year": "2011",
+      "stream": "علوم تجريبية",
+      "topic": "وشيعة RL"
+    },
+    {
+      "id": "solution/unit_03_bac2012_ex18",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2012_ex18.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2012 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2012_ex18",
+      "year": "2012",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "مكثفة RC"
+    },
+    {
+      "id": "solution/unit_03_bac2012_ex19",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2012_ex19.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2012 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2012_ex19",
+      "year": "2012",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "وشيعة RL"
+    },
+    {
+      "id": "solution/unit_03_bac2012_ex20",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2012_ex20.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2012 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2012_ex20",
+      "year": "2012",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "وشيعة RL"
+    },
+    {
+      "id": "solution/unit_03_bac2012_ex21",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2012_ex21.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2012 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2012_ex21",
+      "year": "2012",
+      "stream": "علوم تجريبية",
+      "topic": "وشيعة RL"
+    },
+    {
+      "id": "solution/unit_03_bac2012_ex22",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2012_ex22.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2012 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2012_ex22",
+      "year": "2012",
+      "stream": "علوم تجريبية",
+      "topic": "وشيعة RL"
+    },
+    {
+      "id": "solution/unit_03_bac2013_ex23",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2013_ex23.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2013 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2013_ex23",
+      "year": "2013",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "مكثفة RC"
+    },
+    {
+      "id": "solution/unit_03_bac2013_ex24",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2013_ex24.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2013 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2013_ex24",
+      "year": "2013",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "وشيعة RL"
+    },
+    {
+      "id": "solution/unit_03_bac2013_ex25",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2013_ex25.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2013 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2013_ex25",
+      "year": "2013",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة RC"
+    },
+    {
+      "id": "solution/unit_03_bac2013_ex26",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2013_ex26.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2013 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2013_ex26",
+      "year": "2013",
+      "stream": "علوم تجريبية",
+      "topic": "وشيعة RL – الشحن"
+    },
+    {
+      "id": "solution/unit_03_bac2014_ex27",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2014_ex27.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2014 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2014_ex27",
+      "year": "2014",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "مكثفة RC – الشحن والتفريغ"
+    },
+    {
+      "id": "solution/unit_03_bac2014_ex28",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2014_ex28.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2014 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2014_ex28",
+      "year": "2014",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "وشيعة RL"
+    },
+    {
+      "id": "solution/unit_03_bac2014_ex29",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2014_ex29.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2014 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2014_ex29",
+      "year": "2014",
+      "stream": "علوم تجريبية",
+      "topic": "وشيعة RL – الشحن"
+    },
+    {
+      "id": "solution/unit_03_bac2014_ex30",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2014_ex30.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2014 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2014_ex30",
+      "year": "2014",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة RC – الشحن والتفريغ"
+    },
+    {
+      "id": "solution/unit_03_bac2015_ex31",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2015_ex31.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2015 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2015_ex31",
+      "year": "2015",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "وشيعة RL"
+    },
+    {
+      "id": "solution/unit_03_bac2015_ex32",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2015_ex32.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2015 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2015_ex32",
+      "year": "2015",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "مكثفة RC"
+    },
+    {
+      "id": "solution/unit_03_bac2015_ex33",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2015_ex33.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2015 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2015_ex33",
+      "year": "2015",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة RC – الشحن"
+    },
+    {
+      "id": "solution/unit_03_bac2015_ex34",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2015_ex34.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2015 – شعبة علوم تجريبية",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2015_ex34",
+      "year": "2015",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة RC – التفريغ"
+    },
+    {
+      "id": "solution/unit_03_bac2016_ex35",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2016_ex35.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2016 – شعبة رياضي + تقني رياضي",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2016_ex35",
+      "year": "2016",
+      "stream": "رياضي + تقني رياضي",
+      "topic": "مكثفة RC"
+    },
+    {
+      "id": "solution/unit_03_bac2016_ex36",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2016_ex36.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2016 – شعبة رياضيات + تقني رياضي (الدورة العادية)",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2016_ex36",
+      "year": "2016",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "مكثفة"
+    },
+    {
+      "id": "solution/unit_03_bac2016_ex37",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2016_ex37.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2016 – شعبة علوم تجريبية (الدورة العادية)",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2016_ex37",
+      "year": "2016",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة"
+    },
+    {
+      "id": "solution/unit_03_bac2016_ex38",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2016_ex38.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2016 – شعبة علوم تجريبية (الدورة العادية)",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2016_ex38",
+      "year": "2016",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة"
+    },
+    {
+      "id": "solution/unit_03_bac2016_ex39",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2016_ex39.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2016 – شعبة علوم تجريبية (الدورة الجزئية)",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2016_ex39",
+      "year": "2016",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة"
+    },
+    {
+      "id": "solution/unit_03_bac2016_ex40",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2016_ex40.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2016 – شعبة علوم تجريبية (الدورة الجزئية)",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2016_ex40",
+      "year": "2016",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة"
+    },
+    {
+      "id": "solution/unit_03_bac2017_ex41",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2017_ex41.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2017 – شعبة رياضيات + تقني رياضي (الدورة العادية)",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2017_ex41",
+      "year": "2017",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "RC + RLC"
+    },
+    {
+      "id": "solution/unit_03_bac2017_ex42",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2017_ex42.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2017 – شعبة رياضيات + تقني رياضي (الدورة العادية)",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2017_ex42",
+      "year": "2017",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "مكثفة + LC"
+    },
+    {
+      "id": "solution/unit_03_bac2017_ex43",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2017_ex43.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2017 – شعبة رياضيات + تقني رياضي (الدورة الإضافية)",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2017_ex43",
+      "year": "2017",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "وشيعة (RL)"
+    },
+    {
+      "id": "solution/unit_03_bac2017_ex44",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2017_ex44.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2017 – شعبة رياضيات + تقني رياضي (الدورة الإضافية)",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2017_ex44",
+      "year": "2017",
+      "stream": "رياضيات + تقني رياضي",
+      "topic": "وشيعة + LC"
+    },
+    {
+      "id": "solution/unit_03_bac2017_ex45",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2017_ex45.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2017 – شعبة علوم تجريبية (الدورة العادية)",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2017_ex45",
+      "year": "2017",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة + LC"
+    },
+    {
+      "id": "solution/unit_03_bac2017_ex46",
+      "type": "solution",
+      "path": "solutions/bac_exercises/unit_03/unit_03_bac2017_ex46.md",
+      "unit": "unit3",
+      "title_ar": "حل بكالوريا 2017 – شعبة علوم تجريبية (الدورة الإضافية)",
+      "status": "needs_review",
+      "exercise_ref": "exercise/unit_03_bac2017_ex46",
+      "year": "2017",
+      "stream": "علوم تجريبية",
+      "topic": "مكثفة + RL"
+    }
+  ],
+  "other_records": [],
+  "bac_exams": [
+    {
+      "year": 2008,
+      "exercise_count": 8,
+      "exercise_ids": [
+        "exercise/unit_03_bac2008_ex01",
+        "exercise/unit_03_bac2008_ex02",
+        "exercise/unit_03_bac2008_ex03",
+        "exercise/unit_03_bac2008_ex04",
+        "exercise/unit_04_bac2008_ex01",
+        "exercise/unit_04_bac2008_ex02",
+        "exercise/unit_04_bac2008_ex03",
+        "exercise/unit_04_bac2008_ex04"
+      ]
+    },
+    {
+      "year": 2009,
+      "exercise_count": 5,
+      "exercise_ids": [
+        "exercise/unit_03_bac2009_ex05",
+        "exercise/unit_03_bac2009_ex06",
+        "exercise/unit_03_bac2009_ex07",
+        "exercise/unit_03_bac2009_ex08",
+        "exercise/unit_04_bac2009_ex05"
+      ]
+    },
+    {
+      "year": 2010,
+      "exercise_count": 9,
+      "exercise_ids": [
+        "exercise/unit_03_bac2010_ex09",
+        "exercise/unit_03_bac2010_ex10",
+        "exercise/unit_03_bac2010_ex11",
+        "exercise/unit_03_bac2010_ex12",
+        "exercise/unit_03_bac2010_ex13",
+        "exercise/unit_04_bac2010_ex06",
+        "exercise/unit_04_bac2010_ex07",
+        "exercise/unit_04_bac2010_ex08",
+        "exercise/unit_04_bac2010_ex09"
+      ]
+    },
+    {
+      "year": 2011,
+      "exercise_count": 7,
+      "exercise_ids": [
+        "exercise/unit_03_bac2011_ex14",
+        "exercise/unit_03_bac2011_ex15",
+        "exercise/unit_03_bac2011_ex16",
+        "exercise/unit_03_bac2011_ex17",
+        "exercise/unit_04_bac2011_ex10",
+        "exercise/unit_04_bac2011_ex11",
+        "exercise/unit_04_bac2011_ex12"
+      ]
+    },
+    {
+      "year": 2012,
+      "exercise_count": 9,
+      "exercise_ids": [
+        "exercise/unit_03_bac2012_ex18",
+        "exercise/unit_03_bac2012_ex19",
+        "exercise/unit_03_bac2012_ex20",
+        "exercise/unit_03_bac2012_ex21",
+        "exercise/unit_03_bac2012_ex22",
+        "exercise/unit_04_bac2012_ex13",
+        "exercise/unit_04_bac2012_ex14",
+        "exercise/unit_04_bac2012_ex15",
+        "exercise/unit_04_bac2012_ex16"
+      ]
+    },
+    {
+      "year": 2013,
+      "exercise_count": 7,
+      "exercise_ids": [
+        "exercise/unit_03_bac2013_ex23",
+        "exercise/unit_03_bac2013_ex24",
+        "exercise/unit_03_bac2013_ex25",
+        "exercise/unit_03_bac2013_ex26",
+        "exercise/unit_04_bac2013_ex17",
+        "exercise/unit_04_bac2013_ex18",
+        "exercise/unit_04_bac2013_ex19"
+      ]
+    },
+    {
+      "year": 2014,
+      "exercise_count": 6,
+      "exercise_ids": [
+        "exercise/unit_03_bac2014_ex27",
+        "exercise/unit_03_bac2014_ex28",
+        "exercise/unit_03_bac2014_ex29",
+        "exercise/unit_03_bac2014_ex30",
+        "exercise/unit_04_bac2014_ex20",
+        "exercise/unit_04_bac2014_ex21"
+      ]
+    },
+    {
+      "year": 2015,
+      "exercise_count": 8,
+      "exercise_ids": [
+        "exercise/unit_03_bac2015_ex31",
+        "exercise/unit_03_bac2015_ex32",
+        "exercise/unit_03_bac2015_ex33",
+        "exercise/unit_03_bac2015_ex34",
+        "exercise/unit_04_bac2015_ex22",
+        "exercise/unit_04_bac2015_ex23",
+        "exercise/unit_04_bac2015_ex24",
+        "exercise/unit_04_bac2015_ex25"
+      ]
+    },
+    {
+      "year": 2016,
+      "exercise_count": 11,
+      "exercise_ids": [
+        "exercise/unit_03_bac2016_ex35",
+        "exercise/unit_03_bac2016_ex36",
+        "exercise/unit_03_bac2016_ex37",
+        "exercise/unit_03_bac2016_ex38",
+        "exercise/unit_03_bac2016_ex39",
+        "exercise/unit_03_bac2016_ex40",
+        "exercise/unit_04_bac2016_ex26",
+        "exercise/unit_04_bac2016_ex27",
+        "exercise/unit_04_bac2016_ex28",
+        "exercise/unit_04_bac2016_ex29",
+        "exercise/unit_04_bac2016_ex30"
+      ]
+    },
+    {
+      "year": 2017,
+      "exercise_count": 9,
+      "exercise_ids": [
+        "exercise/unit_03_bac2017_ex41",
+        "exercise/unit_03_bac2017_ex42",
+        "exercise/unit_03_bac2017_ex43",
+        "exercise/unit_03_bac2017_ex44",
+        "exercise/unit_03_bac2017_ex45",
+        "exercise/unit_03_bac2017_ex46",
+        "exercise/unit_04_bac2017_ex31",
+        "exercise/unit_04_bac2017_ex32",
+        "exercise/unit_04_bac2017_ex33"
+      ]
+    }
+  ]
+}

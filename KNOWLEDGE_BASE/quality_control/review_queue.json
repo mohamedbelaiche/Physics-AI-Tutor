@@ -1,0 +1,53 @@
+{
+  "$schema_description": "قائمة مراجعة بشرية لكل عنصر في قاعدة المعرفة بحاجة تحقق. priority: high|medium|low. review_type: content_fidelity | formula_reconstruction | completeness | missing_source.",
+  "source_evaluation_date": "2026-09-10",
+  "items": [
+    {
+      "id": "RQ-001",
+      "priority": "high",
+      "review_type": "formula_reconstruction",
+      "related_records": ["exercise/unit_03/*", "concept/time_constant_rc", "concept/time_constant_rl", "lesson/unit_03_electric_phenomena"],
+      "description": "صيغ الوحدة 3 (RC/RL) أُعيد بناؤها من توكنز طبقة النص (مكسّرة الترتيب). راجع كل صيغة: تعبير i(t) للشحن/التفريغ، u_C(t)، u_L(t)=L di/dt، الطاقة المخزنة، ثوابت الزمن.",
+      "action": "مقارنة بصريًا بالـ PDF الأصلي (ملخص الوحدة الثالثة.pdf صفحات 1-15) قبل اعتماد status=verified.",
+      "expected_after_review": "رفع status من needs_review إلى verified أو تصحيح."
+    },
+    {
+      "id": "RQ-002",
+      "priority": "medium",
+      "review_type": "missing_source",
+      "related_records": ["exercise/unavailable/*"],
+      "description": "تمرينات الوحدة 1 والوحدة 5 (تجميعيتا عمورة) نصوصها مشوّهة الترميز في الـ PDF والـ MD. سجلت كـ 'unavailable' دون محتوى.",
+      "action": "إما نسخ يدوي من الصور أو OCR عربي دقيق، ثم استيفاء سجلات التمارين.",
+      "expected_after_review": "استبدال سجلات unavailable بسجلات تمارين كاملة موثوقة."
+    },
+    {
+      "id": "RQ-003",
+      "priority": "medium",
+      "review_type": "missing_source",
+      "related_records": ["taxonomy/curriculum.json"],
+      "description": "البرنامج السنوي.pdf غير قابل للاستخراج (محتواه صور). حُددت الوحدات الخمس من units.json وملخصات الوحدات، لكن الجدول الزمني (حصص/فترات) غير مؤكد.",
+      "action": "استكمال الجدول الزمني من وثيقة البرنامج الرسمي للرابعة النهائية (وزارة التربية) إن توفرت.",
+      "expected_after_review": "إضافة حقل timeline_weeks موثق أو تثبيت غيابه."
+    },
+    {
+      "id": "RQ-004",
+      "priority": "low",
+      "review_type": "content_fidelity",
+      "related_records": ["lesson/unit_03_*"],
+      "description": "درس الوحدة 3 مبني من استخراج PDF وحيد (ملخص الوحدة الثالثة.pdf) — لا توجد MD نظيفة مقابلة للمطابقة. تأكد من اكتمال أقسام: المكثفة، ثنائي القطب RC (شحن/تفريغ)، الوشيعة، ثنائي القطب RL (ظهور/انقطاع التيار).",
+      "action": "عرض سريع على المراجع البيداغوجية للمطابقة.",
+      "expected_after_review": "إبقاء status=verified بعد التأكد."
+    },
+    {
+      "id": "RQ-005",
+      "priority": "low",
+      "review_type": "completeness",
+      "related_records": ["solutions/policy", "solutions/README"],
+      "description": "لا توجد حلول في أي مصدر خام (التجميعيات تمارين بدون حلول). الحلول ستولَّد بواسطة المصحح الآلي عند الطلب لا من قاعدة المعرفة.",
+      "action": "لا حاجة (وثيقة سياسة فقط).",
+      "expected_after_review": "القبول بدون تغيير."
+    }
+  ],
+  "total_open": 5,
+  "principle": "أي محتوى مصدره PDF متكسرة الصيغ أو غير قابل للتحقق يُسجَّل needs_review حتى مراجعة بشرية."
+}

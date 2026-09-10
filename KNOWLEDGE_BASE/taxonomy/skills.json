@@ -1,0 +1,53 @@
+{
+  "$schema_description": "المهارات المعرفية/الإجرائية مطلوبة لكل نوع سؤال؛ تُستعمل لوسم التمارين وحلقة التعليم (التدريب).",
+  "skills": [
+    {
+      "id": "sk_modelize",
+      "title_ar": "النمذجة والترجمة الرياضية",
+      "title_en": "Modeling and mathematical translation",
+      "description": "تحويل وضعية (نصية/تجريبية) إلى معادلة أو علاقة: معادلة تفاعل، معادلة تفاضلية، عبارة سرعة/طاقة.",
+      "question_types": ["qt_global_reaction", "qt_differential_equation", "qt_verify_solution"]
+    },
+    {
+      "id": "sk_apply_law",
+      "title_ar": "تطبيق القوانين الأساسية",
+      "title_en": "Apply fundamental laws",
+      "description": "قانون جمع التوترات، قانون أوم، قانون الإنحفاظ، قوانين نيوتن، قانون التفكك، ثابت التوازن.",
+      "question_types": ["qt_calculate", "qt_differential_equation", "qt_decay_law"]
+    },
+    {
+      "id": "sk_graph",
+      "title_ar": "التمثيل والاستغلال البياني",
+      "title_en": "Graph construction and exploitation",
+      "description": "رسم بيان بقياسات مناسبة، تعيين الميل والمساحة والمماس، اشتقاق كمية فيزيائية.",
+      "question_types": ["qt_graph", "qt_graph_exploit", "qt_time_constant"]
+    },
+    {
+      "id": "sk_protocol",
+      "title_ar": "الإجراء التجريبي والقياس",
+      "title_en": "Experimental protocol and measurement",
+      "description": "اقتراح تركيب، تفسير قراءات أجهزة (مقياس ناقلية، راسم أمواج)، انعكاسات القياس.",
+      "question_types": ["qt_experiment_setup", "qt_conductivity", "qt_ph"]
+    },
+    {
+      "id": "sk_justify",
+      "title_ar": "التبرير والاستنتاج المنطقي",
+      "title_en": "Justification and logical deduction",
+      "description": "إثبات علاقة، تفسير سلوك (نظام انتقالي/محدود)، استنتاج تلقائية تفاعل.",
+      "question_types": ["qt_justify", "qt_verify_solution", "qt_species_dominate"]
+    },
+    {
+      "id": "sk_units",
+      "title_ar": "الأبعاد والوحدات",
+      "title_en": "Dimensions and units",
+      "description": "تحقق تجانسي + تحويل وحدات (m→cm، L→mL، SI).",
+      "question_types": ["qt_units"]
+    },
+    {
+      "id": "sk_calculate",
+      "title_ar": "الحساب الرقمي الدقيق بالأرقام المعنوية",
+      "title_en": "Accurate numerical computation",
+      "question_types": ["qt_calculate", "qt_ph", "qt_conductivity", "qt_energy", "qt_satellite"]
+    }
+  ]
+}

@@ -1,0 +1,3471 @@
+{
+  "version": "1.0",
+  "generated_at": "2026-09-10T17:02:07.146Z",
+  "generator": "scripts/build-knowledge-base.js",
+  "hierarchy": [
+    "lesson",
+    "concept",
+    "formula",
+    "skill",
+    "exercise",
+    "question",
+    "solution"
+  ],
+  "edge_counts": {
+    "lesson_has_concept": 34,
+    "lesson_has_formula": 0,
+    "concept_related_concept": 77,
+    "concept_has_formula": 37,
+    "concept_used_in_exercise": 0,
+    "formula_uses_concept": 45,
+    "formula_used_in_exercise": 0,
+    "exercise_uses_concept": 206,
+    "exercise_has_solution": 46,
+    "solution_solves_exercise": 46
+  },
+  "edges": [
+    {
+      "from": "lesson/unit_01_chemical_kinetics",
+      "to": "concept/redox_pair",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_01_chemical_kinetics.md"
+    },
+    {
+      "from": "lesson/unit_01_chemical_kinetics",
+      "to": "concept/redox_equation_writing",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_01_chemical_kinetics.md"
+    },
+    {
+      "from": "lesson/unit_01_chemical_kinetics",
+      "to": "concept/oxidation_reduction_reaction",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_01_chemical_kinetics.md"
+    },
+    {
+      "from": "lesson/unit_01_chemical_kinetics",
+      "to": "concept/progress_table",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_01_chemical_kinetics.md"
+    },
+    {
+      "from": "lesson/unit_01_chemical_kinetics",
+      "to": "concept/reaction_rate",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_01_chemical_kinetics.md"
+    },
+    {
+      "from": "lesson/unit_01_chemical_kinetics",
+      "to": "concept/half_reaction_time",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_01_chemical_kinetics.md"
+    },
+    {
+      "from": "lesson/unit_01_chemical_kinetics",
+      "to": "concept/kinetic_factors",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_01_chemical_kinetics.md"
+    },
+    {
+      "from": "lesson/unit_02_nuclear_transformations",
+      "to": "concept/nuclide_notation",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_02_nuclear_transformations.md"
+    },
+    {
+      "from": "lesson/unit_02_nuclear_transformations",
+      "to": "concept/radioactive_decay",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_02_nuclear_transformations.md"
+    },
+    {
+      "from": "lesson/unit_02_nuclear_transformations",
+      "to": "concept/decay_law",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_02_nuclear_transformations.md"
+    },
+    {
+      "from": "lesson/unit_02_nuclear_transformations",
+      "to": "concept/half_life",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_02_nuclear_transformations.md"
+    },
+    {
+      "from": "lesson/unit_02_nuclear_transformations",
+      "to": "concept/activity",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_02_nuclear_transformations.md"
+    },
+    {
+      "from": "lesson/unit_02_nuclear_transformations",
+      "to": "concept/radiocarbon_dating",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_02_nuclear_transformations.md"
+    },
+    {
+      "from": "lesson/unit_03_electric_phenomena",
+      "to": "concept/capacitor",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_03_electric_phenomena.md"
+    },
+    {
+      "from": "lesson/unit_03_electric_phenomena",
+      "to": "concept/capacitor_energy",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_03_electric_phenomena.md"
+    },
+    {
+      "from": "lesson/unit_03_electric_phenomena",
+      "to": "concept/rc_dipole",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_03_electric_phenomena.md"
+    },
+    {
+      "from": "lesson/unit_03_electric_phenomena",
+      "to": "concept/time_constant_rc",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_03_electric_phenomena.md"
+    },
+    {
+      "from": "lesson/unit_03_electric_phenomena",
+      "to": "concept/coil",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_03_electric_phenomena.md"
+    },
+    {
+      "from": "lesson/unit_03_electric_phenomena",
+      "to": "concept/coil_energy",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_03_electric_phenomena.md"
+    },
+    {
+      "from": "lesson/unit_03_electric_phenomena",
+      "to": "concept/rl_dipole",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_03_electric_phenomena.md"
+    },
+    {
+      "from": "lesson/unit_03_electric_phenomena",
+      "to": "concept/time_constant_rl",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_03_electric_phenomena.md"
+    },
+    {
+      "from": "lesson/unit_04_chemical_equilibrium",
+      "to": "concept/limited_vs_complete_reaction",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_04_chemical_equilibrium.md"
+    },
+    {
+      "from": "lesson/unit_04_chemical_equilibrium",
+      "to": "concept/final_progress_ratio",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_04_chemical_equilibrium.md"
+    },
+    {
+      "from": "lesson/unit_04_chemical_equilibrium",
+      "to": "concept/equilibrium_constant",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_04_chemical_equilibrium.md"
+    },
+    {
+      "from": "lesson/unit_04_chemical_equilibrium",
+      "to": "concept/acid_base_strength",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_04_chemical_equilibrium.md"
+    },
+    {
+      "from": "lesson/unit_04_chemical_equilibrium",
+      "to": "concept/ph_measurement",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_04_chemical_equilibrium.md"
+    },
+    {
+      "from": "lesson/unit_04_chemical_equilibrium",
+      "to": "concept/conductivity",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_04_chemical_equilibrium.md"
+    },
+    {
+      "from": "lesson/unit_04_chemical_equilibrium",
+      "to": "concept/dominant_species",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_04_chemical_equilibrium.md"
+    },
+    {
+      "from": "lesson/unit_05_mechanics",
+      "to": "concept/momentum_impulse",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_05_mechanics.md"
+    },
+    {
+      "from": "lesson/unit_05_mechanics",
+      "to": "concept/newton_laws",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_05_mechanics.md"
+    },
+    {
+      "from": "lesson/unit_05_mechanics",
+      "to": "concept/straight_line_motion",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_05_mechanics.md"
+    },
+    {
+      "from": "lesson/unit_05_mechanics",
+      "to": "concept/projectile_motion",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_05_mechanics.md"
+    },
+    {
+      "from": "lesson/unit_05_mechanics",
+      "to": "concept/circular_orbit",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_05_mechanics.md"
+    },
+    {
+      "from": "lesson/unit_05_mechanics",
+      "to": "concept/kepler_relation",
+      "type": "lesson_has_concept",
+      "method": "explicit",
+      "source": "lessons/unit_05_mechanics.md"
+    },
+    {
+      "from": "concept/acid_base_strength",
+      "to": "concept/equilibrium_constant",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/acid_base_strength.md"
+    },
+    {
+      "from": "concept/acid_base_strength",
+      "to": "concept/final_progress_ratio",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/acid_base_strength.md"
+    },
+    {
+      "from": "concept/acid_base_strength",
+      "to": "concept/ph_measurement",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/acid_base_strength.md"
+    },
+    {
+      "from": "concept/acid_base_strength",
+      "to": "formula/u4_ka",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/acid_base_strength.md"
+    },
+    {
+      "from": "concept/activity",
+      "to": "concept/decay_law",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/activity.md"
+    },
+    {
+      "from": "concept/activity",
+      "to": "concept/radiocarbon_dating",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/activity.md"
+    },
+    {
+      "from": "concept/activity",
+      "to": "formula/u2_activity",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/activity.md"
+    },
+    {
+      "from": "concept/capacitor",
+      "to": "concept/rc_dipole",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/capacitor.md"
+    },
+    {
+      "from": "concept/capacitor",
+      "to": "concept/capacitor_energy",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/capacitor.md"
+    },
+    {
+      "from": "concept/capacitor",
+      "to": "formula/u3_capacitor",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/capacitor.md"
+    },
+    {
+      "from": "concept/capacitor_energy",
+      "to": "concept/capacitor",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/capacitor_energy.md"
+    },
+    {
+      "from": "concept/capacitor_energy",
+      "to": "concept/rc_dipole",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/capacitor_energy.md"
+    },
+    {
+      "from": "concept/capacitor_energy",
+      "to": "formula/u3_capacitor_energy",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/capacitor_energy.md"
+    },
+    {
+      "from": "concept/circular_orbit",
+      "to": "concept/newton_laws",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/circular_orbit.md"
+    },
+    {
+      "from": "concept/circular_orbit",
+      "to": "concept/kepler_relation",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/circular_orbit.md"
+    },
+    {
+      "from": "concept/circular_orbit",
+      "to": "formula/u5_gravitation",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/circular_orbit.md"
+    },
+    {
+      "from": "concept/circular_orbit",
+      "to": "formula/u5_satellite",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/circular_orbit.md"
+    },
+    {
+      "from": "concept/circular_orbit",
+      "to": "formula/u5_orbital_speed",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/circular_orbit.md"
+    },
+    {
+      "from": "concept/coil",
+      "to": "concept/rl_dipole",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/coil.md"
+    },
+    {
+      "from": "concept/coil",
+      "to": "concept/coil_energy",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/coil.md"
+    },
+    {
+      "from": "concept/coil",
+      "to": "formula/u3_coil_voltage",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/coil.md"
+    },
+    {
+      "from": "concept/coil_energy",
+      "to": "concept/coil",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/coil_energy.md"
+    },
+    {
+      "from": "concept/coil_energy",
+      "to": "concept/rl_dipole",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/coil_energy.md"
+    },
+    {
+      "from": "concept/coil_energy",
+      "to": "formula/u3_coil_energy",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/coil_energy.md"
+    },
+    {
+      "from": "concept/conductivity",
+      "to": "concept/ph_measurement",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/conductivity.md"
+    },
+    {
+      "from": "concept/conductivity",
+      "to": "formula/u1_conductance",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/conductivity.md"
+    },
+    {
+      "from": "concept/decay_law",
+      "to": "concept/radioactive_decay",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/decay_law.md"
+    },
+    {
+      "from": "concept/decay_law",
+      "to": "concept/half_life",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/decay_law.md"
+    },
+    {
+      "from": "concept/decay_law",
+      "to": "concept/activity",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/decay_law.md"
+    },
+    {
+      "from": "concept/decay_law",
+      "to": "formula/u2_decay_law",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/decay_law.md"
+    },
+    {
+      "from": "concept/decay_law",
+      "to": "formula/u2_half_life",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/decay_law.md"
+    },
+    {
+      "from": "concept/decay_law",
+      "to": "formula/u2_time_constant",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/decay_law.md"
+    },
+    {
+      "from": "concept/dominant_species",
+      "to": "concept/equilibrium_constant",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/dominant_species.md"
+    },
+    {
+      "from": "concept/dominant_species",
+      "to": "concept/acid_base_strength",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/dominant_species.md"
+    },
+    {
+      "from": "concept/dominant_species",
+      "to": "concept/ph_measurement",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/dominant_species.md"
+    },
+    {
+      "from": "concept/dominant_species",
+      "to": "concept/final_progress_ratio",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/dominant_species.md"
+    },
+    {
+      "from": "concept/dominant_species",
+      "to": "formula/u4_dominant_species",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/dominant_species.md"
+    },
+    {
+      "from": "concept/equilibrium_constant",
+      "to": "concept/limited_vs_complete_reaction",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/equilibrium_constant.md"
+    },
+    {
+      "from": "concept/equilibrium_constant",
+      "to": "concept/final_progress_ratio",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/equilibrium_constant.md"
+    },
+    {
+      "from": "concept/equilibrium_constant",
+      "to": "concept/acid_base_strength",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/equilibrium_constant.md"
+    },
+    {
+      "from": "concept/equilibrium_constant",
+      "to": "concept/dominant_species",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/equilibrium_constant.md"
+    },
+    {
+      "from": "concept/equilibrium_constant",
+      "to": "formula/u4_equilibrium_constant",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/equilibrium_constant.md"
+    },
+    {
+      "from": "concept/equilibrium_constant",
+      "to": "formula/u4_ka",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/equilibrium_constant.md"
+    },
+    {
+      "from": "concept/final_progress_ratio",
+      "to": "concept/limited_vs_complete_reaction",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/final_progress_ratio.md"
+    },
+    {
+      "from": "concept/final_progress_ratio",
+      "to": "concept/acid_base_strength",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/final_progress_ratio.md"
+    },
+    {
+      "from": "concept/final_progress_ratio",
+      "to": "concept/dominant_species",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/final_progress_ratio.md"
+    },
+    {
+      "from": "concept/final_progress_ratio",
+      "to": "formula/u4_final_progress",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/final_progress_ratio.md"
+    },
+    {
+      "from": "concept/half_life",
+      "to": "concept/decay_law",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/half_life.md"
+    },
+    {
+      "from": "concept/half_life",
+      "to": "formula/u2_half_life",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/half_life.md"
+    },
+    {
+      "from": "concept/half_reaction_time",
+      "to": "concept/progress_table",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/half_reaction_time.md"
+    },
+    {
+      "from": "concept/half_reaction_time",
+      "to": "concept/reaction_rate",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/half_reaction_time.md"
+    },
+    {
+      "from": "concept/half_reaction_time",
+      "to": "formula/u1_half_reaction_time",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/half_reaction_time.md"
+    },
+    {
+      "from": "concept/kepler_relation",
+      "to": "concept/circular_orbit",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/kepler_relation.md"
+    },
+    {
+      "from": "concept/kepler_relation",
+      "to": "formula/u5_kepler",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/kepler_relation.md"
+    },
+    {
+      "from": "concept/kinetic_factors",
+      "to": "concept/reaction_rate",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/kinetic_factors.md"
+    },
+    {
+      "from": "concept/kinetic_factors",
+      "to": "concept/half_reaction_time",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/kinetic_factors.md"
+    },
+    {
+      "from": "concept/limited_vs_complete_reaction",
+      "to": "concept/final_progress_ratio",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/limited_vs_complete_reaction.md"
+    },
+    {
+      "from": "concept/limited_vs_complete_reaction",
+      "to": "concept/equilibrium_constant",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/limited_vs_complete_reaction.md"
+    },
+    {
+      "from": "concept/limited_vs_complete_reaction",
+      "to": "formula/u4_final_progress",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/limited_vs_complete_reaction.md"
+    },
+    {
+      "from": "concept/momentum_impulse",
+      "to": "concept/newton_laws",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/momentum_impulse.md"
+    },
+    {
+      "from": "concept/newton_laws",
+      "to": "concept/straight_line_motion",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/newton_laws.md"
+    },
+    {
+      "from": "concept/newton_laws",
+      "to": "concept/projectile_motion",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/newton_laws.md"
+    },
+    {
+      "from": "concept/newton_laws",
+      "to": "concept/circular_orbit",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/newton_laws.md"
+    },
+    {
+      "from": "concept/newton_laws",
+      "to": "concept/momentum_impulse",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/newton_laws.md"
+    },
+    {
+      "from": "concept/newton_laws",
+      "to": "formula/u5_newton",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/newton_laws.md"
+    },
+    {
+      "from": "concept/nuclide_notation",
+      "to": "concept/radioactive_decay",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/nuclide_notation.md"
+    },
+    {
+      "from": "concept/oxidation_reduction_reaction",
+      "to": "concept/redox_pair",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/oxidation_reduction_reaction.md"
+    },
+    {
+      "from": "concept/oxidation_reduction_reaction",
+      "to": "concept/redox_equation_writing",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/oxidation_reduction_reaction.md"
+    },
+    {
+      "from": "concept/oxidation_reduction_reaction",
+      "to": "concept/progress_table",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/oxidation_reduction_reaction.md"
+    },
+    {
+      "from": "concept/ph_measurement",
+      "to": "concept/equilibrium_constant",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/ph_measurement.md"
+    },
+    {
+      "from": "concept/ph_measurement",
+      "to": "concept/acid_base_strength",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/ph_measurement.md"
+    },
+    {
+      "from": "concept/ph_measurement",
+      "to": "concept/dominant_species",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/ph_measurement.md"
+    },
+    {
+      "from": "concept/ph_measurement",
+      "to": "formula/u4_ph",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/ph_measurement.md"
+    },
+    {
+      "from": "concept/ph_measurement",
+      "to": "formula/u4_titration",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/ph_measurement.md"
+    },
+    {
+      "from": "concept/progress_table",
+      "to": "concept/oxidation_reduction_reaction",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/progress_table.md"
+    },
+    {
+      "from": "concept/progress_table",
+      "to": "concept/reaction_rate",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/progress_table.md"
+    },
+    {
+      "from": "concept/progress_table",
+      "to": "concept/half_reaction_time",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/progress_table.md"
+    },
+    {
+      "from": "concept/progress_table",
+      "to": "formula/u1_progress_table",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/progress_table.md"
+    },
+    {
+      "from": "concept/projectile_motion",
+      "to": "concept/newton_laws",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/projectile_motion.md"
+    },
+    {
+      "from": "concept/projectile_motion",
+      "to": "concept/straight_line_motion",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/projectile_motion.md"
+    },
+    {
+      "from": "concept/projectile_motion",
+      "to": "concept/circular_orbit",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/projectile_motion.md"
+    },
+    {
+      "from": "concept/projectile_motion",
+      "to": "formula/u5_projectile",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/projectile_motion.md"
+    },
+    {
+      "from": "concept/projectile_motion",
+      "to": "formula/u5_free_fall",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/projectile_motion.md"
+    },
+    {
+      "from": "concept/radioactive_decay",
+      "to": "concept/nuclide_notation",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/radioactive_decay.md"
+    },
+    {
+      "from": "concept/radioactive_decay",
+      "to": "concept/decay_law",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/radioactive_decay.md"
+    },
+    {
+      "from": "concept/radiocarbon_dating",
+      "to": "concept/decay_law",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/radiocarbon_dating.md"
+    },
+    {
+      "from": "concept/radiocarbon_dating",
+      "to": "concept/activity",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/radiocarbon_dating.md"
+    },
+    {
+      "from": "concept/radiocarbon_dating",
+      "to": "formula/u2_dating",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/radiocarbon_dating.md"
+    },
+    {
+      "from": "concept/rc_dipole",
+      "to": "concept/capacitor",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/rc_dipole.md"
+    },
+    {
+      "from": "concept/rc_dipole",
+      "to": "concept/time_constant_rc",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/rc_dipole.md"
+    },
+    {
+      "from": "concept/rc_dipole",
+      "to": "concept/capacitor_energy",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/rc_dipole.md"
+    },
+    {
+      "from": "concept/rc_dipole",
+      "to": "formula/u3_rc_charging",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/rc_dipole.md"
+    },
+    {
+      "from": "concept/rc_dipole",
+      "to": "formula/u3_rc_discharging",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/rc_dipole.md"
+    },
+    {
+      "from": "concept/reaction_rate",
+      "to": "concept/progress_table",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/reaction_rate.md"
+    },
+    {
+      "from": "concept/reaction_rate",
+      "to": "concept/half_reaction_time",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/reaction_rate.md"
+    },
+    {
+      "from": "concept/reaction_rate",
+      "to": "concept/kinetic_factors",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/reaction_rate.md"
+    },
+    {
+      "from": "concept/reaction_rate",
+      "to": "formula/u1_reaction_rate",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/reaction_rate.md"
+    },
+    {
+      "from": "concept/redox_equation_writing",
+      "to": "concept/redox_pair",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/redox_equation_writing.md"
+    },
+    {
+      "from": "concept/redox_equation_writing",
+      "to": "concept/oxidation_reduction_reaction",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/redox_equation_writing.md"
+    },
+    {
+      "from": "concept/redox_pair",
+      "to": "concept/redox_equation_writing",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/redox_pair.md"
+    },
+    {
+      "from": "concept/redox_pair",
+      "to": "concept/oxidation_reduction_reaction",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/redox_pair.md"
+    },
+    {
+      "from": "concept/rl_dipole",
+      "to": "concept/coil",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/rl_dipole.md"
+    },
+    {
+      "from": "concept/rl_dipole",
+      "to": "concept/time_constant_rl",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/rl_dipole.md"
+    },
+    {
+      "from": "concept/rl_dipole",
+      "to": "concept/coil_energy",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/rl_dipole.md"
+    },
+    {
+      "from": "concept/rl_dipole",
+      "to": "formula/u3_rl_establishment",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/rl_dipole.md"
+    },
+    {
+      "from": "concept/rl_dipole",
+      "to": "formula/u3_rl_interruption",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/rl_dipole.md"
+    },
+    {
+      "from": "concept/straight_line_motion",
+      "to": "concept/newton_laws",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/straight_line_motion.md"
+    },
+    {
+      "from": "concept/straight_line_motion",
+      "to": "concept/projectile_motion",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/straight_line_motion.md"
+    },
+    {
+      "from": "concept/straight_line_motion",
+      "to": "formula/u5_kinematics",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/straight_line_motion.md"
+    },
+    {
+      "from": "concept/straight_line_motion",
+      "to": "formula/u5_inclined_plane",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/straight_line_motion.md"
+    },
+    {
+      "from": "concept/time_constant_rc",
+      "to": "concept/rc_dipole",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/time_constant_rc.md"
+    },
+    {
+      "from": "concept/time_constant_rc",
+      "to": "formula/u3_tau_rc",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/time_constant_rc.md"
+    },
+    {
+      "from": "concept/time_constant_rl",
+      "to": "concept/rl_dipole",
+      "type": "concept_related_concept",
+      "method": "explicit",
+      "source": "concepts/time_constant_rl.md"
+    },
+    {
+      "from": "concept/time_constant_rl",
+      "to": "formula/u3_tau_rl",
+      "type": "concept_has_formula",
+      "method": "explicit",
+      "source": "concepts/time_constant_rl.md"
+    },
+    {
+      "from": "formula/purity",
+      "to": "concept/ph_measurement",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/purity.md"
+    },
+    {
+      "from": "formula/u1_conductance",
+      "to": "concept/conductivity",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u1_conductance.md"
+    },
+    {
+      "from": "formula/u1_dilution",
+      "to": "concept/ph_measurement",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u1_dilution.md"
+    },
+    {
+      "from": "formula/u1_half_reaction_time",
+      "to": "concept/half_reaction_time",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u1_half_reaction_time.md"
+    },
+    {
+      "from": "formula/u1_progress_table",
+      "to": "concept/progress_table",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u1_progress_table.md"
+    },
+    {
+      "from": "formula/u1_progress_table",
+      "to": "concept/reaction_rate",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u1_progress_table.md"
+    },
+    {
+      "from": "formula/u1_progress_table",
+      "to": "concept/half_reaction_time",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u1_progress_table.md"
+    },
+    {
+      "from": "formula/u1_reaction_rate",
+      "to": "concept/reaction_rate",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u1_reaction_rate.md"
+    },
+    {
+      "from": "formula/u2_activity",
+      "to": "concept/activity",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u2_activity.md"
+    },
+    {
+      "from": "formula/u2_activity",
+      "to": "concept/decay_law",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u2_activity.md"
+    },
+    {
+      "from": "formula/u2_dating",
+      "to": "concept/radiocarbon_dating",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u2_dating.md"
+    },
+    {
+      "from": "formula/u2_decay_law",
+      "to": "concept/decay_law",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u2_decay_law.md"
+    },
+    {
+      "from": "formula/u2_half_life",
+      "to": "concept/half_life",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u2_half_life.md"
+    },
+    {
+      "from": "formula/u2_half_life",
+      "to": "concept/decay_law",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u2_half_life.md"
+    },
+    {
+      "from": "formula/u2_time_constant",
+      "to": "concept/decay_law",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u2_time_constant.md"
+    },
+    {
+      "from": "formula/u3_capacitor",
+      "to": "concept/capacitor",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u3_capacitor.md"
+    },
+    {
+      "from": "formula/u3_capacitor_energy",
+      "to": "concept/capacitor_energy",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u3_capacitor_energy.md"
+    },
+    {
+      "from": "formula/u3_coil_energy",
+      "to": "concept/coil_energy",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u3_coil_energy.md"
+    },
+    {
+      "from": "formula/u3_coil_voltage",
+      "to": "concept/coil",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u3_coil_voltage.md"
+    },
+    {
+      "from": "formula/u3_rc_charging",
+      "to": "concept/rc_dipole",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u3_rc_charging.md"
+    },
+    {
+      "from": "formula/u3_rc_discharging",
+      "to": "concept/rc_dipole",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u3_rc_discharging.md"
+    },
+    {
+      "from": "formula/u3_rl_establishment",
+      "to": "concept/rl_dipole",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u3_rl_establishment.md"
+    },
+    {
+      "from": "formula/u3_rl_interruption",
+      "to": "concept/rl_dipole",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u3_rl_interruption.md"
+    },
+    {
+      "from": "formula/u3_tau_rc",
+      "to": "concept/time_constant_rc",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u3_tau_rc.md"
+    },
+    {
+      "from": "formula/u3_tau_rl",
+      "to": "concept/time_constant_rl",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u3_tau_rl.md"
+    },
+    {
+      "from": "formula/u4_dominant_species",
+      "to": "concept/dominant_species",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u4_dominant_species.md"
+    },
+    {
+      "from": "formula/u4_equilibrium_constant",
+      "to": "concept/equilibrium_constant",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u4_equilibrium_constant.md"
+    },
+    {
+      "from": "formula/u4_final_progress",
+      "to": "concept/final_progress_ratio",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u4_final_progress.md"
+    },
+    {
+      "from": "formula/u4_final_progress",
+      "to": "concept/limited_vs_complete_reaction",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u4_final_progress.md"
+    },
+    {
+      "from": "formula/u4_ka",
+      "to": "concept/equilibrium_constant",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u4_ka.md"
+    },
+    {
+      "from": "formula/u4_ka",
+      "to": "concept/acid_base_strength",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u4_ka.md"
+    },
+    {
+      "from": "formula/u4_ph",
+      "to": "concept/ph_measurement",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u4_ph.md"
+    },
+    {
+      "from": "formula/u4_titration",
+      "to": "concept/ph_measurement",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u4_titration.md"
+    },
+    {
+      "from": "formula/u5_free_fall",
+      "to": "concept/straight_line_motion",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u5_free_fall.md"
+    },
+    {
+      "from": "formula/u5_free_fall",
+      "to": "concept/projectile_motion",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u5_free_fall.md"
+    },
+    {
+      "from": "formula/u5_gravitation",
+      "to": "concept/circular_orbit",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u5_gravitation.md"
+    },
+    {
+      "from": "formula/u5_inclined_plane",
+      "to": "concept/straight_line_motion",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u5_inclined_plane.md"
+    },
+    {
+      "from": "formula/u5_inclined_plane",
+      "to": "concept/newton_laws",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u5_inclined_plane.md"
+    },
+    {
+      "from": "formula/u5_kepler",
+      "to": "concept/kepler_relation",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u5_kepler.md"
+    },
+    {
+      "from": "formula/u5_kinematics",
+      "to": "concept/straight_line_motion",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u5_kinematics.md"
+    },
+    {
+      "from": "formula/u5_newton",
+      "to": "concept/newton_laws",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u5_newton.md"
+    },
+    {
+      "from": "formula/u5_orbital_speed",
+      "to": "concept/circular_orbit",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u5_orbital_speed.md"
+    },
+    {
+      "from": "formula/u5_projectile",
+      "to": "concept/projectile_motion",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u5_projectile.md"
+    },
+    {
+      "from": "formula/u5_satellite",
+      "to": "concept/circular_orbit",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u5_satellite.md"
+    },
+    {
+      "from": "formula/u5_satellite",
+      "to": "concept/kepler_relation",
+      "type": "formula_uses_concept",
+      "method": "explicit",
+      "source": "formulas/u5_satellite.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2008_ex01",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex01.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2008_ex01",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex01.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2008_ex01",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex01.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2008_ex01",
+      "to": "solution/unit_03_bac2008_ex01",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex01.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2008_ex02",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex02.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2008_ex02",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex02.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2008_ex02",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex02.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2008_ex02",
+      "to": "solution/unit_03_bac2008_ex02",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex02.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2008_ex03",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex03.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2008_ex03",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex03.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2008_ex03",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex03.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2008_ex03",
+      "to": "solution/unit_03_bac2008_ex03",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex03.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2008_ex04",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex04.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2008_ex04",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex04.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2008_ex04",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex04.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2008_ex04",
+      "to": "solution/unit_03_bac2008_ex04",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2008_ex04.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2009_ex05",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex05.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2009_ex05",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex05.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2009_ex05",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex05.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2009_ex05",
+      "to": "solution/unit_03_bac2009_ex05",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex05.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2009_ex06",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex06.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2009_ex06",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex06.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2009_ex06",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex06.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2009_ex06",
+      "to": "solution/unit_03_bac2009_ex06",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex06.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2009_ex07",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex07.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2009_ex07",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex07.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2009_ex07",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex07.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2009_ex07",
+      "to": "solution/unit_03_bac2009_ex07",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex07.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2009_ex08",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex08.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2009_ex08",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex08.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2009_ex08",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex08.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2009_ex08",
+      "to": "solution/unit_03_bac2009_ex08",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2009_ex08.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex09",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex09.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex09",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex09.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex09",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex09.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex09",
+      "to": "solution/unit_03_bac2010_ex09",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex09.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex10",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex10.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex10",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex10.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex10",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex10.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex10",
+      "to": "solution/unit_03_bac2010_ex10",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex10.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex11",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex11.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex11",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex11.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex11",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex11.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex11",
+      "to": "solution/unit_03_bac2010_ex11",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex11.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex12",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex12.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex12",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex12.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex12",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex12.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex12",
+      "to": "solution/unit_03_bac2010_ex12",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex12.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex13",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex13.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex13",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex13.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex13",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex13.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2010_ex13",
+      "to": "solution/unit_03_bac2010_ex13",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2010_ex13.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2011_ex14",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex14.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2011_ex14",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex14.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2011_ex14",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex14.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2011_ex14",
+      "to": "solution/unit_03_bac2011_ex14",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex14.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2011_ex15",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex15.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2011_ex15",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex15.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2011_ex15",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex15.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2011_ex15",
+      "to": "solution/unit_03_bac2011_ex15",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex15.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2011_ex16",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex16.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2011_ex16",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex16.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2011_ex16",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex16.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2011_ex16",
+      "to": "solution/unit_03_bac2011_ex16",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex16.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2011_ex17",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex17.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2011_ex17",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex17.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2011_ex17",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex17.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2011_ex17",
+      "to": "solution/unit_03_bac2011_ex17",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2011_ex17.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex18",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex18.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex18",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex18.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex18",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex18.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex18",
+      "to": "solution/unit_03_bac2012_ex18",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex18.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex19",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex19.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex19",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex19.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex19",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex19.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex19",
+      "to": "solution/unit_03_bac2012_ex19",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex19.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex20",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex20.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex20",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex20.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex20",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex20.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex20",
+      "to": "solution/unit_03_bac2012_ex20",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex20.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex21",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex21.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex21",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex21.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex21",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex21.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex21",
+      "to": "solution/unit_03_bac2012_ex21",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex21.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex22",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex22.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex22",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex22.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex22",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex22.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2012_ex22",
+      "to": "solution/unit_03_bac2012_ex22",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2012_ex22.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2013_ex23",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex23.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2013_ex23",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex23.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2013_ex23",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex23.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2013_ex23",
+      "to": "solution/unit_03_bac2013_ex23",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex23.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2013_ex24",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex24.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2013_ex24",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex24.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2013_ex24",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex24.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2013_ex24",
+      "to": "solution/unit_03_bac2013_ex24",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex24.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2013_ex25",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex25.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2013_ex25",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex25.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2013_ex25",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex25.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2013_ex25",
+      "to": "solution/unit_03_bac2013_ex25",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex25.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2013_ex26",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex26.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2013_ex26",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex26.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2013_ex26",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex26.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2013_ex26",
+      "to": "solution/unit_03_bac2013_ex26",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2013_ex26.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2014_ex27",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex27.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2014_ex27",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex27.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2014_ex27",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex27.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2014_ex27",
+      "to": "solution/unit_03_bac2014_ex27",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex27.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2014_ex28",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex28.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2014_ex28",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex28.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2014_ex28",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex28.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2014_ex28",
+      "to": "solution/unit_03_bac2014_ex28",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex28.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2014_ex29",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex29.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2014_ex29",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex29.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2014_ex29",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex29.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2014_ex29",
+      "to": "solution/unit_03_bac2014_ex29",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex29.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2014_ex30",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex30.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2014_ex30",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex30.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2014_ex30",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex30.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2014_ex30",
+      "to": "solution/unit_03_bac2014_ex30",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2014_ex30.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2015_ex31",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex31.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2015_ex31",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex31.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2015_ex31",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex31.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2015_ex31",
+      "to": "solution/unit_03_bac2015_ex31",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex31.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2015_ex32",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex32.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2015_ex32",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex32.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2015_ex32",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex32.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2015_ex32",
+      "to": "solution/unit_03_bac2015_ex32",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex32.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2015_ex33",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex33.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2015_ex33",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex33.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2015_ex33",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex33.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2015_ex33",
+      "to": "solution/unit_03_bac2015_ex33",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex33.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2015_ex34",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex34.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2015_ex34",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex34.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2015_ex34",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex34.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2015_ex34",
+      "to": "solution/unit_03_bac2015_ex34",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2015_ex34.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex35",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex35.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex35",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex35.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex35",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex35.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex35",
+      "to": "solution/unit_03_bac2016_ex35",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex35.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex36",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex36.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex36",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex36.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex36",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex36.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex36",
+      "to": "solution/unit_03_bac2016_ex36",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex36.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex37",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex37.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex37",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex37.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex37",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex37.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex37",
+      "to": "solution/unit_03_bac2016_ex37",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex37.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex38",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex38.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex38",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex38.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex38",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex38.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex38",
+      "to": "solution/unit_03_bac2016_ex38",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex38.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex39",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex39.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex39",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex39.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex39",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex39.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex39",
+      "to": "solution/unit_03_bac2016_ex39",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex39.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex40",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex40.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex40",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex40.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex40",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex40.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2016_ex40",
+      "to": "solution/unit_03_bac2016_ex40",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2016_ex40.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex41",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex41.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex41",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex41.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex41",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex41.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex41",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex41.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex41",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex41.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex41",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex41.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex41",
+      "to": "solution/unit_03_bac2017_ex41",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex41.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex42",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex42.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex42",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex42.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex42",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex42.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex42",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex42.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex42",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex42.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex42",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex42.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex42",
+      "to": "solution/unit_03_bac2017_ex42",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex42.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex43",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex43.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex43",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex43.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex43",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex43.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex43",
+      "to": "solution/unit_03_bac2017_ex43",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex43.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex44",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex44.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex44",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex44.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex44",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex44.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex44",
+      "to": "solution/unit_03_bac2017_ex44",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex44.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex45",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex45.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex45",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex45.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex45",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex45.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex45",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex45.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex45",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex45.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex45",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex45.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex45",
+      "to": "solution/unit_03_bac2017_ex45",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex45.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex46",
+      "to": "concept/capacitor",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex46.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex46",
+      "to": "concept/rc_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex46.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex46",
+      "to": "concept/time_constant_rc",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex46.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex46",
+      "to": "concept/coil",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex46.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex46",
+      "to": "concept/rl_dipole",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex46.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex46",
+      "to": "concept/time_constant_rl",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex46.md"
+    },
+    {
+      "from": "exercise/unit_03_bac2017_ex46",
+      "to": "solution/unit_03_bac2017_ex46",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_03/unit_03_bac2017_ex46.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2008_ex01",
+      "to": "concept/conductivity",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2008_ex01.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2008_ex01",
+      "to": "concept/equilibrium_constant",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2008_ex01.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2008_ex02",
+      "to": "concept/equilibrium_constant",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2008_ex02.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2008_ex02",
+      "to": "concept/final_progress_ratio",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2008_ex02.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2008_ex02",
+      "to": "concept/acid_base_strength",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2008_ex02.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2008_ex03",
+      "to": "concept/equilibrium_constant",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2008_ex03.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2008_ex03",
+      "to": "concept/final_progress_ratio",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2008_ex03.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2008_ex04",
+      "to": "concept/ph_measurement",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2008_ex04.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2009_ex05",
+      "to": "concept/equilibrium_constant",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2009_ex05.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2010_ex06",
+      "to": "concept/ph_measurement",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2010_ex06.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2010_ex06",
+      "to": "concept/final_progress_ratio",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2010_ex06.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2010_ex07",
+      "to": "concept/equilibrium_constant",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2010_ex07.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2010_ex07",
+      "to": "concept/final_progress_ratio",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2010_ex07.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2010_ex08",
+      "to": "concept/ph_measurement",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2010_ex08.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2010_ex09",
+      "to": "concept/ph_measurement",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2010_ex09.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2010_ex09",
+      "to": "concept/final_progress_ratio",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2010_ex09.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2011_ex10",
+      "to": "concept/conductivity",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2011_ex10.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2011_ex10",
+      "to": "concept/final_progress_ratio",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2011_ex10.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2011_ex11",
+      "to": "concept/ph_measurement",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2011_ex11.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2011_ex12",
+      "to": "concept/conductivity",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2011_ex12.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2011_ex12",
+      "to": "concept/equilibrium_constant",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2011_ex12.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2011_ex12",
+      "to": "concept/final_progress_ratio",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2011_ex12.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2012_ex13",
+      "to": "concept/ph_measurement",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2012_ex13.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2012_ex13",
+      "to": "concept/final_progress_ratio",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2012_ex13.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2012_ex13",
+      "to": "concept/limited_vs_complete_reaction",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2012_ex13.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2012_ex14",
+      "to": "concept/final_progress_ratio",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2012_ex14.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2012_ex15",
+      "to": "concept/ph_measurement",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2012_ex15.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2012_ex15",
+      "to": "concept/dominant_species",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2012_ex15.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2012_ex16",
+      "to": "concept/equilibrium_constant",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2012_ex16.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2012_ex16",
+      "to": "concept/final_progress_ratio",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2012_ex16.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2013_ex17",
+      "to": "concept/equilibrium_constant",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2013_ex17.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2013_ex18",
+      "to": "concept/ph_measurement",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2013_ex18.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2013_ex19",
+      "to": "concept/ph_measurement",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2013_ex19.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2013_ex19",
+      "to": "concept/equilibrium_constant",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2013_ex19.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2014_ex20",
+      "to": "concept/ph_measurement",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2014_ex20.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2014_ex20",
+      "to": "concept/equilibrium_constant",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2014_ex20.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2014_ex20",
+      "to": "concept/final_progress_ratio",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2014_ex20.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2014_ex21",
+      "to": "concept/ph_measurement",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2014_ex21.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2015_ex22",
+      "to": "concept/equilibrium_constant",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2015_ex22.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2015_ex24",
+      "to": "concept/ph_measurement",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2015_ex24.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2015_ex24",
+      "to": "concept/final_progress_ratio",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2015_ex24.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2015_ex25",
+      "to": "concept/acid_base_strength",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2015_ex25.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2016_ex26",
+      "to": "concept/ph_measurement",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2016_ex26.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2016_ex26",
+      "to": "concept/final_progress_ratio",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2016_ex26.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2016_ex27",
+      "to": "concept/ph_measurement",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2016_ex27.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2016_ex27",
+      "to": "concept/equilibrium_constant",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2016_ex27.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2016_ex27",
+      "to": "concept/acid_base_strength",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2016_ex27.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2016_ex29",
+      "to": "concept/equilibrium_constant",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2016_ex29.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2016_ex29",
+      "to": "concept/final_progress_ratio",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2016_ex29.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2016_ex30",
+      "to": "concept/final_progress_ratio",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2016_ex30.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2017_ex31",
+      "to": "concept/conductivity",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2017_ex31.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2017_ex31",
+      "to": "concept/ph_measurement",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2017_ex31.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2017_ex31",
+      "to": "concept/equilibrium_constant",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2017_ex31.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2017_ex32",
+      "to": "concept/ph_measurement",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2017_ex32.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2017_ex32",
+      "to": "concept/acid_base_strength",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2017_ex32.md"
+    },
+    {
+      "from": "exercise/unit_04_bac2017_ex33",
+      "to": "concept/ph_measurement",
+      "type": "exercise_uses_concept",
+      "method": "derived_topic_keyword",
+      "source": "exercises/bac_exercises/unit_04/unit_04_bac2017_ex33.md"
+    },
+    {
+      "from": "solution/unit_03_bac2008_ex01",
+      "to": "exercise/unit_03_bac2008_ex01",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2008_ex01.md"
+    },
+    {
+      "from": "solution/unit_03_bac2008_ex02",
+      "to": "exercise/unit_03_bac2008_ex02",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2008_ex02.md"
+    },
+    {
+      "from": "solution/unit_03_bac2008_ex03",
+      "to": "exercise/unit_03_bac2008_ex03",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2008_ex03.md"
+    },
+    {
+      "from": "solution/unit_03_bac2008_ex04",
+      "to": "exercise/unit_03_bac2008_ex04",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2008_ex04.md"
+    },
+    {
+      "from": "solution/unit_03_bac2009_ex05",
+      "to": "exercise/unit_03_bac2009_ex05",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2009_ex05.md"
+    },
+    {
+      "from": "solution/unit_03_bac2009_ex06",
+      "to": "exercise/unit_03_bac2009_ex06",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2009_ex06.md"
+    },
+    {
+      "from": "solution/unit_03_bac2009_ex07",
+      "to": "exercise/unit_03_bac2009_ex07",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2009_ex07.md"
+    },
+    {
+      "from": "solution/unit_03_bac2009_ex08",
+      "to": "exercise/unit_03_bac2009_ex08",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2009_ex08.md"
+    },
+    {
+      "from": "solution/unit_03_bac2010_ex09",
+      "to": "exercise/unit_03_bac2010_ex09",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2010_ex09.md"
+    },
+    {
+      "from": "solution/unit_03_bac2010_ex10",
+      "to": "exercise/unit_03_bac2010_ex10",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2010_ex10.md"
+    },
+    {
+      "from": "solution/unit_03_bac2010_ex11",
+      "to": "exercise/unit_03_bac2010_ex11",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2010_ex11.md"
+    },
+    {
+      "from": "solution/unit_03_bac2010_ex12",
+      "to": "exercise/unit_03_bac2010_ex12",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2010_ex12.md"
+    },
+    {
+      "from": "solution/unit_03_bac2010_ex13",
+      "to": "exercise/unit_03_bac2010_ex13",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2010_ex13.md"
+    },
+    {
+      "from": "solution/unit_03_bac2011_ex14",
+      "to": "exercise/unit_03_bac2011_ex14",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2011_ex14.md"
+    },
+    {
+      "from": "solution/unit_03_bac2011_ex15",
+      "to": "exercise/unit_03_bac2011_ex15",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2011_ex15.md"
+    },
+    {
+      "from": "solution/unit_03_bac2011_ex16",
+      "to": "exercise/unit_03_bac2011_ex16",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2011_ex16.md"
+    },
+    {
+      "from": "solution/unit_03_bac2011_ex17",
+      "to": "exercise/unit_03_bac2011_ex17",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2011_ex17.md"
+    },
+    {
+      "from": "solution/unit_03_bac2012_ex18",
+      "to": "exercise/unit_03_bac2012_ex18",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2012_ex18.md"
+    },
+    {
+      "from": "solution/unit_03_bac2012_ex19",
+      "to": "exercise/unit_03_bac2012_ex19",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2012_ex19.md"
+    },
+    {
+      "from": "solution/unit_03_bac2012_ex20",
+      "to": "exercise/unit_03_bac2012_ex20",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2012_ex20.md"
+    },
+    {
+      "from": "solution/unit_03_bac2012_ex21",
+      "to": "exercise/unit_03_bac2012_ex21",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2012_ex21.md"
+    },
+    {
+      "from": "solution/unit_03_bac2012_ex22",
+      "to": "exercise/unit_03_bac2012_ex22",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2012_ex22.md"
+    },
+    {
+      "from": "solution/unit_03_bac2013_ex23",
+      "to": "exercise/unit_03_bac2013_ex23",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2013_ex23.md"
+    },
+    {
+      "from": "solution/unit_03_bac2013_ex24",
+      "to": "exercise/unit_03_bac2013_ex24",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2013_ex24.md"
+    },
+    {
+      "from": "solution/unit_03_bac2013_ex25",
+      "to": "exercise/unit_03_bac2013_ex25",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2013_ex25.md"
+    },
+    {
+      "from": "solution/unit_03_bac2013_ex26",
+      "to": "exercise/unit_03_bac2013_ex26",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2013_ex26.md"
+    },
+    {
+      "from": "solution/unit_03_bac2014_ex27",
+      "to": "exercise/unit_03_bac2014_ex27",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2014_ex27.md"
+    },
+    {
+      "from": "solution/unit_03_bac2014_ex28",
+      "to": "exercise/unit_03_bac2014_ex28",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2014_ex28.md"
+    },
+    {
+      "from": "solution/unit_03_bac2014_ex29",
+      "to": "exercise/unit_03_bac2014_ex29",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2014_ex29.md"
+    },
+    {
+      "from": "solution/unit_03_bac2014_ex30",
+      "to": "exercise/unit_03_bac2014_ex30",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2014_ex30.md"
+    },
+    {
+      "from": "solution/unit_03_bac2015_ex31",
+      "to": "exercise/unit_03_bac2015_ex31",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2015_ex31.md"
+    },
+    {
+      "from": "solution/unit_03_bac2015_ex32",
+      "to": "exercise/unit_03_bac2015_ex32",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2015_ex32.md"
+    },
+    {
+      "from": "solution/unit_03_bac2015_ex33",
+      "to": "exercise/unit_03_bac2015_ex33",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2015_ex33.md"
+    },
+    {
+      "from": "solution/unit_03_bac2015_ex34",
+      "to": "exercise/unit_03_bac2015_ex34",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2015_ex34.md"
+    },
+    {
+      "from": "solution/unit_03_bac2016_ex35",
+      "to": "exercise/unit_03_bac2016_ex35",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2016_ex35.md"
+    },
+    {
+      "from": "solution/unit_03_bac2016_ex36",
+      "to": "exercise/unit_03_bac2016_ex36",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2016_ex36.md"
+    },
+    {
+      "from": "solution/unit_03_bac2016_ex37",
+      "to": "exercise/unit_03_bac2016_ex37",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2016_ex37.md"
+    },
+    {
+      "from": "solution/unit_03_bac2016_ex38",
+      "to": "exercise/unit_03_bac2016_ex38",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2016_ex38.md"
+    },
+    {
+      "from": "solution/unit_03_bac2016_ex39",
+      "to": "exercise/unit_03_bac2016_ex39",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2016_ex39.md"
+    },
+    {
+      "from": "solution/unit_03_bac2016_ex40",
+      "to": "exercise/unit_03_bac2016_ex40",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2016_ex40.md"
+    },
+    {
+      "from": "solution/unit_03_bac2017_ex41",
+      "to": "exercise/unit_03_bac2017_ex41",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2017_ex41.md"
+    },
+    {
+      "from": "solution/unit_03_bac2017_ex42",
+      "to": "exercise/unit_03_bac2017_ex42",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2017_ex42.md"
+    },
+    {
+      "from": "solution/unit_03_bac2017_ex43",
+      "to": "exercise/unit_03_bac2017_ex43",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2017_ex43.md"
+    },
+    {
+      "from": "solution/unit_03_bac2017_ex44",
+      "to": "exercise/unit_03_bac2017_ex44",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2017_ex44.md"
+    },
+    {
+      "from": "solution/unit_03_bac2017_ex45",
+      "to": "exercise/unit_03_bac2017_ex45",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2017_ex45.md"
+    },
+    {
+      "from": "solution/unit_03_bac2017_ex46",
+      "to": "exercise/unit_03_bac2017_ex46",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_03/unit_03_bac2017_ex46.md"
+    }
+  ],
+  "derived_topic_notes": {
+    "method": "derived_topic_keyword",
+    "description": "exercise_uses_concept بمنهجية topic_keyword: مبنية فقط من حقل topic (نص التمرين) عبر مطابقة مصطلحات محافظة — يجب مراجعتها مع نص التمرين قبل اعتمادها نهائيًا.",
+    "status": "needs_review"
+  },
+  "dangling_references": []
+}
