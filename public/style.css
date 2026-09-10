@@ -132,6 +132,37 @@ main {
   margin-bottom: 1.25rem;
 }
 
+.file-selector-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.file-selector-label {
+  color: #16213e;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.file-selector {
+  padding: 0.5rem 0.8rem;
+  border: 2px solid #2a6db5;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: #fff;
+  color: #16213e;
+  cursor: pointer;
+  outline: none;
+  min-width: 200px;
+}
+
+.file-selector:focus {
+  border-color: #1f5390;
+  box-shadow: 0 0 0 3px rgba(42, 109, 181, 0.2);
+}
+
 .pdf-container {
   background: #fff;
   border-radius: 12px;
@@ -465,6 +496,16 @@ main {
   .pdf-open-original {
     padding: 0.4rem 0.8rem;
     font-size: 0.85rem;
+  }
+
+  .file-selector-wrap {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .file-selector {
+    width: 100%;
+    min-width: 0;
   }
 
   .pdf-page-info {

@@ -14,6 +14,8 @@
   var pdfPageInfo = document.getElementById('pdf-page-info');
   var pdfDownload = document.getElementById('pdf-download');
   var pdfOpenOriginal = document.getElementById('pdf-open-original');
+  var fileSelectorWrap = document.getElementById('file-selector-wrap');
+  var fileSelector = document.getElementById('file-selector');
 
   var chatBtn = document.getElementById('chat-btn');
   var chatPanel = document.getElementById('chat-panel');
@@ -336,7 +338,18 @@
 
       var badge = document.createElement('span');
       badge.className = 'file-badge';
-      badge.textContent = (unit.files ? unit.files.length : 0) + ' ملخص';
+      var summaryCount = 0;
+      var exerciseCount = 0;
+      if (unit.files) {
+        unit.files.forEach(function (f) {
+          if (f.type === 'exercise') exerciseCount++;
+          else summaryCount++;
+        });
+      }
+      var badgeText = [];
+      if (summaryCount > 0) badgeText.push(summaryCount + ' ملخص');
+      if (exerciseCount > 0) badgeText.push(exerciseCount + ' تمارين');
+      badge.textContent = badgeText.join(' • ') || 'ملخص';
 
       card.appendChild(title);
       card.appendChild(desc);
@@ -357,13 +370,28 @@
   }
 
   function openUnit(unit) {
-    var file = unit.files && unit.files.length ? unit.files[0] : null;
-    if (!file) {
+    if (!unit.files || !unit.files.length) {
       showError('لا يوجد ملف لعرضه لهذه الوحدة.');
       return;
     }
     readerTitle.textContent = unit.title + (unit.description ? ' — ' + unit.description : '');
-    currentFileUrl = file.path;
+
+    // Setup file selector if multiple files
+    if (unit.files.length > 1) {
+      fileSelector.innerHTML = '';
+      unit.files.forEach(function (f, i) {
+        var opt = document.createElement('option');
+        opt.value = i;
+        var icon = f.type === 'exercise' ? '📝 ' : '📄 ';
+        opt.textContent = icon + f.label;
+        fileSelector.appendChild(opt);
+      });
+      fileSelector.dataset.unitId = unit.id;
+      fileSelectorWrap.classList.remove('hidden');
+    } else {
+      fileSelectorWrap.classList.add('hidden');
+    }
+
     pdfError.classList.add('hidden');
     pdfCanvas.classList.add('hidden');
     pdfControls.classList.add('hidden');
@@ -372,9 +400,30 @@
     pdfProgress.classList.remove('hidden');
     pdfProgress.textContent = 'جاري تحميل الملف...';
     showView('reader');
-    loadPdf(file.path);
+    loadPdf(unit.files[0].path);
     recordUnitOpen(unit.id);
   }
+
+  function loadSelectedFile(idx) {
+    var selectedUnitId = fileSelector.dataset.unitId;
+    var unit = units.find(function (u) { return u.id === selectedUnitId; });
+    if (!unit || !unit.files || !unit.files[idx]) return;
+    var file = unit.files[idx];
+    pdfError.classList.add('hidden');
+    pdfCanvas.classList.add('hidden');
+    pdfControls.classList.add('hidden');
+    pdfDownload.classList.add('hidden');
+    if (pdfOpenOriginal) pdfOpenOriginal.classList.add('hidden');
+    pdfProgress.classList.remove('hidden');
+    pdfProgress.textContent = 'جاري تحميل الملف...';
+    currentDoc = null;
+    currentPage = 1;
+    loadPdf(file.path);
+  }
+
+  fileSelector.addEventListener('change', function () {
+    loadSelectedFile(parseInt(fileSelector.value, 10));
+  });
 
   function loadPdf(url) {
     if (!window.pdfjsLib) {
@@ -581,6 +630,7 @@
     pdfError.classList.add('hidden');
     pdfDownload.classList.add('hidden');
     if (pdfOpenOriginal) pdfOpenOriginal.classList.add('hidden');
+    if (fileSelectorWrap) fileSelectorWrap.classList.add('hidden');
     showView('home');
   });
 
