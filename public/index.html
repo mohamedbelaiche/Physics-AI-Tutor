@@ -26,7 +26,7 @@
         <div class="diag-cta-head">
           <span class="diag-cta-label">تقييم تحديد المستوى</span>
           <h3 class="diag-cta-title">اختبر مستواك في الفيزياء</h3>
-          <p class="diag-cta-desc">40 سؤالاً في 6 مهارات، مع خريطة تفصيلية لنقاط القوة والضعف وتوصية بنقطة البداية المناسبة.</p>
+          <p class="diag-cta-desc">50 سؤالاً في 16 مهارة لطلاب البكالوريا، مع خريطة تفصيلية لنقاط القوة والضعف ومسار تعليمي بنقطة بداية موصى بها.</p>
         </div>
         <span id="diag-cta-result" class="diag-cta-result hidden"></span>
         <span id="diag-cta-btn" class="diag-cta-btn">ابدأ التقييم مجاناً</span>
@@ -67,12 +67,27 @@
           <h2 class="diag-title">تقييم تحديد مستوى الطالب في الفيزياء</h2>
           <p class="diag-subtitle">قياس دقيق لمستواك عبر مهارات منفصلة، وتحليل لأخطائك</p>
           <ul class="diag-facts">
-            <li>40 سؤالاً بنظام الاختيار من متعدد</li>
-            <li>6 مهارات: الرياضيات، الوحدات والرموز، المفاهيم، قراءة البيانات، حل المسائل، المنهجية</li>
-            <li>المدة المقترحة: 45 - 60 دقيقة</li>
+            <li>50 سؤالاً بنظام الاختيار من متعدد</li>
+            <li>16 مهارة في 3 فئات: الرياضيات، الفيزياء، التفكير العلمي</li>
+            <li>5 مستويات صعوبة (من أساسي مباشر إلى مسألة مركبة)</li>
+            <li>المدة المقترحة: 75 دقيقة</li>
             <li>النتائج تُحفظ في حسابك آلياً بعد الإرسال</li>
-            <li>خريطة مهارات مع توصية بنقطة البداية للمذاكرة</li>
+            <li>مسار تعليمي مرتّب بالأولوية مع نقطة بداية موصى بها</li>
           </ul>
+          <div id="diag-prior-wrap" class="diag-prior">
+            <h4 class="diag-prior-title">نقطتا العام الماضي (اختياري)</h4>
+            <p class="diag-prior-hint">إشارة أولية فقط — لا تدخلان في درجتك ولا في تشخيص المهارات. أدخل النقطتين معاً (من 20) لتخزينهما.</p>
+            <div class="diag-prior-fields">
+              <label class="diag-prior-field">
+                <span>نقطة الفيزياء</span>
+                <input type="number" id="diag-prior-physics" min="0" max="20" step="0.25" inputmode="decimal" placeholder="مثال: 14">
+              </label>
+              <label class="diag-prior-field">
+                <span>نقطة الرياضيات</span>
+                <input type="number" id="diag-prior-math" min="0" max="20" step="0.25" inputmode="decimal" placeholder="مثال: 12.5">
+              </label>
+            </div>
+          </div>
           <button id="diag-start" class="btn-primary">ابدأ التقييم</button>
           <p id="diag-intro-error" class="diag-error hidden"></p>
         </div>

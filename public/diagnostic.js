@@ -1,18 +1,58 @@
 (function () {
-  var TEST_ID = 'bac-physics-v1';
-  var LS_PREFIX = 'diag_v1_';
+  var TEST_ID = 'bac-physics-v2';
+  var LS_PREFIX = 'diag_v2_';
 
-  var SKILL_LABELS = {
-    math: 'الرياضيات',
-    units: 'الوحدات والرموز',
-    concepts: 'المفاهيم الفيزيائية',
-    data: 'قراءة البيانات والمنحنيات',
-    problem_solving: 'حل المسائل',
-    methodology: 'المنهجية'
+  var CATEGORY_LABELS = {
+    A: { title: 'المهارات الرياضية', skills: ['mat-num', 'mat-unitconv', 'mat-algebra', 'mat-proportion', 'mat-logexp', 'mat-calc', 'mat-vectrig'] },
+    B: { title: 'المهارات الفيزيائية العامة', skills: ['phy-graph', 'phy-table', 'phy-unitsdim', 'phy-lawapply', 'phy-protocol'] },
+    C: { title: 'التفكير العلمي والاستدلال', skills: ['rea-method', 'rea-justify', 'rea-compare', 'rea-modelize'] }
   };
 
-  var DIFF_LABELS = { 1: 'سهل', 2: 'متوسط', 3: 'صعب', 4: 'متقدم' };
-  var LEVEL_LABELS = { 1: 'مستوى التأسيس', 2: 'مستوى أساسي', 3: 'مستوى جيد', 4: 'مستوى متقدم' };
+  var SKILL_LABELS = {
+    'mat-num': 'الحساب بالقوى والكتابة العلمية',
+    'mat-unitconv': 'تحويل الوحدات (النظام الدولي)',
+    'mat-algebra': 'عزل المتغير وإعادة ترتيب العلاقات',
+    'mat-proportion': 'التناسب والكسور والنسب المئوية',
+    'mat-logexp': 'الدوال الأسية واللوغاريتمية',
+    'mat-calc': 'الاشتقاق والتكامل',
+    'mat-vectrig': 'المثلثات والمتجهات (مركبات وإسقاط)',
+    'phy-graph': 'قراءة واستغلال المنحنيات',
+    'phy-table': 'قراءة الجداول وتحديد الأنماط',
+    'phy-unitsdim': 'التحليل البعدي والمتجانسية',
+    'phy-lawapply': 'تطبيق علاقة معطاة في موقف بسيط',
+    'phy-protocol': 'الفهم التجريبي (أجهزة وإجراء)',
+    'rea-method': 'المنهجية: استخراج المعطيات وحل المسألة',
+    'rea-justify': 'التبرير والاستنتاج المنطقي',
+    'rea-compare': 'المقارنة بين كميتين واتخاذ قرار',
+    'rea-modelize': 'النمذجة: وضعية ← علاقة/معادلة'
+  };
+
+  var DIFF_LABELS = { 1: 'أساسي', 2: 'تطبيق علاقة', 3: 'تحليل بيان', 4: 'استدلال', 5: 'مسألة مركبة' };
+  var LEVEL_LABELS = { 1: 'مستوى تأسيسي', 2: 'مستوى أساسي', 3: 'مستوى جيد', 4: 'مستوى متقدم', 5: 'مستوى متقن' };
+  var START_LABELS = {
+    unit1: 'المتابعة الزمنية لتحول كيميائي في وسط مائي',
+    unit2: 'التحويلات النووية',
+    unit3: 'الظواهر الكهربائية (المكثفة والوشيعة)',
+    unit4: 'تطور جملة كيميائية نحو التوازن',
+    unit5: 'تطور جملة ميكانيكية (الميكانيك)',
+    baccalaureate_exams: 'المراجعة المركزة والامتحانات'
+  };
+  var DIMENSION_LABELS = {
+    overall: 'الدرجة الكلية',
+    level: 'المستوى',
+    math: 'الرياضيات',
+    physics: 'الفيزياء',
+    scientific: 'التفكير العلمي',
+    num: 'القوى والكتابة العلمية',
+    units: 'الوحدات والتحليل البعدي',
+    proportion: 'التناسب',
+    algebra: 'الجبر',
+    log_exp: 'الأسي واللوغاريتمي',
+    calc: 'الاشتقاق والتكامل',
+    vectors: 'المتجهات والمثلثات',
+    graph: 'قراءة المنحنيات',
+    experimental: 'التجريبية (بروتوكول وجداول)'
+  };
   var STATUS_LABELS = {
     strength: 'قوة',
     good: 'جيدة',
@@ -31,6 +71,8 @@
     startBtn: document.getElementById('diag-start'),
     backBtn: document.getElementById('diag-back'),
     introError: document.getElementById('diag-intro-error'),
+    priorPhysics: document.getElementById('diag-prior-physics'),
+    priorMath: document.getElementById('diag-prior-math'),
     quizExit: document.getElementById('diag-quiz-exit'),
     progressText: document.getElementById('diag-progress-text'),
     timerEl: document.getElementById('diag-timer'),
@@ -199,12 +241,49 @@
     els.startBtn.textContent = hasProgress ? 'استكمال التقييم' : 'ابدأ التقييم';
   }
 
+  function readPriorScores() {
+    function parseVal(el) {
+      if (!el || el.value.trim() === '') return null;
+      var v = parseFloat(el.value.replace(',', '.'));
+      return v;
+    }
+    return { physics: parseVal(els.priorPhysics), math: parseVal(els.priorMath) };
+  }
+
+  function validateAndGetPriorScores() {
+    var p = readPriorScores();
+    var bad = [];
+    if (p.physics !== null && (isNaN(p.physics) || p.physics < 0 || p.physics > 20)) {
+      bad.push('نقطة الفيزياء يجب أن تكون رقماً بين 0 و 20');
+    }
+    if (p.math !== null && (isNaN(p.math) || p.math < 0 || p.math > 20)) {
+      bad.push('نقطة الرياضيات يجب أن تكون رقماً بين 0 و 20');
+    }
+    return bad;
+  }
+
+  function savePriorScores(attemptId) {
+    var p = readPriorScores();
+    if (p.physics === null || p.math === null) return Promise.resolve();
+    return getSupabase()
+      .rpc('save_prior_year_scores', {
+        p_attempt_id: attemptId,
+        p_math_score: p.math,
+        p_physics_score: p.physics
+      });
+  }
+
   function startBtnClick() {
     if (loadStoredState()) {
       enterQuiz(0);
       return;
     }
     hideError(els.introError);
+    var priorBad = validateAndGetPriorScores();
+    if (priorBad.length) {
+      showError(els.introError, priorBad.join('، '));
+      return;
+    }
     els.startBtn.disabled = true;
     getSupabase()
       .rpc('start_diagnostic_attempt', { p_test_id: TEST_ID })
@@ -213,7 +292,7 @@
         if (res.error) throw res.error;
         var data = res.data;
         var startedMs = new Date(data.started_at).getTime();
-        var limit = (data.test && data.test.time_limit_minutes) || 60;
+        var limit = (data.test && data.test.time_limit_minutes) || 75;
         state = {
           attemptId: data.attempt_id,
           startedAt: startedMs || Date.now(),
@@ -224,6 +303,9 @@
         };
         persistState();
         enterQuiz(0);
+        savePriorScores(state.attemptId).catch(function (err) {
+          console.warn('prior scores not saved:', err && (err.message || err));
+        });
       })
       .catch(function (err) {
         els.startBtn.disabled = false;
@@ -390,6 +472,47 @@
 
   // ---------- results ----------
 
+  function dimTile(v, label, unit) {
+    var tile = document.createElement('div');
+    tile.className = 'diag-dim-tile';
+    var lab = document.createElement('div');
+    lab.className = 'diag-dim-label';
+    lab.textContent = label;
+    var val = document.createElement('div');
+    val.className = 'diag-dim-value';
+    val.textContent = v === null || v === undefined ? '—' : Math.round(v) + unit;
+    tile.appendChild(lab);
+    tile.appendChild(val);
+    return tile;
+  }
+
+  function skillRow(skill, row) {
+    var barWrap = document.createElement('div');
+    barWrap.className = 'diag-skill-row';
+    var label = document.createElement('div');
+    label.className = 'diag-skill-label';
+    var name = document.createElement('span');
+    name.textContent = SKILL_LABELS[skill] || skill;
+    var chip = document.createElement('span');
+    chip.className = 'diag-status diag-status-' + row.status;
+    chip.textContent = STATUS_LABELS[row.status] || row.status;
+    label.appendChild(name);
+    label.appendChild(chip);
+    var track = document.createElement('div');
+    track.className = 'diag-skill-track';
+    var bar = document.createElement('div');
+    bar.className = 'diag-skill-bar diag-skill-' + row.status;
+    bar.style.width = Math.max(2, row.score || 0) + '%';
+    var val = document.createElement('span');
+    val.className = 'diag-skill-val';
+    val.textContent = (row.score || 0) + '%' + (row.level ? ' • L' + row.level : '');
+    track.appendChild(bar);
+    barWrap.appendChild(label);
+    barWrap.appendChild(track);
+    barWrap.appendChild(val);
+    return barWrap;
+  }
+
   function renderResults(report) {
     showScreen('results');
     var body = els.resultBody;
@@ -397,7 +520,7 @@
 
     var score = Math.round(report.overall_score || 0);
     var level = report.level || 1;
-    var levelClass = level === 4 ? 'lvl-4' : level === 3 ? 'lvl-3' : level === 2 ? 'lvl-2' : 'lvl-1';
+    var levelClass = level === 5 ? 'lvl-5' : level === 4 ? 'lvl-4' : level === 3 ? 'lvl-3' : level === 2 ? 'lvl-2' : 'lvl-1';
 
     var head = document.createElement('div');
     head.className = 'diag-result-card diag-result-head ' + levelClass;
@@ -416,41 +539,85 @@
     head.appendChild(meta);
     body.appendChild(head);
 
+    var prior = report.prior_scores || {};
+    if (prior.physics !== null || prior.math !== null) {
+      var priorCard = document.createElement('div');
+      priorCard.className = 'diag-result-card diag-prior-result';
+      var priorTitle = document.createElement('h4');
+      priorTitle.className = 'diag-result-title';
+      priorTitle.textContent = 'نقطة العام الماضي (إشارة أولية فقط)';
+      priorCard.appendChild(priorTitle);
+      var priorRow = document.createElement('div');
+      priorRow.className = 'diag-dim-grid';
+      priorRow.appendChild(dimTile(prior.physics, 'الفيزياء', '/20'));
+      priorRow.appendChild(dimTile(prior.math, 'الرياضيات', '/20'));
+      priorCard.appendChild(priorRow);
+      body.appendChild(priorCard);
+    }
+
+    var dims = report.dimensions || {};
+    if (Object.keys(dims).length) {
+      var dimCard = document.createElement('div');
+      dimCard.className = 'diag-result-card';
+      var dimTitle = document.createElement('h4');
+      dimTitle.className = 'diag-result-title';
+      dimTitle.textContent = 'الأبعاد الرئيسية';
+      dimCard.appendChild(dimTitle);
+      var dimGrid = document.createElement('div');
+      dimGrid.className = 'diag-dim-grid';
+      ['math', 'physics', 'scientific'].forEach(function (k) {
+        if (dims[k] === null || dims[k] === undefined) return;
+        dimGrid.appendChild(dimTile(dims[k], DIMENSION_LABELS[k] || k, '%'));
+      });
+      dimCard.appendChild(dimGrid);
+      var dimChips = document.createElement('div');
+      dimChips.className = 'diag-dim-chips';
+      Object.keys(dims).forEach(function (k) {
+        if (k === 'overall' || k === 'level' || k === 'math' || k === 'physics' || k === 'scientific') return;
+        if (dims[k] === null || dims[k] === undefined) return;
+        var chip = document.createElement('span');
+        chip.className = 'diag-chip info';
+        chip.textContent = DIMENSION_LABELS[k] + ': ' + Math.round(dims[k]) + '%';
+        dimChips.appendChild(chip);
+      });
+      if (dimChips.childNodes.length) dimCard.appendChild(dimChips);
+      body.appendChild(dimCard);
+    }
+
     var skillMap = report.skill_map || {};
     var skillCard = document.createElement('div');
     skillCard.className = 'diag-result-card';
     var skillTitle = document.createElement('h4');
     skillTitle.className = 'diag-result-title';
-    skillTitle.textContent = 'خريطة المهارات';
+    skillTitle.textContent = 'خريطة المهارات (16 مهارة)';
     skillCard.appendChild(skillTitle);
-    Object.keys(SKILL_LABELS).forEach(function (skill) {
-      var row = skillMap[skill];
-      if (!row) return;
-      var barWrap = document.createElement('div');
-      barWrap.className = 'diag-skill-row';
-      var label = document.createElement('div');
-      label.className = 'diag-skill-label';
-      var name = document.createElement('span');
-      name.textContent = SKILL_LABELS[skill];
-      var chip = document.createElement('span');
-      chip.className = 'diag-status diag-status-' + row.status;
-      chip.textContent = STATUS_LABELS[row.status] || row.status;
-      label.appendChild(name);
-      label.appendChild(chip);
-      var track = document.createElement('div');
-      track.className = 'diag-skill-track';
-      var bar = document.createElement('div');
-      bar.className = 'diag-skill-bar diag-skill-' + row.status;
-      bar.style.width = Math.max(2, row.score || 0) + '%';
-      var val = document.createElement('span');
-      val.textContent = (row.score || 0) + '%';
-      track.appendChild(bar);
-      barWrap.appendChild(label);
-      barWrap.appendChild(track);
-      barWrap.appendChild(val);
-      skillCard.appendChild(barWrap);
+    Object.keys(CATEGORY_LABELS).forEach(function (cat) {
+      var catLabel = document.createElement('div');
+      catLabel.className = 'diag-cat-title';
+      catLabel.textContent = CATEGORY_LABELS[cat].title;
+      skillCard.appendChild(catLabel);
+      CATEGORY_LABELS[cat].skills.forEach(function (skill) {
+        var row = skillMap[skill];
+        if (!row) return;
+        skillCard.appendChild(skillRow(skill, row));
+      });
     });
     body.appendChild(skillCard);
+
+    var start = report.recommended_start;
+    if (start) {
+      var startCard = document.createElement('div');
+      startCard.className = 'diag-result-card diag-start-card';
+      var startTitle = document.createElement('h4');
+      startTitle.className = 'diag-result-title';
+      startTitle.textContent = 'نقطة البداية الموصى بها';
+      startCard.appendChild(startTitle);
+      var startText = document.createElement('p');
+      startText.className = 'diag-start-text';
+      startText.textContent = START_LABELS[start] || start;
+      startCard.appendChild(startText);
+      body.appendChild(startCard);
+    }
 
     var path = report.recommended_learning_path;
     if (Array.isArray(path) && path.length) {
@@ -458,15 +625,32 @@
       recCard.className = 'diag-result-card diag-rec';
       var recTitle = document.createElement('h4');
       recTitle.className = 'diag-result-title';
-      recTitle.textContent = 'نقطة البداية الموصى بها';
+      recTitle.textContent = 'المسار التعليمي الموصى به';
       recCard.appendChild(recTitle);
-      path.forEach(function (step) {
+      path.forEach(function (step, idx) {
+        var stepRow = document.createElement('div');
+        stepRow.className = 'diag-path-step';
+        var num = document.createElement('span');
+        num.className = 'diag-path-idx';
+        num.textContent = (idx + 1) + '.';
+        var inner = document.createElement('div');
+        inner.className = 'diag-path-body';
+        var headRow = document.createElement('div');
+        headRow.className = 'diag-path-head';
         var stepTitle = document.createElement('strong');
         stepTitle.textContent = step.title || step.focus || '';
+        headRow.appendChild(stepTitle);
+        var badge = document.createElement('span');
+        badge.className = 'diag-path-badge ' + (step.required ? 'req' : 'rec');
+        badge.textContent = step.required ? 'إلزامي' : 'موصى به';
+        headRow.appendChild(badge);
+        inner.appendChild(headRow);
         var stepDesc = document.createElement('p');
         stepDesc.textContent = step.description || '';
-        recCard.appendChild(stepTitle);
-        recCard.appendChild(stepDesc);
+        inner.appendChild(stepDesc);
+        stepRow.appendChild(num);
+        stepRow.appendChild(inner);
+        recCard.appendChild(stepRow);
       });
       body.appendChild(recCard);
     }
@@ -669,7 +853,19 @@
 
   // ---------- boot ----------
 
+  function clearLegacyKeys() {
+    try {
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (k && k.indexOf('diag_v1_') === 0) {
+          localStorage.removeItem(k);
+        }
+      }
+    } catch (err) {}
+  }
+
   function init() {
+    clearLegacyKeys();
     renderCta();
   }
 

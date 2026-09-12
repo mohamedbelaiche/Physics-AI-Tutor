@@ -1375,3 +1375,177 @@ main {
     grid-column: 1 / -1;
   }
 }
+
+/* ---- diagnostic v2 additions ---- */
+.diag-result-head.lvl-5 .diag-score { color: #14804e; }
+
+.diag-cat-title {
+  margin: 14px 0 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #4a5568;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 4px;
+}
+
+.diag-skill-val {
+  font-size: 0.75rem;
+  color: #42526b;
+  white-space: nowrap;
+}
+
+.diag-dim-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.diag-dim-tile {
+  flex: 1 1 120px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 8px 10px;
+  text-align: center;
+  background: #f8fafc;
+}
+
+.diag-dim-label {
+  font-size: 0.72rem;
+  color: #64748b;
+  margin-bottom: 2px;
+}
+
+.diag-dim-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.diag-dim-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.diag-chip.info {
+  background: #eef2ff;
+  color: #4338ca;
+  border-color: #c7d2fe;
+}
+
+.diag-start-text {
+  margin: 6px 0 0;
+  font-weight: 600;
+  color: #1f5aa0;
+  font-size: 1rem;
+}
+
+.diag-path-step {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.diag-path-step:last-child {
+  border-bottom: none;
+}
+
+.diag-path-idx {
+  color: #2a6db5;
+  font-weight: 700;
+}
+
+.diag-path-body {
+  flex: 1;
+}
+
+.diag-path-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.diag-path-head strong {
+  font-size: 0.95rem;
+}
+
+.diag-path-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid;
+}
+
+.diag-path-badge.req {
+  background: #fdecea;
+  color: #c0392b;
+  border-color: #f5c6c0;
+}
+
+.diag-path-badge.rec {
+  background: #fdf4e3;
+  color: #b9760a;
+  border-color: #f0dfbc;
+}
+
+.diag-path-body p {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: #4a5568;
+}
+
+.diag-prior {
+  margin: 14px 0 10px;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  text-align: right;
+}
+
+.diag-prior-title {
+  margin: 0 0 4px;
+  font-size: 0.95rem;
+}
+
+.diag-prior-hint {
+  margin: 0 0 10px;
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.diag-prior-fields {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.diag-prior-field {
+  flex: 1 1 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.diag-prior-field span {
+  font-size: 0.8rem;
+  color: #42526b;
+}
+
+.diag-prior-field input {
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+.diag-prior-result .diag-dim-tile {
+  background: #fdf4e3;
+  border-color: #f0dfbc;
+}
