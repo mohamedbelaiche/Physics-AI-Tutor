@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-09-10T17:02:07.146Z",
+  "generated_at": "2026-09-12T14:10:02.633Z",
   "generator": "scripts/build-knowledge-base.js",
   "hierarchy": [
     "lesson",
@@ -20,8 +20,8 @@
     "formula_uses_concept": 45,
     "formula_used_in_exercise": 0,
     "exercise_uses_concept": 206,
-    "exercise_has_solution": 46,
-    "solution_solves_exercise": 46
+    "exercise_has_solution": 79,
+    "solution_solves_exercise": 79
   },
   "edges": [
     {
@@ -1374,6 +1374,237 @@
       "type": "formula_uses_concept",
       "method": "explicit",
       "source": "formulas/u5_satellite.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2008_ex01",
+      "to": "solution/unit_02_bac2008_ex01",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2008_ex01.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2008_ex02",
+      "to": "solution/unit_02_bac2008_ex02",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2008_ex02.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2009_ex03",
+      "to": "solution/unit_02_bac2009_ex03",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2009_ex03.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2010_ex04",
+      "to": "solution/unit_02_bac2010_ex04",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2010_ex04.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2012_ex05",
+      "to": "solution/unit_02_bac2012_ex05",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2012_ex05.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2013_ex06",
+      "to": "solution/unit_02_bac2013_ex06",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2013_ex06.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2014_ex07",
+      "to": "solution/unit_02_bac2014_ex07",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2014_ex07.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2014_ex08",
+      "to": "solution/unit_02_bac2014_ex08",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2014_ex08.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2015_ex09",
+      "to": "solution/unit_02_bac2015_ex09",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2015_ex09.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2015_ex10",
+      "to": "solution/unit_02_bac2015_ex10",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2015_ex10.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2016_ex11",
+      "to": "solution/unit_02_bac2016_ex11",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2016_ex11.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2016_ex12",
+      "to": "solution/unit_02_bac2016_ex12",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2016_ex12.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2016_ex13",
+      "to": "solution/unit_02_bac2016_ex13",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2016_ex13.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2016_ex14",
+      "to": "solution/unit_02_bac2016_ex14",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2016_ex14.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2017_ex15",
+      "to": "solution/unit_02_bac2017_ex15",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2017_ex15.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2017_ex16",
+      "to": "solution/unit_02_bac2017_ex16",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2017_ex16.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2017_ex17",
+      "to": "solution/unit_02_bac2017_ex17",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2017_ex17.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2017_ex18",
+      "to": "solution/unit_02_bac2017_ex18",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2017_ex18.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2017_ex19",
+      "to": "solution/unit_02_bac2017_ex19",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2017_ex19.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2018_ex20",
+      "to": "solution/unit_02_bac2018_ex20",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2018_ex20.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2018_ex21",
+      "to": "solution/unit_02_bac2018_ex21",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2018_ex21.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2019_ex22",
+      "to": "solution/unit_02_bac2019_ex22",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2019_ex22.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2020_ex25",
+      "to": "solution/unit_02_bac2020_ex25",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2020_ex25.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2020_ex26",
+      "to": "solution/unit_02_bac2020_ex26",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2020_ex26.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2021_ex27",
+      "to": "solution/unit_02_bac2021_ex27",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2021_ex27.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2022_ex29",
+      "to": "solution/unit_02_bac2022_ex29",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2022_ex29.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2023_ex30",
+      "to": "solution/unit_02_bac2023_ex30",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2023_ex30.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2023_ex31",
+      "to": "solution/unit_02_bac2023_ex31",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2023_ex31.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2024_ex32",
+      "to": "solution/unit_02_bac2024_ex32",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2024_ex32.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2024_ex33",
+      "to": "solution/unit_02_bac2024_ex33",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2024_ex33.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2024_ex34",
+      "to": "solution/unit_02_bac2024_ex34",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2024_ex34.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2025_ex35",
+      "to": "solution/unit_02_bac2025_ex35",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2025_ex35.md"
+    },
+    {
+      "from": "exercise/unit_02_bac2025_ex36",
+      "to": "solution/unit_02_bac2025_ex36",
+      "type": "exercise_has_solution",
+      "method": "explicit",
+      "source": "exercises/bac_exercises/unit_02/unit_02_bac2025_ex36.md"
     },
     {
       "from": "exercise/unit_03_bac2008_ex01",
@@ -3138,6 +3369,237 @@
       "type": "exercise_uses_concept",
       "method": "derived_topic_keyword",
       "source": "exercises/bac_exercises/unit_04/unit_04_bac2017_ex33.md"
+    },
+    {
+      "from": "solution/unit_02_bac2008_ex01",
+      "to": "exercise/unit_02_bac2008_ex01",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2008_ex01.md"
+    },
+    {
+      "from": "solution/unit_02_bac2008_ex02",
+      "to": "exercise/unit_02_bac2008_ex02",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2008_ex02.md"
+    },
+    {
+      "from": "solution/unit_02_bac2009_ex03",
+      "to": "exercise/unit_02_bac2009_ex03",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2009_ex03.md"
+    },
+    {
+      "from": "solution/unit_02_bac2010_ex04",
+      "to": "exercise/unit_02_bac2010_ex04",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2010_ex04.md"
+    },
+    {
+      "from": "solution/unit_02_bac2012_ex05",
+      "to": "exercise/unit_02_bac2012_ex05",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2012_ex05.md"
+    },
+    {
+      "from": "solution/unit_02_bac2013_ex06",
+      "to": "exercise/unit_02_bac2013_ex06",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2013_ex06.md"
+    },
+    {
+      "from": "solution/unit_02_bac2014_ex07",
+      "to": "exercise/unit_02_bac2014_ex07",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2014_ex07.md"
+    },
+    {
+      "from": "solution/unit_02_bac2014_ex08",
+      "to": "exercise/unit_02_bac2014_ex08",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2014_ex08.md"
+    },
+    {
+      "from": "solution/unit_02_bac2015_ex09",
+      "to": "exercise/unit_02_bac2015_ex09",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2015_ex09.md"
+    },
+    {
+      "from": "solution/unit_02_bac2015_ex10",
+      "to": "exercise/unit_02_bac2015_ex10",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2015_ex10.md"
+    },
+    {
+      "from": "solution/unit_02_bac2016_ex11",
+      "to": "exercise/unit_02_bac2016_ex11",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2016_ex11.md"
+    },
+    {
+      "from": "solution/unit_02_bac2016_ex12",
+      "to": "exercise/unit_02_bac2016_ex12",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2016_ex12.md"
+    },
+    {
+      "from": "solution/unit_02_bac2016_ex13",
+      "to": "exercise/unit_02_bac2016_ex13",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2016_ex13.md"
+    },
+    {
+      "from": "solution/unit_02_bac2016_ex14",
+      "to": "exercise/unit_02_bac2016_ex14",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2016_ex14.md"
+    },
+    {
+      "from": "solution/unit_02_bac2017_ex15",
+      "to": "exercise/unit_02_bac2017_ex15",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2017_ex15.md"
+    },
+    {
+      "from": "solution/unit_02_bac2017_ex16",
+      "to": "exercise/unit_02_bac2017_ex16",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2017_ex16.md"
+    },
+    {
+      "from": "solution/unit_02_bac2017_ex17",
+      "to": "exercise/unit_02_bac2017_ex17",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2017_ex17.md"
+    },
+    {
+      "from": "solution/unit_02_bac2017_ex18",
+      "to": "exercise/unit_02_bac2017_ex18",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2017_ex18.md"
+    },
+    {
+      "from": "solution/unit_02_bac2017_ex19",
+      "to": "exercise/unit_02_bac2017_ex19",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2017_ex19.md"
+    },
+    {
+      "from": "solution/unit_02_bac2018_ex20",
+      "to": "exercise/unit_02_bac2018_ex20",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2018_ex20.md"
+    },
+    {
+      "from": "solution/unit_02_bac2018_ex21",
+      "to": "exercise/unit_02_bac2018_ex21",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2018_ex21.md"
+    },
+    {
+      "from": "solution/unit_02_bac2019_ex22",
+      "to": "exercise/unit_02_bac2019_ex22",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2019_ex22.md"
+    },
+    {
+      "from": "solution/unit_02_bac2020_ex25",
+      "to": "exercise/unit_02_bac2020_ex25",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2020_ex25.md"
+    },
+    {
+      "from": "solution/unit_02_bac2020_ex26",
+      "to": "exercise/unit_02_bac2020_ex26",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2020_ex26.md"
+    },
+    {
+      "from": "solution/unit_02_bac2021_ex27",
+      "to": "exercise/unit_02_bac2021_ex27",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2021_ex27.md"
+    },
+    {
+      "from": "solution/unit_02_bac2022_ex29",
+      "to": "exercise/unit_02_bac2022_ex29",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2022_ex29.md"
+    },
+    {
+      "from": "solution/unit_02_bac2023_ex30",
+      "to": "exercise/unit_02_bac2023_ex30",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2023_ex30.md"
+    },
+    {
+      "from": "solution/unit_02_bac2023_ex31",
+      "to": "exercise/unit_02_bac2023_ex31",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2023_ex31.md"
+    },
+    {
+      "from": "solution/unit_02_bac2024_ex32",
+      "to": "exercise/unit_02_bac2024_ex32",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2024_ex32.md"
+    },
+    {
+      "from": "solution/unit_02_bac2024_ex33",
+      "to": "exercise/unit_02_bac2024_ex33",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2024_ex33.md"
+    },
+    {
+      "from": "solution/unit_02_bac2024_ex34",
+      "to": "exercise/unit_02_bac2024_ex34",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2024_ex34.md"
+    },
+    {
+      "from": "solution/unit_02_bac2025_ex35",
+      "to": "exercise/unit_02_bac2025_ex35",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2025_ex35.md"
+    },
+    {
+      "from": "solution/unit_02_bac2025_ex36",
+      "to": "exercise/unit_02_bac2025_ex36",
+      "type": "solution_solves_exercise",
+      "method": "explicit",
+      "source": "solutions/bac_exercises/unit_02/unit_02_bac2025_ex36.md"
     },
     {
       "from": "solution/unit_03_bac2008_ex01",
