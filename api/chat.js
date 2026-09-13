@@ -3,10 +3,9 @@ const { requireUser, getSupabaseConfig } = require('./supabase-server');
 
 const ACADEMIC_INSTRUCTION =
   'إذا وُجد "الملف الأكاديمي للطالب" أعلاه، حسّن الجواب بناءً عليه: ' +
-  'قاس حجم الشرح على مستوى الطالب ("overall_level") دون كشف الدرجة الرقمية له، ' +
-  'وركّز على تقوية المهارات المذكورة في "weaknesses" و "critical"، ' +
-  'وصحّح المفاهيم الخاطئة المذكورة في "misconceptions" كلما وردت بفضل الأخطاء المماثلة، ' +
-  'ووجّه الطالب نحو "next_action" (الخطوة التالية المقترحة) بلطف.';
+  'قاس حجم الشرح على مستوى الطالب ("overall.level") دون كشف الدرجة الرقمية له، ' +
+  'وركّز على تقوية المهارات المذكورة في "weaknesses" و "critical_weaknesses"، ' +
+  'ووجّه الطالب نحو "recommended_learning_path" (الخطوة التالية المقترحة) بلطف.';
 
 const SYSTEM_PROMPT =
   'أنت "المدرس الشخصي للفيزياء"، مدرس فيزياء وعلوم خبير باللغة العربية. ' +
@@ -54,12 +53,11 @@ async function handler(req, res) {
   });
 }
 
-// Fetch the student's learning context (adaptive profile when available,
-// falling back to the diagnostic profile) so the AI can personalize answers.
-// Returns null when the student has no profile yet or the lookup fails.
+// Fetch the student's diagnostic context (profile) so the AI can personalize
+// answers. Returns null when the student has no profile yet or the lookup fails.
 async function getAcademicContext(auth) {
   const { url, anonKey } = getSupabaseConfig();
-  const rpcCandidates = ['get_student_learning_context', 'get_student_diagnostic_context'];
+  const rpcCandidates = ['get_student_diagnostic_context'];
   for (const rpc of rpcCandidates) {
     try {
       const res = await fetch(url + '/rest/v1/rpc/' + rpc, {
@@ -113,7 +111,7 @@ async function handleChat(data, res, auth) {
   const context = await getProjectContext();
   const academic = await getAcademicContext(auth);
   const academicSection = academic
-    ? '## الملف الأكاديمي للطالب (من ملف التعلّم)\n' + JSON.stringify(academic, null, 2)
+    ? '## الملف الأكاديمي للطالب (من الملف التشخيصي)\n' + JSON.stringify(academic, null, 2)
     : '';
   const systemContent =
     SYSTEM_PROMPT +

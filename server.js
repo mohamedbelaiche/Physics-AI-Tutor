@@ -4,10 +4,6 @@ const path = require('path');
 
 const chatHandler = require('./api/chat');
 const configHandler = require('./api/config');
-const quizHandler = require('./api/quiz');
-const skillsHandler = require('./api/skills');
-const adaptiveHandler = require('./api/adaptive');
-const progressHandler = require('./api/progress');
 
 const ROOT = __dirname;
 const PORT = process.env.PORT || 5500;
@@ -59,31 +55,6 @@ const server = http.createServer((req, res) => {
 
   if (urlPath === '/api/config') {
     configHandler(req, res);
-    return;
-  }
-
-  if (urlPath === '/api/quiz') {
-    quizHandler(req, res);
-    return;
-  }
-
-  if (urlPath === '/api/skills') {
-    skillsHandler(req, res);
-    return;
-  }
-
-  if (urlPath === '/api/adaptive') {
-    adaptiveHandler(req, res);
-    return;
-  }
-
-  if (urlPath === '/api/adaptive/next') {
-    adaptiveHandler(req, res);
-    return;
-  }
-
-  if (urlPath === '/api/progress') {
-    progressHandler(req, res);
     return;
   }
 
