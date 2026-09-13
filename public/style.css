@@ -435,6 +435,12 @@ main {
   border-top-left-radius: 2px;
 }
 
+.katex,
+.katex-display {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
 .chat-msg .katex-display {
   margin: 0.4rem 0;
   text-align: center;
