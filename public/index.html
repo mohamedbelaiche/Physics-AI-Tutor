@@ -12,12 +12,17 @@
     <div class="header-inner">
       <div class="header-title">
         <h1>المدرس الشخصي للفيزياء</h1>
-        <p>ملخصات الوحدات الدراسية</p>
+        <p>منصة تعلّم تكيفية للبكالوريا</p>
       </div>
       <div id="auth-area" class="auth-area">
         <button id="auth-btn" class="auth-btn hidden"></button>
       </div>
     </div>
+    <nav id="top-nav" class="top-nav">
+      <button data-nav="home" class="nav-btn">الملخصات</button>
+      <button data-nav="course" class="nav-btn">الدورة التعليمية</button>
+      <button data-nav="dashboard" class="nav-btn">لوحة التقدم</button>
+    </nav>
   </header>
 
   <main>
@@ -50,6 +55,10 @@
         <a id="pdf-open-original" class="pdf-open-original hidden" target="_blank" rel="noopener">فتح الملف الأصلي</a>
       </div>
     </section>
+
+    <section id="course-view" class="view hidden"></section>
+
+    <section id="dashboard-view" class="view hidden"></section>
 
     </main>
 
@@ -114,5 +123,6 @@
   <script src="supabase-config.js"></script>
   <script src="auth.js"></script>
   <script src="app.js"></script>
+  <script src="adaptive.js"></script>
 </body>
 </html>
