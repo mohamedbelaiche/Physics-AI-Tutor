@@ -20,6 +20,7 @@
   var chatBtn = document.getElementById('chat-btn');
   var chatPanel = document.getElementById('chat-panel');
   var chatClose = document.getElementById('chat-close');
+  var chatFullscreen = document.getElementById('chat-fullscreen');
   var chatForm = document.getElementById('chat-form');
   var chatInput = document.getElementById('chat-input');
   var chatMessages = document.getElementById('chat-messages');
@@ -91,6 +92,12 @@
     chatPanel.classList.toggle('hidden', !open);
     chatBtn.classList.toggle('hidden', open);
     if (open) chatInput.focus();
+  }
+
+  function toggleChatFullscreen() {
+    var isFullscreen = chatPanel.classList.toggle('fullscreen');
+    chatFullscreen.setAttribute('aria-label', isFullscreen ? 'استعادة الحجم' : 'تكبير إلى كامل الشاشة');
+    chatFullscreen.setAttribute('title', isFullscreen ? 'استعادة' : 'تكبير');
   }
 
   function showView(view) {
@@ -630,6 +637,9 @@
   });
   chatClose.addEventListener('click', function () {
     toggleChat(false);
+  });
+  chatFullscreen.addEventListener('click', function () {
+    toggleChatFullscreen();
   });
   chatForm.addEventListener('submit', function (e) {
     e.preventDefault();

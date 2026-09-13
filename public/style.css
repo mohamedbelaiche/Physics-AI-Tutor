@@ -354,6 +354,52 @@ main {
   color: #fff;
 }
 
+.chat-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.chat-fullscreen {
+  background: none;
+  border: none;
+  color: #a8c5e0;
+  padding: 0.15rem;
+  cursor: pointer;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-fullscreen:hover {
+  color: #fff;
+}
+
+.chat-fullscreen .icon-collapse {
+  display: none;
+}
+
+.chat-panel.fullscreen .chat-fullscreen .icon-expand {
+  display: none;
+}
+
+.chat-panel.fullscreen .chat-fullscreen .icon-collapse {
+  display: inline;
+}
+
+.chat-panel.fullscreen {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  border-radius: 0;
+  z-index: 999;
+}
+
 .chat-messages {
   flex: 1;
   overflow-y: auto;
