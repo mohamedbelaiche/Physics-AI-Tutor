@@ -55,6 +55,38 @@
   var currentFileUrl = '';
   var currentRenderTask = null;
 
+  function renderMath(tex, isDisplay) {
+    try {
+      return window.katex.renderToString(tex, { throwOnError: false, displayMode: !!isDisplay });
+    } catch (err) {
+      return (isDisplay ? '$$' : '\\(') + tex + (isDisplay ? '$$' : '\\)');
+    }
+  }
+
+  function renderContent(text) {
+    if (typeof text !== 'string' || !text) return '';
+    var math = [];
+    function protect(regex, isDisplay) {
+      text = text.replace(regex, function (match, tex) {
+        var token = '\u0000KX' + math.length + '\u0000';
+        math.push(renderMath(tex, isDisplay));
+        return token;
+      });
+    }
+    protect(/\$\$([\s\S]+?)\$\$/g, true);
+    protect(/\\\[([\s\S]+?)\\\]/g, true);
+    protect(/\\\(([\s\S]+?)\\\)/g, false);
+    protect(/\$([\s\S]+?)\$/g, false);
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\u0000KX(\d+)\u0000/g, function (m, i) {
+        return math[+i] || '';
+      })
+      .replace(/\n/g, '<br>');
+  }
+
   function toggleChat(open) {
     chatPanel.classList.toggle('hidden', !open);
     chatBtn.classList.toggle('hidden', open);
@@ -246,9 +278,9 @@
               msgResult.data.forEach(function (m) {
                 var row = document.createElement('div');
                 row.className = m.role === 'user' ? 'chat-msg user' : 'chat-msg bot';
-                var p = document.createElement('p');
-                p.textContent = m.content;
-                row.appendChild(p);
+                var content = document.createElement('div');
+                content.innerHTML = renderContent(m.content);
+                row.appendChild(content);
                 messagesEl.appendChild(row);
                 chatHistory.push({ role: m.role, content: m.content });
               });
@@ -522,9 +554,9 @@
   function addChatMessage(role, text) {
     var row = document.createElement('div');
     row.className = role === 'user' ? 'chat-msg user' : 'chat-msg bot';
-    var p = document.createElement('p');
-    p.textContent = text;
-    row.appendChild(p);
+    var content = document.createElement('div');
+    content.innerHTML = renderContent(text);
+    row.appendChild(content);
     chatMessages.appendChild(row);
     chatMessages.scrollTop = chatMessages.scrollHeight;
     return row;

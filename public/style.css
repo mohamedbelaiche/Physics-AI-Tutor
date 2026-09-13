@@ -389,6 +389,17 @@ main {
   border-top-left-radius: 2px;
 }
 
+.chat-msg .katex-display {
+  margin: 0.4rem 0;
+  text-align: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.chat-msg .katex {
+  font-size: 1.05em;
+}
+
 .chat-msg.typing {
   display: flex;
   align-items: center;
