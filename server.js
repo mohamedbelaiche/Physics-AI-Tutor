@@ -68,6 +68,12 @@ const server = http.createServer((req, res) => {
   if (urlPath === '/api/course/exam/submit') { courseExamSubmitHandler(req, res); return; }
   if (urlPath === '/api/course/adapt') { courseAdaptHandler(req, res); return; }
 
+  if (urlPath === '/course/questions.json') {
+    res.writeHead(403, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ error: 'بنك الأسئلة غير متاح للعميل.' }));
+    return;
+  }
+
   let filePath = path.join(PUBLIC_DIR, urlPath === '/' ? 'index.html' : urlPath);
 
   if (!filePath.startsWith(PUBLIC_DIR)) {

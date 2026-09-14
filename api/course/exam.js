@@ -38,7 +38,8 @@ async function handler(req, res) {
 
     const { data: attemptData, error } = await auth.supabase.from('course_exam_attempts').insert({
       user_id: auth.userId, exam_type: type, ref_id: ref,
-      total_questions: questions.length, correct_count: 0, score: 0, passed: false
+      total_questions: questions.length, correct_count: 0, score: 0, passed: false,
+      question_ids: questions.map((q) => q.id)
     }).select('id').single();
     if (error) throw error;
 

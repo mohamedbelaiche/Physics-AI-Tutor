@@ -20,13 +20,13 @@ async function handler(req, res) {
       const { data: attempt, error } = await supabase.from('course_exam_attempts').select('*').eq('id', attemptId).single();
       if (error || !attempt) { helpers.send(res, 404, { error: 'محاولة غير موجودة.' }); return; }
       if (attempt.submitted_at) {
-        const result = await buildResult(supabase, auth.userId, attempt, body.answers || [], true);
+        const stored = await loadStoredAnswers(supabase, attemptId);
+        const result = await buildResult(supabase, auth.userId, attempt, stored);
         helpers.send(res, 200, result);
         return;
       }
 
-      const examQuestions = await loadExamQuestions(body.answers || []);
-      const grade = scoring.gradeAttempt(data.getQuestionBank(), examQuestions, body.answers || [], attempt.exam_type);
+      const grade = scoring.gradeAttempt(data.getQuestionBank(), servedQuestions(attempt), body.answers || [], attempt.exam_type);
       const duration = Math.max(0, Math.round((Date.now() - new Date(attempt.started_at).getTime()) / 1000));
 
       // تحديث ملفات المهارات
@@ -66,12 +66,16 @@ async function handler(req, res) {
           response_time_sec: Math.max(0, Math.round(a.response_time_sec || 0))
         };
       });
-      if (answersRows.length) await supabase.from('course_exam_answers').insert(answersRows);
+      if (answersRows.length) {
+        const servedIds = Array.isArray(attempt.question_ids) ? attempt.question_ids : (attempt.question_ids || []);
+        const kept = answersRows.filter((r) => servedIds.indexOf(r.question_id) !== -1);
+        if (kept.length) await supabase.from('course_exam_answers').insert(kept);
+      }
 
       // فتح المسار حسب نوع الامتحان
       await unlockAfterExam(supabase, auth.userId, attempt, grade);
 
-      const result = await buildResult(supabase, auth.userId, attempt, body.answers || [], false, grade);
+      const result = await buildResult(supabase, auth.userId, attempt, body.answers || [], grade);
       helpers.send(res, 200, result);
     } catch (err) {
       console.error('exam submit error:', err);
@@ -80,10 +84,14 @@ async function handler(req, res) {
   });
 }
 
-async function loadExamQuestions(answers) {
-  const ids = (answers || []).map((a) => a.question_id).filter(Boolean);
-  const bank = data.getQuestionBank();
-  return ids.map((id) => bank.questions.find((q) => q.id === id)).filter(Boolean);
+async function loadStoredAnswers(supabase, attemptId) {
+  const { data: rows } = await supabase.from('course_exam_answers').select('question_id,selected_index').eq('attempt_id', attemptId);
+  return (rows || []).map((r) => ({ question_id: r.question_id, selected_index: r.selected_index }));
+}
+
+function servedQuestions(attempt) {
+  const ids = Array.isArray(attempt.question_ids) ? attempt.question_ids : (attempt.question_ids || []);
+  return ids.map((id) => data.questionById(id)).filter(Boolean);
 }
 
 async function unlockAfterExam(supabase, userId, attempt, grade) {
@@ -118,19 +126,15 @@ async function unlockAfterExam(supabase, userId, attempt, grade) {
   );
 }
 
-async function buildResult(supabase, userId, attempt, answers, reload, forcedGrade) {
-  let grade = forcedGrade;
-  if (!grade) {
-    const examQuestions = await loadExamQuestions(answers);
-    grade = scoring.gradeAttempt(data.getQuestionBank(), examQuestions, answers, attempt.exam_type);
-  }
+async function buildResult(supabase, userId, attempt, answers, forcedGrade) {
+  const grade = forcedGrade || scoring.gradeAttempt(data.getQuestionBank(), servedQuestions(attempt), answers || [], attempt.exam_type);
   const state = await helpers.getLearnerState(supabase, userId);
   const snap = seq.computeSnapshot(data.getCourse(), state.progress);
   return {
     result: {
       exam_type: attempt.exam_type, ref_id: attempt.ref_id,
       total: grade.total, correct_count: grade.correct_count, score: grade.score, passed: grade.passed,
-      pass_score: grade.pass_score,
+      pass_score: seq.examThreshold(attempt.exam_type),
       per_skill: grade.per_skill,
       strengths: state.profile.strengths, weaknesses: state.profile.weaknesses,
       overall_mastery: state.profile.overall_mastery, overall_level: state.profile.overall_level
