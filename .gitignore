@@ -13,3 +13,5 @@ skills-lock.json
 # Sync payload cache
 sync_payload/
 *.tmp
+# Isolated worktrees (SDD)
+.worktrees/
