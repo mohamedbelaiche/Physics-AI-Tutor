@@ -5,11 +5,6 @@ const path = require('path');
 const chatHandler = require('./api/chat');
 const configHandler = require('./api/config');
 
-const courseProgressHandler = require('./api/course/progress');
-const courseExamHandler = require('./api/course/exam');
-const courseExamSubmitHandler = require('./api/course/exam/submit');
-const courseAdaptHandler = require('./api/course/adapt');
-
 const ROOT = __dirname;
 const PORT = process.env.PORT || 5500;
 const PUBLIC_DIR = path.join(ROOT, 'public');
@@ -63,23 +58,11 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  if (urlPath === '/api/course/progress') { courseProgressHandler(req, res); return; }
-  if (urlPath === '/api/course/exam' && req.method === 'GET') { courseExamHandler(req, res); return; }
-  if (urlPath === '/api/course/exam/submit') { courseExamSubmitHandler(req, res); return; }
-  if (urlPath === '/api/course/adapt') { courseAdaptHandler(req, res); return; }
-
   let filePath = path.join(PUBLIC_DIR, urlPath === '/' ? 'index.html' : urlPath);
 
   if (!filePath.startsWith(PUBLIC_DIR)) {
     res.writeHead(403);
     res.end('Forbidden');
-    return;
-  }
-
-  const BANK_PATH = path.join(PUBLIC_DIR, 'course', 'questions.json');
-  if (filePath.toLowerCase() === BANK_PATH.toLowerCase()) {
-    res.writeHead(403, { 'Content-Type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ error: 'بنك الأسئلة غير متاح للعميل.' }));
     return;
   }
 

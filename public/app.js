@@ -103,8 +103,6 @@
   function showView(view) {
     homeView.classList.toggle('hidden', view === 'reader');
     readerView.classList.toggle('hidden', view === 'home');
-    var courseEl = document.getElementById('course-tab');
-    if (courseEl) courseEl.classList.toggle('hidden', view !== 'course');
     window.scrollTo(0, 0);
   }
 
@@ -744,14 +742,12 @@
       renderUnitsGated();
       updateChatGate();
       if (isLoggedIn()) loadLatestSession();
-      if (window.CourseApp) window.CourseApp.init();
     });
     window.AppAuth.onAuth(function () {
       renderAuthUI();
       renderUnitsGated();
       updateChatGate();
       if (isLoggedIn() && !currentChatSessionId) loadLatestSession();
-      if (window.CourseApp) window.CourseApp.init();
     });
   }
 
