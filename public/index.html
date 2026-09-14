@@ -20,6 +20,10 @@
         <button id="auth-btn" class="auth-btn hidden"></button>
       </div>
     </div>
+    <nav class="tab-nav">
+      <button id="tab-summaries" class="tab-btn active">الملخصات</button>
+      <button id="tab-course" class="tab-btn">الدورة التعليمية</button>
+    </nav>
     </header>
 
   <main>
@@ -51,6 +55,26 @@
         <a id="pdf-download" class="pdf-download-link hidden" download>تحميل الملف</a>
         <a id="pdf-open-original" class="pdf-open-original hidden" target="_blank" rel="noopener">فتح الملف الأصلي</a>
       </div>
+    </section>
+
+    <section id="course-tab" class="view hidden">
+      <div id="course-dashboard" class="course-inner"></div>
+      <div id="course-lesson-view" class="course-inner hidden">
+        <button id="course-back-lesson" class="back-btn">→ العودة إلى الدورة</button>
+        <div id="course-breadcrumb" class="course-breadcrumb"></div>
+        <div id="course-element"></div>
+        <div id="course-element-actions" class="course-actions"></div>
+        <div id="course-adapt-card" class="course-adapt hidden"></div>
+      </div>
+      <div id="course-exam-view" class="course-inner hidden">
+        <div id="course-exam-head" class="course-exam-head"></div>
+        <div id="course-exam-q" class="course-exam-q"></div>
+        <div id="course-exam-actions" class="course-actions"></div>
+      </div>
+      <div id="course-result-view" class="course-inner hidden">
+        <div id="course-result"></div>
+      </div>
+      <p id="course-msg" class="course-msg hidden"></p>
     </section>
 
     </main>
@@ -131,6 +155,7 @@
   <script src="vendor/supabase.js"></script>
   <script src="supabase-config.js"></script>
   <script src="auth.js"></script>
+  <script src="course.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
