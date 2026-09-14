@@ -1,0 +1,347 @@
+{
+  "$schema_description": "التصنيف الموحد للمهارات المستخدمة في نظام التعلّم التكيفي. كل سؤال يرتبط بمهارة واحدة أساسية (primary_skill) وقد تشمل مهارات إضافية.",
+  "version": 1,
+  "categories": {
+    "mat": {
+      "id": "mat",
+      "title_ar": "مهارات رياضية",
+      "title_en": "Mathematical skills"
+    },
+    "phy": {
+      "id": "phy",
+      "title_ar": "مهارات فيزيائية",
+      "title_en": "Physics skills"
+    },
+    "rea": {
+      "id": "rea",
+      "title_ar": "مهارات استدلالية",
+      "title_en": "Reasoning skills"
+    },
+    "dom": {
+      "id": "dom",
+      "title_ar": "مهارات مفاهيمية (حسب الوحدة)",
+      "title_en": "Domain-specific skills"
+    }
+  },
+  "skills": [
+    {
+      "id": "mat-num",
+      "category": "mat",
+      "title_ar": "الحساب بالقوى والكتابة العلمية",
+      "title_en": "Powers of ten & scientific notation",
+      "importance": "critical",
+      "description": "الحساب مع الأسس، الكتابة العلمية، الأرقام المعنوية."
+    },
+    {
+      "id": "mat-unitconv",
+      "category": "mat",
+      "title_ar": "تحويل الوحدات (النظام الدولي)",
+      "title_en": "Unit conversion (SI)",
+      "importance": "critical",
+      "description": "التحويل بين المضاعفات (km، cm، mm، ميكرو...)، تحويل إلى النظمة الدولية قبل التعويض."
+    },
+    {
+      "id": "mat-algebra",
+      "category": "mat",
+      "title_ar": "عزل المتغير وإعادة ترتيب العلاقات",
+      "title_en": "Algebraic manipulation",
+      "importance": "critical",
+      "description": "عزل الطرف المجهول، النقل، القسمة، الجذر التربيعي داخل العلاقات الفيزيائية."
+    },
+    {
+      "id": "mat-proportion",
+      "category": "mat",
+      "title_ar": "التناسب والكسور والنسب المئوية",
+      "title_en": "Proportions, fractions, percentages",
+      "importance": "critical"
+    },
+    {
+      "id": "mat-logexp",
+      "category": "mat",
+      "title_ar": "الدوال الأسية واللوغاريتمية",
+      "title_en": "Exponential & log functions",
+      "importance": "critical",
+      "description": "معالجة e^x و ln، قوانين اللوغاريتم المستعملة في قانون التناقص الإشعاعي والتفكك."
+    },
+    {
+      "id": "mat-calc",
+      "category": "mat",
+      "title_ar": "الاشتقاق والتكامل",
+      "title_en": "Differentiation & integration",
+      "importance": "critical",
+      "description": "اشتقاق الدوال، معادلات تفاضلية بسيطة، العلاقة بين r و v و a."
+    },
+    {
+      "id": "mat-vectrig",
+      "category": "mat",
+      "title_ar": "المثلثات والمتجهات (مركبات وإسقاط)",
+      "title_en": "Trigonometry & vectors (components)",
+      "importance": "important",
+      "description": "مركبات المتجه، cos/sin، إسقاط القوى على المحاور."
+    },
+    {
+      "id": "phy-graph",
+      "category": "phy",
+      "title_ar": "قراءة واستغلال المنحنيات",
+      "title_en": "Graph reading & exploitation",
+      "importance": "critical",
+      "description": "قراءة x(t)، v(t)، الميل، المساحة تحت المنحنى، التعيين البياني."
+    },
+    {
+      "id": "phy-table",
+      "category": "phy",
+      "title_ar": "قراءة الجداول وتحديد الأنماط",
+      "title_en": "Table reading & patterns",
+      "importance": "important"
+    },
+    {
+      "id": "phy-unitsdim",
+      "category": "phy",
+      "title_ar": "التحليل البعدي والمتجانسية",
+      "title_en": "Dimensional analysis",
+      "importance": "important",
+      "description": "التحقق من تجانس العلاقات، استنتاج وحدة ثابت."
+    },
+    {
+      "id": "phy-lawapply",
+      "category": "phy",
+      "title_ar": "تطبيق علاقة معطاة في موقف بسيط",
+      "title_en": "Apply a given relation",
+      "importance": "critical"
+    },
+    {
+      "id": "phy-protocol",
+      "category": "phy",
+      "title_ar": "الفهم التجريبي (أجهزة وإجراء)",
+      "title_en": "Experimental protocol",
+      "importance": "important"
+    },
+    {
+      "id": "rea-method",
+      "category": "rea",
+      "title_ar": "المنهجية: استخراج المعطيات وحل المسألة",
+      "title_en": "Methodology: extract data & solve",
+      "importance": "critical",
+      "description": "تحديد المعطيات والمطلوب، اختيار الخطوات المنهجية لحل وضعية."
+    },
+    {
+      "id": "rea-justify",
+      "category": "rea",
+      "title_ar": "التبرير والاستنتاج المنطقي",
+      "title_en": "Justification & logical deduction",
+      "importance": "critical"
+    },
+    {
+      "id": "rea-compare",
+      "category": "rea",
+      "title_ar": "المقارنة بين كميتين واتخاذ قرار",
+      "title_en": "Comparison & decision",
+      "importance": "important"
+    },
+    {
+      "id": "rea-modelize",
+      "category": "rea",
+      "title_ar": "النمذجة: وضعية ← علاقة/معادلة",
+      "title_en": "Modeling: situation → equation",
+      "importance": "critical",
+      "description": "ترجمة وضعية فيزيائية إلى معادلة تفاضلية أو علاقة رياضية."
+    },
+    {
+      "id": "dom-formula_choice",
+      "category": "dom",
+      "title_ar": "اختيار القانون المناسب",
+      "title_en": "Appropriate formula selection",
+      "importance": "critical",
+      "description": "اختيار القانون الصحيح من بين قوانين الحركة (التسارع، السرعة، الطاقة، نيوتن...) حسب المعطيات والمطلوب."
+    },
+    {
+      "id": "dom-sign_interpret",
+      "category": "dom",
+      "title_ar": "تفسير الإشارة والاتجاه",
+      "title_en": "Sign & direction interpretation",
+      "importance": "critical",
+      "description": "تفسير إشارة السرعة/التسارع/العمل (محرك/مقاوم/معدوم، تباطؤ/تسارع)."
+    },
+    {
+      "id": "dom-graph_x_t",
+      "category": "dom",
+      "title_ar": "قراءة منحنى x(t)",
+      "title_en": "Reading x(t) graph",
+      "importance": "critical",
+      "description": "الميل = السرعة، تقوّس المنحنى، الحالات الخاصة."
+    },
+    {
+      "id": "dom-graph_v_t",
+      "category": "dom",
+      "title_ar": "قراءة منحنى v(t)",
+      "title_en": "Reading v(t) graph",
+      "importance": "critical",
+      "description": "الميل = التسارع، المساحة = المسافة المقطوعة."
+    },
+    {
+      "id": "dom-speed_calc",
+      "category": "dom",
+      "title_ar": "حساب السرعة",
+      "title_en": "Calculating velocity",
+      "importance": "critical"
+    },
+    {
+      "id": "dom-accel_calc",
+      "category": "dom",
+      "title_ar": "حساب التسارع",
+      "title_en": "Calculating acceleration",
+      "importance": "critical"
+    },
+    {
+      "id": "dom-equations",
+      "category": "dom",
+      "title_ar": "المعادلات الزمنية للحركة",
+      "title_en": "Kinematic equations",
+      "importance": "critical",
+      "description": "x(t)، v(t)، وعلاقات السقوط والقذف والحركة على مستوٍ."
+    },
+    {
+      "id": "dom-decay_law",
+      "category": "dom",
+      "title_ar": "قانون التناقص الإشعاعي",
+      "title_en": "Radioactive decay law",
+      "importance": "critical",
+      "description": "N(t)، t₁/₂، λ، τ، وأعمار الأنصاف."
+    },
+    {
+      "id": "dom-nuclear_eq",
+      "category": "dom",
+      "title_ar": "موازنة المعادلات النووية",
+      "title_en": "Nuclear equation balancing",
+      "importance": "critical",
+      "description": "انحفاظ A وZ، كتابة معادلات α وβ وγ."
+    },
+    {
+      "id": "dom-activity",
+      "category": "dom",
+      "title_ar": "النشاط الإشعاعي والتأريخ",
+      "title_en": "Radioactivity & dating",
+      "importance": "important",
+      "description": "A = λN، التأريخ بالكربون 14."
+    },
+    {
+      "id": "dom-bond_energy",
+      "category": "dom",
+      "title_ar": "الطاقة النووية والربط",
+      "title_en": "Nuclear energy & binding",
+      "importance": "important",
+      "description": "النقص الكتلي، طاقة الربط، الانشطار والاندماج."
+    },
+    {
+      "id": "dom-progress_table",
+      "category": "dom",
+      "title_ar": "جدول التقدم والحصيلة المولية",
+      "title_en": "Progress table & molar balance",
+      "importance": "critical",
+      "description": "التقدم x، المتفاعل المحد، المزيج الستوكيومتري، الحال النهائية."
+    },
+    {
+      "id": "dom-reaction_rate",
+      "category": "dom",
+      "title_ar": "سرعة التفاعل وزمن نصف التفاعل",
+      "title_en": "Reaction rate & half-reaction time",
+      "importance": "critical",
+      "description": "v للتفاعل/تشكل/اختفاء، v الحجمية، t₁/₂."
+    },
+    {
+      "id": "dom-conductivity",
+      "category": "dom",
+      "title_ar": "المتابعة بالناقلية",
+      "title_en": "Conductivity tracking",
+      "importance": "important",
+      "description": "σ، G، ثابت الخلية K، الشوارد المتفرجة."
+    },
+    {
+      "id": "dom-redox",
+      "category": "dom",
+      "title_ar": "تفاعلات الأكسدة والإرجاع",
+      "title_en": "Redox reactions",
+      "importance": "critical",
+      "description": "كتابة المعادلات النصفية والإجمالية، الموازنة."
+    },
+    {
+      "id": "dom-kinetic_factors",
+      "category": "dom",
+      "title_ar": "العوامل الحركية",
+      "title_en": "Kinetic factors",
+      "importance": "important",
+      "description": "أثر الحرارة والتراكيز والوساطة على سرعة التفاعل."
+    },
+    {
+      "id": "dom-rc_rl",
+      "category": "dom",
+      "title_ar": "الثنائيات RC وRL",
+      "title_en": "RC & RL dipoles",
+      "importance": "critical",
+      "description": "الشحن والتفريغ، ثابت الزمن τ، الطاقة المخزنة."
+    },
+    {
+      "id": "dom-time_constant",
+      "category": "dom",
+      "title_ar": "ثابت الزمن τ",
+      "title_en": "Time constant",
+      "importance": "critical",
+      "description": "مفهوم τ، التعيين البياني (الماس)، العلاقة بـ R وC أو R وL."
+    },
+    {
+      "id": "dom-energy",
+      "category": "dom",
+      "title_ar": "العمل والطاقة",
+      "title_en": "Work & energy",
+      "importance": "critical",
+      "description": "W، E_C، E_PP، E_Pe، انحفاظ الطاقة الميكانيكية."
+    },
+    {
+      "id": "dom-electric_charge",
+      "category": "dom",
+      "title_ar": "الشحنة والتوتر في الدارة RC/RL",
+      "title_en": "Charge & voltage in circuits",
+      "importance": "critical"
+    },
+    {
+      "id": "dom-equilibrium",
+      "category": "dom",
+      "title_ar": "التوازن الكيميائي وثابت التوازن",
+      "title_en": "Chemical equilibrium & constant",
+      "importance": "critical",
+      "description": "K، Q_r، التقدم النهائي، التلقائية."
+    },
+    {
+      "id": "dom-acid_base",
+      "category": "dom",
+      "title_ar": "تفاعلات حمض-أساس والأس الهيدروجيني",
+      "title_en": "Acid-base & pH",
+      "importance": "critical",
+      "description": "pH، الشاردة المتفرجة، قوة الأحماض والأسس، المعايرة."
+    }
+  ],
+  "prerequisites": {
+    "dom-formula_choice": ["mat-algebra", "phy-graph"],
+    "dom-sign_interpret": ["phy-graph", "rea-justify"],
+    "dom-graph_x_t": ["phy-graph", "mat-calc"],
+    "dom-graph_v_t": ["phy-graph", "mat-calc"],
+    "dom-speed_calc": ["mat-unitconv", "mat-calc"],
+    "dom-accel_calc": ["mat-unitconv", "mat-calc"],
+    "dom-equations": ["mat-algebra", "mat-calc", "mat-vectrig"],
+    "dom-decay_law": ["mat-logexp", "mat-algebra"],
+    "dom-nuclear_eq": ["mat-algebra"],
+    "dom-activity": ["mat-logexp"],
+    "dom-bond_energy": ["mat-unitconv", "mat-num"],
+    "dom-progress_table": ["mat-proportion", "mat-algebra"],
+    "dom-reaction_rate": ["mat-calc", "phy-graph"],
+    "dom-conductivity": ["mat-num", "mat-unitconv"],
+    "dom-redox": ["mat-algebra"],
+    "dom-kinetic_factors": ["rea-justify", "phy-graph"],
+    "dom-rc_rl": ["mat-calc", "mat-algebra", "phy-graph"],
+    "dom-time_constant": ["phy-graph", "mat-algebra"],
+    "dom-energy": ["mat-algebra", "phy-graph"],
+    "dom-electric_charge": ["mat-calc", "phy-graph"],
+    "dom-equilibrium": ["mat-logexp", "mat-algebra", "rea-modelize"],
+    "dom-acid_base": ["mat-logexp", "mat-algebra"]
+  }
+}
