@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المحاكي الفيزيائي التفاعلي | المدرس الشخصي للفيزياء</title>
+  <link rel="stylesheet" href="simulator.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.18.6/katex.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.18.6/katex.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.18.6/contrib/auto-render.min.js"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="sim-header">
+    <div class="sim-header-inner">
+      <div class="sim-brand">
+        <div class="sim-logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="m4.93 4.93 4.24 4.24"></path>
+            <path d="m14.83 9.17 4.24-4.24"></path>
+            <path d="m14.83 14.83 4.24 4.24"></path>
+            <path d="m9.17 14.83-4.24 4.24"></path>
+            <circle cx="12" cy="12" r="4"></circle>
+          </svg>
+        </div>
+        <div>
+          <h1>المحاكي الفيزيائي الميكانيكي</h1>
+          <span>المختبر الافتراضي - الوحدة 05: تطور جملة ميكانيكية</span>
+        </div>
+      </div>
+
+      <div class="sim-nav-actions">
+        <a href="index.html" class="btn-header">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          العودة للدروس والملخصات
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Phenomena Selection Navigation -->
+  <nav class="phenomena-tabs-bar">
+    <button class="tab-btn active" data-phenomenon="falling">
+      <span>🪂</span> السقوط الشاقولي (الحر والحقيقي)
+    </button>
+    <button class="tab-btn" data-phenomenon="projectile">
+      <span>🎯</span> حركة القذائف في حقل الجاذبية
+    </button>
+    <button class="tab-btn" data-phenomenon="satellites">
+      <span>🛰️</span> الكواكب والأقمار الاصطناعية
+    </button>
+    <button class="tab-btn" data-phenomenon="plane">
+      <span>📐</span> حركة الأجسام على مستوٍ مائل وأفقي
+    </button>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="sim-app-container">
+
+    <!-- Sidebar: Control Parameters -->
+    <aside class="sim-sidebar">
+      
+      <!-- Primary Controls (Play/Pause/Reset) -->
+      <div class="panel-card">
+        <div class="playback-bar">
+          <button id="btn-play" class="btn-play">
+            <span>▶️</span> بدء المحاكاة
+          </button>
+          <button id="btn-step" class="btn-step" title="خطوة زمنية واحدة">
+            <span>⏭️</span> خطوة
+          </button>
+          <button id="btn-reset" class="btn-reset" title="إعادة التعيين">
+            <span>🔄</span> تصفير
+          </button>
+        </div>
+      </div>
+
+      <!-- Display Options & Vectors -->
+      <div class="panel-card">
+        <div class="panel-title">
+          <span>خيارات العرض والأشعة</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+
+        <div class="toggle-row">
+          <span>إظهار متجهات القوى والسرعة</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="chk-show-vectors" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <span>إظهار أثر المسار (Trajectory)</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="chk-show-trajectory" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <span>الحركة البطيئة (Slow Motion)</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="chk-slow-motion">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <!-- Legend -->
+        <div style="margin-top: 0.85rem; display: flex; flex-wrap: wrap; gap: 0.4rem;">
+          <span class="vector-badge badge-p">الثقل P</span>
+          <span class="vector-badge badge-pi">دافعة أرخميدس Π</span>
+          <span class="vector-badge badge-f">الاحتكاك f</span>
+          <span class="vector-badge badge-r">رد الفعل R</span>
+          <span class="vector-badge badge-v">السرعة v</span>
+          <span class="vector-badge badge-a">التسارع a</span>
+        </div>
+      </div>
+
+      <!-- Shared Global Parameters -->
+      <div class="panel-card">
+        <div class="panel-title">
+          <span>المعاملات المشتركة</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>كتلة الجسم (m)</span>
+            <span id="val-mass" class="val-tag">0.5 kg</span>
+          </div>
+          <input type="range" id="range-mass" min="0.1" max="5" step="0.1" value="0.5">
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>شدة الجاذبية (g)</span>
+            <span id="val-g" class="val-tag">9.8 m/s²</span>
+          </div>
+          <input type="range" id="range-g" min="1.6" max="25" step="0.2" value="9.8">
+        </div>
+      </div>
+
+      <!-- Phenomenon 1: Falling Parameters -->
+      <div id="params-falling" class="panel-card phenomenon-params">
+        <div class="panel-title">
+          <span>إعدادات السقوط الشاقولي</span>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">نوع السقوط:</label>
+          <select id="select-fall-type">
+            <option value="real">سقوط حقيقي (مع مائع واحتكاك)</option>
+            <option value="free">سقوط حر (فقط تحت تأثير الثقل P)</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">نوع المائع المحيط:</label>
+          <select id="select-fluid">
+            <option value="air">الهواء (ρ = 1.29 kg/m³)</option>
+            <option value="water">الماء (ρ = 1000 kg/m³)</option>
+            <option value="oil">الزيت (ρ = 850 kg/m³)</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">قانون الاحتكاك f:</label>
+          <select id="select-drag-law">
+            <option value="v2">سرعات كبيرة: f = k · v²</option>
+            <option value="v">سرعات صغيرة: f = k · v</option>
+          </select>
+        </div>
+
+        <div class="toggle-row">
+          <span>تفعيل دافعة أرخميدس (Π)</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="chk-archimedes" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="control-group" style="margin-top: 0.8rem;">
+          <div class="control-label">
+            <span>معامل الاحتكاك (k)</span>
+            <span id="val-k-drag" class="val-tag">0.08</span>
+          </div>
+          <input type="range" id="range-k-drag" min="0.01" max="0.5" step="0.01" value="0.08">
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>ارتفاع السقوط (h)</span>
+            <span id="val-fall-height" class="val-tag">15 m</span>
+          </div>
+          <input type="range" id="range-fall-height" min="5" max="30" step="1" value="15">
+        </div>
+      </div>
+
+      <!-- Phenomenon 2: Projectile Parameters -->
+      <div id="params-projectile" class="panel-card phenomenon-params hidden">
+        <div class="panel-title">
+          <span>إعدادات القذيفة</span>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>السرعة الابتدائية (v₀)</span>
+            <span id="val-v0" class="val-tag">15 m/s</span>
+          </div>
+          <input type="range" id="range-v0" min="5" max="35" step="1" value="15">
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>زاوية القذف (α)</span>
+            <span id="val-angle" class="val-tag">45 °</span>
+          </div>
+          <input type="range" id="range-angle" min="5" max="85" step="1" value="45">
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>الارتفاع الابتدائي (h₀)</span>
+            <span id="val-h0" class="val-tag">2 m</span>
+          </div>
+          <input type="range" id="range-h0" min="0" max="15" step="1" value="2">
+        </div>
+
+        <div class="toggle-row">
+          <span>مقاومة الهواء أثناء القذف</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="chk-proj-air">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Phenomenon 3: Satellites Parameters -->
+      <div id="params-satellites" class="panel-card phenomenon-params hidden">
+        <div class="panel-title">
+          <span>إعدادات الأقمار والكواكب</span>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">الجسم المركزي:</label>
+          <select id="select-central-body">
+            <option value="earth">الأرض (حركة الأقمار الاصطناعية)</option>
+            <option value="sun">الشمس (حركة الكواكب - قوانين كبلر)</option>
+          </select>
+        </div>
+
+        <div class="guidance-box" style="margin-top: 0.5rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div>
+            في الحركة الدائرية المنتظمة: يكون التسارع ناظمياً ممركزاً $\vec{a} = a_n \vec{n}$، وتكون السرعة المدارية ثابتة على المسار $v = \text{cte}$.
+          </div>
+        </div>
+      </div>
+
+      <!-- Phenomenon 4: Plane Parameters -->
+      <div id="params-plane" class="panel-card phenomenon-params hidden">
+        <div class="panel-title">
+          <span>إعدادات المستوي المائل</span>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>زاوية ميل المستوي (α)</span>
+            <span id="val-plane-angle" class="val-tag">30 °</span>
+          </div>
+          <input type="range" id="range-plane-angle" min="0" max="60" step="1" value="30">
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>معامل الاحتكاك السطحي (μ)</span>
+            <span id="val-friction-mu" class="val-tag">0.15</span>
+          </div>
+          <input type="range" id="range-friction-mu" min="0" max="0.6" step="0.02" value="0.15">
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>قوة الجر الخارجية (F)</span>
+            <span id="val-pull-force" class="val-tag">4 N</span>
+          </div>
+          <input type="range" id="range-pull-force" min="0" max="25" step="0.5" value="4">
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Simulation & Graphical Stage Area -->
+    <section class="sim-stage-area">
+
+      <!-- Canvas Stage -->
+      <div class="canvas-card">
+        <!-- Live Floating Telemetry -->
+        <div class="live-telemetry">
+          <div class="telemetry-row">
+            <span>الزمن (t):</span>
+            <span id="tele-time">0.00 s</span>
+          </div>
+          <div class="telemetry-row">
+            <span>السرعة (v):</span>
+            <span id="tele-v">0.00 m/s</span>
+          </div>
+          <div class="telemetry-row">
+            <span>التسارع (a):</span>
+            <span id="tele-a">9.80 m/s²</span>
+          </div>
+          <div class="telemetry-row">
+            <span>الموضع:</span>
+            <span id="tele-pos">0.00 m</span>
+          </div>
+        </div>
+
+        <!-- Top Right Canvas Actions -->
+        <div class="canvas-toolbar">
+          <button id="btn-clear-traj" class="tool-btn" title="مسح المسار">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            مسح المسار
+          </button>
+        </div>
+
+        <!-- Canvas -->
+        <canvas id="physics-canvas"></canvas>
+      </div>
+
+      <!-- Physics Equation & Theoretical Breakdown Banner -->
+      <div class="physics-banner">
+        <div class="formula-box" id="formula-details">
+          <!-- Populated dynamically with KaTeX formulas -->
+        </div>
+        <div class="key-values-grid">
+          <div class="key-metric-card">
+            <span class="metric-label" id="metric-1-label">السرعة الحدية vL</span>
+            <span class="metric-value" id="metric-1-val">--</span>
+          </div>
+          <div class="key-metric-card">
+            <span class="metric-label" id="metric-2-label">ثابت الزمن τ</span>
+            <span class="metric-value" id="metric-2-val">--</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-Time Dynamic Charts Section -->
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-header">
+            <span>مخطط السرعة اللحظية $v = f(t)$</span>
+            <span style="color: #10b981; font-size: 0.8rem;">● السرعة اللحظية</span>
+          </div>
+          <canvas id="chart-v-canvas" class="chart-canvas"></canvas>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-header">
+            <span>مخطط انحفاظ الطاقة (الطاقة الحركية، الكامنة، الكلية)</span>
+            <span style="color: #38bdf8; font-size: 0.8rem;">● مخطط الطاقات</span>
+          </div>
+          <canvas id="chart-e-canvas" class="chart-canvas"></canvas>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="simulator.js"></script>
+</body>
+</html>

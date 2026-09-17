@@ -394,6 +394,17 @@
       card.appendChild(desc);
       card.appendChild(badge);
 
+      if (unit.id === 'unit5') {
+        var simBtn = document.createElement('a');
+        simBtn.className = 'card-sim-badge';
+        simBtn.href = 'simulator.html';
+        simBtn.innerHTML = '⚡ فتح محاكي الميكانيك التفاعلي 🔬';
+        simBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+        });
+        card.appendChild(simBtn);
+      }
+
       card.addEventListener('click', function () {
         openUnit(unit);
       });

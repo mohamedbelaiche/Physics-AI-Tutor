@@ -110,6 +110,49 @@ main {
   font-size: 0.8rem;
 }
 
+.nav-simulator-btn {
+  background: linear-gradient(135deg, #0284c7, #2563eb);
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+  transition: all 0.2s ease;
+}
+
+.nav-simulator-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.5);
+  color: #fff;
+}
+
+.card-sim-badge {
+  display: block;
+  margin-top: 0.85rem;
+  padding: 0.55rem 0.75rem;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(59, 130, 246, 0.15));
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #0284c7;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.card-sim-badge:hover {
+  background: linear-gradient(135deg, #0284c7, #2563eb);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+}
+
 .back-btn {
   background: #2a6db5;
   color: #fff;
