@@ -57,15 +57,19 @@
   <div class="canvas-fullscreen-container">
     
     <!-- Floating Live Telemetry HUD (Top Left) -->
-    <div class="floating-telemetry">
+    <div id="floating-telemetry" class="floating-telemetry">
       <div class="telemetry-title">
-        <span>القياسات اللحظية</span>
-        <span id="tele-status" style="color:#10b981;">● جاهز</span>
+        <div style="display: flex; align-items: center; gap: 0.4rem;">
+          <span>القياسات اللحظية</span>
+          <span id="tele-status" style="color:#10b981;">● جاهز</span>
+        </div>
+        <button id="btn-toggle-telemetry" class="btn-tele-toggle" title="طي / إظهار القياسات">▼</button>
       </div>
-      <div class="telemetry-row">
-        <span>الزمن (t):</span>
-        <span id="tele-time">0.00 s</span>
-      </div>
+      <div id="telemetry-body">
+        <div class="telemetry-row">
+          <span>الزمن (t):</span>
+          <span id="tele-time">0.00 s</span>
+        </div>
       <div class="telemetry-row">
         <span>السرعة (v):</span>
         <span id="tele-v">0.00 m/s</span>
@@ -77,6 +81,7 @@
       <div class="telemetry-row">
         <span>الموضع:</span>
         <span id="tele-pos">0.00 m</span>
+      </div>
       </div>
     </div>
 

@@ -481,34 +481,38 @@
 
   // 1. Vertical Falling Drawer
   function drawFallingPhenomenon(w, h) {
-    var groundY = h - 100;
+    var isMobile = w < 680;
+    var bottomMargin = isMobile ? 80 : 110;
+    var topMargin = isMobile ? 50 : 75;
+    var groundY = h - bottomMargin;
     var tubeX = w * 0.5;
-    var tubeW = 120;
+    var tubeW = isMobile ? 90 : 120;
     var maxH = params.fallHeight;
-    var pxPerM = (groundY - 100) / maxH;
+    var pxPerM = (groundY - topMargin) / maxH;
 
     if (params.fallType === 'real') {
       ctx.fillStyle = params.fluidType === 'water' ? 'rgba(56, 189, 248, 0.16)' :
                       params.fluidType === 'oil' ? 'rgba(234, 179, 8, 0.2)' :
                       'rgba(148, 163, 184, 0.09)';
-      ctx.fillRect(tubeX - tubeW / 2, 70, tubeW, groundY - 70);
+      ctx.fillRect(tubeX - tubeW / 2, topMargin, tubeW, groundY - topMargin);
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
       ctx.lineWidth = 2;
-      ctx.strokeRect(tubeX - tubeW / 2, 70, tubeW, groundY - 70);
+      ctx.strokeRect(tubeX - tubeW / 2, topMargin, tubeW, groundY - topMargin);
 
       ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-      ctx.font = '13px Cairo';
-      ctx.fillText('مائع: ' + (params.fluidType === 'water' ? 'ماء' : params.fluidType === 'oil' ? 'زيت' : 'هواء'), tubeX - tubeW / 2 + 12, 92);
+      ctx.font = isMobile ? '11px Cairo' : '13px Cairo';
+      ctx.fillText('مائع: ' + (params.fluidType === 'water' ? 'ماء' : params.fluidType === 'oil' ? 'زيت' : 'هواء'), tubeX - tubeW / 2 + 10, topMargin + 20);
     }
 
     // Ground platform
+    var platW = Math.min(500, w * 0.85);
     ctx.fillStyle = '#1e293b';
-    ctx.fillRect(tubeX - 250, groundY, 500, 24);
+    ctx.fillRect(tubeX - platW / 2, groundY, platW, 20);
     ctx.strokeStyle = '#38bdf8';
     ctx.lineWidth = 2.5;
     ctx.beginPath();
-    ctx.moveTo(tubeX - 250, groundY);
-    ctx.lineTo(tubeX + 250, groundY);
+    ctx.moveTo(tubeX - platW / 2, groundY);
+    ctx.lineTo(tubeX + platW / 2, groundY);
     ctx.stroke();
 
     // Height ruler
@@ -562,25 +566,27 @@
 
   // 2. Projectile Drawer
   function drawProjectilePhenomenon(w, h) {
-    var groundY = h - 90;
-    var startX = 100;
-    var scaleM = Math.min((w - 200) / 45, (groundY - 100) / 20);
+    var isMobile = w < 680;
+    var bottomMargin = isMobile ? 85 : 110;
+    var groundY = h - bottomMargin;
+    var startX = isMobile ? 50 : 100;
+    var scaleM = Math.min((w - (isMobile ? 90 : 200)) / 45, (groundY - (isMobile ? 60 : 100)) / 20);
 
     ctx.fillStyle = '#1e293b';
-    ctx.fillRect(startX - 50, groundY, w - startX, 24);
+    ctx.fillRect(startX - 30, groundY, w - startX + 10, 20);
     ctx.strokeStyle = '#38bdf8';
     ctx.lineWidth = 2.5;
     ctx.beginPath();
-    ctx.moveTo(startX - 50, groundY);
-    ctx.lineTo(w - 50, groundY);
+    ctx.moveTo(startX - 30, groundY);
+    ctx.lineTo(w - 20, groundY);
     ctx.stroke();
 
     if (params.projH0 > 0) {
       var towerH = params.projH0 * scaleM;
       ctx.fillStyle = '#334155';
-      ctx.fillRect(startX - 20, groundY - towerH, 40, towerH);
+      ctx.fillRect(startX - 16, groundY - towerH, 32, towerH);
       ctx.strokeStyle = '#64748b';
-      ctx.strokeRect(startX - 20, groundY - towerH, 40, towerH);
+      ctx.strokeRect(startX - 16, groundY - towerH, 32, towerH);
     }
 
     if (showTrajectory && trajectoryPoints.length > 1) {
@@ -682,10 +688,12 @@
 
   // 4. Inclined Plane Drawer
   function drawPlanePhenomenon(w, h) {
+    var isMobile = w < 680;
+    var bottomMargin = isMobile ? 85 : 110;
     var theta = (params.planeAngle * Math.PI) / 180;
-    var startX = 140;
-    var groundY = h - 100;
-    var planeLenPx = Math.min(w - 300, 750);
+    var startX = isMobile ? 40 : 140;
+    var groundY = h - bottomMargin;
+    var planeLenPx = Math.min(w - (isMobile ? 100 : 300), 750);
 
     var endX = startX + planeLenPx * Math.cos(theta);
     var endY = groundY - planeLenPx * Math.sin(theta);
@@ -994,6 +1002,16 @@
     document.getElementById('btn-dismiss-results').addEventListener('click', function () {
       closeModal(modalResults);
     });
+
+    // Toggle Telemetry Drawer
+    var btnToggleTele = document.getElementById('btn-toggle-telemetry');
+    var floatingTele = document.getElementById('floating-telemetry');
+    if (btnToggleTele && floatingTele) {
+      btnToggleTele.addEventListener('click', function () {
+        floatingTele.classList.toggle('collapsed');
+        btnToggleTele.textContent = floatingTele.classList.contains('collapsed') ? '▲' : '▼';
+      });
+    }
 
     // Click outside to close modals
     modalSettings.addEventListener('click', function (e) {
