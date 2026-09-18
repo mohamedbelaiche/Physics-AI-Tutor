@@ -12,6 +12,24 @@ const SYSTEM_PROMPT =
   'أجب بوضوح ودقة عن أسئلة الفيزياء (الميكانيك، الكهرباء، النووية، الكيمياء وغيرها) ' +
   '، اشرح المفاهيم خطوة بخطوة، واعرض الحلول بالتفصيل مع الصيغ الرياضية عند الحاجة.';
 
+// The latest user message in the conversation, used to pick the wiki pages
+// most relevant to the current question.
+function lastUserText(messages) {
+  for (let i = messages.length - 1; i >= 0; i--) {
+    if (messages[i] && messages[i].role === 'user') {
+      const text = messages[i].content;
+      if (typeof text === 'string') return text;
+      if (Array.isArray(text)) {
+        const joined = text
+          .map((p) => (p && typeof p.type === 'text' ? p.text : ''))
+          .join(' ');
+        if (joined.trim()) return joined;
+      }
+    }
+  }
+  return '';
+}
+
 function readJsonBody(req, callback) {
   // On Vercel, the body is already parsed into req.body
   if (req.body && typeof req.body === 'object') {
@@ -108,7 +126,7 @@ async function handleChat(data, res, auth) {
     return;
   }
 
-  const context = await getProjectContext();
+  const context = await getProjectContext(lastUserText(withoutSystem));
   const academic = await getAcademicContext(auth);
   const academicSection = academic
     ? '## الملف الأكاديمي للطالب (من الملف التشخيصي)\n' + JSON.stringify(academic, null, 2)

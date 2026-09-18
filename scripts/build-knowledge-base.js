@@ -21,6 +21,7 @@ const path = require('path');
 const KB_ROOT = path.join(__dirname, '..', 'KNOWLEDGE_BASE');
 const MANIFEST_PATH = path.join(KB_ROOT, 'manifest.json');
 const RELATIONS_PATH = path.join(KB_ROOT, 'relationships', 'index.json');
+const INDEX_PATH = path.join(KB_ROOT, 'index.md');
 
 /* ---------- file walking / frontmatter parsing ---------- */
 
@@ -139,7 +140,7 @@ function topicConcepts(unit, topic) {
 
 const mdFiles = walk(KB_ROOT)
   .map((p) => relToKb(p))
-  .filter((p) => p !== 'README.md' && !p.endsWith('/README.md') && p !== 'validation_report.md');
+  .filter((p) => p !== 'README.md' && !p.endsWith('/README.md') && p !== 'validation_report.md' && p !== 'index.md' && p !== 'log.md');
 const records = [];
 const statusCounts = {};
 const typeCounts = {};
@@ -304,15 +305,94 @@ const relationships = {
   dangling_references: dangling,
 };
 
+/* ---------- render index.md ---------- */
+
+const STATUS_ICON = {
+  verified: 'OK',
+  needs_review: '~',
+  uncertain: '?',
+  extraction_failed: 'X',
+};
+
+function renderIndex(m) {
+  const L = [];
+  const c = m.counts.by_type;
+  const st = m.counts.by_status;
+
+  L.push('# فهرس المحتوى — قاعدة المعرفة (LLM Wiki)');
+  L.push('');
+  L.push('> يُولَّد آليًا بواسطة `scripts/build-knowledge-base.js` من `manifest.json`. لا تحرّره يدويًا — أعد توليده بعد أي تغيير في الويكي.');
+  L.push('> آخر توليد: ' + m.generated_at);
+  L.push('');
+  L.push('**الإحصاءات**: ' + m.total_items + ' سجلًا — دروس: ' + (c.lesson || 0) + '، مفاهيم: ' + (c.concept || 0) +
+    '، صيغ: ' + (c.formula || 0) + '، تمارين: ' + (c.exercise || 0) + '، حلول: ' + (c.solution || 0) + '.');
+  L.push('**الحالات**: verified: ' + (st.verified || 0) + '، needs_review: ' + (st.needs_review || 0) +
+    '، uncertain: ' + (st.uncertain || 0) + '، extraction_failed: ' + (st.extraction_failed || 0) + '.');
+  L.push('');
+
+  const link = (e) => '[' + (e.title_ar || e.id) + '](' + e.path + ')';
+
+  L.push('## دروس (lessons)');
+  L.push('');
+  for (const e of m.lessons || []) {
+    const nCon = ((e.concepts || []).length) + ' concept(s)';
+    L.push('- ' + link(e) + ' — ' + (e.title_ar || e.id) + ' (' + (STATUS_ICON[e.status] || '?') + ')، ' + nCon);
+  }
+  L.push('');
+
+  L.push('## مفاهيم (concepts)');
+  L.push('');
+  for (const e of m.concepts || []) {
+    L.push('- ' + link(e) + ' (' + (STATUS_ICON[e.status] || '?') + ')');
+  }
+  L.push('');
+
+  L.push('## صيغ (formulas)');
+  L.push('');
+  for (const e of m.formulas || []) {
+    L.push('- ' + link(e) + ' (' + (STATUS_ICON[e.status] || '?') + ') — `' + (e.symbol || '') + '`');
+  }
+  L.push('');
+
+  const byUnit = {};
+  for (const e of m.exercises || []) {
+    (byUnit[e.unit || 'other'] = byUnit[e.unit || 'other'] || []).push(e);
+  }
+
+  L.push('## تمارين (exercises)');
+  L.push('');
+  for (const unit of Object.keys(byUnit).sort()) {
+    L.push('### ' + unit + ' (' + byUnit[unit].length + ')');
+    for (const e of byUnit[unit].sort((a, b) => (a.id < b.id ? -1 : 1))) {
+      const sol = e.solutions_ref ? ' ✓' : '';
+      const when = [e.year, e.stream].filter(Boolean).join(' · ');
+      const topic = e.topic ? ' — ' + e.topic : '';
+      L.push('- ' + link(e) + ' (' + (STATUS_ICON[e.status] || '?') + ') ' + when + topic + sol);
+    }
+    L.push('');
+  }
+
+  L.push('## حلول (solutions)');
+  L.push('');
+  for (const e of m.solutions || []) {
+    const forEx = e.exercise_ref ? ' — يحل `' + e.exercise_ref + '`' : '';
+    L.push('- ' + link(e) + ' (' + (STATUS_ICON[e.status] || '?') + ')' + forEx);
+  }
+
+  return L.join('\n') + '\n';
+}
+
 /* ---------- write ---------- */
 
 fs.mkdirSync(path.dirname(RELATIONS_PATH), { recursive: true });
 fs.writeFileSync(MANIFEST_PATH, JSON.stringify(manifest, null, 2), 'utf8');
 fs.writeFileSync(RELATIONS_PATH, JSON.stringify(relationships, null, 2), 'utf8');
+fs.writeFileSync(INDEX_PATH, renderIndex(manifest), 'utf8');
 
 console.log(JSON.stringify({
   manifest_written: MANIFEST_PATH,
   relationships_written: RELATIONS_PATH,
+  index_written: INDEX_PATH,
   counts: { by_type: typeCounts, by_status: statusCounts, total: records.length },
   edges_total: edges.length,
   dangling: dangling.length,
