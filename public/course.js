@@ -26,6 +26,11 @@
   var modeSlidesBtn = document.getElementById('mode-slides');
   var slidesView = document.getElementById('slides-view');
   var currentMode = 'text';
+  var sectionsBar = document.getElementById('course-sections-bar');
+  var currentSlideIdx = 0;   // فهرس شريحة المقطع الحالي (لحفظ موقع الاستئناف)
+  var pendingSlide = null;   // شريحة البداية عند فتح الكورس (الاستئناف)
+  var lastServerPosTs = 0;   // تخفيف طلبات الخادم عند حفظ الموقع
+  var POS_STORAGE_KEY = 'course_positions.v1';
 
   function isLoggedIn() {
     return !!(window.AppAuth && window.AppAuth.getUser());
@@ -59,7 +64,9 @@
 
   // يسجّل إتمام جزء عند الخادم (بدون حظر). الزائر بدون حساب لا يسجّل شيئًا.
   function postPart(course, sectionIdx, partKey) {
-    if (!isLoggedIn() || !course || !course.sections[sectionIdx]) return Promise.resolve();
+    if (!course || !course.sections[sectionIdx]) return Promise.resolve();
+    markLocalProgress(course, sectionIdx, partKey);
+    if (!isLoggedIn()) return Promise.resolve();
     return getToken().then(function (token) {
       return fetch('/api/course/progress', {
         method: 'POST',
@@ -74,6 +81,83 @@
         })
       });
     }).catch(function () { /* التقدم ثانوي — نفشل بصمت */ });
+  }
+
+  // تحديث متفائل محلي: يعلّم المقطع مكتملًا ويسجّل الجزء في شريط الأقسام فورًا.
+  function markLocalProgress(course, sectionIdx, partKey) {
+    if (!progress || !progress.courses) return;
+    var rec = progress.courses.find(function (c) { return c.id === course.id; });
+    if (!rec || !rec.sections[sectionIdx]) return;
+    var sec = rec.sections[sectionIdx];
+    if (partKey === 'text' || partKey === 'slides.complete') sec.completed = true;
+    var has = (sec.parts || []).some(function (p) { return p.key === partKey; });
+    if (!has) sec.parts.push({ key: partKey, completed: true });
+  }
+
+  /* ---------- موقع الاستئناف (خادم للمسجّل + localStorage للزوار) ---------- */
+
+  function readLocalPositions() {
+    try {
+      return JSON.parse(localStorage.getItem(POS_STORAGE_KEY) || '{}');
+    } catch (e) { return {}; }
+  }
+
+  // موقع محفوظ للكورس: من الخادم للمسجّل، وإلا من localStorage للزوار.
+  function storedPosition(course) {
+    if (course && progress && progress.positions && progress.positions[course.id]) {
+      return progress.positions[course.id];
+    }
+    return course ? (readLocalPositions()[course.id] || null) : null;
+  }
+
+  function buildPosition(course) {
+    var secIdx = currentSectionIdx;
+    var slIdx = 0;
+    if (currentMode === 'slides' && window.SlidesPlayer && window.SlidesPlayer.getPos) {
+      var p = window.SlidesPlayer.getPos();
+      secIdx = p.sectionIdx != null ? p.sectionIdx : secIdx;
+      slIdx = p.slideIdx != null ? p.slideIdx : 0;
+    }
+    var section = course.sections[secIdx];
+    return {
+      course_id: course.id,
+      section_id: section ? sectionKey(section) : '',
+      slide_index: slIdx,
+      mode: currentMode
+    };
+  }
+
+  // يحفظ الموقع محليًا دائمًا، وللمسجّل يرسله للخادم (مخفّفًا كل ثانيتين).
+  function savePosition() {
+    var course = getCourse(currentCourseId);
+    if (!course || !course.sections.length) return;
+    var pos = buildPosition(course);
+    var local = readLocalPositions();
+    local[course.id] = { section_id: pos.section_id, slide_index: pos.slide_index, mode: pos.mode };
+    try { localStorage.setItem(POS_STORAGE_KEY, JSON.stringify(local)); } catch (e) {}
+    if (!isLoggedIn() || !pos.section_id) return;
+    var now = Date.now();
+    if (now - lastServerPosTs < 2000) return;
+    lastServerPosTs = now;
+    postPosition(pos);
+  }
+
+  function postPosition(pos) {
+    getToken().then(function (token) {
+      if (!token) return;
+      return fetch('/api/course/progress', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token
+        },
+        body: JSON.stringify({
+          course_id: pos.course_id,
+          section_id: pos.section_id,
+          position: { section_id: pos.section_id, slide_index: pos.slide_index, mode: pos.mode }
+        })
+      });
+    }).catch(function () { /* الموقع ثانوي — نفشل بصمت */ });
   }
 
   /* ---------- التبويبات ---------- */
@@ -327,12 +411,15 @@
   function switchMode(mode) {
     if (mode === currentMode) return;
     currentMode = mode;
+    currentSlideIdx = 0;
+    pendingSlide = 0;
     if (courseHasSlides(currentCourseId ? getCourse(currentCourseId).slug || '' : '')) {
       setModeUI(true);
     } else {
       setModeUI(false);
     }
     renderLesson();
+    savePosition();
   }
 
   modeTextBtn.addEventListener('click', function () { switchMode('text'); });
@@ -349,7 +436,22 @@
     if (state === 'locked') return;
     currentCourseId = course.id;
     currentSectionIdx = 0;
+    currentSlideIdx = 0;
     currentMode = 'text';
+    pendingSlide = null;
+
+    // استئناف من آخر موقع محفوظ (الخادم للمسجّل أو localStorage للزوار).
+    var saved = storedPosition(course);
+    if (saved) {
+      var si = course.sections.findIndex(function (s) {
+        return sectionKey(s) === String(saved.section_id || '');
+      });
+      if (si >= 0) currentSectionIdx = si;
+      currentSlideIdx = Math.max(0, Number(saved.slide_index) || 0);
+      pendingSlide = currentSlideIdx;
+      if (saved.mode === 'slides') currentMode = 'slides';
+    }
+
     setModeUI(false);
     courseHasSlides(course.slug).then(function (available) {
       if (currentCourseId !== course.id) return;
@@ -358,6 +460,7 @@
     dashView.classList.add('hidden');
     lessonView.classList.remove('hidden');
     renderLesson();
+    savePosition();
     window.scrollTo(0, 0);
   }
 
@@ -375,6 +478,7 @@
     var course = getCourse(currentCourseId);
     if (!course) return;
     var section = course.sections[currentSectionIdx];
+    renderSectionsBar(course);
 
     lessonHead.innerHTML =
       '<span class="course-lesson-crumb">' + escapeHtml(course.title_ar) + '</span>' +
@@ -387,7 +491,10 @@
         if (currentMode !== 'slides' || currentCourseId !== course.id) return;
         if (deck) {
           lessonBody.classList.add('slides-mode');
-          window.SlidesPlayer.playSection(lessonBody, slug, currentSectionIdx);
+          var initial = pendingSlide;
+          pendingSlide = 0;
+          window.SlidesPlayer.playSection(lessonBody, slug, currentSectionIdx, initial);
+          renderSectionsBar(course);
         } else {
           setModeUI(false);
           lessonBody.innerHTML = renderMarkdownContent(section.content_md);
@@ -418,7 +525,12 @@
 
     var prev = makeNavBtn('→ السابق', {
       disabled: currentSectionIdx === 0,
-      onClick: function () { currentSectionIdx--; renderLesson(); }
+      onClick: function () {
+        currentSectionIdx--;
+        currentSlideIdx = 0;
+        renderLesson();
+        savePosition();
+      }
     });
     lessonNav.appendChild(prev);
 
@@ -439,11 +551,83 @@
           // يُسجَّل الجزء الحالي عندما يتركه التلميذ إلى المقطع التالي.
           postPart(course, currentSectionIdx, currentPartKey());
           currentSectionIdx++;
+          currentSlideIdx = 0;
           renderLesson();
+          savePosition();
         }
       });
     }
     lessonNav.appendChild(next);
+  }
+
+  /* ---------- لوحة التقدم الداخلية (شريط الأقسام) ---------- */
+
+  function sectionRec(course, i) {
+    if (!progress || !progress.courses) return null;
+    var rec = progress.courses.find(function (c) { return c.id === course.id; });
+    return rec && rec.sections[i] ? rec.sections[i] : null;
+  }
+
+  function renderSectionsBar(course) {
+    if (!sectionsBar) return;
+    if (!course || !course.sections || !course.sections.length) {
+      sectionsBar.classList.add('hidden');
+      sectionsBar.innerHTML = '';
+      return;
+    }
+    sectionsBar.classList.remove('hidden');
+    sectionsBar.innerHTML = '';
+
+    var currentSlidesSection = null;
+    if (currentMode === 'slides' && window.SlidesPlayer && window.SlidesPlayer.getPos) {
+      currentSlidesSection = window.SlidesPlayer.getPos().sectionIdx;
+    }
+
+    course.sections.forEach(function (section, i) {
+      var chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'course-section-chip';
+      chip.title = section.title;
+
+      var rec = sectionRec(course, i);
+      var isCurrent = (currentMode === 'slides' && currentSlidesSection === i) ||
+                      (currentMode !== 'slides' && currentSectionIdx === i);
+      var done = !!(rec && rec.completed);
+      if (done) chip.classList.add('done');
+      if (isCurrent) chip.classList.add('current');
+
+      var num = String(section.num != null ? section.num : (i + 1));
+      var inner = '<span class="chip-num">' + escapeHtml(num) + '</span>';
+      if (done) {
+        inner += '<span class="chip-state">✓</span>';
+      } else if (rec) {
+        var doneParts = (rec.parts || []).length;
+        var total = rec.parts_total || 0;
+        if (doneParts && total) {
+          inner += '<span class="chip-state">' + doneParts + '/' + total + '</span>';
+        }
+      }
+      chip.innerHTML = inner;
+      chip.setAttribute('aria-label', section.title + (done ? ' — مكتمل' : ''));
+      chip.addEventListener('click', function () {
+        jumpToSection(course, i);
+      });
+      sectionsBar.appendChild(chip);
+    });
+  }
+
+  function jumpToSection(course, idx) {
+    if (idx === currentSectionIdx) {
+      if (currentMode === 'slides') window.SlidesPlayer.reset();
+      renderLesson();
+      savePosition();
+      return;
+    }
+    currentSectionIdx = idx;
+    currentSlideIdx = 0;
+    pendingSlide = 0;
+    renderLesson();
+    savePosition();
   }
 
   function getCourseProgressState(courseId) {
@@ -522,6 +706,9 @@
         onClick: function () {
           currentCourseId = nextCourse.id;
           currentSectionIdx = 0;
+          currentSlideIdx = 0;
+          pendingSlide = null;
+          currentMode = 'text';
           renderLesson();
         }
       });
@@ -533,15 +720,27 @@
   /* ---------- Boot ---------- */
 
   function init() {
-    // في وضع الشرائح: كل شريحة تُعرض = جزء مكتمل (part_key = slide.id).
+    // في وضع الشرائح: كل شريحة تُعرض = جزء مكتمل (part_key = slide.id)،
+    // ويُحدَّث موقع الاستئناف مع كل تنقّل.
     if (window.SlidesPlayer) {
-      window.SlidesPlayer.setSlideProgressHandler(function (sectionIdx, slideId) {
-        if (!isLoggedIn() || !currentCourseId) return;
+      window.SlidesPlayer.setSlideProgressHandler(function (sectionIdx, slideIdx, slideId) {
+        if (!currentCourseId) return;
         var course = getCourse(currentCourseId);
-        if (!course || !course.sections[sectionIdx]) return;
-        postPart(course, sectionIdx, slideId);
+        if (!course) return;
+        currentSlideIdx = slideIdx != null ? slideIdx : 0;
+        if (slideId && isLoggedIn() && course.sections[sectionIdx]) {
+          markLocalProgress(course, sectionIdx, slideId);
+          postPart(course, sectionIdx, slideId);
+        }
+        savePosition();
       });
     }
+    // عند مغادرة الصفحة/التبويب، نعتمد آخر موقع حتى لا يضيع عند الإغلاق.
+    var flushPos = function () { savePosition(); };
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') savePosition();
+    });
+    window.addEventListener('pagehide', flushPos);
     if (window.AppAuth) {
       window.AppAuth.onAuth(function () {
         loadProgress().then(function () { renderDashboard(); });

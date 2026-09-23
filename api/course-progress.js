@@ -17,8 +17,11 @@
  * GET  /api/course/progress -> { courses: [ { id, title_ar, completed,
  *                              completedSections, totalSections,
  *                              sections: [ { id, title, parts: [...] } ] } ],
- *                              completedCount, total }
- * POST { course_id, section_id, part_key } -> يسجّل إتمام جزء.
+ *                              completedCount, total,
+ *                              positions: { [course_id]: { section_id, slide_index, mode } } }
+ * POST { course_id, section_id, part_key?, position?: { section_id, slide_index, mode } }
+ *   - part_key (اختياري): يسجّل إتمام جزء.
+ *   - position (اختياري): يحدّث موقع الاستئناف (upsert في course_positions).
  */
 'use strict';
 
@@ -163,6 +166,65 @@ async function markCourseComplete(auth, courseId) {
   if (!res.ok) throw new Error('POST course_progress: ' + res.status);
 }
 
+// مواقع الاستئناف: صف واحد لكل مستخدم/كورس → خريطة { course_id: { section_id, slide_index, mode } }
+async function fetchPositions(auth) {
+  const { url } = getSupabaseConfig();
+  const qs = 'select=course_id,section_id,slide_index,mode&' + userQuery(auth);
+  const res = await fetch(url + '/rest/v1/course_positions?' + qs, {
+    headers: postgrestHeaders(auth)
+  });
+  if (!res.ok) throw new Error('GET course_positions: ' + res.status);
+  const rows = await res.json();
+  const map = {};
+  (Array.isArray(rows) ? rows : []).forEach(function (r) {
+    if (!r.course_id) return;
+    map[r.course_id] = {
+      section_id: r.section_id,
+      slide_index: r.slide_index != null ? Number(r.slide_index) || 0 : 0,
+      mode: r.mode === 'slides' ? 'slides' : 'text'
+    };
+  });
+  return map;
+}
+
+// حفظ/تحديث موقع الاستئناف (upsert على مفتاح (user_id, course_id)).
+async function savePosition(auth, pos) {
+  const { url } = getSupabaseConfig();
+  const body = {
+    user_id: auth.userId,
+    course_id: pos.course_id,
+    section_id: pos.section_id || '',
+    slide_index: pos.slide_index != null ? Math.max(0, Number(pos.slide_index) || 0) : 0,
+    mode: pos.mode === 'slides' ? 'slides' : 'text',
+    updated_at: new Date().toISOString()
+  };
+  const res = await fetch(
+    url + '/rest/v1/course_positions?on_conflict=user_id,course_id',
+    {
+      method: 'POST',
+      headers: Object.assign(postgrestHeaders(auth), {
+        'Content-Type': 'application/json',
+        Prefer: 'resolution=merge-duplicates'
+      }),
+      body: JSON.stringify(body)
+    }
+  );
+  if (!res.ok) throw new Error('POST course_positions: ' + res.status);
+}
+
+// تطبيع موضع يأتي من جسم الطلب (قد يأتي بدون slide_index أو mode).
+function normalizePosition(data) {
+  const p = data && data.position;
+  if (!p) return null;
+  const sectionId = p.section_id != null ? String(p.section_id) : '';
+  if (!sectionId) return null;
+  return {
+    section_id: sectionId,
+    slide_index: p.slide_index != null ? Number(p.slide_index) : 0,
+    mode: p.mode === 'slides' ? 'slides' : 'text'
+  };
+}
+
 function buildState(courses, courseRows, partRows) {
   const flagged = {};
   courseRows.forEach(function (r) {
@@ -274,7 +336,9 @@ async function handler(req, res) {
       const courses = readCourses();
       const courseRows = await fetchCourseRows(auth);
       const partRows = await fetchPartRows(auth);
-      sendJson(res, 200, buildState(courses, courseRows, partRows));
+      const state = buildState(courses, courseRows, partRows);
+      state.positions = await fetchPositions(auth);
+      sendJson(res, 200, state);
       return;
     } catch (err) {
       console.error('course-progress GET error:', err);
@@ -295,9 +359,10 @@ async function handler(req, res) {
     const courseId = data.course_id != null ? String(data.course_id) : '';
     const sectionId = data.section_id != null ? String(data.section_id) : '';
     const partKey = data.part_key != null ? String(data.part_key) : '';
+    const pos = normalizePosition(data);
 
-    if (!courseId || !sectionId || !partKey) {
-      sendJson(res, 400, { error: 'أرسل course_id و section_id و part_key.' });
+    if (!courseId || (!partKey && !pos)) {
+      sendJson(res, 400, { error: 'أرسل course_id مع part_key أو position.' });
       return;
     }
 
@@ -310,24 +375,45 @@ async function handler(req, res) {
         sendJson(res, 400, { error: 'كورس غير معروف.' });
         return;
       }
-      const section = (course.sections || []).find(function (s) {
-        return sectionKey(s) === sectionId;
-      });
-      if (!section) {
-        sendJson(res, 400, { error: 'مقطع غير معروف.' });
-        return;
+
+      let partRows;
+      if (partKey) {
+        const section = (course.sections || []).find(function (s) {
+          return sectionKey(s) === sectionId;
+        });
+        if (!section) {
+          sendJson(res, 400, { error: 'مقطع غير معروف.' });
+          return;
+        }
+
+        await markPartCompleted(auth, { course_id: courseId, section_id: sectionId, part_key: partKey });
+
+        const deck = readDeck(course) || [];
+        partRows = await fetchPartRows(auth);
+        if (courseFullyComplete(courses, course, deck, partRows)) {
+          await markCourseComplete(auth, courseId);
+        }
       }
 
-      await markPartCompleted(auth, { course_id: courseId, section_id: sectionId, part_key: partKey });
-
-      const deck = readDeck(course) || [];
-      const partRows = await fetchPartRows(auth);
-      if (courseFullyComplete(courses, course, deck, partRows)) {
-        await markCourseComplete(auth, courseId);
+      // تحديث موقع الاستئناف (منخفض الأهمية — لا يكسر الرد إن فشل).
+      if (pos) {
+        try {
+          await savePosition(auth, {
+            course_id: courseId,
+            section_id: pos.section_id || sectionId,
+            slide_index: pos.slide_index,
+            mode: pos.mode
+          });
+        } catch (err) {
+          console.error('course-progress savePosition error:', err.message);
+        }
       }
 
+      if (!partRows) partRows = await fetchPartRows(auth);
       const courseRows = await fetchCourseRows(auth);
-      sendJson(res, 200, buildState(courses, courseRows, partRows));
+      const state = buildState(courses, courseRows, partRows);
+      state.positions = await fetchPositions(auth);
+      sendJson(res, 200, state);
       return;
     } catch (err) {
       console.error('course-progress POST error:', err);

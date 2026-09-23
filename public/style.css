@@ -1133,6 +1133,68 @@ main {
   font-size: 0.85rem;
 }
 
+/* شريط أقسام (لوحة التقدم الداخلية) */
+.course-sections-bar {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  padding: 0.15rem 0 0.9rem;
+  margin-bottom: 0.5rem;
+  scrollbar-width: thin;
+}
+
+.course-sections-bar::-webkit-scrollbar { height: 6px; }
+.course-sections-bar::-webkit-scrollbar-thumb { background: #c3cfdd; border-radius: 3px; }
+
+.course-section-chip {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #eef2f6;
+  border: 1px solid #dde5ee;
+  border-radius: 20px;
+  padding: 0.28rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #3a4a5e;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.course-section-chip:hover { border-color: #2a6db5; color: #16213e; }
+
+.course-section-chip .chip-num {
+  line-height: 1;
+}
+
+.course-section-chip .chip-state {
+  background: #d5e3f5;
+  color: #1f5390;
+  border-radius: 10px;
+  padding: 0.05rem 0.4rem;
+  font-size: 0.7rem;
+}
+
+.course-section-chip.current {
+  background: #2a6db5;
+  border-color: #2a6db5;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(42, 109, 181, 0.35);
+}
+
+.course-section-chip.current .chip-state { background: #eaf3fd; color: #16213e; }
+
+.course-section-chip.done { border-color: #3f9d6e; background: #e8f5ee; color: #2f7d58; }
+
+.course-section-chip.done .chip-state { background: #3f9d6e; color: #fff; }
+
+.course-section-chip.done.current {
+  background: linear-gradient(135deg, #3f9d6e, #2f7d58);
+  border-color: #2f7d58;
+  color: #fff;
+}
+
 .course-content {
   background: #fff;
   border-radius: 14px;

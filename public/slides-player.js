@@ -172,9 +172,9 @@
     }
     current.container.appendChild(card);
 
-    // كل شريحة تُعرض تُبلَّغ كمقطع/جزء مكتمل (يستخدمه course.js لحفظ التقدم).
+    // كل شريحة تُعرض تُبلَّغ كمقطع/جزء مكتمل (يستخدمه course.js لحفظ التقدم والموقع).
     if (slideProgressHandler && slide && slide.id) {
-      slideProgressHandler(current.sectionIdx, slide.id);
+      slideProgressHandler(current.sectionIdx, current.slideIdx, slide.id);
     }
 
     current.container.scrollIntoView({ block: 'start' });
@@ -182,8 +182,9 @@
 
   /* ---------- واجهة عامة ---------- */
 
-  /* يعرض شرائح قسم معيّن (index صفري) داخل الحاوية المرسلة. */
-  function playSection(container, slug, sectionIdx) {
+  /* يعرض شرائح قسم معيّن (index صفري) داخل الحاوية المرسلة.
+   * initialSlide: فهرس شريحة بداية غير الصفر (لاستئناف الموقع المحفوظ). */
+  function playSection(container, slug, sectionIdx, initialSlide) {
     current.container = container;
     current.slug = slug;
     current.sectionIdx = sectionIdx;
@@ -193,9 +194,13 @@
       container.innerHTML = '<p>لا تتوفر شرائح لهذا الكورس.</p>';
       return;
     }
-    if (!deck.sections[sectionIdx] || !deck.sections[sectionIdx].slides.length) {
+    var section = deck.sections[sectionIdx];
+    if (!section || !section.slides.length) {
       container.innerHTML = '<p>لا توجد شرائح لهذا القسم.</p>';
       return;
+    }
+    if (initialSlide != null) {
+      current.slideIdx = Math.max(0, Math.min(Number(initialSlide) || 0, section.slides.length - 1));
     }
     renderCard(deck);
   }
@@ -205,7 +210,12 @@
     current.slideIdx = 0;
   }
 
-  /* مسجّل تقدم: fn(sectionIdx, slideId) يُستدعى عند كل شريحة تُعرض. */
+  /* الموقع الحالي { sectionIdx, slideIdx } — يستخدمه course.js لحفظ الاستئناف. */
+  function getPos() {
+    return { sectionIdx: current.sectionIdx, slideIdx: current.slideIdx };
+  }
+
+  /* مسجّل تقدم: fn(sectionIdx, slideIdx, slideId) يُستدعى عند كل شريحة تُعرض. */
   function setSlideProgressHandler(fn) {
     slideProgressHandler = typeof fn === 'function' ? fn : null;
   }
@@ -215,6 +225,7 @@
     hasDeck: hasDeck,
     playSection: playSection,
     reset: reset,
+    getPos: getPos,
     setSlideProgressHandler: setSlideProgressHandler
   };
 })();
