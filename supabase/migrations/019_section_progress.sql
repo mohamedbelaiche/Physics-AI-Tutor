@@ -11,6 +11,11 @@
 -- ملاحظة: لا نعتمد على auth.setSession هنا (يفشل بصمت في supabase-js v2)
 -- بل نستدعي PostgREST مباشرةً بالتوكن الفعلي — تمامًا كما في
 -- api/course-progress.js و api/supabase-server.js (نمط chat.js).
+--
+-- التصحيح على النسخة السابقة (part_id → part_key):
+--   - اسم العمود بات part_key ليطابق api/course-progress.js.
+--   - المرجع الخارجي أصبح auth.users(id) بدل public.profiles(user_id)
+--     (العمود user_id غير موجود في profiles).
 -- ============================================================
 
 -- 1) منح أذونات الدور authenticated أولاً (قبل إنشاء RLS)
@@ -18,13 +23,13 @@ grant usage on schema public to authenticated;
 
 -- 2) جدول تقدم المقاطع/الأجزاء
 create table if not exists public.section_progress (
-  user_id uuid not null references public.profiles (user_id) on delete cascade,
+  user_id uuid not null references auth.users (id) on delete cascade,
   course_id text not null,
   section_id text not null,
-  part_id text not null,
+  part_key text not null,
   completed_at timestamptz,
   updated_at timestamptz not null default now(),
-  primary key (user_id, course_id, section_id, part_id)
+  primary key (user_id, course_id, section_id, part_key)
 );
 
 create index if not exists section_progress_user_idx

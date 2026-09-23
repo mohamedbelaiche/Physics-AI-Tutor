@@ -3,10 +3,16 @@
  *
  * متابعة تقدّم الكورسات (المقاطع والأجزاء) — Supabase via PostgREST + RLS.
  *
- * البنية (النموذج الجديد المعتمد):
+ * البنية (النموذج المعتمد):
  *   - كل الكورسات مفتوحة — لا تسلسل ولا قفل على مستوى الكورسات.
  *   - داخل الكورس: مقاطع (sections)، وكل مقطع أجزاء (parts) تُجتاز بأي ترتيب.
- *   - الجداول: course_progress (للكورس ككل) + section_progress (لكل جزء).
+ *   - الجداول: course_progress (لكورس ككلي) + section_progress (لكل جزء).
+ *
+ * أجزاء المقطع:
+ *   - إن وُجد deck شرائح للكورس (public/course/slides/<slug>/index.json) كان
+ *     كل شريحة من مقاطعه جزءًا (slide id)، ويُكمل المقطع بتصفح كل الشرائح
+ *     أو بتسجيل علامة إتمام («text» في وضع النص أو «slides.complete»).
+ *   - وإن لم يوجد deck كان المقطع جزءًا واحدًا («text»).
  *
  * GET  /api/course/progress -> { courses: [ { id, title_ar, completed,
  *                              completedSections, totalSections,
@@ -18,43 +24,81 @@
 
 const fs = require('fs');
 const path = require('path');
-const { requireUser, getSupabaseConfig, postgrestHeaders } = require('./supabase-server');
+const { requireUser, getSupabaseConfig } = require('./supabase-server');
 
 const ROOT = path.join(__dirname, '..');
-const COURSE_PATH = path.join(ROOT, 'public', 'courseData.json');
+const COURSE_JSON_PATH = path.join(ROOT, 'public', 'course', 'course.json');
+const SLIDES_DIR = path.join(ROOT, 'public', 'course', 'slides');
+
+// علامات تدل على إتمام المقطع كاملًا في وضع النص أو الشرائح.
+const COMPLETE_MARKERS = ['text', 'slides.complete'];
+
+// مفتاح مقطع ثابت يطابق ما ترسله الواجهة (num رقمي بنص).
+function sectionKey(section) {
+  return String(section && section.num != null ? section.num : (section.title || ''));
+}
 
 function readCourses() {
   try {
-    const raw = fs.readFileSync(COURSE_PATH, 'utf8');
-    const parsed = JSON.parse(raw);
-    return (parsed && Array.isArray(parsed.courses)) ? parsed.courses : [];
+    const data = JSON.parse(fs.readFileSync(COURSE_JSON_PATH, 'utf8'));
+    return (data && Array.isArray(data.courses)) ? data.courses : [];
   } catch (err) {
-    console.error('course-progress: failed to read courseData.json:', err.message);
+    console.error('course-progress: failed to read course.json:', err.message);
     return [];
   }
+}
+
+// قراءة deck الشرائح (إن وُجد) لتحديد أجزاء كل مقطع.
+function readDeck(course) {
+  const slug = course && (course.slug || course.id);
+  if (!slug) return null;
+  try {
+    const raw = fs.readFileSync(path.join(SLIDES_DIR, slug, 'index.json'), 'utf8');
+    const parsed = JSON.parse(raw);
+    if (!parsed || !Array.isArray(parsed.sections)) return null;
+    return parsed.sections.map(function (s) {
+      return {
+        num: s.num,
+        slideIds: Array.isArray(s.slides)
+          ? s.slides.map(function (sl) { return sl.id; }).filter(Boolean)
+          : []
+      };
+    });
+  } catch (err) {
+    return null;
+  }
+}
+
+// رأس PostgREST: apikey + توكن المستخدم الفعلي حتى تحترم RLS.
+function postgrestHeaders(auth) {
+  const { anonKey } = getSupabaseConfig();
+  return {
+    apikey: anonKey,
+    Authorization: 'Bearer ' + auth.token
+  };
 }
 
 function userQuery(auth) {
   return 'user_id=eq.' + encodeURIComponent(auth.userId);
 }
 
-function shortUserQuery(auth) {
-  return userQuery(auth);
+// الأجزاء المطلوبة لإكمال مقطع: أجزاء الشرائح إن وُجدت، وإلا «text».
+function sectionPartPlan(section, deckSection) {
+  const required = (deckSection && deckSection.slideIds.length)
+    ? deckSection.slideIds.slice()
+    : ['text'];
+  return { required: required, total: Math.max(1, required.length) };
 }
 
-function countParts(section) {
-  if (section && Array.isArray(section.parts)) return section.parts.length;
-  const ids = (section && section.content_md || '')
-    .split('\n')
-    .filter(function (line) {
-      return /^(#{2,4})\s/.test(line) || /\d+\.\s*(تمرين|مثال|نشاط|مسألة)/.test(line);
-    });
-  return Math.max(1, ids.length);
+function isSectionComplete(plan, recordedKeys) {
+  const rec = new Set(recordedKeys);
+  if (recordedKeys.some(function (k) { return COMPLETE_MARKERS.indexOf(k) !== -1; })) return true;
+  return plan.required.every(function (k) { return rec.has(k); });
 }
 
 async function fetchCourseRows(auth) {
   const { url } = getSupabaseConfig();
-  const qs = 'select=course_id,status,completed_at&' + shortUserQuery(auth);
+  const qs = 'select=course_id,status,completed_at&' + userQuery(auth);
   const res = await fetch(url + '/rest/v1/course_progress?' + qs, {
     headers: postgrestHeaders(auth)
   });
@@ -65,7 +109,7 @@ async function fetchCourseRows(auth) {
 
 async function fetchPartRows(auth) {
   const { url } = getSupabaseConfig();
-  const qs = 'select=course_id,section_id,part_key,completed_at&' + shortUserQuery(auth);
+  const qs = 'select=course_id,section_id,part_key,completed_at&' + userQuery(auth);
   const res = await fetch(url + '/rest/v1/section_progress?' + qs, {
     headers: postgrestHeaders(auth)
   });
@@ -97,7 +141,7 @@ async function markPartCompleted(auth, data) {
   if (!res.ok) throw new Error('POST section_progress: ' + res.status);
 }
 
-async function copyCourseComplete(auth, courseId) {
+async function markCourseComplete(auth, courseId) {
   const { url } = getSupabaseConfig();
   const body = {
     user_id: auth.userId,
@@ -119,52 +163,54 @@ async function copyCourseComplete(auth, courseId) {
   if (!res.ok) throw new Error('POST course_progress: ' + res.status);
 }
 
-function buildState(courses, courseRows, partRows, helper) {
+function buildState(courses, courseRows, partRows) {
   const flagged = {};
-  courseRows.forEach(function (row) {
-    if (row.status === 'completed') flagged[row.course_id] = true;
+  courseRows.forEach(function (r) {
+    if (r.status === 'completed') flagged[r.course_id] = true;
   });
 
   const byCourse = {};
-  partRows.forEach(function (row) {
-    if (!row.course_id) return;
-    byCourse[row.course_id] = byCourse[row.course_id] || [];
-    byCourse[row.course_id].push(row);
+  partRows.forEach(function (r) {
+    if (!r.course_id) return;
+    (byCourse[r.course_id] = byCourse[r.course_id] || []).push(r);
   });
 
-  const result = courses.map(function (course) {
-    const courseId = String(course.id || course.slug);
-    const bySection = {};
+  const decks = courses.map(readDeck);
 
-    (byCourse[courseId] || []).forEach(function (row) {
-      bySection[row.section_id] = bySection[row.section_id] || [];
-      bySection[row.section_id].push(row.part_key);
+  const result = courses.map(function (course, ci) {
+    const courseId = String(course.id || course.slug);
+    const rows = byCourse[courseId] || [];
+    const deckSections = decks[ci] || [];
+
+    const bySection = {};
+    rows.forEach(function (r) {
+      (bySection[r.section_id] = bySection[r.section_id] || []).push(r);
     });
 
     const sections = (course.sections || []).map(function (section) {
-      const sid = String(section.id != null ? section.id : section.title || section.num || '');
-      const done = bySection[sid] || [];
-      const keys = done.map(function (key) {
-        return { key: key, completed: true };
-      });
-      const total = (section.parts && section.parts.length) || 1;
-      const completed = done.length >= total;
+      const sid = sectionKey(section);
+      const rec = bySection[sid] || [];
+      const recorded = rec.map(function (r) { return r.part_key; });
+      const deckSection = deckSections.find(function (d) { return String(d.num) === sid; });
+      const plan = sectionPartPlan(section, deckSection);
+      const completed = isSectionComplete(plan, recorded);
+      const parts = rec.map(function (r) { return { key: r.part_key, completed: true }; });
       return {
         id: sid,
         title: section.title,
-        parts: keys,
-        parts_total: total,
-        completed: !!completed,
-        status: completed ? 'completed' : (done.length ? 'in_progress' : 'open')
+        parts: parts,
+        parts_total: plan.total,
+        completed: completed,
+        status: completed ? 'completed' : (rec.length ? 'in_progress' : 'open')
       };
     });
 
     const completedSections = sections.filter(function (s) { return s.completed; }).length;
-    const allDone = completedSections === sections.length;
+    const allDone = sections.length > 0 && completedSections === sections.length;
 
     return {
       id: courseId,
-      title_ar: course.title_ar || course.title_ar_ || course.title || '',
+      title_ar: course.title_ar || course.title || '',
       completed: !!flagged[courseId] || allDone,
       sections: sections,
       completedSections: completedSections,
@@ -173,10 +219,9 @@ function buildState(courses, courseRows, partRows, helper) {
     };
   });
 
-  const completedCourses = result.filter(function (c) { return c.completed; });
   return {
     courses: result,
-    completedCount: completedCourses.length,
+    completedCount: result.filter(function (c) { return c.completed; }).length,
     total: result.length,
     coursesOpenedAt: null
   };
@@ -187,7 +232,38 @@ function sendJson(res, code, payload) {
   res.end(JSON.stringify(payload));
 }
 
-/* ---------- ما ذكرناه عن الوصول: كل الكورسات مفيدة ---------- */
+async function readJsonBody(req) {
+  return new Promise(function (resolve, reject) {
+    let body = '';
+    req.on('data', function (chunk) {
+      body += chunk;
+      if (body.length > 1e6) req.destroy();
+    });
+    req.on('end', function () {
+      try {
+        resolve(body ? JSON.parse(body) : {});
+      } catch (err) {
+        reject(err);
+      }
+    });
+  });
+}
+
+// هل كل مقاطع الكورس مكتملة بعد تسجيل جزء جديد؟
+function courseFullyComplete(courses, course, deck, partRows) {
+  const courseId = String(course.id || course.slug);
+  const all = partRows.filter(function (r) { return String(r.course_id) === courseId; });
+  const bySection = {};
+  all.forEach(function (r) {
+    (bySection[r.section_id] = bySection[r.section_id] || []).push(r.part_key);
+  });
+  return (course.sections || []).every(function (section) {
+    const sid = sectionKey(section);
+    const deckSection = deck.find(function (d) { return String(d.num) === sid; });
+    const plan = sectionPartPlan(section, deckSection);
+    return isSectionComplete(plan, bySection[sid] || []);
+  });
+}
 
 async function handler(req, res) {
   const auth = await requireUser(req, res);
@@ -208,17 +284,9 @@ async function handler(req, res) {
   }
 
   if (req.method === 'POST') {
-    let data = {};
+    let data;
     try {
-      const raw = await new Promise(function (resolve, reject) {
-        let body = '';
-        req.on('data', function (chunk) { body += chunk; });
-        req.on('end', function () {
-          try { resolve(body ? JSON.parse(body) : {}); }
-          catch (err) { reject(err); }
-        });
-      });
-      data = raw || {};
+      data = await readJsonBody(req);
     } catch (err) {
       sendJson(res, 400, { error: 'جسم الطلب غير صالح: ' + err.message });
       return;
@@ -234,44 +302,32 @@ async function handler(req, res) {
     }
 
     try {
-      await markPartCompleted(auth, { course_id: courseId, section_id: sectionId, part_key: partKey });
-
       const courses = readCourses();
       const course = courses.find(function (c) {
         return String(c.id || c.slug) === courseId;
       });
-      let markCourse = false;
-      if (course) {
-        const section = (course.sections || []).find(function (s) {
-          return String(s.id != null ? s.id : s.title || s.num || '') === sectionId;
-        });
-        if (section) {
-          const total = (section.parts && section.parts.length) || 1;
-          const partRows = await fetchPartRows(auth);
-          const doneCount = partRows.filter(function (r) {
-            return String(r.course_id) === courseId && String(r.section_id) === sectionId;
-          }).length;
-          const allSectionsDone = (course.sections || []).every(function (s) {
-            const sid = String(s.id != null ? s.id : s.title || s.num || '');
-            const sTotal = (s.parts && s.parts.length) || 1;
-            const sDone = partRows.filter(function (r) {
-              return String(r.course_id) === courseId && String(r.section_id) === sid;
-            }).length;
-            return sDone >= sTotal;
-          });
-          if (allSectionsDone) markCourse = true;
-          void total; void doneCount;
-        }
+      if (!course) {
+        sendJson(res, 400, { error: 'كورس غير معروف.' });
+        return;
+      }
+      const section = (course.sections || []).find(function (s) {
+        return sectionKey(s) === sectionId;
+      });
+      if (!section) {
+        sendJson(res, 400, { error: 'مقطع غير معروف.' });
+        return;
       }
 
-      if (markCourse) {
-        await copyCourseComplete(auth, courseId);
+      await markPartCompleted(auth, { course_id: courseId, section_id: sectionId, part_key: partKey });
+
+      const deck = readDeck(course) || [];
+      const partRows = await fetchPartRows(auth);
+      if (courseFullyComplete(courses, course, deck, partRows)) {
+        await markCourseComplete(auth, courseId);
       }
 
       const courseRows = await fetchCourseRows(auth);
-      const partRows = await fetchPartRows(auth);
-      const allCourses = readCourses();
-      sendJson(res, 200, buildState(allCourses, courseRows, partRows));
+      sendJson(res, 200, buildState(courses, courseRows, partRows));
       return;
     } catch (err) {
       console.error('course-progress POST error:', err);
@@ -284,4 +340,3 @@ async function handler(req, res) {
 }
 
 module.exports = handler;
-module.exports.default = handler;

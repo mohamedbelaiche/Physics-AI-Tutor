@@ -16,6 +16,7 @@
     container: null,
     deck: null
   };
+  var slideProgressHandler = null;
 
   function cacheBust(url) {
     return url + (url.indexOf('?') === -1 ? '?' : '&') + 'r=' + Date.now();
@@ -161,6 +162,8 @@
 
   function renderCard(deck) {
     if (!current.container || !deck) return;
+    var section = deck.sections[current.sectionIdx];
+    var slide = section && section.slides[current.slideIdx] ? section.slides[current.slideIdx] : null;
     current.container.innerHTML = '';
     var card = buildSlideCard(deck);
     if (!card) {
@@ -168,6 +171,12 @@
       return;
     }
     current.container.appendChild(card);
+
+    // كل شريحة تُعرض تُبلَّغ كمقطع/جزء مكتمل (يستخدمه course.js لحفظ التقدم).
+    if (slideProgressHandler && slide && slide.id) {
+      slideProgressHandler(current.sectionIdx, slide.id);
+    }
+
     current.container.scrollIntoView({ block: 'start' });
   }
 
@@ -196,10 +205,16 @@
     current.slideIdx = 0;
   }
 
+  /* مسجّل تقدم: fn(sectionIdx, slideId) يُستدعى عند كل شريحة تُعرض. */
+  function setSlideProgressHandler(fn) {
+    slideProgressHandler = typeof fn === 'function' ? fn : null;
+  }
+
   window.SlidesPlayer = {
     loadDeck: loadDeck,
     hasDeck: hasDeck,
     playSection: playSection,
-    reset: reset
+    reset: reset,
+    setSlideProgressHandler: setSlideProgressHandler
   };
 })();

@@ -45,6 +45,37 @@
       .replace(/"/g, '&quot;');
   }
 
+  /* ---------- مفاتيح المقاطع وتسجيل الأجزاء ---------- */
+
+  // مفتاح مقطع ثابت (num) يطابق ما يتوقعه الخادم.
+  function sectionKey(section) {
+    return String(section && section.num != null ? section.num : (section.title || ''));
+  }
+
+  // جزء الإتمام حسب الوضع: «text» للنص، «slides.complete» للشرائح.
+  function currentPartKey() {
+    return currentMode === 'slides' ? 'slides.complete' : 'text';
+  }
+
+  // يسجّل إتمام جزء عند الخادم (بدون حظر). الزائر بدون حساب لا يسجّل شيئًا.
+  function postPart(course, sectionIdx, partKey) {
+    if (!isLoggedIn() || !course || !course.sections[sectionIdx]) return Promise.resolve();
+    return getToken().then(function (token) {
+      return fetch('/api/course/progress', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token
+        },
+        body: JSON.stringify({
+          course_id: course.id,
+          section_id: sectionKey(course.sections[sectionIdx]),
+          part_key: partKey
+        })
+      });
+    }).catch(function () { /* التقدم ثانوي — نفشل بصمت */ });
+  }
+
   /* ---------- التبويبات ---------- */
 
   function setTab(active) {
@@ -404,7 +435,12 @@
     } else {
       next = makeNavBtn('التالي ←', {
         primary: true,
-        onClick: function () { currentSectionIdx++; renderLesson(); }
+        onClick: function () {
+          // يُسجَّل الجزء الحالي عندما يتركه التلميذ إلى المقطع التالي.
+          postPart(course, currentSectionIdx, currentPartKey());
+          currentSectionIdx++;
+          renderLesson();
+        }
       });
     }
     lessonNav.appendChild(next);
@@ -421,26 +457,23 @@
       showLessonNote('سجّل الدخول أولاً لحفظ تقدمك وإتمام الكورسات.', 'error');
       return;
     }
-    getToken().then(function (token) {
-      return fetch('/api/course/progress', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token
-        },
-        body: JSON.stringify({
-          course_id: course.id,
-          section_id: course.sections[currentSectionIdx] ? course.sections[currentSectionIdx].id : null,
-          part_key: 'text'
-        })
-      });
-    })
+    // يسجّل الجزء الأخير، وقد يرد الخادم بإتمام الكورس إذا اكتملت كل المقاطع.
+    postPart(course, currentSectionIdx, currentPartKey())
       .then(function (res) { return res.json(); })
       .then(function (data) {
-        if (data && data.status === 'completed') {
+        var rec = data && data.courses
+          ? data.courses.find(function (c) { return String(c.id) === String(course.id); })
+          : null;
+        if (rec && rec.completed) {
           return loadProgress().then(function () { showSuccess(course); });
         }
-        showLessonNote(data.error || 'تعذر إتمام الكورس.', 'error');
+        var done = rec ? rec.completedSections : 0;
+        var total = rec ? rec.totalSections : 0;
+        showLessonNote(
+          (data && data.error) ||
+            'ما تزال بعض المقاطع غير مكتملة (' + done + ' من ' + total + '). أتمم كل مقاطع الكورس.',
+          'error'
+        );
       })
       .catch(function (err) {
         showLessonNote('تعذر الاتصال بالخادم: ' + err.message, 'error');
@@ -500,6 +533,15 @@
   /* ---------- Boot ---------- */
 
   function init() {
+    // في وضع الشرائح: كل شريحة تُعرض = جزء مكتمل (part_key = slide.id).
+    if (window.SlidesPlayer) {
+      window.SlidesPlayer.setSlideProgressHandler(function (sectionIdx, slideId) {
+        if (!isLoggedIn() || !currentCourseId) return;
+        var course = getCourse(currentCourseId);
+        if (!course || !course.sections[sectionIdx]) return;
+        postPart(course, sectionIdx, slideId);
+      });
+    }
     if (window.AppAuth) {
       window.AppAuth.onAuth(function () {
         loadProgress().then(function () { renderDashboard(); });
