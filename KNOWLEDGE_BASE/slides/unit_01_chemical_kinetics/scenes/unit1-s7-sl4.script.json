@@ -1,0 +1,27 @@
+{
+  "slide_id": "unit1-s7-sl4",
+  "viewBox": "0 0 640 360",
+  "intent": "إظهار أن ميل المماس لمنحنى x(t) يعطي السرعة اللحظية v(t)، والأعظمية عند البداية",
+  "elements": [
+    { "id": "axisX", "role": "axis", "desc": "محور الزمن t", "x1": 80, "y1": 280, "x2": 580, "y2": 280, "color": "#16213e" },
+    { "id": "axisY", "role": "axis", "desc": "محور التقدم x", "x1": 80, "y1": 280, "x2": 80, "y2": 50, "color": "#16213e" },
+    { "id": "curve", "role": "object", "desc": "منحنى x(t)", "d": "M80 270 C 200 120, 340 80, 580 70", "color": "#2a6db5" },
+    { "id": "tangent", "role": "arrow", "desc": "المماس عند t₁", "x1": 120, "y1": 250, "x2": 300, "y2": 120, "color": "#3f9d6e" }
+  ],
+  "animation": "SMIL",
+  "timing": { "dur": "3s", "delay": "0.5s", "repeat": "none" },
+  "motion": [
+    { "target": "curve", "attr": "stroke-dashoffset", "from": 600, "to": 0 },
+    { "target": "tangent", "attr": "opacity", "from": 0, "to": 1 }
+  ],
+  "labels": [
+    { "id": "lblV", "text": "v(t) = dx/dt", "x": 310, "y": 110 },
+    { "id": "lblMax", "text": "v أعظمي عند t₀", "x": 95, "y": 45 }
+  ],
+  "steps": [
+    "المنحنى x(t) يرتفع بسرعة كبيرة في البداية",
+    "ميل المماس عند نقطة ما = السرعة اللحظية v(t)",
+    "مع تقدم التفاعل يقل الميل حتى ينعدم (v → 0)"
+  ],
+  "notes": "رسم المنحنى stroke-dasharray/offset (رسم ذاتي)، ثم إظهار المماس بنقطته وسرعة تناقصه."
+}

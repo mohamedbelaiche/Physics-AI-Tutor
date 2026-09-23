@@ -23,6 +23,12 @@
     </header>
 
   <main>
+    <nav class="view-tabs" aria-label="اختيار القسم">
+      <button id="tab-summaries" class="tab-btn active" type="button">الملخصات</button>
+      <button id="tab-courses" class="tab-btn" type="button">الكورسات</button>
+    </nav>
+
+    <div id="summaries-group" class="view-group">
     <section id="home-view" class="view">
       <h2 class="section-title">اختر الوحدة</h2>
       <div id="units-container" class="cards-grid">
@@ -52,6 +58,38 @@
         <a id="pdf-open-original" class="pdf-open-original hidden" target="_blank" rel="noopener">فتح الملف الأصلي</a>
       </div>
     </section>
+    </div><!-- /summaries-group -->
+
+    <div id="courses-group" class="view-group hidden">
+      <section id="course-dashboard-view" class="view">
+        <h2 class="section-title">كورسات منظمة</h2>
+        <p id="course-intro" class="course-intro">خمسة كورسات مرتبة — أتبع المستوى وأكمل كل كورس لتفتح الذي يليه. تقدمك محفوظ عند تسجيل الدخول.</p>
+        <div id="course-gate" class="gate-banner hidden">
+          سجّل الدخول من الزر أعلى الصفحة لحفظ تقدمك وإتمام الكورسات بالترتيب. في وضع الزائر يمكنك تصفح كورس واحد فقط.
+        </div>
+        <div id="course-overall-wrap" class="course-overall-wrap hidden">
+          <div class="course-overall-label">
+            <span>التقدم الكلي في المسار</span>
+            <span id="course-overall-count"></span>
+          </div>
+          <div class="course-overall-bar"><div id="course-overall-fill"></div></div>
+        </div>
+        <div id="course-cards" class="cards-grid">
+          <p id="course-loading">جاري تحميل الكورسات...</p>
+        </div>
+      </section>
+
+      <section id="course-lesson-view" class="view hidden">
+        <button id="course-lesson-back" class="back-btn">→ العودة إلى الكورسات</button>
+        <div id="course-lesson-head" class="course-lesson-head"></div>
+        <div id="course-lesson-mode" class="lesson-mode-switch hidden" role="tablist" aria-label="وضع العرض">
+          <button id="mode-text" class="mode-btn active" type="button" role="tab" aria-selected="true">النص</button>
+          <button id="mode-slides" class="mode-btn" type="button" role="tab" aria-selected="false">الشرائح التفاعلية</button>
+        </div>
+        <div id="course-lesson-body" class="course-content lesson-content"></div>
+        <div id="course-lesson-nav" class="course-lesson-nav"></div>
+      </section>
+    </div><!-- /courses-group -->
 
     </main>
 
@@ -131,6 +169,10 @@
   <script src="vendor/supabase.js"></script>
   <script src="supabase-config.js"></script>
   <script src="auth.js"></script>
+  <script src="vendor/marked.min.js"></script>
+  <script src="md-render.js"></script>
+  <script src="slides-player.js"></script>
+  <script src="course.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" font-family="Segoe UI, Tahoma, Arial, sans-serif">
+  <title>سرعة التفاعل: ميل المماس للـمنحنى x(t)</title>
+  <desc>منحنى التقدم بدلالة الزمن؛ السرعة اللحظية هي ميل المماس، وهي أعظمية عند البداية وتتلاشى قرب النهاية.</desc>
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      svg * { animation: none !important; transition: none !important; }
+    }
+  </style>
+  <rect x="6" y="6" width="628" height="348" rx="16" fill="#f4f8fc" stroke="#d5e4f2" stroke-width="2"/>
+
+  <!-- المحاور -->
+  <line x1="90" y1="310" x2="600" y2="310" stroke="#16213e" stroke-width="3"/>
+  <line x1="90" y1="310" x2="90" y2="50" stroke="#16213e" stroke-width="3"/>
+  <path d="M 600 310 L 588 301 M 600 310 L 588 319" stroke="#16213e" stroke-width="3"/>
+  <path d="M 90 50 L 81 62 M 90 50 L 99 62" stroke="#16213e" stroke-width="3"/>
+  <text x="608" y="316" font-size="16" fill="#16213e">t</text>
+  <text x="60" y="55" font-size="16" fill="#16213e" text-anchor="middle">x</text>
+
+  <!-- المنحنى x(t) -->
+  <path id="curve" d="M 100 305 C 260 190, 420 130, 590 75" fill="none" stroke="#2a6db5" stroke-width="4" stroke-dasharray="600" stroke-dashoffset="600">
+    <animate attributeName="stroke-dashoffset" values="600;0" dur="2.5s" fill="freeze" calcMode="spline" keySplines="0 0 0.58 1"/>
+  </path>
+
+  <!-- نقطتان: عند البداية وفي النهاية -->
+  <circle cx="217" cy="222" r="9" fill="#e63946">
+    <animate attributeName="opacity" values="0;1" begin="2.6s" dur="0.4s" fill="freeze"/>
+  </circle>
+  <circle cx="520" cy="100" r="9" fill="#3f9d6e">
+    <animate attributeName="opacity" values="0;1" begin="2.8s" dur="0.4s" fill="freeze"/>
+  </circle>
+
+  <!-- المماس عند البداية (انحدار كبير) -->
+  <line id="tan1" x1="140" y1="275" x2="300" y2="195" stroke="#e63946" stroke-width="3" stroke-dasharray="8 6" opacity="0">
+    <animate attributeName="opacity" values="0;1" begin="2.6s" dur="0.6s" fill="freeze"/>
+  </line>
+  <text id="lblTangStart" x="150" y="300" font-size="15" fill="#e63946" opacity="0">
+    ميل المماس أعظمي عند t=0
+    <animate attributeName="opacity" values="0;1" begin="3.2s" dur="0.5s" fill="freeze"/>
+  </text>
+  <text id="lblVbig" x="185" y="165" font-size="17" font-weight="bold" fill="#e63946" text-anchor="middle" opacity="0">
+    v = v_max
+    <animate attributeName="opacity" values="0;1" begin="3.6s" dur="0.5s" fill="freeze"/>
+  </text>
+
+  <!-- المماس عند النهاية (انحدار صغير) -->
+  <line id="tan2" x1="440" y1="145" x2="580" y2="75" stroke="#3f9d6e" stroke-width="3" stroke-dasharray="8 6" opacity="0">
+    <animate attributeName="opacity" values="0;1" begin="3s" dur="0.6s" fill="freeze"/>
+  </line>
+  <text id="lblVnone" x="520" y="60" font-size="16" font-weight="bold" fill="#3f9d6e" text-anchor="middle" opacity="0">
+    v → 0 قرب النهاية
+    <animate attributeName="opacity" values="0;1" begin="3.6s" dur="0.5s" fill="freeze"/>
+  </text>
+
+  <!-- الصيغة -->
+  <text x="320" y="345" text-anchor="middle" font-size="19" font-weight="bold" fill="#16213e">v(t) = dx/dt  و  v_vol = (1/V)·v</text>
+</svg>

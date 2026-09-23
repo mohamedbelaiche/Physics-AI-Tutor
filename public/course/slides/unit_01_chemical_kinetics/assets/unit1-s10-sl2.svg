@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" font-family="Segoe UI, Tahoma, Arial, sans-serif">
+  <title>العوامل الحركية: درجة الحرارة</title>
+  <desc>رفع درجة الحرارة يزيد سرعة التفاعل، فيصبح المنحنى أشد انحدارًا ويقل زمن نصف التفاعل t₁/₂.</desc>
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      svg * { animation: none !important; transition: none !important; }
+    }
+  </style>
+  <rect x="6" y="6" width="628" height="348" rx="16" fill="#f4f8fc" stroke="#d5e4f2" stroke-width="2"/>
+
+  <!-- المحاور -->
+  <line x1="90" y1="310" x2="600" y2="310" stroke="#16213e" stroke-width="3"/>
+  <line x1="90" y1="310" x2="90" y2="50" stroke="#16213e" stroke-width="3"/>
+  <path d="M 600 310 L 588 301 M 600 310 L 588 319" stroke="#16213e" stroke-width="3"/>
+  <text x="608" y="316" font-size="16" fill="#16213e">t</text>
+  <text x="60" y="55" font-size="16" fill="#16213e" text-anchor="middle">x</text>
+
+  <!-- خط x_max المشترك -->
+  <line x1="90" y1="85" x2="590" y2="85" stroke="#16213e" stroke-width="2" stroke-dasharray="6 6"/>
+
+  <!-- الحرارة المنخفضة -->
+  <path id="lowT" d="M 90 305 C 280 250, 450 185, 590 95" fill="none" stroke="#2a6db5" stroke-width="4" stroke-dasharray="620" stroke-dashoffset="620">
+    <animate attributeName="stroke-dashoffset" values="620;0" dur="2s" fill="freeze" calcMode="spline" keySplines="0 0 0.58 1"/>
+  </path>
+  <text id="lblLow" x="500" y="150" font-size="17" font-weight="bold" fill="#2a6db5" text-anchor="end" opacity="0">
+    θ منخفضة
+    <animate attributeName="opacity" values="0;1" begin="2.2s" dur="0.4s" fill="freeze"/>
+  </text>
+  <text id="lblLowHalf" x="360" y="330" font-size="16" fill="#2a6db5" text-anchor="middle" opacity="0">
+    t₁/₂(θ1)
+    <animate attributeName="opacity" values="0;1" begin="2.8s" dur="0.4s" fill="freeze"/>
+  </text>
+
+  <!-- الحرارة المرتفعة -->
+  <path id="highT" d="M 90 305 C 260 180, 400 110, 590 88" fill="none" stroke="#e63946" stroke-width="4" stroke-dasharray="620" stroke-dashoffset="620">
+    <animate attributeName="stroke-dashoffset" values="620;0" begin="2s" dur="1.6s" fill="freeze" calcMode="spline" keySplines="0 0 0.58 1"/>
+  </path>
+  <text id="lblHigh" x="500" y="80" font-size="17" font-weight="bold" fill="#e63946" text-anchor="end" opacity="0">
+    θ مرتفعة
+    <animate attributeName="opacity" values="0;1" begin="3.8s" dur="0.4s" fill="freeze"/>
+  </text>
+  <text id="lblHighHalf" x="270" y="330" font-size="16" fill="#e63946" text-anchor="middle" opacity="0">
+    t₁/₂(θ2) &lt; t₁/₂(θ1)
+    <animate attributeName="opacity" values="0;1" begin="4.2s" dur="0.4s" fill="freeze"/>
+  </text>
+
+  <!-- النتيجة -->
+  <text x="320" y="350" text-anchor="middle" font-size="17" font-weight="bold" fill="#16213e" opacity="0">
+    θ يرتفع ⇒ v يزداد ⇒ t₁/₂ ينقص (التركيب النهائي لا يتغير)
+    <animate attributeName="opacity" values="0;1" begin="4.8s" dur="0.5s" fill="freeze"/>
+  </text>
+</svg>

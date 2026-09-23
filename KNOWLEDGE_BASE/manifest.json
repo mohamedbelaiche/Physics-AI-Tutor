@@ -1,21 +1,23 @@
 {
   "version": "1.0",
-  "generated_at": "2026-09-18T16:00:15.825Z",
+  "generated_at": "2026-09-23T17:54:24.960Z",
   "generator": "scripts/build-knowledge-base.js",
-  "total_items": 271,
+  "total_items": 285,
   "counts": {
     "by_type": {
       "concept": 34,
       "exercise": 117,
       "formula": 36,
       "lesson": 5,
+      "unknown": 14,
       "solution": 79
     },
     "by_status": {
       "verified": 88,
       "needs_review": 180,
       "uncertain": 1,
-      "extraction_failed": 2
+      "extraction_failed": 2,
+      "unknown": 14
     },
     "raw_files_total": 19,
     "raw_files_unique_by_hash": 18,
@@ -4291,7 +4293,120 @@
       "topic": "مكثفة + RL"
     }
   ],
-  "other_records": [],
+  "other_records": [
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_01_chemical_kinetics/sections/01.deck.md",
+      "unit": "unit1",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_01_chemical_kinetics/sections/02.deck.md",
+      "unit": "unit1",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_01_chemical_kinetics/sections/03.deck.md",
+      "unit": "unit1",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_01_chemical_kinetics/sections/04.deck.md",
+      "unit": "unit1",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_01_chemical_kinetics/sections/05.deck.md",
+      "unit": "unit1",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_01_chemical_kinetics/sections/06.deck.md",
+      "unit": "unit1",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_01_chemical_kinetics/sections/07.deck.md",
+      "unit": "unit1",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_01_chemical_kinetics/sections/08.deck.md",
+      "unit": "unit1",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_01_chemical_kinetics/sections/09.deck.md",
+      "unit": "unit1",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_01_chemical_kinetics/sections/10.deck.md",
+      "unit": "unit1",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_01_chemical_kinetics/sections/11.deck.md",
+      "unit": "unit1",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_01_chemical_kinetics/sections/12.deck.md",
+      "unit": "unit1",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_01_chemical_kinetics/sections/13.deck.md",
+      "unit": "unit1",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_01_chemical_kinetics/summary.md",
+      "unit": "unit1",
+      "title_ar": null,
+      "status": null
+    }
+  ],
   "bac_exams": [
     {
       "year": 2008,

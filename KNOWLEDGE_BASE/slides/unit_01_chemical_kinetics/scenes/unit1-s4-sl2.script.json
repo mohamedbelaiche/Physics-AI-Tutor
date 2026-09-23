@@ -1,0 +1,28 @@
+{
+  "slide_id": "unit1-s4-sl2",
+  "viewBox": "0 0 640 360",
+  "intent": "إظهار أن المتفاعل المحدّ (A) ينفد أولًا بينما يتبقى من B، وتحديد x_max بالأصغر",
+  "elements": [
+    { "id": "barA", "role": "bar", "desc": "كمية A المتبقية", "x": 120, "y": 60, "w": 120, "h": 200, "color": "#2a6db5" },
+    { "id": "barB", "role": "bar", "desc": "كمية B المتبقية", "x": 400, "y": 100, "w": 120, "h": 160, "color": "#3f9d6e" }
+  ],
+  "animation": "SMIL",
+  "timing": { "dur": "3s", "delay": "1s", "repeat": "none" },
+  "motion": [
+    { "target": "barA", "attr": "height", "from": 200, "to": 0 },
+    { "target": "barA", "attr": "y", "from": 60, "to": 260 },
+    { "target": "barB", "attr": "height", "from": 160, "to": 60 },
+    { "target": "barB", "attr": "y", "from": 100, "to": 200 }
+  ],
+  "labels": [
+    { "id": "lblA", "text": "A (محدّ)", "x": 180, "y": 45 },
+    { "id": "lblB", "text": "B (زائد)", "x": 460, "y": 85 },
+    { "id": "lblMax", "text": "x_max من عند A", "x": 320, "y": 300 }
+  ],
+  "steps": [
+    "A وB يتفاعلان حتى تنفد كمية A",
+    "B يتبقى لأن x_max محدد بالأصغر",
+    "نختار x_max = n₀(A)/a (القيمة الصغرى)"
+  ],
+  "notes": "الأعمدة تنزل تدريجيًا عبر SMIL؛ fill=freeze لاحتفاظها بالحالة النهائية عند x_max."
+}

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" font-family="Segoe UI, Tahoma, Arial, sans-serif">
+  <title>أصناف التحولات حسب المدة</title>
+  <desc>سريع يكتمل فورًا، بطيء خلال ثوانٍ إلى ساعات، بطيء جدًا خلال أيام إلى أشهر.</desc>
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      svg * { animation: none !important; transition: none !important; }
+    }
+  </style>
+  <rect x="6" y="6" width="628" height="348" rx="16" fill="#f4f8fc" stroke="#d5e4f2" stroke-width="2"/>
+
+  <!-- محور الزمن -->
+  <line x1="80" y1="290" x2="600" y2="290" stroke="#16213e" stroke-width="3"/>
+  <path d="M 600 290 L 588 281 M 600 290 L 588 299" stroke="#16213e" stroke-width="3"/>
+  <text x="620" y="295" font-size="16" fill="#16213e">t</text>
+
+  <!-- أشرطة النوع الأول: سريع (مدة قصيرة) -->
+  <text x="80" y="55" font-size="25" font-weight="bold" fill="#3f9d6e">سريع</text>
+  <rect id="fast" x="80" y="70" width="0" height="34" rx="6" fill="#3f9d6e">
+    <animate attributeName="width" values="0;110" dur="1.2s" fill="freeze" calcMode="spline" keySplines="0 0 0.58 1"/>
+  </rect>
+  <text x="220" y="95" font-size="15" fill="#16213e">لحظي (المدة ≃ 0)</text>
+
+  <!-- النوع الثاني: بطيء (مدة متوسطة) -->
+  <text x="80" y="135" font-size="25" font-weight="bold" fill="#2a6db5">بطيء</text>
+  <rect id="slow" x="80" y="150" width="0" height="34" rx="6" fill="#2a6db5">
+    <animate attributeName="width" values="0;300" dur="2s" begin="0.4s" fill="freeze" calcMode="spline" keySplines="0 0 0.58 1"/>
+  </rect>
+  <text x="400" y="175" font-size="15" fill="#16213e">من ثوانٍ إلى ساعات</text>
+
+  <!-- النوع الثالث: بطيء جدًا (مدة طويلة) -->
+  <text x="80" y="215" font-size="25" font-weight="bold" fill="#8a9bb0">بطيء جدًا</text>
+  <rect id="vslow" x="80" y="230" width="0" height="34" rx="6" fill="#8a9bb0">
+    <animate attributeName="width" values="0;480" dur="3s" begin="0.8s" fill="freeze" calcMode="spline" keySplines="0 0 0.58 1"/>
+  </rect>
+  <text x="580" y="255" font-size="15" fill="#16213e">أيام إلى أشهر</text>
+
+  <text x="320" y="330" text-anchor="middle" font-size="15" font-weight="bold" fill="#16213e">كلما طالت المدة لتصل للحالة النهائية، كان التحول أبطأ</text>
+</svg>

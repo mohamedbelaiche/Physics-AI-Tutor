@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" font-family="Segoe UI, Tahoma, Arial, sans-serif">
+  <title>زمن نصف التفاعل t₁/₂</title>
+  <desc>عند الزمن t₁/₂ يصل التقدم إلى نصف قيمته الأعظمية x_max/2 على منحنى x(t).</desc>
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      svg * { animation: none !important; transition: none !important; }
+    }
+  </style>
+  <rect x="6" y="6" width="628" height="348" rx="16" fill="#f4f8fc" stroke="#d5e4f2" stroke-width="2"/>
+
+  <!-- المحاور -->
+  <line x1="90" y1="310" x2="600" y2="310" stroke="#16213e" stroke-width="3"/>
+  <line x1="90" y1="310" x2="90" y2="50" stroke="#16213e" stroke-width="3"/>
+  <path d="M 600 310 L 588 301 M 600 310 L 588 319" stroke="#16213e" stroke-width="3"/>
+  <text x="608" y="316" font-size="16" fill="#16213e">t</text>
+  <text x="60" y="55" font-size="16" fill="#16213e" text-anchor="middle">x</text>
+
+  <!-- خط x_max -->
+  <line id="xmaxLine" x1="90" y1="80" x2="590" y2="80" stroke="#16213e" stroke-width="2" stroke-dasharray="6 6" opacity="0">
+    <animate attributeName="opacity" values="0;1" begin="1.5s" dur="0.5s" fill="freeze"/>
+  </line>
+  <text id="lblXmax" x="530" y="72" font-size="15" fill="#16213e" text-anchor="end" opacity="0">x_max</text>
+
+  <!-- المنحنى x(t) -->
+  <path id="curve" d="M 90 305 C 240 230, 380 150, 590 82" fill="none" stroke="#2a6db5" stroke-width="4" stroke-dasharray="600" stroke-dashoffset="600">
+    <animate attributeName="stroke-dashoffset" values="600;0" dur="2s" fill="freeze" calcMode="spline" keySplines="0 0 0.58 1"/>
+  </path>
+
+  <!-- خط x_max/2 -->
+  <line id="halfY" x1="90" y1="195" x2="352" y2="195" stroke="#3f9d6e" stroke-width="2" stroke-dasharray="6 6" opacity="0">
+    <animate attributeName="opacity" values="0;1" begin="2.2s" dur="0.4s" fill="freeze"/>
+  </line>
+  <text id="lblHalfY" x="80" y="190" font-size="16" fill="#3f9d6e" text-anchor="end" opacity="0">x_max / 2</text>
+
+  <!-- خط t1/2 -->
+  <line id="halfX" x1="352" y1="310" x2="352" y2="195" stroke="#3f9d6e" stroke-width="2" stroke-dasharray="6 6" opacity="0">
+    <animate attributeName="opacity" values="0;1" begin="2.4s" dur="0.4s" fill="freeze"/>
+  </line>
+  <text id="lblHalfX" x="352" y="330" font-size="18" font-weight="bold" fill="#3f9d6e" text-anchor="middle" opacity="0">t₁/₂</text>
+
+  <!-- نقطة عند t1/2 -->
+  <circle id="pt" cx="352" cy="195" r="10" fill="#e9c46a" stroke="#b8860b" stroke-width="2" opacity="0">
+    <animate attributeName="opacity" values="0;1" begin="2.6s" dur="0.3s" fill="freeze"/>
+  </circle>
+
+  <!-- ملاحظة -->
+  <text x="320" y="350" text-anchor="middle" font-size="16" font-weight="bold" fill="#16213e">
+    التقدم الكلي ≃ 7 × t₁/₂
+    <animate attributeName="opacity" values="0;1" begin="3.2s" dur="0.5s" fill="freeze"/>
+  </text>
+</svg>

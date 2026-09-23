@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" font-family="Segoe UI, Tahoma, Arial, sans-serif">
+  <title>التمديد: انحفاظ كمية المادة</title>
+  <desc>إضافة ماء مقطر إلى محلول مركز فيزداد الحجم V وينخفض التركيز C مع بقاء C·V ثابتًا.</desc>
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      svg * { animation: none !important; transition: none !important; }
+    }
+  </style>
+  <rect x="6" y="6" width="628" height="348" rx="16" fill="#f4f8fc" stroke="#d5e4f2" stroke-width="2"/>
+
+  <!-- الحوجلة 1 (مركز) -->
+  <text x="120" y="60" text-anchor="middle" font-size="18" font-weight="bold" fill="#16213e">قبل</text>
+  <rect x="45" y="75" width="150" height="200" rx="10" fill="#ffffff" stroke="#16213e" stroke-width="2.5"/>
+  <rect id="water1" x="55" y="190" width="130" height="75" rx="6" fill="#2a6db5"/>
+  <text x="120" y="255" text-anchor="middle" font-size="17" font-weight="bold" fill="#ffffff">C₁</text>
+
+  <!-- الحوجلة 2 (ممدد) -->
+  <text x="520" y="60" text-anchor="middle" font-size="18" font-weight="bold" fill="#16213e">بعد التمديد</text>
+  <rect x="445" y="75" width="150" height="200" rx="10" fill="#ffffff" stroke="#16213e" stroke-width="2.5"/>
+  <rect id="water2" x="455" y="150" width="130" height="115" rx="6" fill="#9db9dd"/>
+
+  <!-- قطرة ماء تسقط في الحوجلة 2 -->
+  <g>
+    <circle r="9" fill="#8ecae6">
+      <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.75;0.9;1" dur="2s" repeatCount="indefinite"/>
+      <animateMotion dur="2s" repeatCount="indefinite" path="M 470 40 C 470 80, 470 80, 476 146"/>
+    </circle>
+  </g>
+
+  <!-- سهم بين الحوجلتين -->
+  <g>
+    <path d="M 215 175 L 425 175" stroke="#3f9d6e" stroke-width="3">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 425 175 L 411 166 M 425 175 L 411 184" stroke="#3f9d6e" stroke-width="3"/>
+  </g>
+
+  <!-- العلاقة -->
+  <text x="320" y="310" text-anchor="middle" font-size="21" font-weight="bold" fill="#16213e">C₁·V₁ = C₂·V₂</text>
+  <text id="eq2" x="320" y="335" text-anchor="middle" font-size="16" fill="#2a6db5">
+    معامل التمديد: F = C₁/C₂ = V₂/V₁
+    <animate attributeName="opacity" values="0.2;1;0.2" dur="2.4s" repeatCount="indefinite"/>
+  </text>
+</svg>

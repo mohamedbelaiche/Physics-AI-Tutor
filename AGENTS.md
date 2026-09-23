@@ -36,7 +36,7 @@ The tedious part of knowledge-base maintenance — bookkeeping, cross-references
 ### قواعد غير قابلة للتفاوض (Non-Negotiable Rules)
 
 1. **لا تعديل للمصادر الخام** — كل ما تحت `api/data/البيانات/` أو `public/البيانات/` يُقرأ ولا يُحرَّر أبدًا. أي تكرار/مشكلة تُسجَّل في `KNOWLEDGE_BASE/quality_control/`.
-2. **لا اختراع ولا تخمين** — كل محتوى غير قابل للنقل بأمانة من مصدر يُستبعد ويُسجَّل في `quality_control/`. الويكي مبني على الحقائق فقط.
+2. **لا اختراع ولا تخمين** — كل محتوى غير قابل للنقل بأمانة من مصدر يُستبعد ويُسجَّل في `quality_control/`. الويكي مبني على الحقائق فقط. في طبقة `KNOWLEDGE_BASE/slides/` يجوز **إعادة صياغة النص لهيكلة شريحية أفضل** شرط بقاء كل ادعاء/معادلة/قيمة حرفيًا كما في الويكي.
 3. **فصل نص السؤال عن الحل** — نصوص التمارين مستقلة عن الحلول (انظر `KNOWLEDGE_BASE/solutions/README.md`).
 4. **فصل الطبقات** — الويكي لا يكتب في المصادر الخام؛ والـ LLM وحده يكتب في الويكي (بإشراف الإنسان).
 5. **الوضعية `status`** لكل سجل من: `verified` | `needs_review` | `uncertain` | `extraction_failed`.
@@ -49,6 +49,7 @@ The tedious part of knowledge-base maintenance — bookkeeping, cross-references
 | المسار | المحتوى |
 |---|---|
 | `KNOWLEDGE_BASE/lessons/` | درس واحد لكل وحدة (5 وحدات) — المحتوى الكامل المترجم |
+| `KNOWLEDGE_BASE/slides/` | **طبقة تأليف الشرائح التفاعلية** (يكتبها الـ LLM فقط): `<slug>/sections/NN.deck.md` (سكربت الشريحات) + `<slug>/scenes/*.script.json` (سيناريوهات المشاهد) + `<slug>/summary.md` |
 | `KNOWLEDGE_BASE/concepts/` | صفحة لكل مفهوم أساسي (تعريفات، سلوك، نطاق) |
 | `KNOWLEDGE_BASE/formulas/` | صفحة لكل صيغة/قانون (LaTeX) |
 | `KNOWLEDGE_BASE/exercises/` | تمارين بكالوريا مجمعة حسب الوحدة |

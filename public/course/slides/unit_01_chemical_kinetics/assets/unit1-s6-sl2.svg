@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" font-family="Segoe UI, Tahoma, Arial, sans-serif">
+  <title>المتابعة الناقلية (فيزيائية)</title>
+  <desc>صفيحتان مغمورتان في المزيج التفاعلي؛ الناقلية G تُقاس ومعها الناقلية النوعية σ متعلقة بمجموع λᵢ[Xᵢ].</desc>
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      svg * { animation: none !important; transition: none !important; }
+    }
+  </style>
+  <rect x="6" y="6" width="628" height="348" rx="16" fill="#f4f8fc" stroke="#d5e4f2" stroke-width="2"/>
+
+  <!-- الحوض -->
+  <rect id="beaker" x="80" y="70" width="280" height="200" rx="12" fill="#eaf3fd" stroke="#16213e" stroke-width="3"/>
+
+  <!-- الصفيحتان -->
+  <rect x="140" y="85" width="26" height="170" rx="4" fill="#16213e"/>
+  <rect x="274" y="85" width="26" height="170" rx="4" fill="#16213e"/>
+
+  <!-- أيونات داخل الحوض -->
+  <g fill="#2a6db5">
+    <circle cx="100" cy="200" r="7">
+      <animate attributeName="cy" values="210;150;210" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="110" cy="160" r="6">
+      <animate attributeName="cy" values="170;120;170" dur="3.4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="220" cy="180" r="7">
+      <animate attributeName="cy" values="190;130;190" dur="3.2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="240" cy="200" r="6">
+      <animate attributeName="cy" values="210;150;210" dur="3.6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3.6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="120" cy="220" r="6">
+      <animate attributeName="cy" values="230;170;230" dur="3.1s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3.1s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  <g fill="#3f9d6e">
+    <circle cx="180" cy="200" r="6">
+      <animate attributeName="cy" values="210;160;210" dur="2.9s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="2.9s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="160" r="6">
+      <animate attributeName="cy" values="170;120;170" dur="3.3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3.3s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- قطب التيار -->
+  <line x1="300" y1="60" x2="300" y2="85" stroke="#16213e" stroke-width="3"/>
+  <text x="306" y="72" font-size="16" fill="#e63946">+</text>
+
+  <!-- المعادلات -->
+  <text x="470" y="90" text-anchor="middle" font-size="22" font-weight="bold" fill="#16213e">σ = Σ λᵢ·[Xᵢ]</text>
+  <text x="470" y="125" text-anchor="middle" font-size="22" font-weight="bold" fill="#16213e">G = K·σ</text>
+  <text x="470" y="160" text-anchor="middle" font-size="16" fill="#2a6db5">K = S/L</text>
+  <text id="flash" x="470" y="215" text-anchor="middle" font-size="16" font-weight="bold" fill="#e63946">
+    x يزداد ⇒ [Xᵢ] يرتفع
+    <animate attributeName="opacity" values="0.25;1;0.25" dur="1.6s" repeatCount="indefinite"/>
+  </text>
+  <text id="flash2" x="470" y="250" text-anchor="middle" font-size="15" fill="#16213e">
+    لا تنسَ الشوارد المتفرّجة!
+    <animate attributeName="opacity" values="0.2;1;0.2" dur="2.2s" repeatCount="indefinite"/>
+  </text>
+</svg>

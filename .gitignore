@@ -7,8 +7,12 @@ node_modules/
 # Local tooling files (not part of the project)
 .agents/
 .claude/
+.opencode/
 agent/
 skills-lock.json
+
+# Local project planning docs (not part of the shipped project)
+تعليمات بناء course/
 
 # Sync payload cache
 sync_payload/

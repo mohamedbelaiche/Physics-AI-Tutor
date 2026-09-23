@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" font-family="Segoe UI, Tahoma, Arial, sans-serif">
+  <title>انتقال الإلكترون من المرجع إلى المؤكسد</title>
+  <desc>المرجع Red على اليمين يرسل إلكترونًا منتشرًا نحو المؤكسد Ox على اليسار عبر مسار منحني.</desc>
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      svg * { animation: none !important; transition: none !important; }
+    }
+  </style>
+  <rect x="6" y="6" width="628" height="348" rx="16" fill="#f4f8fc" stroke="#d5e4f2" stroke-width="2"/>
+
+  <!-- المؤكسد Ox (يسار) -->
+  <text x="140" y="70" text-anchor="middle" font-size="20" font-weight="bold" fill="#16213e">المؤكسد (Ox)</text>
+  <rect x="55" y="90" width="170" height="130" rx="14" fill="#2a6db5"/>
+  <text x="140" y="150" text-anchor="middle" font-size="30" font-weight="bold" fill="#ffffff">Ox</text>
+  <text x="140" y="180" text-anchor="middle" font-size="16" fill="#dfeaff">يكتسب إلكترونًا</text>
+
+  <!-- المرجع Red (يمين) -->
+  <text x="500" y="70" text-anchor="middle" font-size="20" font-weight="bold" fill="#16213e">المرجع (Red)</text>
+  <rect x="415" y="90" width="170" height="130" rx="14" fill="#3f9d6e"/>
+  <text x="500" y="150" text-anchor="middle" font-size="30" font-weight="bold" fill="#ffffff">Red</text>
+  <text x="500" y="180" text-anchor="middle" font-size="16" fill="#e3f6e9">يفقد إلكترونًا</text>
+
+  <!-- سهم الاتجاه + المسار -->
+  <path id="electronPath" d="M 415 155 C 320 95, 245 215, 225 155" fill="none" stroke="#b8c6d6" stroke-width="3" stroke-dasharray="6 6"/>
+  <path d="M 225 155 L 214 160 L 224 170 Z" fill="#b8c6d6"/>
+
+  <!-- الإلكترون المتحرك -->
+  <g>
+    <circle r="17" fill="#e9c46a" stroke="#b8860b" stroke-width="2">
+      <animateMotion dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1">
+        <mpath href="#electronPath"/>
+      </animateMotion>
+    </circle>
+    <text font-size="15" font-weight="bold" fill="#16213e" text-anchor="middle" dy="-1">
+      e⁻
+      <animateMotion dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1">
+        <mpath href="#electronPath"/>
+      </animateMotion>
+    </text>
+  </g>
+
+  <!-- وسم ++ e⁻ -->
+  <text x="225" y="88" font-size="17" font-weight="bold" fill="#b8860b" text-anchor="middle">
+    + e⁻
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.2s" repeatCount="indefinite"/>
+  </text>
+  <text x="500" y="252" text-anchor="middle" font-size="14" fill="#16213e">Red ⟶ e⁻ ⟶ Ox</text>
+</svg>

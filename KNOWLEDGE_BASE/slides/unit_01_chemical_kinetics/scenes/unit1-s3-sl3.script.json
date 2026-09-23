@@ -1,0 +1,27 @@
+{
+  "slide_id": "unit1-s3-sl3",
+  "viewBox": "0 0 640 360",
+  "intent": "إظهار انحفاظ كمية المادة خلال التمديد: V يزداد و C يقل مع بقاء c·v ثابتًا",
+  "elements": [
+    { "id": "glassStart", "role": "object", "desc": "الحوجلة قبل التمديد", "x": 60, "y": 60, "w": 130, "h": 200, "color": "#eaf3fd" },
+    { "id": "glassEnd", "role": "object", "desc": "الحوجلة بعد التمديد", "x": 380, "y": 40, "w": 130, "h": 260, "color": "#eaf3fd" },
+    { "id": "levelStart", "role": "bar", "desc": "منسوب المحلول المركز", "x": 70, "y": 220, "w": 110, "h": 30, "color": "#2a6db5" },
+    { "id": "levelEnd", "role": "bar", "desc": "منسوب المحلول الممدد", "x": 390, "y": 260, "w": 110, "h": 30, "color": "#9db9dd" }
+  ],
+  "animation": "SMIL",
+  "timing": { "dur": "3s", "delay": "0.5s", "repeat": "indefinite" },
+  "motion": [
+    { "target": "arrowDown", "attr": "opacity", "from": 0.2, "to": 1 }
+  ],
+  "labels": [
+    { "id": "lblMin", "text": "C₁  V₁", "x": 125, "y": 250 },
+    { "id": "lblMax", "text": "C₂  V₂  (C₂<C₁, V₂>V₁)", "x": 445, "y": 290 },
+    { "id": "lblEq", "text": "C₁·V₁ = C₂·V₂", "x": 320, "y": 320 }
+  ],
+  "steps": [
+    "نضيف ماءً مقطرًا → يزداد الحجم V",
+    "ينخفض التركيز C مع بقاء الحجم V₂>V₁",
+    "كمية المادة محفوظة: C₁V₁ = C₂V₂"
+  ],
+  "notes": "سهم أفقي بين الحوجلتين (animateMotion) يشير لحركة الماء؛ المستوى في الحوجلة الثانية أخف لونًا قبل التمديد. استعمل نص الحفاظ أسفل."
+}

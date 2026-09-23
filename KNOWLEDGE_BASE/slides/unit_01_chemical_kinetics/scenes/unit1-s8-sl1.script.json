@@ -1,0 +1,28 @@
+{
+  "slide_id": "unit1-s8-sl1",
+  "viewBox": "0 0 640 360",
+  "intent": "إظهار أن عند زمن نصف التفاعل t₁/₂ يصل التقدم لصف قيمة x_max على المحور",
+  "elements": [
+    { "id": "axisX", "role": "axis", "desc": "محور الزمن t", "x1": 80, "y1": 280, "x2": 580, "y2": 280, "color": "#16213e" },
+    { "id": "axisY", "role": "axis", "desc": "محور التقدم x", "x1": 80, "y1": 280, "x2": 80, "y2": 50, "color": "#16213e" },
+    { "id": "curveHalf", "role": "object", "desc": "منحنى x(t)", "d": "M80 275 C 220 170, 360 110, 580 90", "color": "#2a6db5" },
+    { "id": "marker", "role": "circle", "desc": "النقطة عند t₁/₂", "cx": 320, "cy": 175, "r": 9, "color": "#3f9d6e" }
+  ],
+  "animation": "SMIL",
+  "timing": { "dur": "3s", "delay": "0.5s", "repeat": "none" },
+  "motion": [
+    { "target": "curveHalf", "attr": "stroke-dashoffset", "from": 620, "to": 0 },
+    { "target": "marker", "attr": "opacity", "from": 0, "to": 1 }
+  ],
+  "labels": [
+    { "id": "lblHalfY", "text": "x = x_max / 2", "x": 95, "y": 170 },
+    { "id": "lblHalfX", "text": "t₁/₂", "x": 320, "y": 300 },
+    { "id": "lblEnd", "text": "x_max", "x": 545, "y": 80 }
+  ],
+  "steps": [
+    "المنحنى يصعد ويقترب من القيمة العظمى x_max",
+    "عند t = t₁/₂ تصل x لصف x_max",
+    "استعمل t₁/₂ لمقارنة السرعة (الأصغر أسرع) أو تقدير المدة ≈ 7×t₁/₂"
+  ],
+  "notes": "تسمية wavy 7×t₁/₂ اختيارية في وصف الشريحة، لا في المشهد."
+}

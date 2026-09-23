@@ -1,0 +1,27 @@
+{
+  "slide_id": "unit1-s1-sl4",
+  "viewBox": "0 0 640 360",
+  "intent": "إظهار انتقال الإلكترونات من المرجع (Red) إلى المؤكسد (Ox) خلال تفاعل الأكسدة-الإرجاع",
+  "elements": [
+    { "id": "boxOx", "role": "object", "desc": "المؤكسد Ox", "x": 460, "y": 90, "w": 140, "h": 120, "color": "#2a6db5" },
+    { "id": "boxRed", "role": "object", "desc": "المرجع Red", "x": 50, "y": 160, "w": 140, "h": 120, "color": "#3f9d6e" },
+    { "id": "electron", "role": "circle", "desc": "إلكترون e⁻ ينتقل", "r": 14, "color": "#e6a700" }
+  ],
+  "animation": "SMIL",
+  "timing": { "dur": "2.5s", "delay": "0.5s", "repeat": "indefinite" },
+  "motion": [
+    { "target": "electron", "attr": "cx", "from": 190, "to": 450 },
+    { "target": "electronCycle", "attr": "opacity", "from": 1, "to": 1 }
+  ],
+  "labels": [
+    { "id": "lblOx", "text": "المؤكسد (Ox)", "x": 530, "y": 75 },
+    { "id": "lblRed", "text": "المرجع (Red)", "x": 120, "y": 145 },
+    { "id": "lblE", "text": "e⁻", "x": 450, "y": 0 }
+  ],
+  "steps": [
+    "المرجع (Red) يفقد إلكترونًا",
+    "الإلكترون ينتقل نحو المؤكسد (Ox)",
+    "المؤكسد يكتسب الإلكترون → اكتمال التفاعل"
+  ],
+  "notes": "حركة الإلكترون SMIL عبر animateMotion على مسار أفقي، تتكرر (repeat indefinite)؛ استعمل سهمًا خفيفًا كمسار."
+}

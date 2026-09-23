@@ -1,0 +1,27 @@
+{
+  "slide_id": "unit1-s10-sl2",
+  "viewBox": "0 0 640 360",
+  "intent": "إظهار أن رفع درجة الحرارة يسرّع التفاعل (v تزداد) ويقلل زمن نصف التفاعل t₁/₂",
+  "elements": [
+    { "id": "lowTempCurve", "role": "object", "desc": "منحنى بحرارة منخفضة", "d": "M80 275 C 260 240, 420 200, 580 170", "color": "#2a6db5" },
+    { "id": "highTempCurve", "role": "object", "desc": "منحنى بحرارة مرتفعة", "d": "M80 275 C 220 150, 400 100, 580 85", "color": "#e63946" }
+  ],
+  "animation": "SMIL",
+  "timing": { "dur": "3s", "delay": "0.5s", "repeat": "none" },
+  "motion": [
+    { "target": "lowTempCurve", "attr": "stroke-dashoffset", "from": 560, "to": 0 },
+    { "target": "highTempCurve", "attr": "stroke-dashoffset", "from": 560, "to": 0, "begin": "1.2s" }
+  ],
+  "labels": [
+    { "id": "lblLow", "text": "θ منخفضة", "x": 545, "y": 195 },
+    { "id": "lblHigh", "text": "θ مرتفعة", "x": 545, "y": 75 },
+    { "id": "lblV", "text": "v ↑  |  t₁/₂ ↓", "x": 300, "y": 40 }
+  ],
+  "steps": [
+    "رفع θ يزيد تواتر التصادمات الفعّالة",
+    "v ترتفع ← الميل يصبح أشد",
+    "t₁/₂ يقل ← الوصول لنهاية التفاعل أسرع",
+    "التركيب المولي النهائي لا يتغيّر"
+  ],
+  "notes": "منطقتان لونية مختلفتان على نفس المحور؛ تُرسم بالتتابع (begin offset) لوضوح المقارنة."
+}
