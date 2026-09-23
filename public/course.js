@@ -136,11 +136,9 @@
     if (progress && progress.courses) {
       var rec = progress.courses.find(function (c) { return c.id === course.id; });
       if (rec && rec.completed) return 'completed';
-      if (rec && rec.opened) return 'available';
-      return 'locked';
     }
-    // زائر بدون حساب: يُفتح الكورس الأول للتصفح فقط.
-    return idx === 0 ? 'available' : 'locked';
+    // كل الكورسات مفتوحة — يمكن اجتياز المقاطع والأجزاء بأي ترتيب.
+    return 'available';
   }
 
   function renderOverall() {
@@ -430,7 +428,11 @@
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token
         },
-        body: JSON.stringify({ course_id: course.id, action: 'complete' })
+        body: JSON.stringify({
+          course_id: course.id,
+          section_id: course.sections[currentSectionIdx] ? course.sections[currentSectionIdx].id : null,
+          part_key: 'text'
+        })
       });
     })
       .then(function (res) { return res.json(); })
