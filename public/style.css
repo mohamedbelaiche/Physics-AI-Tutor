@@ -1431,11 +1431,21 @@ body.slides-focus main {
   padding: clamp(1rem, 2vw, 2rem);
 }
 
+/* المساحة الآمنة للشريحة: محتوى متمركز لا يلمس حواف الشاشة، وقياسات
+   متناسبة (vw/vh) تتنفّس مع حجم الشاشة بدل قيم ثابتة، فيبقى مقروءًا على
+   الجوال والحاسب والشاشة الكبيرة على السواء. */
 .slides-wrap {
+  --slide-safe-inline: clamp(1rem, 4vw, 4rem);
+  --slide-safe-block: clamp(4.5rem, 8vh, 7rem);
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  box-sizing: border-box;
   min-height: 300px;
+  max-width: min(1200px, 100%);
+  margin-inline: auto;
+  padding-inline: var(--slide-safe-inline);
+  padding-block: var(--slide-safe-block);
 }
 
 /* عرض الشرائح يملأ مساحة الموقع بالكامل (صنف على body، لا Fullscreen API). */
@@ -1458,11 +1468,14 @@ body.slides-focus main {
   padding: 0;
 }
 
+/* الوضع الموسّع: لا تُصفَّر حشوة الحاوية — احتواء النص تكفل به المساحة
+   الآمنة على .slides-wrap، وتصفيرها هنا كان يجعل العمود يمتد على الحواف. */
 body.slides-focus #courses-group,
 body.slides-focus #course-lesson-view,
 body.slides-focus .course-content.slides-mode {
   min-height: 100dvh;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 /* الأدوات العائمة فوق الشريحة: مبدّل الوضع وزرّ التوسيع. */
@@ -1481,14 +1494,19 @@ body.slides-focus #lesson-presentation-controls > * {
   pointer-events: auto;
 }
 
+/* البطاقة تملأ الارتفاع المتاح وتحتفظ بمساحتها الآمنة، والمحتوى الأطول
+   يُمرَّر داخلها بدل أن يُقصّ (الجسم أصلًا overflow: hidden). */
 body.slides-focus .slides-wrap {
+  flex: 1;
   min-height: 100dvh;
+  overflow-y: auto;
 }
 
-/* المشاهد تكبر داخل العرض الموسّع فقط، فتبقى شرائح العرض العادي كما هي. */
+/* المشاهد تتوقف عند حدود المساحة الآمنة ولا تتجاوزها، فتبقى متمركزة
+   ومتّسقة مع النص في كل حجم شاشة. */
 body.slides-focus .slides-scene-img {
   width: 100%;
-  max-height: calc(100dvh - 14rem);
+  max-height: calc(100dvh - (2 * var(--slide-safe-block) + 6rem));
   object-fit: contain;
 }
 
@@ -1542,6 +1560,9 @@ body.slides-focus .slides-scene-img {
 }
 
 .slides-text {
+  /* قِيس قراءة متناسب: 68ch يتتبّع عرض المحرف وحجم الخط ولغة النص، فلا
+     يطول السطر على الشاشات الكبيرة ولا ينكمش على الصغيرة. */
+  max-width: 68ch;
   line-height: 1.9;
   overflow-wrap: break-word;
 }

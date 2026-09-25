@@ -347,6 +347,18 @@ function flushAsyncWork() {
   return new Promise((resolve) => setImmediate(resolve));
 }
 
+// يقتطع كتلة تعريف مُحدَّد من style.css. المُحدَّد مثبَّت في بداية السطر حتى
+// لا تلتقط قاعدة أعمق (مثل ".slides-text" داخل "…two-col .slides-text").
+function cssBlock(css, selector) {
+  const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const open = new RegExp('^' + escaped + '\\s*\\{', 'm').exec(css);
+  assert.notEqual(open, null, 'public/style.css must contain a rule for "' + selector + '"');
+  const start = css.indexOf('{', open.index);
+  const close = css.indexOf('\n}', start);
+  assert.notEqual(close, -1, 'rule "' + selector + '" must close its block');
+  return css.slice(start, close);
+}
+
 test('the slide controls markup matches the ids course.js looks up', () => {
   const html = fs.readFileSync(path.join(__dirname, '..', 'public', 'index.html'), 'utf8');
   [
@@ -365,6 +377,44 @@ test('the slide controls markup matches the ids course.js looks up', () => {
       'public/index.html must keep id="' + id + '"'
     );
   });
+});
+
+test('the slide card defines a proportional safe area for every screen size', () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'style.css'), 'utf8');
+  const wrap = cssBlock(css, '.slides-wrap');
+
+  // المسافة من الحواف تتنفّس مع الشاشة (vw أفقيًا، vh رأسيًا) لا بقيم ثابتة.
+  assert.match(wrap, /--slide-safe-inline:\s*clamp\([^)]*vw[^)]*\)/);
+  assert.match(wrap, /--slide-safe-block:\s*clamp\([^)]*vh[^)]*\)/);
+
+  // عمود مريح متمركز: سقف بالبكسل + نسبي صغير، فلا يستفيض ولا يتضيق.
+  assert.match(wrap, /max-width:\s*min\(\s*\d+px\s*,\s*100%\s*\)/);
+  assert.match(wrap, /margin-inline:\s*auto/);
+  assert.match(wrap, /padding-inline:\s*var\(--slide-safe-inline\)/);
+  assert.match(wrap, /padding-block:\s*var\(--slide-safe-block\)/);
+});
+
+test('the expanded slide layout does not zero the content padding', () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'style.css'), 'utf8');
+  const container = cssBlock(css, 'body.slides-focus .course-content.slides-mode');
+
+  // هذا هو سبب ظهور النص في الحواف: تصفير الحشوة مع max-width: none ترك
+  // عمود النص بلا أي احتواء، فامتد على كامل عرض الشاشة.
+  assert.doesNotMatch(container, /padding:\s*0\b/);
+  assert.doesNotMatch(container, /max-width:\s*none\b/);
+});
+
+test('slide prose keeps a proportional reading measure', () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'style.css'), 'utf8');
+  const text = cssBlock(css, '.slides-text');
+
+  // 68ch يتبع حجم الخط ولغة النص، فلا يطول السطر مع كبر الشاشة ولا يقصّ.
+  assert.match(text, /max-width:\s*\d+ch/);
+  assert.match(text, /line-height:\s*1\.[6-9]/);
+
+  // المشاهد تتوقف عند حدود المساحة الآمنة بدل أن تمتد على الحواف.
+  const scene = cssBlock(css, 'body.slides-focus .slides-scene-img');
+  assert.match(scene, /max-height:\s*calc\(100dvh\s*-\s*\(?\s*2\s*\*\s*var\(--slide-safe-block\)/);
 });
 
 test('slide mode keeps the normal site layout until the expand button is pressed', async () => {
