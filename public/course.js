@@ -25,9 +25,10 @@
   var lessonPresentationControls = document.getElementById('lesson-presentation-controls');
   var modeTextBtn = document.getElementById('mode-text');
   var modeSlidesBtn = document.getElementById('mode-slides');
-  var slidesFullscreenBtn = document.getElementById('slides-fullscreen-btn');
+  var slidesExpandBtn = document.getElementById('slides-expand-btn');
   var slidesView = document.getElementById('slides-view');
   var currentMode = 'text';
+  var slidesExpanded = false;   // الشريحة ملأت مساحة الموقع (صنف body.slides-focus)
   var sectionsBar = document.getElementById('course-sections-bar');
   var currentSlideIdx = 0;   // فهرس شريحة المقطع الحالي (لحفظ موقع الاستئناف)
   var pendingSlide = null;   // شريحة البداية عند فتح الكورس (الاستئناف)
@@ -167,12 +168,8 @@
 
   function setTab(active) {
     var showCourses = active === 'courses';
-    // مغادرة تبويب الكورسات تُنهي ملء الشاشة فقط: نُبقي وضع الشرائح وموضعه عند العودة.
-    if (!showCourses) {
-      exitLessonFullscreen().catch(function () {
-        showLessonNote('تعذر إنهاء ملء الشاشة.', 'error');
-      });
-    }
+    // مغادرة تبويب الكورسات تُنهي التوسيع فقط: نُبقي وضع الشرائح وموضعه عند العودة.
+    if (!showCourses) setSlidesExpand(false);
     tabSummaries.classList.toggle('active', !showCourses);
     tabCourses.classList.toggle('active', showCourses);
     summariesGroup.classList.toggle('hidden', showCourses);
@@ -409,22 +406,29 @@
     });
   }
 
-  function updateSlidesFullscreenUI() {
-    if (!slidesFullscreenBtn) return;
-    var active = document.fullscreenElement === lessonView;
-    // اسم واحد ثابت + aria-pressed: القارئ الشاشةي يقرأ "ملء الشاشة: مضغوط/غير مضغوط".
-    slidesFullscreenBtn.setAttribute('aria-pressed', active ? 'true' : 'false');
+  // التوسيع قرار تخطيطي داخل الموقع: صنف واحد على body يجعل الشريحة تملأ
+  // مساحة الموقع (تُخفى الترويسة والتابات والشات وبقية أدوات الدرس)، ولا
+  // علاقة له بملء الشاشة الأصلي للمتصفح. الحالة تُقرأ من الصنف لتبقى
+  // aria-pressed صادقة بعد أي إعادة رسم.
+  function setSlidesExpand(on) {
+    slidesExpanded = !!on;
+    document.body.classList.toggle('slides-focus', slidesExpanded);
+    if (slidesExpandBtn) {
+      slidesExpandBtn.setAttribute('aria-pressed', slidesExpanded ? 'true' : 'false');
+      slidesExpandBtn.setAttribute(
+        'aria-label',
+        slidesExpanded ? 'تصغير عرض الشرائح' : 'توسيع عرض الشرائح'
+      );
+      slidesExpandBtn.setAttribute(
+        'title',
+        slidesExpanded ? 'تصغير عرض الشرائح' : 'توسيع عرض الشرائح'
+      );
+    }
   }
 
-  function exitLessonFullscreen() {
-    if (document.fullscreenElement !== lessonView || typeof document.exitFullscreen !== 'function') {
-      return Promise.resolve();
-    }
-    try {
-      return Promise.resolve(document.exitFullscreen());
-    } catch (err) {
-      return Promise.reject(err);
-    }
+  function toggleSlidesExpand() {
+    if (currentMode !== 'slides') return;
+    setSlidesExpand(!slidesExpanded);
   }
 
   function leaveLessonSlides() {
@@ -432,41 +436,9 @@
     currentSlideIdx = 0;
     pendingSlide = null;
     lessonBody.classList.remove('slides-mode');
-    document.body.classList.remove('slides-focus');
     if (lessonPresentationControls) lessonPresentationControls.classList.add('hidden');
-    if (slidesFullscreenBtn) slidesFullscreenBtn.classList.add('hidden');
-    updateSlidesFullscreenUI();
-    return exitLessonFullscreen().catch(function () {
-      showLessonNote('تعذر إنهاء ملء الشاشة.', 'error');
-    });
-  }
-
-  function toggleSlidesFullscreen() {
-    if (!slidesFullscreenBtn || currentMode !== 'slides') return;
-    var action;
-    try {
-      if (document.fullscreenElement === lessonView) {
-        action = exitLessonFullscreen();
-      } else if (supportsLessonFullscreen()) {
-        action = lessonView.requestFullscreen();
-      } else {
-        showLessonNote('ملء الشاشة غير مدعوم في هذا المتصفح.', 'error');
-        return;
-      }
-    } catch (err) {
-      showLessonNote('تعذر تغيير ملء الشاشة.', 'error');
-      return;
-    }
-    if (action && typeof action.catch === 'function') {
-      action.catch(function () {
-        showLessonNote('تعذر تغيير ملء الشاشة.', 'error');
-      });
-    }
-  }
-
-  function supportsLessonFullscreen() {
-    return typeof lessonView.requestFullscreen === 'function' &&
-      typeof document.exitFullscreen === 'function';
+    if (slidesExpandBtn) slidesExpandBtn.classList.add('hidden');
+    setSlidesExpand(false);
   }
 
   function setModeUI(available) {
@@ -480,14 +452,11 @@
     modeTextBtn.setAttribute('aria-selected', slides ? 'false' : 'true');
     modeSlidesBtn.setAttribute('aria-selected', slides ? 'true' : 'false');
     lessonBody.classList.toggle('slides-mode', slides);
-    document.body.classList.toggle('slides-focus', slides && available);
-    if (slidesFullscreenBtn) {
-      slidesFullscreenBtn.classList.toggle(
-        'hidden',
-        !slides || !available || !supportsLessonFullscreen()
-      );
+    if (slidesExpandBtn) {
+      slidesExpandBtn.classList.toggle('hidden', !slides || !available);
     }
-    updateSlidesFullscreenUI();
+    // أي إعادة رسم للوضع تنسّق حالة التوسيع مع الصنف الفعلي على body.
+    setSlidesExpand(slidesExpanded && slides && available);
   }
 
   function switchMode(mode) {
@@ -496,9 +465,7 @@
     currentSlideIdx = 0;
     pendingSlide = 0;
     if (mode === 'text') {
-      exitLessonFullscreen().catch(function () {
-        showLessonNote('تعذر إنهاء ملء الشاشة.', 'error');
-      });
+      setSlidesExpand(false);
       setModeUI(true);
       renderLesson();
       savePosition();
@@ -524,14 +491,9 @@
 
   modeTextBtn.addEventListener('click', function () { switchMode('text'); });
   modeSlidesBtn.addEventListener('click', function () { switchMode('slides'); });
-  if (slidesFullscreenBtn) {
-    slidesFullscreenBtn.addEventListener('click', toggleSlidesFullscreen);
+  if (slidesExpandBtn) {
+    slidesExpandBtn.addEventListener('click', toggleSlidesExpand);
   }
-  document.addEventListener('fullscreenchange', updateSlidesFullscreenUI);
-  document.addEventListener('fullscreenerror', function (event) {
-    if (event.target && event.target !== lessonView) return;
-    showLessonNote('تعذر تغيير ملء الشاشة.', 'error');
-  });
 
   /* ---------- درس الكورس ---------- */
 

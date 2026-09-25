@@ -52,7 +52,6 @@ function createHarness(options) {
       this.children = [];
       this.parent = null;
       this.eventListeners = new Map();
-      this.isFullscreen = false;
     }
 
     get innerHTML() {
@@ -129,12 +128,6 @@ function createHarness(options) {
     }
 
     scrollIntoView() {}
-
-    async requestFullscreen() {
-      this.isFullscreen = true;
-      this.document.fullscreenElement = this;
-      this.document.dispatchEvent({ type: 'fullscreenchange' });
-    }
   }
 
   const body = new FakeElement('body');
@@ -143,7 +136,7 @@ function createHarness(options) {
     'course-lesson-view': ['hidden'],
     'lesson-presentation-controls': ['hidden'],
     'course-lesson-mode': ['hidden'],
-    'slides-fullscreen-btn': ['hidden']
+    'slides-expand-btn': ['hidden']
   };
   const ids = [
     'summaries-group',
@@ -166,7 +159,7 @@ function createHarness(options) {
     'mode-text',
     'mode-slides',
     'course-sections-bar',
-    'slides-fullscreen-btn'
+    'slides-expand-btn'
   ];
 
   ids.forEach((id) => {
@@ -179,7 +172,6 @@ function createHarness(options) {
   const document = {
     readyState: 'complete',
     visibilityState: 'visible',
-    fullscreenElement: null,
     body,
     getElementById(id) {
       return elements.get(id) || null;
@@ -196,25 +188,12 @@ function createHarness(options) {
       const handlers = documentListeners.get(event.type) || [];
       handlers.slice().forEach((handler) => handler.call(document, event));
       return true;
-    },
-    async exitFullscreen() {
-      const active = this.fullscreenElement;
-      if (active) active.isFullscreen = false;
-      this.fullscreenElement = null;
-      this.dispatchEvent({ type: 'fullscreenchange' });
     }
   };
 
-  if (settings.fullscreenSupported === false) {
-    elements.get('course-lesson-view').requestFullscreen = null;
-    document.exitFullscreen = null;
-  }
-  if (settings.fullscreenRequestFails === true) {
-    elements.get('course-lesson-view').requestFullscreen = function () {
-      throw new Error('Fullscreen denied');
-    };
-  }
-
+  // Expansion is a CSS class on body alone, so the harness never stubs
+  // requestFullscreen/exitFullscreen: the suite runs in a browser-like context
+  // that simply has no Fullscreen API, which is the behaviour we depend on.
   body.document = document;
   elements.forEach((element) => {
     element.document = document;
@@ -345,16 +324,6 @@ function createHarness(options) {
       return new Promise(function () {});
     };
   }
-  if (settings.fullscreenRequestRejects === true) {
-    elements.get('course-lesson-view').requestFullscreen = function () {
-      return Promise.reject(new Error('Fullscreen rejected'));
-    };
-  }
-  if (settings.exitFullscreenRejects === true) {
-    document.exitFullscreen = function () {
-      return Promise.reject(new Error('Exit rejected'));
-    };
-  }
 
   const source = fs.readFileSync(path.join(__dirname, '..', 'public', 'course.js'), 'utf8');
   vm.runInContext(source, context, { filename: 'public/course.js' });
@@ -385,7 +354,7 @@ test('the slide controls markup matches the ids course.js looks up', () => {
     'course-lesson-mode',
     'mode-text',
     'mode-slides',
-    'slides-fullscreen-btn',
+    'slides-expand-btn',
     'course-lesson-view',
     'course-lesson-body',
     'course-lesson-nav'
@@ -398,151 +367,119 @@ test('the slide controls markup matches the ids course.js looks up', () => {
   });
 });
 
-test('slide mode expands the lesson and toggles fullscreen behavior', async () => {
+test('slide mode keeps the normal site layout until the expand button is pressed', async () => {
   const { elements, body } = createHarness();
   const modeSlides = elements.get('mode-slides');
   const modeText = elements.get('mode-text');
-  const fullscreenButton = elements.get('slides-fullscreen-btn');
+  const expandButton = elements.get('slides-expand-btn');
   const presentationControls = elements.get('lesson-presentation-controls');
-  const lessonView = elements.get('course-lesson-view');
 
   modeSlides.click();
   await flushAsyncWork();
 
-  assert.equal(body.classList.contains('slides-focus'), true);
+  assert.equal(body.classList.contains('slides-focus'), false);
   assert.equal(presentationControls.classList.contains('hidden'), false);
-  assert.equal(fullscreenButton.classList.contains('hidden'), false);
-  assert.equal(fullscreenButton.getAttribute('aria-pressed'), 'false');
+  assert.equal(expandButton.classList.contains('hidden'), false);
+  assert.equal(expandButton.getAttribute('aria-pressed'), 'false');
   assert.equal(modeText.getAttribute('aria-selected'), 'false');
   assert.equal(modeSlides.getAttribute('aria-selected'), 'true');
 
-  fullscreenButton.click();
+  expandButton.click();
   await flushAsyncWork();
 
-  assert.equal(lessonView.isFullscreen, true);
-  assert.equal(fullscreenButton.getAttribute('aria-pressed'), 'true');
+  assert.equal(body.classList.contains('slides-focus'), true);
+  assert.equal(expandButton.getAttribute('aria-pressed'), 'true');
 
-  fullscreenButton.click();
+  expandButton.click();
   await flushAsyncWork();
 
-  assert.equal(lessonView.isFullscreen, false);
-  assert.equal(fullscreenButton.getAttribute('aria-pressed'), 'false');
+  assert.equal(body.classList.contains('slides-focus'), false);
+  assert.equal(expandButton.getAttribute('aria-pressed'), 'false');
 
   modeText.click();
   await flushAsyncWork();
 
   assert.equal(body.classList.contains('slides-focus'), false);
   assert.equal(presentationControls.classList.contains('hidden'), false);
-  assert.equal(fullscreenButton.classList.contains('hidden'), true);
+  assert.equal(expandButton.classList.contains('hidden'), true);
   assert.equal(modeText.getAttribute('aria-selected'), 'true');
   assert.equal(modeSlides.getAttribute('aria-selected'), 'false');
 });
 
-test('switching to text exits slide fullscreen', async () => {
-  const { elements, body } = createHarness();
-  const modeSlides = elements.get('mode-slides');
-  const modeText = elements.get('mode-text');
-  const fullscreenButton = elements.get('slides-fullscreen-btn');
+test('the expand button never calls the browser fullscreen API', async () => {
+  const { document, elements, body } = createHarness();
+  const expandButton = elements.get('slides-expand-btn');
   const lessonView = elements.get('course-lesson-view');
 
-  modeSlides.click();
-  await flushAsyncWork();
-  fullscreenButton.click();
+  assert.equal(typeof lessonView.requestFullscreen, 'undefined');
+  assert.equal(typeof document.exitFullscreen, 'undefined');
+  assert.equal(document.fullscreenElement, undefined);
+
+  elements.get('mode-slides').click();
   await flushAsyncWork();
 
-  modeText.click();
+  expandButton.click();
   await flushAsyncWork();
 
-  assert.equal(lessonView.isFullscreen, false);
-  assert.equal(body.classList.contains('slides-focus'), false);
+  assert.equal(body.classList.contains('slides-focus'), true);
+  assert.equal(document.fullscreenElement, undefined);
+  assert.equal(
+    elements.get('course-lesson-nav').querySelector('.course-note'),
+    null
+  );
 });
 
-test('switching to another tab exits fullscreen but keeps the slide lesson ready', async () => {
+test('switching to text collapses the expanded slide', async () => {
   const { elements, body } = createHarness();
-  const modeSlides = elements.get('mode-slides');
-  const fullscreenButton = elements.get('slides-fullscreen-btn');
-  const lessonView = elements.get('course-lesson-view');
 
-  modeSlides.click();
+  elements.get('mode-slides').click();
   await flushAsyncWork();
-  fullscreenButton.click();
+  elements.get('slides-expand-btn').click();
+  await flushAsyncWork();
+
+  assert.equal(body.classList.contains('slides-focus'), true);
+
+  elements.get('mode-text').click();
+  await flushAsyncWork();
+
+  assert.equal(body.classList.contains('slides-focus'), false);
+  assert.equal(elements.get('slides-expand-btn').getAttribute('aria-pressed'), 'false');
+});
+
+test('switching to another tab collapses the slide but keeps the lesson ready', async () => {
+  const { elements, body } = createHarness();
+
+  elements.get('mode-slides').click();
+  await flushAsyncWork();
+  elements.get('slides-expand-btn').click();
   await flushAsyncWork();
 
   elements.get('tab-summaries').click();
   await flushAsyncWork();
 
-  assert.equal(lessonView.isFullscreen, false);
-  assert.equal(fullscreenButton.getAttribute('aria-pressed'), 'false');
-  assert.equal(body.classList.contains('slides-focus'), true);
+  assert.equal(body.classList.contains('slides-focus'), false);
+  assert.equal(elements.get('slides-expand-btn').getAttribute('aria-pressed'), 'false');
 });
 
 test('returning to the course dashboard clears slide focus', async () => {
   const { elements, body } = createHarness();
-  const modeSlides = elements.get('mode-slides');
-  const fullscreenButton = elements.get('slides-fullscreen-btn');
-  const lessonView = elements.get('course-lesson-view');
 
-  modeSlides.click();
+  elements.get('mode-slides').click();
   await flushAsyncWork();
-  fullscreenButton.click();
+  elements.get('slides-expand-btn').click();
   await flushAsyncWork();
 
   elements.get('course-lesson-back').click();
   await flushAsyncWork();
 
-  assert.equal(lessonView.isFullscreen, false);
   assert.equal(body.classList.contains('slides-focus'), false);
-});
-
-test('fullscreen API errors show a lesson error', async () => {
-  const { document, elements } = createHarness();
-  const modeSlides = elements.get('mode-slides');
-  const lessonNav = elements.get('course-lesson-nav');
-
-  modeSlides.click();
-  await flushAsyncWork();
-  document.dispatchEvent({ type: 'fullscreenerror' });
-  await flushAsyncWork();
-
-  assert.equal(lessonNav.children.length, 1);
-  assert.equal(lessonNav.children[0].classList.contains('error'), true);
-});
-
-test('synchronous fullscreen failures show a lesson error', async () => {
-  const { elements } = createHarness({ fullscreenRequestFails: true });
-  const modeSlides = elements.get('mode-slides');
-  const fullscreenButton = elements.get('slides-fullscreen-btn');
-  const lessonNav = elements.get('course-lesson-nav');
-
-  modeSlides.click();
-  await flushAsyncWork();
-
-  assert.doesNotThrow(() => fullscreenButton.click());
-  await flushAsyncWork();
-
-  assert.equal(lessonNav.children.length, 1);
-  assert.equal(lessonNav.children[0].classList.contains('error'), true);
-});
-
-test('unsupported fullscreen hides only the fullscreen control', async () => {
-  const { elements, body } = createHarness({ fullscreenSupported: false });
-  const modeSlides = elements.get('mode-slides');
-  const fullscreenButton = elements.get('slides-fullscreen-btn');
-  const presentationControls = elements.get('lesson-presentation-controls');
-
-  modeSlides.click();
-  await flushAsyncWork();
-
-  assert.equal(body.classList.contains('slides-focus'), true);
-  assert.equal(presentationControls.classList.contains('hidden'), false);
-  assert.equal(fullscreenButton.classList.contains('hidden'), true);
 });
 
 test('unavailable slide decks fall back to text mode', async () => {
   const { elements, body } = createHarness({ deckAvailable: false });
   const modeSlides = elements.get('mode-slides');
   const modeText = elements.get('mode-text');
-  const fullscreenButton = elements.get('slides-fullscreen-btn');
+  const expandButton = elements.get('slides-expand-btn');
   const presentationControls = elements.get('lesson-presentation-controls');
 
   modeSlides.click();
@@ -551,7 +488,7 @@ test('unavailable slide decks fall back to text mode', async () => {
 
   assert.equal(body.classList.contains('slides-focus'), false);
   assert.equal(presentationControls.classList.contains('hidden'), true);
-  assert.equal(fullscreenButton.classList.contains('hidden'), true);
+  assert.equal(expandButton.classList.contains('hidden'), true);
   assert.equal(modeText.classList.contains('active'), true);
   assert.equal(modeSlides.classList.contains('active'), false);
 });
@@ -597,9 +534,8 @@ test('completing a course in slide mode resets the layout for the next course', 
     loggedIn: true
   });
   const cards = elements.get('course-cards');
-  const lessonView = elements.get('course-lesson-view');
   const presentationControls = elements.get('lesson-presentation-controls');
-  const fullscreenButton = elements.get('slides-fullscreen-btn');
+  const expandButton = elements.get('slides-expand-btn');
   const modeText = elements.get('mode-text');
   const modeSlides = elements.get('mode-slides');
   const lessonNav = elements.get('course-lesson-nav');
@@ -618,11 +554,10 @@ test('completing a course in slide mode resets the layout for the next course', 
   modeSlides.click();
   await flushAsyncWork();
   await flushAsyncWork();
-  fullscreenButton.click();
+  expandButton.click();
   await flushAsyncWork();
 
   assert.equal(body.classList.contains('slides-focus'), true);
-  assert.equal(lessonView.isFullscreen, true);
 
   navButton('إنهاء الكورس').click();
   await flushAsyncWork();
@@ -630,10 +565,9 @@ test('completing a course in slide mode resets the layout for the next course', 
   await flushAsyncWork();
   await flushAsyncWork();
 
-  assert.equal(lessonView.isFullscreen, false);
   assert.equal(body.classList.contains('slides-focus'), false);
   assert.equal(presentationControls.classList.contains('hidden'), true);
-  assert.equal(fullscreenButton.classList.contains('hidden'), true);
+  assert.equal(expandButton.classList.contains('hidden'), true);
   assert.equal(modeText.classList.contains('active'), true);
   assert.equal(modeText.getAttribute('aria-selected'), 'true');
   assert.equal(modeSlides.getAttribute('aria-selected'), 'false');
@@ -645,7 +579,7 @@ test('completing a course in slide mode resets the layout for the next course', 
 
   assert.equal(body.classList.contains('slides-focus'), false);
   assert.equal(presentationControls.classList.contains('hidden'), false);
-  assert.equal(fullscreenButton.classList.contains('hidden'), true);
+  assert.equal(expandButton.classList.contains('hidden'), true);
   assert.equal(modeText.classList.contains('active'), true);
   assert.equal(elements.get('course-lesson-head').innerHTML.indexOf('الكورس الثاني') !== -1, true);
 });
@@ -681,7 +615,7 @@ test('switching tabs and back preserves the open slide lesson', async () => {
   });
   const cards = elements.get('course-cards');
   const presentationControls = elements.get('lesson-presentation-controls');
-  const fullscreenButton = elements.get('slides-fullscreen-btn');
+  const expandButton = elements.get('slides-expand-btn');
   const modeSlides = elements.get('mode-slides');
 
   await flushAsyncWork();
@@ -694,7 +628,7 @@ test('switching tabs and back preserves the open slide lesson', async () => {
   modeSlides.click();
   await flushAsyncWork();
   await flushAsyncWork();
-  fullscreenButton.click();
+  expandButton.click();
   await flushAsyncWork();
 
   assert.equal(body.classList.contains('slides-focus'), true);
@@ -705,62 +639,44 @@ test('switching tabs and back preserves the open slide lesson', async () => {
   await flushAsyncWork();
   await flushAsyncWork();
 
-  assert.equal(elements.get('course-lesson-view').isFullscreen, false);
-  assert.equal(body.classList.contains('slides-focus'), true);
+  assert.equal(body.classList.contains('slides-focus'), false);
   assert.equal(presentationControls.classList.contains('hidden'), false);
-  assert.equal(fullscreenButton.classList.contains('hidden'), false);
+  assert.equal(expandButton.classList.contains('hidden'), false);
   assert.equal(modeSlides.classList.contains('active'), true);
   assert.equal(JSON.parse(storage.get('course_positions.v1'))['unit-01'].mode, 'slides');
 });
 
-test('a rejected fullscreen request shows a lesson error', async () => {
-  const { elements } = createHarness({ fullscreenRequestRejects: true });
-  const lessonNav = elements.get('course-lesson-nav');
-
-  elements.get('mode-slides').click();
-  await flushAsyncWork();
-  await flushAsyncWork();
-  elements.get('slides-fullscreen-btn').click();
-  await flushAsyncWork();
-  await flushAsyncWork();
-
-  assert.equal(lessonNav.children.length, 1);
-  assert.equal(lessonNav.children[0].classList.contains('error'), true);
-  assert.equal(lessonNav.children[0].getAttribute('role'), 'alert');
-});
-
 test('repeated lesson errors replace the previous note instead of stacking', async () => {
-  const { document, elements } = createHarness();
+  const { elements } = createHarness({
+    course: makeCourse(),
+    loggedIn: false
+  });
   const lessonNav = elements.get('course-lesson-nav');
 
-  elements.get('mode-slides').click();
-  await flushAsyncWork();
-  document.dispatchEvent({ type: 'fullscreenerror' });
-  await flushAsyncWork();
-  document.dispatchEvent({ type: 'fullscreenerror' });
-  await flushAsyncWork();
+  const navButton = (label) => lessonNav.children.filter(function (child) {
+    return child.textContent === label;
+  })[0];
+  const notes = () => lessonNav.children.filter(function (child) {
+    return child.classList.contains('course-note');
+  });
 
-  assert.equal(lessonNav.children.length, 1);
-});
-
-test('a rejected exit request still restores the layout', async () => {
-  const { elements, body } = createHarness({ exitFullscreenRejects: true });
-  const fullscreenButton = elements.get('slides-fullscreen-btn');
-
-  elements.get('mode-slides').click();
   await flushAsyncWork();
   await flushAsyncWork();
-  fullscreenButton.click();
-  await flushAsyncWork();
-
-  assert.equal(body.classList.contains('slides-focus'), true);
-
-  elements.get('mode-text').click();
+  elements.get('course-cards').children[0].click();
   await flushAsyncWork();
   await flushAsyncWork();
 
-  assert.equal(body.classList.contains('slides-focus'), false);
-  assert.equal(elements.get('course-lesson-nav').children.length, 1);
+  assert.equal(notes().length, 0);
+
+  navButton('إنهاء الكورس').click();
+  await flushAsyncWork();
+  navButton('إنهاء الكورس').click();
+  await flushAsyncWork();
+
+  assert.equal(notes().length, 1);
+  assert.equal(notes()[0].classList.contains('error'), true);
+  assert.equal(notes()[0].getAttribute('role'), 'alert');
+  assert.equal(notes()[0].textContent, 'سجّل الدخول أولاً لحفظ تقدمك وإتمام الكورسات.');
 });
 
 test('slide mode renders the real slide card with text and scene', async () => {
