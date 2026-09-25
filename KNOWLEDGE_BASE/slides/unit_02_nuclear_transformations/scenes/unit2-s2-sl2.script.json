@@ -1,0 +1,36 @@
+{
+  "slide_id": "unit2-s2-sl2",
+  "viewBox": "0 0 640 360",
+  "intent": "أن تُظهر انبعاث نواة هيليوم من نواة أم ثقيلة، مع إبراز انحفاظ العدد الكتلي A والعدد الذري Z بين الأم والبنت والهليوم",
+  "elements": [
+    { "id": "panel", "role": "object", "desc": "لوحة خلفية", "x": 20, "y": 20, "w": 600, "h": 320, "fill": "#f4f8fc", "stroke": "#d5e4f2" },
+    { "id": "parentNucleus", "role": "circle", "desc": "النواة الأم الثقيلة قبل التفكك", "cx": 190, "cy": 200, "r": 50, "color": "#16213e" },
+    { "id": "daughterNucleus", "role": "circle", "desc": "النواة المتبقّية Y بعد انفصال الهليوم", "cx": 190, "cy": 200, "r": 34, "color": "#3f9d6e" },
+    { "id": "heliumNucleus", "role": "circle", "desc": "نواة الهليوم المنبعثة، تنطلق من مركز الأم إلى أعلى اليمين", "cx": 190, "cy": 200, "r": 22, "color": "#2a6db5" },
+    { "id": "emissionArrow", "role": "arrow", "desc": "سهم مسار انبعاث إشعاع α من النواة الأم", "x1": 235, "y1": 178, "x2": 470, "y2": 118, "color": "#e63946", "stroke_dasharray": "10 6" }
+  ],
+  "animation": "SMIL",
+  "timing": { "dur": "3s", "delay": "0.8s", "repeat": "none" },
+  "motion": [
+    { "target": "emissionArrow", "attr": "stroke-dashoffset", "from": 245, "to": 0 },
+    { "target": "heliumNucleus", "attr": "cx", "from": 190, "to": 505, "begin": "0.4s" },
+    { "target": "heliumNucleus", "attr": "cy", "from": 200, "to": 115, "begin": "0.4s" },
+    { "target": "daughterNucleus", "attr": "cx", "from": 190, "to": 310, "begin": "0.6s" },
+    { "target": "daughterNucleus", "attr": "cy", "from": 200, "to": 240, "begin": "0.6s" }
+  ],
+  "labels": [
+    { "id": "lblEqA", "text": "انحفاظ A:  A = (A-4) + 4", "x": 215, "y": 52 },
+    { "id": "lblEqZ", "text": "انحفاظ Z:  Z = (Z-2) + 2", "x": 450, "y": 52 },
+    { "id": "lblParent", "text": "نواة الأم (ثقيلة):  X  (A , Z)", "x": 190, "y": 136 },
+    { "id": "lblRay", "text": "إشعاع α", "x": 365, "y": 128 },
+    { "id": "lblHelium", "text": "⁴₂He", "x": 505, "y": 80 },
+    { "id": "lblDaughter", "text": "نواة البنت:  Y  (A-4 , Z-2)", "x": 310, "y": 300 }
+  ],
+  "steps": [
+    "النواة المميَّزة هي الأنوية الثقيلة",
+    "ينبعث منها جزء هو نواة هيليوم ⁴₂He",
+    "النواة المتبقّية Y تأخذ A-4 و Z-2",
+    "العدد الكتلي A والعدد الذري Z محفوظان"
+  ],
+  "notes": "اللوحة من العنصر panel فقط (لا ترسم لوحة ثانية). ترتيب الرسم: panel ثم parentNucleus ثم daughterNucleus ثم heliumNucleus (الدائرة الكبيرة تغطي الدائرتين في البداية فتبدو كأنهما مركز الأم). السهم الأحمر المتقطّع يُرسم ذاتيًا بـ stroke-dashoffset ثم تنطلق عليه دائرة الهليوم. البنت تنزاح قليلا لأسفل اليمين فقط (لا تكبر ولا تصغر). fill=freeze لإبقاء الحالة النهائية."
+}

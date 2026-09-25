@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" font-family="Segoe UI, Tahoma, Arial, sans-serif">
+  <title>الانشطار النووي: نترون يقسّم نواة ثقيلة</title>
+  <desc>نترون واحد ¹₀n يقصف نواة اليورانيوم ²³⁵₉₂U فتنقسمها إلى نواتين: ¹⁴¹₅₆Ba و ⁹²₃₆Kr، مع انطلاق ثلاثة نترونات، فيكون عدد النترونات 1 داخل و 3 خارج. ويظهر شريطا انحفاظ عدد النترونات، ومعادلتا انحفاظ العدد الكتلي A والشحنة Z، وسهم يشير إلى الطاقة المحرَّرة عن النقصان الكتلي: E = |Δm|·c².</desc>
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      svg * { animation: none !important; transition: none !important; }
+    }
+  </style>
+  <defs>
+    <marker id="ah" markerWidth="6.5" markerHeight="6.5" refX="5.4" refY="3.25" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0L6.5 3.25L0 6.5Z" fill="#e63946"/>
+    </marker>
+  </defs>
+  <rect x="6" y="6" width="628" height="348" rx="16" fill="#f4f8fc" stroke="#d5e4f2" stroke-width="2"/>
+
+  <!-- النترون القادم: يتسارع نحو حافة النواة ثم يندمج فيها -->
+  <circle id="nIn" cx="56" cy="120" r="12" fill="#16213e">
+    <animate attributeName="cx" from="56" to="266" dur="1.1s" begin="0.8s" calcMode="spline" keySplines="0.42 0 1 1" fill="freeze"/>
+    <animate attributeName="opacity" from="1" to="0" dur="0.25s" begin="1.8s" fill="freeze"/>
+  </circle>
+
+  <!-- النترونات المنبعثة: تبدأ مخفية خلف النواة ثم تنطلق بعد الانشطار -->
+  <circle id="nOut1" cx="320" cy="120" r="11" fill="#16213e" opacity="0">
+    <animate attributeName="cx" from="320" to="100" dur="1.2s" begin="3.1s" calcMode="spline" keySplines="0 0 0.58 1" fill="freeze"/>
+    <animate attributeName="cy" from="120" to="185" dur="1.2s" begin="3.1s" calcMode="spline" keySplines="0 0 0.58 1" fill="freeze"/>
+    <animate attributeName="opacity" from="0" to="1" dur="1.2s" begin="3.1s" fill="freeze"/>
+  </circle>
+  <circle id="nOut2" cx="320" cy="120" r="11" fill="#16213e" opacity="0">
+    <animate attributeName="cy" from="120" to="205" dur="1.1s" begin="3.3s" calcMode="spline" keySplines="0 0 0.58 1" fill="freeze"/>
+    <animate attributeName="opacity" from="0" to="1" dur="1.1s" begin="3.3s" fill="freeze"/>
+  </circle>
+  <circle id="nOut3" cx="320" cy="120" r="11" fill="#16213e" opacity="0">
+    <animate attributeName="cx" from="320" to="540" dur="1.2s" begin="3.2s" calcMode="spline" keySplines="0 0 0.58 1" fill="freeze"/>
+    <animate attributeName="cy" from="120" to="185" dur="1.2s" begin="3.2s" calcMode="spline" keySplines="0 0 0.58 1" fill="freeze"/>
+    <animate attributeName="opacity" from="0" to="1" dur="1.2s" begin="3.2s" fill="freeze"/>
+  </circle>
+
+  <!-- نواتا الانشطار تحت النواة: تكبران وتنفصلان إلى جهتين -->
+  <circle id="fragBa" cx="320" cy="120" r="16" fill="#3f9d6e" opacity="0">
+    <animate attributeName="cx" from="320" to="180" dur="1.4s" begin="1.9s" calcMode="spline" keySplines="0 0 0.58 1" fill="freeze"/>
+    <animate attributeName="cy" from="120" to="88" dur="1.4s" begin="1.9s" calcMode="spline" keySplines="0 0 0.58 1" fill="freeze"/>
+    <animate attributeName="r" from="16" to="38" dur="1.4s" begin="1.9s" calcMode="spline" keySplines="0 0 0.58 1" fill="freeze"/>
+    <animate attributeName="opacity" from="0" to="1" dur="1.4s" begin="1.9s" fill="freeze"/>
+  </circle>
+  <circle id="fragKr" cx="320" cy="120" r="14" fill="#3f9d6e" opacity="0">
+    <animate attributeName="cx" from="320" to="460" dur="1.4s" begin="2.1s" calcMode="spline" keySplines="0 0 0.58 1" fill="freeze"/>
+    <animate attributeName="cy" from="120" to="88" dur="1.4s" begin="2.1s" calcMode="spline" keySplines="0 0 0.58 1" fill="freeze"/>
+    <animate attributeName="r" from="14" to="36" dur="1.4s" begin="2.1s" calcMode="spline" keySplines="0 0 0.58 1" fill="freeze"/>
+    <animate attributeName="opacity" from="0" to="1" dur="1.4s" begin="2.1s" fill="freeze"/>
+  </circle>
+
+  <!-- النواة الثقيلة: تنكمش وتتلاشى لحظة الانشطار لا قبلها -->
+  <circle id="nucleusU" cx="320" cy="120" r="52" fill="#2a6db5">
+    <animate attributeName="r" from="52" to="0" dur="0.7s" begin="1.9s" calcMode="spline" keySplines="0.45 0 1 1" fill="freeze"/>
+    <animate attributeName="opacity" from="1" to="0" dur="0.7s" begin="1.9s" fill="freeze"/>
+  </circle>
+
+  <!-- رموز النوى: قبل الانشطار تختفي، وبعده تظهر -->
+  <text id="lblU" x="320" y="56" text-anchor="middle" font-size="18" font-weight="bold" fill="#2a6db5">²³⁵₉₂U
+    <animate attributeName="opacity" from="1" to="0" dur="0.55s" begin="1.9s" fill="freeze"/>
+  </text>
+  <text id="lblBa" x="180" y="40" text-anchor="middle" font-size="18" font-weight="bold" fill="#3f9d6e" opacity="0">¹⁴¹₅₆Ba
+    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="3s" fill="freeze"/>
+  </text>
+  <text id="lblKr" x="460" y="40" text-anchor="middle" font-size="18" font-weight="bold" fill="#3f9d6e" opacity="0">⁹²₃₆Kr
+    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="3.2s" fill="freeze"/>
+  </text>
+
+  <!-- رموز النترونات المنبعثة -->
+  <text id="lblN1" x="100" y="214" text-anchor="middle" font-size="17" font-weight="bold" fill="#16213e" opacity="0">¹₀n
+    <animate attributeName="opacity" from="0" to="1" dur="0.45s" begin="4.3s" fill="freeze"/>
+  </text>
+  <text id="lblN2" x="320" y="234" text-anchor="middle" font-size="17" font-weight="bold" fill="#16213e" opacity="0">¹₀n
+    <animate attributeName="opacity" from="0" to="1" dur="0.45s" begin="4.4s" fill="freeze"/>
+  </text>
+  <text id="lblN3" x="540" y="214" text-anchor="middle" font-size="17" font-weight="bold" fill="#16213e" opacity="0">¹₀n
+    <animate attributeName="opacity" from="0" to="1" dur="0.45s" begin="4.35s" fill="freeze"/>
+  </text>
+
+  <!-- صدمة الانشطار عند مركز النواة -->
+  <circle id="fractureRing" cx="320" cy="120" r="10" fill="none" stroke="#e63946" stroke-width="3" opacity="0">
+    <animate attributeName="r" from="10" to="72" dur="1s" begin="1.9s" calcMode="spline" keySplines="0 0 0.6 1" fill="freeze"/>
+    <animate attributeName="opacity" from="0.9" to="0" dur="1s" begin="1.9s" fill="freeze"/>
+  </circle>
+
+  <!-- شريطا انحفاظ عدد النترونات: 1 داخل و 3 خارج، بمقياس 30 بكسل للنترون -->
+  <rect id="barIn" x="30" y="296" width="30" height="24" rx="4" fill="#16213e" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="4.5s" fill="freeze"/>
+  </rect>
+  <rect id="barOut" x="80" y="296" width="90" height="24" rx="4" fill="#3f9d6e" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="4.5s" fill="freeze"/>
+  </rect>
+
+  <!-- سهم الطاقة المحرَّرة -->
+  <line id="energyArrow" x1="295" y1="326" x2="335" y2="326" stroke="#e63946" stroke-width="3" stroke-linecap="round" marker-end="url(#ah)" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="4.7s" fill="freeze"/>
+  </line>
+
+  <!-- رمز النترون القائم في بداية المشهد -->
+  <text id="lblNIn" x="56" y="96" text-anchor="middle" font-size="16" font-weight="bold" fill="#16213e" direction="rtl" unicode-bidi="embed">¹₀n قادم
+    <animate attributeName="opacity" from="1" to="0" dur="0.5s" begin="1.9s" fill="freeze"/>
+  </text>
+
+  <!-- عنوان الشريط وبياناته -->
+  <text id="lblStrip" x="100" y="262" text-anchor="middle" font-size="16" font-weight="bold" fill="#16213e" direction="rtl" unicode-bidi="embed" opacity="0">انحفاظ عدد النترونات
+    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="4.5s" fill="freeze"/>
+  </text>
+  <text id="lblIn" x="45" y="288" text-anchor="middle" font-size="15" fill="#16213e" direction="rtl" unicode-bidi="embed" opacity="0">1 نترون
+    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="4.5s" fill="freeze"/>
+  </text>
+  <text id="lblOut" x="125" y="288" text-anchor="middle" font-size="15" font-weight="bold" fill="#3f9d6e" direction="rtl" unicode-bidi="embed" opacity="0">3 نترونات
+    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="4.5s" fill="freeze"/>
+  </text>
+
+  <!-- معادلتا انحفاظ العدد الكتلي A والشحنة Z -->
+  <text id="lblConsA" x="420" y="288" text-anchor="middle" font-size="15" font-weight="bold" fill="#16213e" opacity="0">A : 1 + 235 = 141 + 92 + 3 = 236
+    <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="4.7s" fill="freeze"/>
+  </text>
+  <text id="lblConsZ" x="420" y="308" text-anchor="middle" font-size="15" font-weight="bold" fill="#16213e" opacity="0">Z : 0 + 92 = 56 + 36 = 92
+    <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="4.7s" fill="freeze"/>
+  </text>
+
+  <!-- الطاقة المحرَّرة -->
+  <text id="lblEnergy" x="430" y="332" text-anchor="middle" font-size="14" font-weight="bold" fill="#e63946" direction="rtl" unicode-bidi="embed" opacity="0">الطاقة المحرَّرة: E = |Δm|·c²
+    <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="4.7s" fill="freeze"/>
+  </text>
+</svg>

@@ -1,0 +1,44 @@
+{
+  "slide_id": "unit2-s2-sl4",
+  "viewBox": "0 0 640 360",
+  "intent": "أن يُظهر أن نترونًا واحدًا داخل نواة غنية بالنترونات يتحوّل إلى بروتون مع إطلاق إلكترون، فتصبح النواة المتبقّية ذات العدد الذري Z+1",
+  "elements": [
+    { "id": "panel", "role": "object", "desc": "لوحة خلفية", "x": 20, "y": 20, "w": 600, "h": 320, "fill": "#f4f8fc", "stroke": "#d5e4f2" },
+    { "id": "parentNucleus", "role": "circle", "desc": "النواة الأم الغنية بالنترونات", "cx": 205, "cy": 195, "r": 46, "color": "#16213e" },
+    { "id": "protonA", "role": "circle", "desc": "بروتون موجود في النواة الأم", "cx": 178, "cy": 186, "r": 9, "color": "#e63946" },
+    { "id": "protonB", "role": "circle", "desc": "بروتون موجود في النواة الأم", "cx": 222, "cy": 218, "r": 9, "color": "#e63946" },
+    { "id": "neutronA", "role": "circle", "desc": "نترون ثابت في النواة الأم", "cx": 205, "cy": 167, "r": 9, "color": "#2a6db5" },
+    { "id": "neutronB", "role": "circle", "desc": "نترون ثابت في النواة الأم", "cx": 189, "cy": 218, "r": 9, "color": "#2a6db5" },
+    { "id": "convertingNeutron", "role": "circle", "desc": "النترون الذي يتحوّل إلى بروتون (يتبدّل لونه من الأزرق إلى الأحمر)", "cx": 232, "cy": 186, "r": 9, "color": "#2a6db5" },
+    { "id": "electron", "role": "circle", "desc": "الإلكترون المنبعث، ينطلق من مكان النترون إلى أعلى اليمين", "cx": 232, "cy": 186, "r": 7, "color": "#3f9d6e" },
+    { "id": "emissionArrow", "role": "arrow", "desc": "سهم خروج الإلكترون من النواة", "x1": 250, "y1": 172, "x2": 470, "y2": 112, "color": "#e63946", "stroke_dasharray": "10 6" },
+    { "id": "daughterRing", "role": "circle", "desc": "حلقة تُبرز النواة المتبقّية Y بعد حدوث التحوّل", "cx": 205, "cy": 195, "r": 52, "fill": "none", "stroke": "#3f9d6e", "strokeWidth": 3 },
+    { "id": "legendProton", "role": "circle", "desc": "نقطة مفتاح: بروتون", "cx": 468, "cy": 292, "r": 6, "color": "#e63946" },
+    { "id": "legendNeutron", "role": "circle", "desc": "نقطة مفتاح: نترون", "cx": 468, "cy": 318, "r": 6, "color": "#2a6db5" }
+  ],
+  "animation": "SMIL",
+  "timing": { "dur": "3s", "delay": "0.8s", "repeat": "none" },
+  "motion": [
+    { "target": "emissionArrow", "attr": "stroke-dashoffset", "from": 230, "to": 0 },
+    { "target": "convertingNeutron", "attr": "fill", "from": "#2a6db5", "to": "#e63946", "begin": "0.5s" },
+    { "target": "electron", "attr": "cx", "from": 232, "to": 500, "begin": "0.7s" },
+    { "target": "electron", "attr": "cy", "from": 186, "to": 110, "begin": "0.7s" },
+    { "target": "daughterRing", "attr": "opacity", "from": 0, "to": 1, "begin": "1.2s" }
+  ],
+  "labels": [
+    { "id": "lblConversion", "text": "تحوّل نترون:  n → p + ⁰₋₁e", "x": 320, "y": 52 },
+    { "id": "lblParent", "text": "نواة الأم غنية بالنترونات:  X", "x": 205, "y": 130 },
+    { "id": "lblRay", "text": "إشعاع β⁻", "x": 360, "y": 122 },
+    { "id": "lblElectron", "text": "⁰₋₁e", "x": 500, "y": 88 },
+    { "id": "lblDaughter", "text": "النواة المتبقّية:  Y  (A , Z+1)", "x": 205, "y": 282 },
+    { "id": "lblLegendProton", "text": "بروتون", "x": 482, "y": 296 },
+    { "id": "lblLegendNeutron", "text": "نترون", "x": 482, "y": 322 }
+  ],
+  "steps": [
+    "النواة المميَّزة هي الأنوية الغنية بالنترونات",
+    "نترون واحد داخل النواة يتحوّل إلى بروتون",
+    "الإلكترون ⁰₋₁e ينطلق خارج النواة",
+    "النواة تصبح Y بنفس A وبعدد ذري Z+1"
+  ],
+  "notes": "اللوحة من العنصر panel فقط. التكبونات الخمس داخل الأم مرتّبة على دائرة نصف قطرها 28 حول (205,195). المفتاح: نقطة حمراء = بروتون، نقطة زرقاء = نترون. النترون المتحوّل changing لونه من #2a6db5 إلى #e63946 (animate fill)، والإلكترون الأخضر يبدأ من نفس مركزه فينطلق كأنه انفصل منه. daughterRing حلقة بلا تعبئة تظهر متأخرة لتُبرز النواة البنت. fill=freeze."
+}

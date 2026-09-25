@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" font-family="Segoe UI, Tahoma, Arial, sans-serif">
+  <title>إشعاع ألفا: انبعاث نواة هليوم</title>
+  <desc>نواة أم ثقيلة (A , Z) تنبعث منها نواة هليوم ⁴₂He إلى أعلى اليمين على مسار السهم الأحمر المتقطّع، فتنزاح النواة المتبقّية Y نحو أسفل اليمين. وينحفظ العدد الكتلي A والعدد الذري Z: A = (A-4) + 4 و Z = (Z-2) + 2.</desc>
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      svg * { animation: none !important; transition: none !important; }
+      #heliumNucleus { cx: 505px !important; cy: 115px !important; }
+      #daughterNucleus { cx: 310px !important; cy: 240px !important; }
+      #emissionArrow { stroke-dashoffset: 0 !important; }
+    }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#e63946"/>
+    </marker>
+  </defs>
+  <rect id="panel" x="20" y="20" width="600" height="320" rx="16" fill="#f4f8fc" stroke="#d5e4f2" stroke-width="2"/>
+
+  <!-- النواة الأم الثقيلة: الدائرة الكبيرة تغطي الدائرتين في البداية فتبدو كأنهما مركزها -->
+  <circle id="parentNucleus" cx="190" cy="200" r="50" fill="#16213e"/>
+
+  <!-- النواة المتبقّية Y: تنزاح إلى أسفل اليمين فقط (لا تكبر ولا تصغر) -->
+  <circle id="daughterNucleus" cx="310" cy="240" r="34" fill="#3f9d6e">
+    <animate attributeName="cx" from="190" to="310" begin="0.6s" dur="3s" fill="freeze"/>
+    <animate attributeName="cy" from="200" to="240" begin="0.6s" dur="3s" fill="freeze"/>
+  </circle>
+
+  <!-- نواة الهليوم المنبعثة ⁴₂He: تنطلق من مركز الأم إلى أعلى اليمين -->
+  <circle id="heliumNucleus" cx="505" cy="115" r="22" fill="#2a6db5">
+    <animate attributeName="cx" from="190" to="505" begin="0.4s" dur="3s" fill="freeze"/>
+    <animate attributeName="cy" from="200" to="115" begin="0.4s" dur="3s" fill="freeze"/>
+  </circle>
+
+  <!-- مسار انبعاث إشعاع α: خط متقطّع يُرسم ذاتيًا، ثم تنطلق عليه دوائر الهليوم -->
+  <line id="emissionArrow" x1="235" y1="178" x2="470" y2="118" stroke="#e63946" stroke-width="3" stroke-dasharray="10 6" stroke-linecap="round" stroke-dashoffset="0" marker-end="url(#ah)">
+    <animate attributeName="stroke-dashoffset" from="245" to="0" begin="0.8s" dur="3s" fill="freeze"/>
+  </line>
+
+  <!-- معادلتا انحفاظ العدد الكتلي والعدد الذري -->
+  <text id="lblEqA" x="215" y="52" text-anchor="middle" font-size="18" font-weight="bold" fill="#16213e" direction="rtl">انحفاظ A:  A = (A-4) + 4</text>
+  <text id="lblEqZ" x="450" y="52" text-anchor="middle" font-size="18" font-weight="bold" fill="#16213e" direction="rtl">انحفاظ Z:  Z = (Z-2) + 2</text>
+
+  <!-- تسميات الأم والبنت والهليوم ومسمّى الإشعاع -->
+  <text id="lblParent" x="190" y="136" text-anchor="middle" font-size="15" fill="#16213e" direction="rtl">نواة الأم (ثقيلة):  X  (A , Z)</text>
+  <text id="lblRay" x="365" y="128" text-anchor="middle" font-size="15" font-weight="bold" fill="#e63946" direction="rtl">إشعاع α</text>
+  <text id="lblHelium" x="505" y="80" text-anchor="middle" font-size="18" font-weight="bold" fill="#2a6db5">⁴₂He</text>
+  <text id="lblDaughter" x="310" y="300" text-anchor="middle" font-size="15" fill="#16213e" direction="rtl">نواة البنت:  Y  (A-4 , Z-2)</text>
+</svg>

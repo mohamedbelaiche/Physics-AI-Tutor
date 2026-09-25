@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" font-family="Segoe UI, Tahoma, Arial, sans-serif">
+  <title>إشعاع بيتا سالب: تحوّل نترون إلى بروتون</title>
+  <desc>نواة أم غنية بالنترونات، نواتاها مرتّبتان على دائرة نصف قطرها 28 حول المركز. نترون واحد منها يتحوّل لونه من الأزرق إلى الأحمر (نترون ← بروتون)، فينطلق منه إلكترون ⁰₋₁e إلى أعلى اليمين، ويظهر حلقة خضراء تُبرز النواة المتبقّية Y صاحبة العدد الكتلي A نفسه والعدد الذري Z+1. المفتاح: نقطة حمراء = بروتون، نقطة زرقاء = نترون.</desc>
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      svg * { animation: none !important; transition: none !important; }
+      #convertingNeutron { fill: #e63946 !important; }
+      #electron { cx: 500px !important; cy: 110px !important; }
+      #emissionArrow { stroke-dashoffset: 0 !important; }
+      #daughterRing { opacity: 1 !important; }
+    }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#e63946"/>
+    </marker>
+  </defs>
+  <rect id="panel" x="20" y="20" width="600" height="320" rx="16" fill="#f4f8fc" stroke="#d5e4f2" stroke-width="2"/>
+
+  <!-- النواة الأم الغنية بالنترونات -->
+  <circle id="parentNucleus" cx="205" cy="195" r="46" fill="#16213e"/>
+
+  <!-- النوى الخمس داخل الأم على دائرة نصف قطرها 28: حمراء = بروتون، زرقاء = نترون -->
+  <circle id="protonA" cx="178" cy="186" r="9" fill="#e63946"/>
+  <circle id="protonB" cx="222" cy="218" r="9" fill="#e63946"/>
+  <circle id="neutronA" cx="205" cy="167" r="9" fill="#2a6db5"/>
+  <circle id="neutronB" cx="189" cy="218" r="9" fill="#2a6db5"/>
+  <circle id="convertingNeutron" cx="232" cy="186" r="9" fill="#e63946">
+    <set attributeName="fill" to="#e63946" begin="0.5s"/>
+  </circle>
+
+  <!-- الإلكترون المنبعث ⁰₋₁e: ينطلق من مركز النترون المتحوّل إلى أعلى اليمين -->
+  <circle id="electron" cx="500" cy="110" r="7" fill="#3f9d6e">
+    <animate attributeName="cx" from="232" to="500" begin="0.7s" dur="3s" fill="freeze"/>
+    <animate attributeName="cy" from="186" to="110" begin="0.7s" dur="3s" fill="freeze"/>
+  </circle>
+
+  <!-- سهم خروج الإلكترون: خط متقطّع يُرسم ذاتيًا قبل انطلاق الإلكترون -->
+  <line id="emissionArrow" x1="250" y1="172" x2="470" y2="112" stroke="#e63946" stroke-width="3" stroke-dasharray="10 6" stroke-linecap="round" stroke-dashoffset="0" marker-end="url(#ah)">
+    <animate attributeName="stroke-dashoffset" from="230" to="0" begin="0.8s" dur="3s" fill="freeze"/>
+  </line>
+
+  <!-- حلقة بلا تعبئة تظهر متأخرة لتُبرز النواة البنت -->
+  <circle id="daughterRing" cx="205" cy="195" r="52" fill="none" stroke="#3f9d6e" stroke-width="3" opacity="1">
+    <animate attributeName="opacity" from="0" to="1" begin="1.2s" dur="3s" fill="freeze"/>
+  </circle>
+
+  <!-- مفتاح النوى: نقطة حمراء = بروتون، نقطة زرقاء = نترون -->
+  <circle id="legendProton" cx="468" cy="292" r="6" fill="#e63946"/>
+  <circle id="legendNeutron" cx="468" cy="318" r="6" fill="#2a6db5"/>
+  <text id="lblLegendProton" x="482" y="296" font-size="14" fill="#16213e">بروتون</text>
+  <text id="lblLegendNeutron" x="482" y="322" font-size="14" fill="#16213e">نترون</text>
+
+  <!-- التسميات: معادلة التحوّل، الأم، الإشعاع، الإلكترون، البنت -->
+  <text id="lblConversion" x="320" y="52" text-anchor="middle" font-size="19" font-weight="bold" fill="#16213e" direction="rtl">تحوّل نترون:  n → p + ⁰₋₁e</text>
+  <text id="lblParent" x="205" y="130" text-anchor="middle" font-size="15" fill="#16213e" direction="rtl">نواة الأم غنية بالنترونات:  X</text>
+  <text id="lblRay" x="360" y="122" text-anchor="middle" font-size="15" font-weight="bold" fill="#e63946" direction="rtl">إشعاع β⁻</text>
+  <text id="lblElectron" x="500" y="88" text-anchor="middle" font-size="18" font-weight="bold" fill="#3f9d6e">⁰₋₁e</text>
+  <text id="lblDaughter" x="205" y="282" text-anchor="middle" font-size="15" fill="#16213e" direction="rtl">النواة المتبقّية:  Y  (A , Z+1)</text>
+</svg>

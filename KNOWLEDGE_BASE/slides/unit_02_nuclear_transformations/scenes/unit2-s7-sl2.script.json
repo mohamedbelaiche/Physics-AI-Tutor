@@ -1,0 +1,58 @@
+{
+  "slide_id": "unit2-s7-sl2",
+  "viewBox": "0 0 640 360",
+  "intent": "أن تُرى نواتان خفيفتان ²₁H و ³₁H تتقاربان وتتحدان في نواة أثقل ⁴₂He ينبعث معها نترون واحد، مع إبراز انحفاظ A (2 + 3 = 4 + 1 = 5) و Z (1 + 1 = 2 + 0 = 2) دون ذكر أي رقم للطاقة.",
+  "elements": [
+    { "id": "nucleusH2", "role": "circle", "desc": "نواة الديوتروم ²₁H وهي أحد المتفاعلين وهي في حالة البداية", "cx": 170, "cy": 150, "r": 28, "color": "#2a6db5" },
+    { "id": "nucleusH3", "role": "circle", "desc": "نواة التريتيوم ³₁H وهي المتفاعل الثاني وهي في حالة البداية", "cx": 470, "cy": 150, "r": 28, "color": "#2a6db5" },
+    { "id": "nucleusHe", "role": "circle", "desc": "النواة الناتجة ⁴₂He بعد الاتحاد، أثقل من كل متفاعل على حدة", "cx": 328, "cy": 150, "r": 0, "color": "#3f9d6e" },
+    { "id": "nOut", "role": "circle", "desc": "النترون المنبعث الوحيد ¹₀n", "cx": 328, "cy": 150, "r": 10, "color": "#16213e" },
+    { "id": "fusionRing", "role": "circle", "desc": "حلقة دالة على نقطة الاتحاد عند مركز النواة الناتجة", "cx": 328, "cy": 150, "r": 8, "color": "#e63946" },
+    { "id": "lblH2", "role": "label", "desc": "رمز المتفاعل الأول ²₁H، يختفي عند اتحاده", "x": 170, "y": 112, "color": "#2a6db5" },
+    { "id": "lblH3", "role": "label", "desc": "رمز المتفاعل الثاني ³₁H، يختفي عند اتحاده", "x": 470, "y": 112, "color": "#2a6db5" },
+    { "id": "lblHe", "role": "label", "desc": "رمز النواة الناتجة ⁴₂He", "x": 328, "y": 95, "color": "#3f9d6e" },
+    { "id": "lblNOut", "role": "label", "desc": "رمز النترون المنبعث ¹₀n", "x": 545, "y": 50, "color": "#16213e" },
+    { "id": "barReactants", "role": "bar", "desc": "مجموع الأعداد الكتلية للمتفاعلات 2 + 3 = 5، بوحدة قياس 30 بكسل للنوية الواحدة", "x": 30, "y": 296, "w": 150, "h": 24, "color": "#2a6db5" },
+    { "id": "barProducts", "role": "bar", "desc": "مجموع الأعداد الكتلية للنواتج 4 + 1 = 5، بنفس المقياس فيطابق الشريط الأول تمامًا", "x": 210, "y": 296, "w": 150, "h": 24, "color": "#3f9d6e" },
+    { "id": "energyArrow", "role": "arrow", "desc": "سهم يشير إلى الطاقة المحرَّرة المنبعثة عن النقصان الكتلي", "x1": 370, "y1": 320, "x2": 400, "y2": 320, "color": "#e63946" }
+  ],
+  "animation": "SMIL",
+  "timing": { "dur": "4.5s", "delay": "0.8s", "repeat": "none" },
+  "motion": [
+    { "target": "nucleusH2", "attr": "cx", "from": 170, "to": 328 },
+    { "target": "nucleusH2", "attr": "r", "from": 28, "to": 0 },
+    { "target": "nucleusH2", "attr": "opacity", "from": 1, "to": 0 },
+    { "target": "nucleusH3", "attr": "cx", "from": 470, "to": 328 },
+    { "target": "nucleusH3", "attr": "r", "from": 28, "to": 0 },
+    { "target": "nucleusH3", "attr": "opacity", "from": 1, "to": 0 },
+    { "target": "nucleusHe", "attr": "r", "from": 0, "to": 44 },
+    { "target": "nucleusHe", "attr": "opacity", "from": 0, "to": 1 },
+    { "target": "nOut", "attr": "cx", "from": 328, "to": 545 },
+    { "target": "nOut", "attr": "cy", "from": 150, "to": 75 },
+    { "target": "nOut", "attr": "r", "from": 10, "to": 12 },
+    { "target": "nOut", "attr": "opacity", "from": 0, "to": 1 },
+    { "target": "fusionRing", "attr": "r", "from": 8, "to": 66 },
+    { "target": "fusionRing", "attr": "opacity", "from": 0.9, "to": 0 },
+    { "target": "lblH2", "attr": "opacity", "from": 1, "to": 0 },
+    { "target": "lblH3", "attr": "opacity", "from": 1, "to": 0 },
+    { "target": "lblHe", "attr": "opacity", "from": 0, "to": 1 },
+    { "target": "lblNOut", "attr": "opacity", "from": 0, "to": 1 },
+    { "target": "barReactants", "attr": "opacity", "from": 0, "to": 1 },
+    { "target": "barProducts", "attr": "opacity", "from": 0, "to": 1 },
+    { "target": "energyArrow", "attr": "opacity", "from": 0, "to": 1 }
+  ],
+  "labels": [
+    { "id": "lblStrip", "text": "انحفاظ العدد الكتلي A", "x": 195, "y": 262 },
+    { "id": "lblBarL", "text": "2 + 3 = 5", "x": 105, "y": 288 },
+    { "id": "lblBarR", "text": "4 + 1 = 5", "x": 285, "y": 288 },
+    { "id": "lblConsZ", "text": "Z : 1 + 1 = 2 + 0 = 2", "x": 490, "y": 296 },
+    { "id": "lblEnergy", "text": "الطاقة المحرَّرة: E = |Δm|·c²", "x": 490, "y": 326 }
+  ],
+  "steps": [
+    "نواتان خفيفتان ²₁H و ³₁H تتقاربان",
+    "تتحدان في نواة أثقل واحدة ⁴₂He",
+    "ينبعث معها نترون واحد ¹₀n",
+    "العدد الكتلي محفوظ: 2 + 3 = 4 + 1 = 5 والفرق الكتلي يطلق الطاقة"
+  ],
+  "notes": "اللوحة بخلفية #f4f8fc وحدود #d5e4f2. nucleusHe معرَّفة r=0 و opacity=0 في.elements حتى لا تُرسم في الحالة الابتدائية، ومعرَّفة بعد nucleusH2 و nucleusH3 لتغطيها وهي تنكمش فتصبح عملية الاتحاد واضحة. nucleusHe تنمو إلى r=44 أي أكبر من r=28 لكل متفاعل لإبراز أنها أثقل. نOut يبدأ opacity=0 في مركز الاتحاد فلا يظهر قبل انبعاثه. المشهد انتقال متزامن من نواتين متباعدتين إلى نواة واحدة + نترون، والحالة الابتدائية تبقى معروضة طوال delay=0.8s. شريطا انحفاظ A لهما الطول نفسه 150 (بمقياس 30 بكسل لكل نوية) وهذا هو البرهان البصري على الانحفاظ. أحجام النوى ورسم تخطيطي لا مقياس كتل. لا يُذكر أي رقم للطاقة ولا كتلة: الفكرة المجردة E = |Δm|·c² فقط."
+}
