@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" font-family="Segoe UI, Tahoma, Arial, sans-serif">
+  <title>التأريخ الإشعاعي: من النسبة المتبقية إلى عمر العينة</title>
+  <desc>عمودان يقارنان المستوى الابتدائي N₀ و A₀ بالمستوى المتبقي N و A، فيعطيان النسبة المتبقية N₀/N أو A₀/A؛ ثم يُعكس قانون التناقص على هذه النسبة فتُنتج عمر العينة t بصيغتين متكافئتين. المشهد رمزي بالكامل: كل رموزه مضاعِفة، بلا أي قيمة فيزيائية مقاسة.</desc>
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      svg * { animation: none !important; transition: none !important; }
+      #arrowSolve, #nodeResult, #lblResult, #lblResultCap { opacity: 1 !important; }
+      #barN { height: 104px !important; y: 146px !important; }
+      #barA { height: 104px !important; y: 146px !important; }
+    }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#e63946"/>
+    </marker>
+  </defs>
+  <rect x="6" y="6" width="628" height="348" rx="16" fill="#f4f8fc" stroke="#d5e4f2" stroke-width="2"/>
+
+  <!-- خط الأساس والمستوى الابتدائي N₀ / A₀ (متقطع) -->
+  <line id="axisBase" x1="52" y1="250" x2="290" y2="250" stroke="#16213e" stroke-width="2.5"/>
+  <line id="axisLevel0" x1="52" y1="90" x2="290" y2="90" stroke="#16213e" stroke-width="2" stroke-dasharray="6 5" stroke-linecap="round"/>
+
+  <!-- عمودا القياس: عدد الأنوية N ثم النشاط A — الصيغتان لقانون واحد -->
+  <rect id="barN" x="82" y="90" width="58" height="160" fill="#2a6db5">
+    <animate attributeName="height" from="160" to="104" dur="2.2s" begin="0s" fill="freeze"/>
+    <animate attributeName="y" from="90" to="146" dur="2.2s" begin="0s" fill="freeze"/>
+  </rect>
+  <rect id="barA" x="186" y="90" width="58" height="160" fill="#3f9d6e">
+    <animate attributeName="height" from="160" to="104" dur="2.2s" begin="0.4s" fill="freeze"/>
+    <animate attributeName="y" from="90" to="146" dur="2.2s" begin="0.4s" fill="freeze"/>
+  </rect>
+
+  <!-- فاصل بين مرحلة القياس ومرحلة حل المعادلة -->
+  <line id="divider" x1="306" y1="60" x2="306" y2="320" stroke="#d5e4f2" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- الانتقال من النسبة المقيسة إلى حل المعادلة ثم إلى النتيجة -->
+  <line id="arrowSolve" x1="320" y1="150" x2="388" y2="150" stroke="#e63946" stroke-width="3" stroke-linecap="round" marker-end="url(#ah)" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="2.4s" fill="freeze"/>
+  </line>
+  <circle id="nodeResult" cx="420" cy="150" r="30" fill="#e63946" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="2.8s" fill="freeze"/>
+  </circle>
+
+  <!-- شارتان ثابتتان عند مستوى نهاية كل عمود لإبقاء النص مقروءًا أثناء نزوله -->
+  <rect x="96" y="120" width="22" height="22" rx="6" fill="#f4f8fc" stroke="#d5e4f2" stroke-width="1.5"/>
+  <rect x="200" y="120" width="22" height="22" rx="6" fill="#f4f8fc" stroke="#d5e4f2" stroke-width="1.5"/>
+
+  <!-- عناوين المرحلتين والمستويات -->
+  <text x="32" y="48" direction="rtl" text-anchor="end" font-size="18" font-weight="bold" fill="#16213e">① نقيس المتبقي</text>
+  <text x="101" y="80" text-anchor="middle" font-size="17" fill="#16213e">N₀</text>
+  <text x="205" y="80" text-anchor="middle" font-size="17" fill="#16213e">A₀</text>
+  <text x="107" y="138" text-anchor="middle" font-size="17" font-weight="bold" fill="#16213e">N</text>
+  <text x="211" y="138" text-anchor="middle" font-size="17" font-weight="bold" fill="#16213e">A</text>
+  <text x="32" y="310" direction="rtl" text-anchor="end" font-size="15" fill="#2a6db5">النسبة المتبقية N₀/N أو A₀/A</text>
+
+  <!-- النسبة المقيسة تُعكس على معادلة واحدة تُعطي t -->
+  <text x="326" y="100" direction="rtl" text-anchor="end" font-size="18" font-weight="bold" fill="#16213e">② نعكس القانون</text>
+  <text id="lblResult" x="420" y="158" text-anchor="middle" font-size="24" font-weight="bold" fill="#ffffff">t</text>
+  <text id="lblResultCap" x="386" y="196" direction="rtl" text-anchor="end" font-size="15" fill="#e63946">عمر العينة</text>
+  <text x="326" y="248" text-anchor="start" font-size="17" fill="#16213e">t = (ln2 / t₁/₂) · ln(N₀ / N)</text>
+  <text x="348" y="274" text-anchor="start" font-size="17" fill="#16213e">= (ln2 / t₁/₂) · ln(A₀ / A)</text>
+</svg>

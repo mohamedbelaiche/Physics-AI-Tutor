@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" font-family="Segoe UI, Tahoma, Arial, sans-serif">
+  <title>مخطط N-Z ومنطقة استقرار الأنوية</title>
+  <desc>مخطط محاوره: عدد النترونات N أفقيًا وعدد البروتونات Z رأسيًا. شريط مائل شفاف يحدّد منطقة استقرار الأنوية. نواة غنية بالنترونات فوق الشريط تنزلق نحوه سالب شحنة β⁻، ونواة غنية بالبروتونات تحت الشريط تنزلق نحوه موجب الشحنة β⁺، ونواة ثقيلة ذات عدد ذري Z كبير عند نهاية الشريط تنزلق نحو طرفه في إشعاع α.</desc>
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      svg * { animation: none !important; transition: none !important; }
+      #stabilityBand { opacity: 0.28 !important; }
+      #arrowBetaMinus, #arrowBetaPlus, #arrowAlpha { opacity: 1 !important; }
+      #nucBetaMinus { cx: 275px !important; cy: 213px !important; }
+      #nucBetaPlus { cx: 350px !important; cy: 170px !important; }
+      #nucAlpha { cx: 480px !important; cy: 95px !important; }
+    }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#e63946"/>
+    </marker>
+  </defs>
+  <rect id="panel" x="20" y="20" width="600" height="320" rx="16" fill="#f4f8fc" stroke="#d5e4f2" stroke-width="2"/>
+
+  <!-- شريط منطقة الاستقرار: رباعي مائل شفاف، يُرسم قبل المحاور -->
+  <polygon id="stabilityBand" points="136,263 466,73 494,117 164,307" fill="#3f9d6e" opacity="0.28">
+    <animate attributeName="opacity" from="0" to="0.28" begin="0.5s" dur="3s" fill="freeze"/>
+  </polygon>
+
+  <!-- المحوران: N أفقيًا و Z رأسيًا -->
+  <line id="axisN" x1="90" y1="310" x2="600" y2="310" stroke="#16213e" stroke-width="3" stroke-linecap="round"/>
+  <line id="axisZ" x1="90" y1="310" x2="90" y2="62" stroke="#16213e" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- الأنوية الثلاث: كل واحدة تنزلق نحو الشريط حتى تستقر عليه -->
+  <circle id="nucBetaMinus" cx="275" cy="213" r="12" fill="#2a6db5">
+    <animate attributeName="cx" from="215" to="275" begin="1.1s" dur="3s" fill="freeze"/>
+    <animate attributeName="cy" from="120" to="213" begin="1.1s" dur="3s" fill="freeze"/>
+  </circle>
+  <circle id="nucBetaPlus" cx="350" cy="170" r="12" fill="#3f9d6e">
+    <animate attributeName="cx" from="395" to="350" begin="2.1s" dur="3s" fill="freeze"/>
+    <animate attributeName="cy" from="262" to="170" begin="2.1s" dur="3s" fill="freeze"/>
+  </circle>
+  <circle id="nucAlpha" cx="480" cy="95" r="15" fill="#e63946">
+    <animate attributeName="cx" from="565" to="480" begin="3.1s" dur="3s" fill="freeze"/>
+    <animate attributeName="cy" from="60" to="95" begin="3.1s" dur="3s" fill="freeze"/>
+  </circle>
+
+  <!-- أسهم الانزلاق نحو الشريط: تظهر أولًا ثم تنزلق النواة فوقها -->
+  <line id="arrowBetaMinus" x1="215" y1="130" x2="272" y2="205" stroke="#e63946" stroke-width="3" stroke-linecap="round" marker-end="url(#ah)" opacity="1">
+    <animate attributeName="opacity" from="0" to="1" begin="0.8s" dur="3s" fill="freeze"/>
+  </line>
+  <line id="arrowBetaPlus" x1="398" y1="255" x2="354" y2="182" stroke="#e63946" stroke-width="3" stroke-linecap="round" marker-end="url(#ah)" opacity="1">
+    <animate attributeName="opacity" from="0" to="1" begin="1.8s" dur="3s" fill="freeze"/>
+  </line>
+  <line id="arrowAlpha" x1="558" y1="66" x2="490" y2="90" stroke="#e63946" stroke-width="3" stroke-linecap="round" marker-end="url(#ah)" opacity="1">
+    <animate attributeName="opacity" from="0" to="1" begin="2.8s" dur="3s" fill="freeze"/>
+  </line>
+
+  <!-- اسم منطقة الاستقرار، لهالة بيضاء لأنه موضوع فوق الشريط -->
+  <text id="lblBand" x="215" y="270" text-anchor="middle" font-size="15" font-weight="bold" fill="#16213e" direction="rtl" paint-order="stroke" stroke="#ffffff" stroke-width="6" stroke-linejoin="round">منطقة الاستقرار</text>
+
+  <!-- تسميات الأنوية ونوع الإشعاع المنبعث من كل منها -->
+  <text id="lblNucBetaMinus" x="210" y="92" text-anchor="middle" font-size="14" fill="#16213e" direction="rtl">نواة غنية بالنترونات</text>
+  <text id="lblTypeBetaMinus" x="250" y="152" text-anchor="middle" font-size="18" font-weight="bold" fill="#e63946">β⁻</text>
+  <text id="lblNucBetaPlus" x="450" y="295" text-anchor="middle" font-size="14" fill="#16213e" direction="rtl">نواة غنية بالبروتونات</text>
+  <text id="lblTypeBetaPlus" x="350" y="233" text-anchor="middle" font-size="18" font-weight="bold" fill="#e63946">β⁺</text>
+  <text id="lblNucAlpha" x="520" y="38" text-anchor="middle" font-size="14" fill="#16213e" direction="rtl">نواة ثقيلة (Z كبير)</text>
+  <text id="lblTypeAlpha" x="528" y="88" text-anchor="middle" font-size="18" font-weight="bold" fill="#e63946">α</text>
+
+  <!-- تسميتا المحورين -->
+  <text id="lblAxisN" x="600" y="332" text-anchor="middle" font-size="16" font-weight="bold" fill="#16213e">N</text>
+  <text id="lblAxisZ" x="78" y="56" text-anchor="middle" font-size="16" font-weight="bold" fill="#16213e">Z</text>
+</svg>

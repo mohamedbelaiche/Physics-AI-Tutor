@@ -1,15 +1,15 @@
 {
   "version": "1.0",
-  "generated_at": "2026-09-23T17:54:24.960Z",
+  "generated_at": "2026-09-25T21:15:09.759Z",
   "generator": "scripts/build-knowledge-base.js",
-  "total_items": 285,
+  "total_items": 295,
   "counts": {
     "by_type": {
       "concept": 34,
       "exercise": 117,
       "formula": 36,
       "lesson": 5,
-      "unknown": 14,
+      "unknown": 24,
       "solution": 79
     },
     "by_status": {
@@ -17,7 +17,7 @@
       "needs_review": 180,
       "uncertain": 1,
       "extraction_failed": 2,
-      "unknown": 14
+      "unknown": 24
     },
     "raw_files_total": 19,
     "raw_files_unique_by_hash": 18,
@@ -4403,6 +4403,86 @@
       "type": "unknown",
       "path": "slides/unit_01_chemical_kinetics/summary.md",
       "unit": "unit1",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_02_nuclear_transformations/sections/01.deck.md",
+      "unit": "unit2",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_02_nuclear_transformations/sections/02.deck.md",
+      "unit": "unit2",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_02_nuclear_transformations/sections/03.deck.md",
+      "unit": "unit2",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_02_nuclear_transformations/sections/04.deck.md",
+      "unit": "unit2",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_02_nuclear_transformations/sections/05.deck.md",
+      "unit": "unit2",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_02_nuclear_transformations/sections/06.deck.md",
+      "unit": "unit2",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_02_nuclear_transformations/sections/07.deck.md",
+      "unit": "unit2",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_02_nuclear_transformations/sections/08.deck.md",
+      "unit": "unit2",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_02_nuclear_transformations/sections/09.deck.md",
+      "unit": "unit2",
+      "title_ar": null,
+      "status": null
+    },
+    {
+      "id": null,
+      "type": "unknown",
+      "path": "slides/unit_02_nuclear_transformations/summary.md",
+      "unit": "unit2",
       "title_ar": null,
       "status": null
     }

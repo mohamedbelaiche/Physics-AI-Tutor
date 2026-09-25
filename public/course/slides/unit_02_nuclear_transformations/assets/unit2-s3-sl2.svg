@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" font-family="Segoe UI, Tahoma, Arial, sans-serif">
+  <title>التناقص الإشعاعي لعدد الأنوية: N(t) = N₀·e^(−λt)</title>
+  <desc>منحنى تناقص أسّي مقابل الزمن يبرز أربعة مواضع رمزية: N₀ عند t = 0، وN ≈ N₀/e عند t = τ، وN = N₀/2 عند t = t₁/₂، وN = N₀/4 عند t = 2t₁/₂.</desc>
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      svg * { animation: none !important; transition: none !important; }
+    }
+  </style>
+
+  <!-- لوحة المشهد: خلفية فاتحة وحدود -->
+  <rect id="panel" x="20" y="20" width="600" height="320" rx="16" fill="#f4f8fc" stroke="#d5e4f2" stroke-width="2"/>
+
+  <!-- شريط فاتح يبرز مستوى N₀/2 (مستوى زمن عمر النصف) -->
+  <rect id="bandHalf" x="90" y="179" width="510" height="12" fill="#eaf3fd">
+    <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.333;1" dur="0.6s" fill="freeze"/>
+  </rect>
+
+  <!-- المحوران: N عموديًا و t أفقيًا (الوحدات رمزية) -->
+  <line id="axisY" x1="90" y1="300" x2="90" y2="70" stroke="#16213e" stroke-width="2" stroke-linecap="round"/>
+  <line id="axisX" x1="90" y1="300" x2="600" y2="300" stroke="#16213e" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- خطوط مرجعية أفقية عند N₀ و N₀/2 و N₀/e و N₀/4 -->
+  <g stroke="#2a6db5" stroke-width="1" stroke-dasharray="6 5" stroke-linecap="round" opacity="0.35">
+    <line id="gridN0" x1="90" y1="70" x2="600" y2="70">
+      <animate attributeName="opacity" from="0" to="0.35" dur="0.4s" fill="freeze"/>
+    </line>
+    <line id="gridNhalf" x1="90" y1="185.3" x2="600" y2="185.3">
+      <animate attributeName="opacity" values="0;0;0.35" keyTimes="0;0.2;1" dur="0.5s" fill="freeze"/>
+    </line>
+    <line id="gridNe" x1="90" y1="215.4" x2="600" y2="215.4">
+      <animate attributeName="opacity" values="0;0;0.35" keyTimes="0;0.273;1" dur="0.55s" fill="freeze"/>
+    </line>
+    <line id="gridNquarter" x1="90" y1="242.5" x2="600" y2="242.5">
+      <animate attributeName="opacity" values="0;0;0.35" keyTimes="0;0.333;1" dur="0.6s" fill="freeze"/>
+    </line>
+  </g>
+
+  <!-- خطوط عمودية منقّطة تربط مواضع t₁/₂ و τ و 2t₁/₂ بمحور الزمن -->
+  <g stroke="#3f9d6e" stroke-width="1" stroke-dasharray="4 4" stroke-linecap="round" opacity="0.5">
+    <line id="guideHalf" x1="187" y1="185.3" x2="187" y2="300">
+      <animate attributeName="opacity" values="0;0;0.5" keyTimes="0;0.72;1" dur="1.25s" fill="freeze"/>
+    </line>
+    <line id="guideTau" x1="225" y1="215.4" x2="225" y2="300">
+      <animate attributeName="opacity" values="0;0;0.5" keyTimes="0;0.759;1" dur="1.45s" fill="freeze"/>
+    </line>
+    <line id="guideQuarter" x1="273" y1="242.5" x2="273" y2="300">
+      <animate attributeName="opacity" values="0;0;0.5" keyTimes="0;0.794;1" dur="1.7s" fill="freeze"/>
+    </line>
+  </g>
+
+  <!-- منحنى N(t) = N₀·e^(−λt): 17 نقطة أسّية (محدّب، متناقص، مقارب للصفر) -->
+  <path id="curveDecay" d="M100 70 L131.3 120.9 L162.5 160.5 L193.8 191.4 L225 215.4 L256.3 234.1 L287.5 248.7 L318.8 260 L350 268.9 L381.3 275.8 L412.5 281.1 L443.8 285.3 L475 288.5 L506.3 291.1 L537.5 293.1 L568.8 294.6 L600 295.8" fill="none" stroke="#2a6db5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="590" stroke-dashoffset="0">
+    <animate attributeName="stroke-dashoffset" values="590;590;0" keyTimes="0;0.071;1" dur="2.8s" fill="freeze"/>
+  </path>
+
+  <!-- العلامات الأربع: البداية، ثم ت₁/₂ (أحمر تأكيد)، ثم τ، ثم 2t₁/₂ -->
+  <circle id="m0" cx="100" cy="70" r="7" fill="#16213e" stroke="#f4f8fc" stroke-width="2">
+    <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.455;1" dur="0.55s" fill="freeze"/>
+    <animate attributeName="cy" values="40;40;70" keyTimes="0;0.455;1" dur="0.55s" fill="freeze"/>
+  </circle>
+  <circle id="mHalf" cx="187" cy="185.3" r="8" fill="#e63946" stroke="#f4f8fc" stroke-width="2">
+    <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.72;1" dur="1.25s" fill="freeze"/>
+    <animate attributeName="cy" values="150;150;185.3" keyTimes="0;0.667;1" dur="1.35s" fill="freeze"/>
+  </circle>
+  <circle id="mTau" cx="225" cy="215.4" r="8" fill="#3f9d6e" stroke="#f4f8fc" stroke-width="2">
+    <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.759;1" dur="1.45s" fill="freeze"/>
+    <animate attributeName="cy" values="180;180;215.4" keyTimes="0;0.71;1" dur="1.55s" fill="freeze"/>
+  </circle>
+  <circle id="mQuarter" cx="273" cy="242.5" r="7" fill="#3f9d6e" stroke="#f4f8fc" stroke-width="2">
+    <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.794;1" dur="1.7s" fill="freeze"/>
+    <animate attributeName="cy" values="200;200;242.5" keyTimes="0;0.75;1" dur="1.8s" fill="freeze"/>
+  </circle>
+
+  <!-- التسميات: المعادلة، محورا N و t، ثم التدريج الرمزي -->
+  <text id="lblEq" x="330" y="100" text-anchor="middle" font-size="20" font-weight="bold" fill="#16213e">N(t) = N₀ · e^(−λt)</text>
+  <text id="lblNaxis" x="78" y="56" text-anchor="middle" font-size="18" font-weight="bold" fill="#16213e">N</text>
+  <text id="lblN0" x="46" y="76" text-anchor="middle" font-size="15" fill="#2a6db5">N₀</text>
+  <text id="lblNhalf" x="40" y="190" text-anchor="middle" font-size="15" fill="#2a6db5">N₀/2</text>
+  <text id="lblNe" x="40" y="220" text-anchor="middle" font-size="15" fill="#2a6db5">N₀/e</text>
+  <text id="lblNquarter" x="40" y="247" text-anchor="middle" font-size="15" fill="#2a6db5">N₀/4</text>
+  <text id="lblTaxis" x="606" y="316" text-anchor="middle" font-size="17" font-style="italic" fill="#16213e">t</text>
+  <text id="lblOrigin" x="92" y="316" text-anchor="middle" font-size="14" fill="#16213e">0</text>
+  <text id="lblTickHalf" x="172" y="322" text-anchor="middle" font-size="15" fill="#2a6db5">t₁/₂</text>
+  <text id="lblTickTau" x="222" y="322" text-anchor="middle" font-size="16" fill="#2a6db5">τ</text>
+  <text id="lblTickQuarter" x="258" y="322" text-anchor="middle" font-size="14" fill="#2a6db5">2t₁/₂</text>
+
+  <!-- تسمية كل نقطة، تظهر مع هبوط علامتها -->
+  <text id="lblP0" x="116" y="60" font-size="14" fill="#16213e">N = N₀
+    <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.455;1" dur="0.55s" fill="freeze"/>
+  </text>
+  <text id="lblPHalf" x="200" y="168" font-size="14" fill="#e63946">N = N₀/2
+    <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.72;1" dur="1.25s" fill="freeze"/>
+  </text>
+  <text id="lblPTau" x="238" y="190" font-size="14" fill="#3f9d6e">N ≈ N₀/e
+    <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.759;1" dur="1.45s" fill="freeze"/>
+  </text>
+  <text id="lblPQuarter" x="286" y="218" font-size="14" fill="#3f9d6e">N = N₀/4
+    <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.794;1" dur="1.7s" fill="freeze"/>
+  </text>
+</svg>

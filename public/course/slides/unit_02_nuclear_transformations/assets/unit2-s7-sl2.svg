@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" font-family="Segoe UI, Tahoma, Arial, sans-serif">
+  <title>الاندماج النووي: نواتان خفيفتان تتحدان</title>
+  <desc>النواة الخفيفة ²₁H والنواة ³₁H تتقاربان من الجهتين فتتحدان في نواة أثقل ⁴₂He، ينبعث معها نترون واحد ¹₀n. ويظهر شريطان متساويان الطول لأن مجموع الأعداد الكتلية محفوظ: 2 + 3 = 4 + 1 = 5، مع معادلة انحفاظ الشحنة Z، وسهم يشير إلى الطاقة المحرَّرة عن النقصان الكتلي: E = |Δm|·c².</desc>
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      svg * { animation: none !important; transition: none !important; }
+    }
+  </style>
+  <defs>
+    <marker id="ah" markerWidth="6.5" markerHeight="6.5" refX="5.4" refY="3.25" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0L6.5 3.25L0 6.5Z" fill="#e63946"/>
+    </marker>
+  </defs>
+  <rect x="6" y="6" width="628" height="348" rx="16" fill="#f4f8fc" stroke="#d5e4f2" stroke-width="2"/>
+
+  <!-- المتفاعلان: يسرعان أحدهما نحو الآخر من الجهتين -->
+  <circle id="nucleusH2" cx="170" cy="150" r="28" fill="#2a6db5">
+    <animate attributeName="cx" from="170" to="328" dur="2.1s" begin="0.8s" calcMode="spline" keySplines="0.42 0 1 1" fill="freeze"/>
+    <animate attributeName="r" from="28" to="0" dur="2.1s" begin="0.8s" calcMode="spline" keySplines="0.42 0 1 1" fill="freeze"/>
+    <animate attributeName="opacity" from="1" to="0" dur="2.1s" begin="0.8s" fill="freeze"/>
+  </circle>
+  <circle id="nucleusH3" cx="470" cy="150" r="28" fill="#2a6db5">
+    <animate attributeName="cx" from="470" to="328" dur="2.1s" begin="1s" calcMode="spline" keySplines="0.42 0 1 1" fill="freeze"/>
+    <animate attributeName="r" from="28" to="0" dur="2.1s" begin="1s" calcMode="spline" keySplines="0.42 0 1 1" fill="freeze"/>
+    <animate attributeName="opacity" from="1" to="0" dur="2.1s" begin="1s" fill="freeze"/>
+  </circle>
+
+  <!-- النواة الناتجة: تولد من نقطة الاتحاد وتنمو إلى ما هو أكبر من كل متفاعل -->
+  <circle id="nucleusHe" cx="328" cy="150" r="0" fill="#3f9d6e" opacity="0">
+    <animate attributeName="r" from="0" to="44" dur="0.9s" begin="2.9s" calcMode="spline" keySplines="0 0 0.58 1" fill="freeze"/>
+    <animate attributeName="opacity" from="0" to="1" dur="0.9s" begin="2.9s" fill="freeze"/>
+  </circle>
+
+  <!-- النترون المنبعث: يخرج من نواة الاتحاد إلى أعلى اليمين -->
+  <circle id="nOut" cx="328" cy="150" r="10" fill="#16213e" opacity="0">
+    <animate attributeName="cx" from="328" to="545" dur="1.2s" begin="3.4s" calcMode="spline" keySplines="0 0 0.58 1" fill="freeze"/>
+    <animate attributeName="cy" from="150" to="75" dur="1.2s" begin="3.4s" calcMode="spline" keySplines="0 0 0.58 1" fill="freeze"/>
+    <animate attributeName="r" from="10" to="12" dur="1.2s" begin="3.4s" calcMode="spline" keySplines="0 0 0.58 1" fill="freeze"/>
+    <animate attributeName="opacity" from="0" to="1" dur="1.2s" begin="3.4s" fill="freeze"/>
+  </circle>
+
+  <!-- صدمة الاتحاد عند مركز النواة الناتجة -->
+  <circle id="fusionRing" cx="328" cy="150" r="8" fill="none" stroke="#e63946" stroke-width="3" opacity="0">
+    <animate attributeName="r" from="8" to="66" dur="1.1s" begin="2.9s" calcMode="spline" keySplines="0 0 0.6 1" fill="freeze"/>
+    <animate attributeName="opacity" from="0.9" to="0" dur="1.1s" begin="2.9s" fill="freeze"/>
+  </circle>
+
+  <!-- رمزا المتفاعلين: يختفان عند اتحادهما -->
+  <text id="lblH2" x="170" y="112" text-anchor="middle" font-size="18" font-weight="bold" fill="#2a6db5">²₁H
+    <animate attributeName="opacity" from="1" to="0" dur="1.7s" begin="0.8s" fill="freeze"/>
+  </text>
+  <text id="lblH3" x="470" y="112" text-anchor="middle" font-size="18" font-weight="bold" fill="#2a6db5">³₁H
+    <animate attributeName="opacity" from="1" to="0" dur="1.7s" begin="1s" fill="freeze"/>
+  </text>
+
+  <!-- رمز النواة الناتجة والنترون المنبعث -->
+  <text id="lblHe" x="328" y="95" text-anchor="middle" font-size="18" font-weight="bold" fill="#3f9d6e" opacity="0">⁴₂He
+    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="3.2s" fill="freeze"/>
+  </text>
+  <text id="lblNOut" x="545" y="50" text-anchor="middle" font-size="17" font-weight="bold" fill="#16213e" opacity="0">¹₀n
+    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="4.5s" fill="freeze"/>
+  </text>
+
+  <!-- شريطا انحفاظ العدد الكتلي A: بطول متساوٍ 150 لكل منهما (30 بكسل لكل نوية) -->
+  <rect id="barReactants" x="30" y="296" width="150" height="24" rx="4" fill="#2a6db5" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="4.5s" fill="freeze"/>
+  </rect>
+  <rect id="barProducts" x="210" y="296" width="150" height="24" rx="4" fill="#3f9d6e" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="4.5s" fill="freeze"/>
+  </rect>
+
+  <!-- سهم الطاقة المحرَّرة -->
+  <line id="energyArrow" x1="370" y1="320" x2="400" y2="320" stroke="#e63946" stroke-width="3" stroke-linecap="round" marker-end="url(#ah)" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="4.7s" fill="freeze"/>
+  </line>
+
+  <!-- عنوان الشريط وبياناته -->
+  <text id="lblStrip" x="195" y="262" text-anchor="middle" font-size="16" font-weight="bold" fill="#16213e" direction="rtl" unicode-bidi="embed" opacity="0">انحفاظ العدد الكتلي A
+    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="4.5s" fill="freeze"/>
+  </text>
+  <text id="lblBarL" x="105" y="288" text-anchor="middle" font-size="15" font-weight="bold" fill="#2a6db5" opacity="0">2 + 3 = 5
+    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="4.5s" fill="freeze"/>
+  </text>
+  <text id="lblBarR" x="285" y="288" text-anchor="middle" font-size="15" font-weight="bold" fill="#3f9d6e" opacity="0">4 + 1 = 5
+    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="4.5s" fill="freeze"/>
+  </text>
+
+  <!-- معادلة انحفاظ الشحنة Z -->
+  <text id="lblConsZ" x="490" y="296" text-anchor="middle" font-size="15" font-weight="bold" fill="#16213e" opacity="0">Z : 1 + 1 = 2 + 0 = 2
+    <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="4.7s" fill="freeze"/>
+  </text>
+
+  <!-- الطاقة المحرَّرة -->
+  <text id="lblEnergy" x="490" y="326" text-anchor="middle" font-size="14" font-weight="bold" fill="#e63946" direction="rtl" unicode-bidi="embed" opacity="0">الطاقة المحرَّرة: E = |Δm|·c²
+    <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="4.7s" fill="freeze"/>
+  </text>
+</svg>

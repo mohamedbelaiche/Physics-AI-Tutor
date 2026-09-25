@@ -1,0 +1,49 @@
+{
+  "slide_id": "unit2-s2-sl10",
+  "viewBox": "0 0 640 360",
+  "intent": "أن يُظهر مخطط (N-Z) بشريط منطقة الاستقرار، وأن يحدّد موضع كل نواة فوق الشريط أو تحته أو عند نهايته نوع الإشعاع المنبعث منها",
+  "elements": [
+    { "id": "panel", "role": "object", "desc": "لوحة خلفية", "x": 20, "y": 20, "w": 600, "h": 320, "fill": "#f4f8fc", "stroke": "#d5e4f2" },
+    { "id": "axisN", "role": "axis", "desc": "محور عدد النترونات N (أفقي)", "x1": 90, "y1": 310, "x2": 600, "y2": 310, "color": "#16213e" },
+    { "id": "axisZ", "role": "axis", "desc": "محور عدد البروتونات Z (رأسي)", "x1": 90, "y1": 310, "x2": 90, "y2": 62, "color": "#16213e" },
+    { "id": "stabilityBand", "role": "object", "desc": "شريط مائل يمثّل منطقة استقرار الأنوية", "points": [136, 263, 466, 73, 494, 117, 164, 307], "color": "#3f9d6e", "opacity": 0.28 },
+    { "id": "nucBetaMinus", "role": "circle", "desc": "نواة غنية بالنترونات تقع فوق منطقة الاستقرار ⟵ إشعاع β⁻", "cx": 215, "cy": 120, "r": 12, "color": "#2a6db5" },
+    { "id": "nucBetaPlus", "role": "circle", "desc": "نواة غنية بالبروتونات تقع تحت منطقة الاستقرار ⟵ إشعاع β⁺", "cx": 395, "cy": 262, "r": 12, "color": "#3f9d6e" },
+    { "id": "nucAlpha", "role": "circle", "desc": "نواة ثقيلة ذات عدد ذري Z كبير عند نهاية الشريط ⟵ إشعاع α", "cx": 565, "cy": 60, "r": 15, "color": "#e63946" },
+    { "id": "arrowBetaMinus", "role": "arrow", "desc": "سهم انزلاق نواة β⁻ نحو الشريط", "x1": 215, "y1": 130, "x2": 272, "y2": 205, "color": "#e63946" },
+    { "id": "arrowBetaPlus", "role": "arrow", "desc": "سهم انزلاق نواة β⁺ نحو الشريط", "x1": 398, "y1": 255, "x2": 354, "y2": 182, "color": "#e63946" },
+    { "id": "arrowAlpha", "role": "arrow", "desc": "سهم انزلاق النواة الثقيلة نحو طرف الشريط", "x1": 558, "y1": 66, "x2": 490, "y2": 90, "color": "#e63946" }
+  ],
+  "animation": "SMIL",
+  "timing": { "dur": "3s", "delay": "0.5s", "repeat": "none" },
+  "motion": [
+    { "target": "stabilityBand", "attr": "opacity", "from": 0, "to": 0.28 },
+    { "target": "arrowBetaMinus", "attr": "opacity", "from": 0, "to": 1, "begin": "0.8s" },
+    { "target": "nucBetaMinus", "attr": "cx", "from": 215, "to": 275, "begin": "1.1s" },
+    { "target": "nucBetaMinus", "attr": "cy", "from": 120, "to": 213, "begin": "1.1s" },
+    { "target": "arrowBetaPlus", "attr": "opacity", "from": 0, "to": 1, "begin": "1.8s" },
+    { "target": "nucBetaPlus", "attr": "cx", "from": 395, "to": 350, "begin": "2.1s" },
+    { "target": "nucBetaPlus", "attr": "cy", "from": 262, "to": 170, "begin": "2.1s" },
+    { "target": "arrowAlpha", "attr": "opacity", "from": 0, "to": 1, "begin": "2.8s" },
+    { "target": "nucAlpha", "attr": "cx", "from": 565, "to": 480, "begin": "3.1s" },
+    { "target": "nucAlpha", "attr": "cy", "from": 60, "to": 95, "begin": "3.1s" }
+  ],
+  "labels": [
+    { "id": "lblBand", "text": "منطقة الاستقرار", "x": 215, "y": 270 },
+    { "id": "lblNucBetaMinus", "text": "نواة غنية بالنترونات", "x": 210, "y": 92 },
+    { "id": "lblTypeBetaMinus", "text": "β⁻", "x": 250, "y": 152 },
+    { "id": "lblNucBetaPlus", "text": "نواة غنية بالبروتونات", "x": 450, "y": 295 },
+    { "id": "lblTypeBetaPlus", "text": "β⁺", "x": 350, "y": 233 },
+    { "id": "lblNucAlpha", "text": "نواة ثقيلة (Z كبير)", "x": 520, "y": 38 },
+    { "id": "lblTypeAlpha", "text": "α", "x": 528, "y": 88 },
+    { "id": "lblAxisN", "text": "N", "x": 600, "y": 332 },
+    { "id": "lblAxisZ", "text": "Z", "x": 78, "y": 56 }
+  ],
+  "steps": [
+    "مخطط (N-Z): عدد النترونات أفقيًا وعدد البروتونات رأسيًا",
+    "الشريط المائل يحدّد منطقة استقرار الأنوية",
+    "فوق الشريط ⟵ β⁻ ؛ تحت الشريط ⟵ β⁺",
+    "نهاية الشريط (Z كبير) ⟵ إشعاع α"
+  ],
+  "notes": "اللوحة من العنصر panel فقط. stabilityBand رباعي تعبئة شفاف (0.28) يُرسم قبل المحاور. لكل نواة سهم أحمر يظهر أولًا (opacity) ثم تنزلق النواة نحو الشريط حتى تستقر عليه (β⁻ إلى 275,213 ؛ β⁺ إلى 350,170 ؛ α إلى 480,95). ضع هالة بيضاء خلف نص «منطقة الاستقرار» لأنه موضوع فوق الشريط. محور N أفقي و Z رأسي. fill=freeze."
+}

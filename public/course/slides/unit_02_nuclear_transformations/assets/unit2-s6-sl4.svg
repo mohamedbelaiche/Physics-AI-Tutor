@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" font-family="Segoe UI, Tahoma, Arial, sans-serif">
+  <title>النقصان الكتلي وطاقة الربط</title>
+  <desc>نكليونات حرّة زرقاء (Z) وخضراء (N) تتقارب إلى نواة مكوّنة. يمينًا: عمود كتلة النكليونات الحرّة Z·m_p + N·m_n أطول دائمًا من عمود كتلة النواة m(^A_Z X)، والفارق Δm بينهما يُقاس بسهم مزدوج الرأس ثم يُحرَّر على شكل طاقة ربط E_l = Δm·c². كل شيء رمزي: الدوائر تمثيل لـ Z و N لا لعددهما، ولا أرقام فيزيائية مقاسة.</desc>
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      svg * { animation: none !important; transition: none !important; }
+      #nucleus, #gapDm, #lblDm, #lblEl { opacity: 1 !important; }
+      #barNucleus { height: 150px !important; y: 150px !important; }
+      #barEnergy { height: 100px !important; y: 200px !important; }
+    }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#e63946"/>
+    </marker>
+  </defs>
+  <rect id="panel" x="0" y="0" width="640" height="360" fill="#f4f8fc" stroke="#d5e4f2" stroke-width="2"/>
+
+  <!-- النواة المكوّنة: قرص يظهر في منتصف التقارب -->
+  <circle id="nucleus" cx="140" cy="252" r="34" fill="#eaf3fd" stroke="#16213e" stroke-width="2.5" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="1.2s" fill="freeze"/>
+  </circle>
+
+  <!-- النكليونات الحرّة: زرقاء = بروتون (Z)، خضراء = نترون (N) — تمثيل رمزي لا عددي -->
+  <circle id="p1" cx="70" cy="68" r="13" fill="#2a6db5">
+    <animate attributeName="cx" from="70" to="140" dur="1.3s" begin="0s" fill="freeze"/>
+    <animate attributeName="cy" from="68" to="234" dur="1.3s" begin="0s" fill="freeze"/>
+  </circle>
+  <circle id="p2" cx="142" cy="46" r="13" fill="#2a6db5">
+    <animate attributeName="cx" from="142" to="122" dur="1.3s" begin="0s" fill="freeze"/>
+    <animate attributeName="cy" from="46" to="252" dur="1.3s" begin="0s" fill="freeze"/>
+  </circle>
+  <circle id="p3" cx="214" cy="76" r="13" fill="#2a6db5">
+    <animate attributeName="cx" from="214" to="158" dur="1.3s" begin="0s" fill="freeze"/>
+    <animate attributeName="cy" from="76" to="252" dur="1.3s" begin="0s" fill="freeze"/>
+  </circle>
+  <circle id="n1" cx="100" cy="106" r="13" fill="#3f9d6e">
+    <animate attributeName="cx" from="100" to="140" dur="1.3s" begin="0s" fill="freeze"/>
+    <animate attributeName="cy" from="106" to="270" dur="1.3s" begin="0s" fill="freeze"/>
+  </circle>
+  <circle id="n2" cx="182" cy="110" r="13" fill="#3f9d6e">
+    <animate attributeName="cx" from="182" to="140" dur="1.3s" begin="0s" fill="freeze"/>
+    <animate attributeName="cy" from="110" to="252" dur="1.3s" begin="0s" fill="freeze"/>
+  </circle>
+
+  <!-- سهم الارتباط/الاحتجاز من النكليونات الحرّة إلى النواة -->
+  <line id="bindArrow" x1="140" y1="150" x2="140" y2="212" stroke="#e63946" stroke-width="3" stroke-linecap="round" marker-end="url(#ah)"/>
+
+  <!-- خط أساس الكتلة المشترك للعمودين -->
+  <line id="axisMass" x1="276" y1="300" x2="566" y2="300" stroke="#16213e" stroke-width="2.5"/>
+
+  <!-- عمود الكتلة الحرّة: ثابت الارتفاع وقمّته y=90 — الأطول دائمًا، لا يُسوّى بعمود النواة -->
+  <rect id="barFree" x="290" y="90" width="48" height="210" fill="#2a6db5"/>
+
+  <!-- عمود كتلة النواة: ينمو من خط الأساس إلى h=150 ويبقى أقصر -->
+  <rect id="barNucleus" x="350" y="300" width="48" height="0" fill="#3f9d6e">
+    <animate attributeName="height" from="0" to="150" dur="1s" begin="1.7s" fill="freeze"/>
+    <animate attributeName="y" from="300" to="150" dur="1s" begin="1.7s" fill="freeze"/>
+  </rect>
+
+  <!-- قياس الفجوة Δm بين قمّتي العمودين -->
+  <line id="gapDm" x1="418" y1="90" x2="418" y2="150" stroke="#e63946" stroke-width="2" stroke-dasharray="5 4" stroke-linecap="round" marker-start="url(#ah)" marker-end="url(#ah)" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2.5s" fill="freeze"/>
+  </line>
+  <text id="lblDm" x="444" y="126" text-anchor="start" font-size="15" font-weight="bold" fill="#e63946" opacity="0">Δm<animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="2.7s" fill="freeze"/></text>
+
+  <!-- عمود طاقة الربط المحرَّرة: ارتفاعه رمزي، فالكتلة والطاقة وحدان مختلفان -->
+  <rect id="barEnergy" x="505" y="300" width="44" height="0" fill="#e63946">
+    <animate attributeName="height" from="0" to="100" dur="0.9s" begin="3.2s" fill="freeze"/>
+    <animate attributeName="y" from="300" to="200" dur="0.9s" begin="3.2s" fill="freeze"/>
+  </rect>
+
+  <!-- سهم تصاعد الطاقة المحرَّرة -->
+  <line id="arrowEnergy" x1="580" y1="292" x2="580" y2="208" stroke="#e63946" stroke-width="3" stroke-linecap="round" marker-end="url(#ah)"/>
+
+  <!-- مفتاح النكليونات الحرّة -->
+  <text x="72" y="30" text-anchor="start" font-size="16" font-weight="bold" fill="#2a6db5">Z · m<tspan baseline-shift="sub" font-size="11">p</tspan></text>
+  <text x="214" y="30" text-anchor="start" font-size="16" font-weight="bold" fill="#3f9d6e">N · m<tspan baseline-shift="sub" font-size="11">n</tspan></text>
+
+  <!-- المشهد الأيسر: نكليونات حرّة ثم ارتباط ثم نواة مكوّنة -->
+  <text x="140" y="140" direction="rtl" text-anchor="middle" font-size="15" fill="#16213e">نكليونات حرّة</text>
+  <text x="200" y="186" direction="rtl" text-anchor="end" font-size="14" fill="#e63946">احتجاز / ارتباط</text>
+  <text x="140" y="306" direction="rtl" text-anchor="middle" font-size="15" fill="#16213e">النواة المكوّنة</text>
+
+  <!-- عناوين الأعمدة الثلاثة -->
+  <text x="314" y="78" text-anchor="middle" font-size="14" fill="#16213e">Z·m<tspan baseline-shift="sub" font-size="10">p</tspan> + N·m<tspan baseline-shift="sub" font-size="10">n</tspan></text>
+  <text x="374" y="140" text-anchor="middle" font-size="14" fill="#3f9d6e">m(<tspan baseline-shift="super" font-size="9">A</tspan><tspan baseline-shift="sub" font-size="9">Z</tspan>X)</text>
+  <text id="lblEl" x="527" y="188" text-anchor="middle" font-size="14" font-weight="bold" fill="#e63946" opacity="0">E<tspan baseline-shift="sub" font-size="10">l</tspan> = Δm·c²<animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="3.1s" fill="freeze"/></text>
+
+  <!-- معادلة النقصان الكتلي وخاتمة الدرس -->
+  <text x="320" y="320" text-anchor="middle" font-size="15" fill="#16213e">Δm = [Z·m<tspan baseline-shift="sub" font-size="10">p</tspan> + N·m<tspan baseline-shift="sub" font-size="10">n</tspan>] − m(<tspan baseline-shift="super" font-size="9">A</tspan><tspan baseline-shift="sub" font-size="9">Z</tspan>X)</text>
+  <text x="320" y="338" direction="rtl" text-anchor="middle" font-size="13" fill="#2a6db5">النواة أكثر استقرارًا كلما كانت طاقة الربط لكل نويّة أكبر.</text>
+</svg>
