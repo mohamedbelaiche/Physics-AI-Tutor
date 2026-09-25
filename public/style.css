@@ -1500,6 +1500,8 @@ body.slides-focus .slides-wrap {
   flex: 1;
   min-height: 100dvh;
   overflow-y: auto;
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
 }
 
 /* المشاهد تتوقف عند حدود المساحة الآمنة ولا تتجاوزها، فتبقى متمركزة
@@ -1508,6 +1510,20 @@ body.slides-focus .slides-scene-img {
   width: 100%;
   max-height: calc(100dvh - (2 * var(--slide-safe-block) + 6rem));
   object-fit: contain;
+}
+
+/* شريط التنقّل يبقى ملتصقًا بأسفل البطاقة. sticky يبقى ضمن التدفّق
+   فيحجز مكانه فلا يركب على المشهد ولا على نصّ الشريحة (بعكس fixed/absolute
+   اللذين يغطّيان)، ومع ذلك يبقى زر «التالي» نغازًا مهما طال محتوى الشريحة
+   فلا يضطر التلميذ إلى النزول بحثًا عنه. والخلفية معتمة بلون البطاقة
+   حتى لا يظهر النص متباخلًا مع الأزرار أثناء التمرير. */
+body.slides-focus .slides-nav {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  padding-block: 0.6rem;
+  background: #fff;
+  box-shadow: 0 -1px 0 #e5ebf1;
 }
 
 .slides-wrap > .slides-body {

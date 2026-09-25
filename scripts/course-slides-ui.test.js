@@ -417,6 +417,32 @@ test('slide prose keeps a proportional reading measure', () => {
   assert.match(scene, /max-height:\s*calc\(100dvh\s*-\s*\(?\s*2\s*\*\s*var\(--slide-safe-block\)/);
 });
 
+test('the slide next button stays reachable without covering the slide', () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'style.css'), 'utf8');
+  const nav = cssBlock(css, 'body.slides-focus .slides-nav');
+
+  // sticky يحجز مكانه في التدفّق فلا يركب على الشريحة؛ fixed/absolute يغطّيان
+  // المشهد والنص، وهما بالضبط ما اشتكى منه التلميذ.
+  assert.match(nav, /position:\s*sticky/);
+  assert.match(nav, /bottom:\s*0\b/);
+  assert.doesNotMatch(nav, /position:\s*(fixed|absolute)\b/);
+
+  // خلفية معتمة: النص المارّ تحت الشريط لا يظهر متباخلًا مع الأزرار.
+  const background = /background:\s*([^;]+);/.exec(nav);
+  assert.notEqual(background, null, 'the sticky controls need a background');
+  assert.notEqual(background[1].trim(), 'none');
+
+  // البطاقة هي المِرْيار الوحيد (الجسم overflow:hidden)، فيجب أن يُعلن
+  // التمرير بمقبض مستقرّ حتى يعرف التلميذ أن هناك محتوى أسفل.
+  const scroller = cssBlock(css, 'body.slides-focus .slides-wrap');
+  assert.match(scroller, /overflow-y:\s*auto/);
+  assert.match(scroller, /scrollbar-gutter:\s*stable/);
+
+  // المشهد لا ينزل تحت الشريط الملتصق.
+  const scene = cssBlock(css, 'body.slides-focus .slides-scene-img');
+  assert.match(scene, /max-height:\s*calc\(/);
+});
+
 test('slide mode keeps the normal site layout until the expand button is pressed', async () => {
   const { elements, body } = createHarness();
   const modeSlides = elements.get('mode-slides');
