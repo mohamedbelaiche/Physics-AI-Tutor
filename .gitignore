@@ -19,3 +19,7 @@ sync_payload/
 *.tmp
 # Isolated worktrees (SDD)
 .worktrees/
+
+# Supabase data exports (PII — never commit)
+users-export.csv
+*users-export*.csv

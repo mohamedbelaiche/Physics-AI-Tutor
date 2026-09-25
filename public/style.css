@@ -1343,11 +1343,19 @@ main {
 
 /* ============ الشرائح التفاعلية (نظام الشرائح) ============ */
 
+.lesson-presentation-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-bottom: 1.25rem;
+}
+
 .lesson-mode-switch {
   display: flex;
   justify-content: center;
   gap: 0.4rem;
-  margin: 0 auto 1.25rem;
+  margin: 0;
   background: #eef2f6;
   border-radius: 30px;
   padding: 0.3rem;
@@ -1374,8 +1382,52 @@ main {
   color: #fff;
 }
 
+body.slides-focus main {
+  max-width: none;
+  padding-inline: clamp(0.75rem, 2vw, 2rem);
+}
+
+.slides-fullscreen-btn {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #b8cbe0;
+  border-radius: 50%;
+  background: #fff;
+  color: #1f5aa0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.slides-fullscreen-btn:hover {
+  background: #2a6db5;
+  border-color: #2a6db5;
+  color: #fff;
+}
+
+.slides-fullscreen-btn:focus-visible {
+  outline: 3px solid rgba(42, 109, 181, 0.28);
+  outline-offset: 2px;
+}
+
+.slides-fullscreen-btn .icon-collapse {
+  display: none;
+}
+
+.slides-fullscreen-btn[aria-pressed="true"] .icon-expand {
+  display: none;
+}
+
+.slides-fullscreen-btn[aria-pressed="true"] .icon-collapse {
+  display: inline;
+}
+
 .course-content.slides-mode {
-  padding: 1.4rem;
+  padding: clamp(1rem, 2vw, 2rem);
 }
 
 .slides-wrap {
@@ -1383,6 +1435,21 @@ main {
   flex-direction: column;
   gap: 1rem;
   min-height: 300px;
+}
+
+body.slides-focus .slides-wrap {
+  min-height: max(420px, calc(100dvh - var(--lesson-chrome, 20rem)));
+}
+
+/* تكبير المشاهد يقتصر على العرض الموسّع: لا نغيّر تخطيط الشرائح العادي. */
+body.slides-focus .slides-scene-img {
+  width: 100%;
+  max-height: calc(100dvh - (var(--lesson-chrome, 20rem) + 7rem));
+  object-fit: contain;
+}
+
+.slides-wrap > .slides-body {
+  flex: 1;
 }
 
 .slides-top {
@@ -1519,6 +1586,33 @@ main {
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
+}
+
+#course-lesson-view:fullscreen {
+  width: 100%;
+  height: 100%;
+  padding: 1.25rem clamp(0.75rem, 2vw, 2rem);
+  overflow: auto;
+  background: #f0f4f8;
+}
+
+/* ارتفاع الـ chrome الثابت فوق البطاقة (رجوع، عنوان، شرائح الأقسام، المبدّل). */
+#course-lesson-view {
+  --lesson-chrome: 20rem;
+}
+
+#course-lesson-view:fullscreen .course-content.slides-mode {
+  min-height: calc(100dvh - (var(--lesson-chrome) - 4rem));
+  display: flex;
+}
+
+#course-lesson-view:fullscreen .slides-wrap {
+  flex: 1;
+  min-height: max(420px, calc(100dvh - var(--lesson-chrome)));
+}
+
+#course-lesson-view:fullscreen .slides-scene-img {
+  max-height: calc(100dvh - (var(--lesson-chrome) + 7rem));
 }
 
 @media (max-width: 620px) {

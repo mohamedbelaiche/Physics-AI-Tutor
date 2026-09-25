@@ -22,8 +22,10 @@
   var lessonBody = document.getElementById('course-lesson-body');
   var lessonNav = document.getElementById('course-lesson-nav');
   var modeSwitch = document.getElementById('course-lesson-mode');
+  var lessonPresentationControls = document.getElementById('lesson-presentation-controls');
   var modeTextBtn = document.getElementById('mode-text');
   var modeSlidesBtn = document.getElementById('mode-slides');
+  var slidesFullscreenBtn = document.getElementById('slides-fullscreen-btn');
   var slidesView = document.getElementById('slides-view');
   var currentMode = 'text';
   var sectionsBar = document.getElementById('course-sections-bar');
@@ -128,7 +130,8 @@
   }
 
   // يحفظ الموقع محليًا دائمًا، وللمسجّل يرسله للخادم (مخفّفًا كل ثانيتين).
-  function savePosition() {
+  // force: تجاوز التخفيف لتصحيح حالة يجب أن تصل الخادم فورًا (مثل الرجوع من الشرائح).
+  function savePosition(force) {
     var course = getCourse(currentCourseId);
     if (!course || !course.sections.length) return;
     var pos = buildPosition(course);
@@ -137,7 +140,7 @@
     try { localStorage.setItem(POS_STORAGE_KEY, JSON.stringify(local)); } catch (e) {}
     if (!isLoggedIn() || !pos.section_id) return;
     var now = Date.now();
-    if (now - lastServerPosTs < 2000) return;
+    if (!force && now - lastServerPosTs < 2000) return;
     lastServerPosTs = now;
     postPosition(pos);
   }
@@ -164,6 +167,12 @@
 
   function setTab(active) {
     var showCourses = active === 'courses';
+    // مغادرة تبويب الكورسات تُنهي ملء الشاشة فقط: نُبقي وضع الشرائح وموضعه عند العودة.
+    if (!showCourses) {
+      exitLessonFullscreen().catch(function () {
+        showLessonNote('تعذر إنهاء ملء الشاشة.', 'error');
+      });
+    }
     tabSummaries.classList.toggle('active', !showCourses);
     tabCourses.classList.toggle('active', showCourses);
     summariesGroup.classList.toggle('hidden', showCourses);
@@ -400,12 +409,85 @@
     });
   }
 
+  function updateSlidesFullscreenUI() {
+    if (!slidesFullscreenBtn) return;
+    var active = document.fullscreenElement === lessonView;
+    // اسم واحد ثابت + aria-pressed: القارئ الشاشةي يقرأ "ملء الشاشة: مضغوط/غير مضغوط".
+    slidesFullscreenBtn.setAttribute('aria-pressed', active ? 'true' : 'false');
+  }
+
+  function exitLessonFullscreen() {
+    if (document.fullscreenElement !== lessonView || typeof document.exitFullscreen !== 'function') {
+      return Promise.resolve();
+    }
+    try {
+      return Promise.resolve(document.exitFullscreen());
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
+  function leaveLessonSlides() {
+    currentMode = 'text';
+    currentSlideIdx = 0;
+    pendingSlide = null;
+    lessonBody.classList.remove('slides-mode');
+    document.body.classList.remove('slides-focus');
+    if (lessonPresentationControls) lessonPresentationControls.classList.add('hidden');
+    if (slidesFullscreenBtn) slidesFullscreenBtn.classList.add('hidden');
+    updateSlidesFullscreenUI();
+    return exitLessonFullscreen().catch(function () {
+      showLessonNote('تعذر إنهاء ملء الشاشة.', 'error');
+    });
+  }
+
+  function toggleSlidesFullscreen() {
+    if (!slidesFullscreenBtn || currentMode !== 'slides') return;
+    var action;
+    try {
+      if (document.fullscreenElement === lessonView) {
+        action = exitLessonFullscreen();
+      } else if (supportsLessonFullscreen()) {
+        action = lessonView.requestFullscreen();
+      } else {
+        showLessonNote('ملء الشاشة غير مدعوم في هذا المتصفح.', 'error');
+        return;
+      }
+    } catch (err) {
+      showLessonNote('تعذر تغيير ملء الشاشة.', 'error');
+      return;
+    }
+    if (action && typeof action.catch === 'function') {
+      action.catch(function () {
+        showLessonNote('تعذر تغيير ملء الشاشة.', 'error');
+      });
+    }
+  }
+
+  function supportsLessonFullscreen() {
+    return typeof lessonView.requestFullscreen === 'function' &&
+      typeof document.exitFullscreen === 'function';
+  }
+
   function setModeUI(available) {
     modeSwitch.classList.toggle('hidden', !available);
+    if (lessonPresentationControls) {
+      lessonPresentationControls.classList.toggle('hidden', !available);
+    }
     var slides = currentMode === 'slides';
     modeTextBtn.classList.toggle('active', !slides);
     modeSlidesBtn.classList.toggle('active', slides);
+    modeTextBtn.setAttribute('aria-selected', slides ? 'false' : 'true');
+    modeSlidesBtn.setAttribute('aria-selected', slides ? 'true' : 'false');
     lessonBody.classList.toggle('slides-mode', slides);
+    document.body.classList.toggle('slides-focus', slides && available);
+    if (slidesFullscreenBtn) {
+      slidesFullscreenBtn.classList.toggle(
+        'hidden',
+        !slides || !available || !supportsLessonFullscreen()
+      );
+    }
+    updateSlidesFullscreenUI();
   }
 
   function switchMode(mode) {
@@ -413,17 +495,43 @@
     currentMode = mode;
     currentSlideIdx = 0;
     pendingSlide = 0;
-    if (courseHasSlides(currentCourseId ? getCourse(currentCourseId).slug || '' : '')) {
+    if (mode === 'text') {
+      exitLessonFullscreen().catch(function () {
+        showLessonNote('تعذر إنهاء ملء الشاشة.', 'error');
+      });
       setModeUI(true);
-    } else {
-      setModeUI(false);
+      renderLesson();
+      savePosition();
+      return;
     }
-    renderLesson();
-    savePosition();
+    var courseId = currentCourseId;
+    var course = getCourse(courseId);
+    courseHasSlides(course && course.slug || '').then(function (available) {
+      if (currentMode !== mode || currentCourseId !== courseId) return;
+      if (!available) currentMode = 'text';
+      setModeUI(available);
+      renderLesson();
+      savePosition();
+    }).catch(function () {
+      // فشل تحميل الـ deck: نعود للنص حتى لا يعلق مبدّل الوضع.
+      if (currentCourseId !== courseId) return;
+      currentMode = 'text';
+      setModeUI(true);
+      renderLesson();
+      savePosition();
+    });
   }
 
   modeTextBtn.addEventListener('click', function () { switchMode('text'); });
   modeSlidesBtn.addEventListener('click', function () { switchMode('slides'); });
+  if (slidesFullscreenBtn) {
+    slidesFullscreenBtn.addEventListener('click', toggleSlidesFullscreen);
+  }
+  document.addEventListener('fullscreenchange', updateSlidesFullscreenUI);
+  document.addEventListener('fullscreenerror', function (event) {
+    if (event.target && event.target !== lessonView) return;
+    showLessonNote('تعذر تغيير ملء الشاشة.', 'error');
+  });
 
   /* ---------- درس الكورس ---------- */
 
@@ -455,6 +563,7 @@
     setModeUI(false);
     courseHasSlides(course.slug).then(function (available) {
       if (currentCourseId !== course.id) return;
+      if (!available && currentMode === 'slides') currentMode = 'text';
       setModeUI(available);
     });
     dashView.classList.add('hidden');
@@ -467,6 +576,7 @@
   backBtn.addEventListener('click', function () { showDashboard(); });
 
   function showDashboard() {
+    leaveLessonSlides();
     dashView.classList.remove('hidden');
     lessonView.classList.add('hidden');
     currentCourseId = null;
@@ -496,12 +606,22 @@
           window.SlidesPlayer.playSection(lessonBody, slug, currentSectionIdx, initial);
           renderSectionsBar(course);
         } else {
+          currentMode = 'text';
+          pendingSlide = null;
           setModeUI(false);
           lessonBody.innerHTML = renderMarkdownContent(section.content_md);
+          savePosition(true);
         }
       });
     } else {
       lessonBody.classList.remove('slides-mode');
+      // لا يوجد مشغّل شرائح أصلًا: نصحّح الوضع المحفوظ حتى لا نعيد المحاولة كل فتح.
+      if (currentMode === 'slides') {
+        currentMode = 'text';
+        pendingSlide = null;
+        setModeUI(false);
+        savePosition(true);
+      }
       lessonBody.innerHTML = renderMarkdownContent(section.content_md);
     }
     renderLessonNav(course);
@@ -678,6 +798,10 @@
     var idx = courseData.findIndex(function (c) { return c.id === course.id; });
     var nextCourse = courseData[idx + 1] || null;
 
+    // شاشة الإتمام تحلّ محل الدرس: ننهي أي وضع شرائح أو ملء شاشة قبل عرضها.
+    leaveLessonSlides();
+    setModeUI(false);
+
     lessonHead.innerHTML =
       '<h2 class="lesson-title">🎉 مبارك! أتممتَ الكورس: ' + escapeHtml(course.title_ar) + '</h2>' +
       '<span class="lesson-counter">رائع — تقدمك محفوظ.</span>';
@@ -704,12 +828,7 @@
       var nxt = makeNavBtn('افتح الكورس التالي ←', {
         primary: true,
         onClick: function () {
-          currentCourseId = nextCourse.id;
-          currentSectionIdx = 0;
-          currentSlideIdx = 0;
-          pendingSlide = null;
-          currentMode = 'text';
-          renderLesson();
+          openCourse(nextCourse, idx + 1);
         }
       });
       lessonNav.appendChild(nxt);

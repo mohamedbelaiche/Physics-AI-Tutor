@@ -8,7 +8,8 @@
     "sync:data": "node scripts/sync-data.js",
     "build:course": "node scripts/build-course-content.js",
     "check:course": "node scripts/smoke-course.js",
-    "check:slides": "node scripts/smoke-slides.js"
+    "check:slides": "node scripts/smoke-slides.js",
+    "test": "node --test scripts/course-slides-ui.test.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.116.0",
