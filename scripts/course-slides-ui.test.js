@@ -52,6 +52,7 @@ function createHarness(options) {
       this.children = [];
       this.parent = null;
       this.eventListeners = new Map();
+      this.scrollIntoViewCalls = 0;
     }
 
     get innerHTML() {
@@ -127,8 +128,43 @@ function createHarness(options) {
       this.classList.values = new Set(String(value).split(/\s+/).filter(Boolean));
     }
 
-    scrollIntoView() {}
+    // قياسات التخطيط: test harness لا يملك محرّك تخطيط، فيُلقن كل عنصر بأبعاد
+    // map حسب أصنافه (settings.layout) لإثارة مسارات القياس في slides-player.
+    layoutBox() {
+      const layout = this.harnessLayout || {};
+      for (const name of this.classList.values) {
+        if (layout[name]) return layout[name];
+      }
+      return null;
+    }
+
+    get clientHeight() {
+      const box = this.layoutBox();
+      return box && typeof box.clientHeight === 'number' ? box.clientHeight : 0;
+    }
+
+    get scrollHeight() {
+      const box = this.layoutBox();
+      return box && typeof box.scrollHeight === 'number' ? box.scrollHeight : 0;
+    }
+
+    get clientWidth() {
+      const box = this.layoutBox();
+      return box && typeof box.clientWidth === 'number' ? box.clientWidth : 0;
+    }
+
+    get scrollWidth() {
+      const box = this.layoutBox();
+      return box && typeof box.scrollWidth === 'number' ? box.scrollWidth : 0;
+    }
+
+    scrollIntoView() {
+      this.scrollIntoViewCalls += 1;
+    }
   }
+
+  // كل عنصر يعرف قياسات التخطيط التي يلقنها له الاختبار.
+  FakeElement.prototype.harnessLayout = settings.layout || {};
 
   const body = new FakeElement('body');
   const elements = new Map();
@@ -266,11 +302,34 @@ function createHarness(options) {
     });
   };
 
+  // ResizeObserver: المشغّل يراقب صندوق الشريحة، فقِس تغيّره لا تغيّر النافذة
+  // فقط (لوحة المحادثة، شريط المتصفح على الجوال، تبديل الأدوات). harness يجد
+  // مَن مرصود فـtriggerResize يطلق الاستدعاء كما يفعل المتصفح.
+  const observedTargets = [];
+  const resizeCallbacks = [];
+  class FakeResizeObserver {
+    constructor(callback) {
+      this.callback = callback;
+      resizeCallbacks.push(callback);
+    }
+
+    observe(target) {
+      observedTargets.push(target);
+    }
+
+    unobserve() {}
+
+    disconnect() {}
+  }
+
   const window = {
     fetch,
     scrollTo() {},
+    ResizeObserver: FakeResizeObserver,
     addEventListener(type, handler) {
-      listeners.set(type, handler);
+      const handlers = listeners.get(type) || [];
+      handlers.push(handler);
+      listeners.set(type, handlers);
     },
     MdRender: {
       renderMarkdownContent(md) {
@@ -328,7 +387,29 @@ function createHarness(options) {
   const source = fs.readFileSync(path.join(__dirname, '..', 'public', 'course.js'), 'utf8');
   vm.runInContext(source, context, { filename: 'public/course.js' });
 
-  return { context, document, elements, body, storage, postedPositions };
+  function dispatchWindow(type) {
+    const handlers = listeners.get(type) || [];
+    handlers.slice().forEach((handler) => handler.call(window, { type }));
+  }
+
+  // يطلق ResizeObserver كما لو تغيّر حجم الصندوق المرصود (لا حدث نافذة).
+  function triggerResize() {
+    resizeCallbacks.forEach(function (callback) {
+      callback([], null);
+    });
+  }
+
+  return {
+    context,
+    document,
+    elements,
+    body,
+    storage,
+    postedPositions,
+    dispatchWindow,
+    observedTargets,
+    triggerResize
+  };
 }
 
 function makeCourse(overrides) {
@@ -404,6 +485,47 @@ test('the expanded slide layout does not zero the content padding', () => {
   assert.doesNotMatch(container, /max-width:\s*none\b/);
 });
 
+test('the expanded slide chain shares one screen instead of stacking full screens', () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'style.css'), 'utf8');
+
+  // كل مستوى كان يحمل min-height: 100dvh، والبطاقة نفسها 100dvh داخل حشوة
+  // وأدوات عرض: فيصير المجموع أطول من الشاشة بقليل، فيخرج شريط «التالي»
+  // (الملتصق بأسفل البطاقة) تحت حافة الشاشة ولا يمكن الوصول إليه أصلًا
+  // (الجسم overflow: hidden). الحل: مستوى واحد فقط يحمل الشاشة، والباقي
+  // يقسمها؛ حشوة الحاوية وحدها تكفي للاحتواء.
+  const wrap = cssBlock(css, 'body.slides-focus .slides-wrap');
+  assert.doesNotMatch(wrap, /min-height:\s*100dvh/);
+  assert.match(wrap, /min-height:\s*0\b/);
+  assert.match(wrap, /flex:\s*1\b/);
+
+  // الحاوية تأخذ المتبقّي بعد شريط التنقّل بين المقاطع، لا شاشة كاملة زائدة.
+  const container = cssBlock(css, 'body.slides-focus .course-content.slides-mode');
+  assert.doesNotMatch(container, /min-height:\s*100dvh/);
+  assert.match(container, /min-height:\s*0\b/);
+  assert.match(container, /flex:\s*1\b/);
+});
+
+test('the slide body may shrink below its content so it can be measured', () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'style.css'), 'utf8');
+  const body = cssBlock(css, '.slides-wrap > .slides-body');
+
+  // min-height:auto في عنصر flex يجعل الصندوق أطول من محتواه، فلا ينكمش ولا
+  // يُقاس: يفيض النص خارجًا ويُطلب التمرير. min-height:0 يجعل صندوق الجسم
+  // هو المساحة المتاحة بالضبط (clientHeight) فيقاس الفيض (scrollHeight)
+  // وتُبنى عليه ملاءمة الشريحة للشاشة.
+  assert.match(body, /flex:\s*1\b/);
+  assert.match(body, /min-height:\s*0\b/);
+});
+
+test('the expanded slide reserves room for the floating controls only at the top', () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'style.css'), 'utf8');
+  const wrap = cssBlock(css, 'body.slides-focus .slides-wrap');
+
+  // الأدوات العائمة فوق البطاقة تستحق حيّزًا أعلىها فقط؛ الحيّز الأسفل
+  // كان يهدر مساحة الشاشة ويبعد شريط التنقّل عن الحواف.
+  assert.match(wrap, /padding-block:\s*var\(--slide-controls-h\)\s+0/);
+});
+
 test('slide prose keeps a proportional reading measure', () => {
   const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'style.css'), 'utf8');
   const text = cssBlock(css, '.slides-text');
@@ -411,10 +533,75 @@ test('slide prose keeps a proportional reading measure', () => {
   // 68ch يتبع حجم الخط ولغة النص، فلا يطول السطر مع كبر الشاشة ولا يقصّ.
   assert.match(text, /max-width:\s*\d+ch/);
   assert.match(text, /line-height:\s*1\.[6-9]/);
+});
 
-  // المشاهد تتوقف عند حدود المساحة الآمنة بدل أن تمتد على الحواف.
+test('a scene is not shrunk twice in the expanded slide', async () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'style.css'), 'utf8');
   const scene = cssBlock(css, 'body.slides-focus .slides-scene-img');
-  assert.match(scene, /max-height:\s*calc\(100dvh\s*-\s*\(?\s*2\s*\*\s*var\(--slide-safe-block\)/);
+
+  // كان max-height محسوبًا من 100dvh، أي قبل تحجيم جسم الشريحة: المشهد
+  // ينكمش مرّتين (سقفٌ ثم تحجيم) فيصير أصغر من اللازم والم启迪 غير مقروء.
+  // الآن سقفه صندوقُ جسم الشريحة وحده، والتحجيم الواحد يكفي.
+  assert.doesNotMatch(scene, /100dvh/);
+  assert.match(scene, /max-height:\s*100%/);
+
+  // ولا ينكمش صندوق المشهد عن محتواه فيتحدّد السقف بنسبة زائفة.
+  const box = cssBlock(css, '.slides-scene');
+  assert.match(box, /min-height:\s*0\b/);
+});
+
+test('the slide navigation and the toolbar never sit inside the scaled body', async () => {
+  // التحجيم يطبَّق على جسم الشريحة وحده. شريط التنقّل (السابقة/التالي) وزرّ
+  // التوسيع خارجه، فيبقيان بحجمهما الكامل مهما صغُر المحتوى — وهذا ما يجعل
+  // الأزرار واضحة بدل أن تصغر مع النص حتى تختفي.
+  const { slideBody, card } = await expandedSlideWith({
+    'slides-body': { clientHeight: 800, scrollHeight: 2000 }
+  });
+
+  const scaledLabels = [];
+  slideBody.children.forEach(function (child) {
+    scaledLabels.push(child.className);
+  });
+  assert.equal(scaledLabels.indexOf('slides-nav'), -1);
+  assert.equal(card.children.filter(function (child) {
+    return child.classList.contains('slides-nav');
+  }).length, 1);
+});
+
+test('the scene replay button cannot be mistaken for the next button', () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'style.css'), 'utf8');
+  const replay = cssBlock(css, '.slides-scene-actions .nav-btn');
+  const primary = cssBlock(css, '.nav-btn.primary');
+
+  // كان زرّ «إعادة الحركة» بنفس الأزرق المصمتّ لزرّ «التالي» تمامًا، فليس
+  // التلميذ أيّهما ينقل الشريحة وأيّهما يعيد المشهد.Outline أبيض بحافة
+  // زرقاء يفصل بينهما شكلًا لا لونًا وحده (تبقى مقروءة فوق أي مشهد).
+  const replayBackground = /background:\s*([^;]+);/.exec(replay);
+  assert.notEqual(replayBackground, null, 'the replay button needs a background');
+  assert.notEqual(replayBackground[1].trim(), 'none');
+  assert.match(replay, /border:\s*1px\s+solid/);
+  assert.match(replay, /color:\s*#/);
+
+  const primaryBackground = /background:\s*([^;]+);/.exec(primary);
+  assert.notEqual(primaryBackground, null, 'the next button needs a background');
+  assert.notEqual(
+    replayBackground[1].trim(),
+    primaryBackground[1].trim(),
+    'replay and next must not share one background'
+  );
+});
+
+test('the floating toolbar does not tint the white slide card grey', () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'style.css'), 'utf8');
+  const controls = cssBlock(css, 'body.slides-focus #lesson-presentation-controls');
+
+  // التدرّج كان بلون خلفية الصفحة (240,244,248) فيُلقي شريطًا رماديًا على
+  // البطاقة البيضاء فيبدو العرض قذرًا. البطاقة بيضاء، فليكن التلاشي من
+  // الأبيض أيضًا.
+  const background = /background:\s*([^;]+);/.exec(controls);
+  assert.notEqual(background, null, 'the floating controls need a background');
+  assert.doesNotMatch(background[1], /240,\s*244,\s*248/);
+  assert.match(background[1], /255,\s*255,\s*255/);
 });
 
 test('the slide next button stays reachable without covering the slide', () => {
@@ -438,9 +625,207 @@ test('the slide next button stays reachable without covering the slide', () => {
   assert.match(scroller, /overflow-y:\s*auto/);
   assert.match(scroller, /scrollbar-gutter:\s*stable/);
 
-  // المشهد لا ينزل تحت الشريط الملتصق.
+  // المشهد لا ينزل تحت الشريط الملتصق: سقفه صندوق جسم الشريحة، وهو مقيس
+  // على المتاح بعد حشوة الشريط، فيبقى داخله ويُصغَّر معه عند الحاجة.
   const scene = cssBlock(css, 'body.slides-focus .slides-scene-img');
-  assert.match(scene, /max-height:\s*calc\(/);
+  assert.match(scene, /max-height:\s*100%/);
+});
+
+// ---------- ملاءمة الشريحة للشاشة في الوضع الموسّع ----------
+
+// يفتح درسًا في وضع الشرائح ويوسّع العرض، ثم يعيد جسم الشريحة المرسوم.
+async function expandedSlideWith(layout, extraSettings) {
+  const harness = createHarness(Object.assign({
+    course: makeCourse({ id: 'unit-01', slug: 'unit-01' }),
+    layout
+  }, extraSettings || {}));
+  const { elements, body } = harness;
+
+  await flushAsyncWork();
+  await flushAsyncWork();
+  elements.get('course-cards').children[0].click();
+  await flushAsyncWork();
+  await flushAsyncWork();
+  elements.get('mode-slides').click();
+  await flushAsyncWork();
+  await flushAsyncWork();
+  elements.get('slides-expand-btn').click();
+  await flushAsyncWork();
+
+  const card = elements.get('course-lesson-body').children[0];
+  const slideBody = card.children.filter(function (child) {
+    return child.classList.contains('slides-body');
+  })[0];
+
+  return { harness, body, card, slideBody };
+}
+
+test('the expanded slide shrinks its body to fit the whole slide on screen', async () => {
+  // 1000px محتوى في 800px متاح ⇒ 0.8، فلا يفيض شيء ولا يُطلب نزول.
+  const { slideBody } = await expandedSlideWith({
+    'slides-body': { clientHeight: 800, scrollHeight: 1000 }
+  });
+
+  assert.equal(slideBody.style.transform, 'scale(0.8)');
+  assert.equal(slideBody.style.transformOrigin, 'top center');
+});
+
+test('a slide too wide for the screen is shrunk on the width axis too', async () => {
+  // 1600px محتوى في 1200px عرض، والارتفاع مضبوط تمامًا (800 في 800). القياس
+  // بالارتفاع وحده كان يمرّ (لا فيض رأسي) فيترك المحتوى العريض يُقصّ أفقيًا
+  // ويضطرّ التلميذ للتمرير جانبًا. المحوران معًا: 1200/1600 = 0.75.
+  const { slideBody } = await expandedSlideWith({
+    'slides-body': {
+      clientHeight: 800, scrollHeight: 800,
+      clientWidth: 1200, scrollWidth: 1600
+    }
+  });
+
+  assert.equal(slideBody.style.transform, 'scale(0.75)');
+  assert.equal(slideBody.style.transformOrigin, 'top center');
+});
+
+test('the fit falls back to the height axis when the width has no measurement', async () => {
+  // محور بلا قياس (0) لا يُحتسب: نكتفي بالمتاح. المتصفح يعطي clientWidth
+  // دائمًا، فوجود شرط عدم الكسر حماية لا انحراف.
+  const { slideBody } = await expandedSlideWith({
+    'slides-body': { clientHeight: 800, scrollHeight: 1000 }
+  });
+
+  assert.equal(slideBody.style.transform, 'scale(0.8)');
+});
+
+test('a slide that already fits keeps its natural size', async () => {
+  const { slideBody } = await expandedSlideWith({
+    'slides-body': { clientHeight: 800, scrollHeight: 640 }
+  });
+
+  assert.equal(slideBody.style.transform, '');
+});
+
+test('an overlong slide stops shrinking at the readable floor of 0.55', async () => {
+  // 2000px في 800px ⇒ 0.4، أي نصّ غير مقروء. نقف عند 0.55 — أضيق حدٍّ قرّره
+  // صاحب المشروع ليبقى النص مقروءًا. ما دونه يبقى التمرير صمّامَ أمان
+  // للمحتوى الشاذّ لا سلوكًا معتادًا؛ ولا شريحة من الشرائح الـ84 يحتاجه.
+  const { slideBody } = await expandedSlideWith({
+    'slides-body': { clientHeight: 800, scrollHeight: 2000 }
+  });
+
+  assert.equal(slideBody.style.transform, 'scale(0.55)');
+});
+
+test('collapsing the expanded view restores the natural slide size', async () => {
+  const { harness, slideBody } = await expandedSlideWith({
+    'slides-body': { clientHeight: 800, scrollHeight: 1000 }
+  });
+
+  assert.equal(slideBody.style.transform, 'scale(0.8)');
+
+  harness.elements.get('slides-expand-btn').click();
+  await flushAsyncWork();
+
+  assert.equal(slideBody.style.transform, '');
+});
+
+test('a window resize re-fits the expanded slide', async () => {
+  const layout = { 'slides-body': { clientHeight: 800, scrollHeight: 1000 } };
+  const { harness, slideBody } = await expandedSlideWith(layout);
+
+  assert.equal(slideBody.style.transform, 'scale(0.8)');
+
+  // نافذة أطول: تظهر مساحة أكبر فيتّسع المحتوى ويُعاد القياس.
+  layout['slides-body'] = { clientHeight: 1000, scrollHeight: 1000 };
+  harness.dispatchWindow('resize');
+  await flushAsyncWork();
+
+  assert.equal(slideBody.style.transform, '');
+});
+
+test('a container resize re-fits the slide even without a window resize event', async () => {
+  const layout = { 'slides-body': { clientHeight: 800, scrollHeight: 1000 } };
+  const { harness, slideBody } = await expandedSlideWith(layout);
+
+  assert.equal(slideBody.style.transform, 'scale(0.8)');
+
+  // المساحة المتاحة تتغير دون حدث نافذة: فتح لوحة المحادثة، انطواء شريط
+  // المتصفح على الجوال، تبديل الأدوات. ResizeObserver هو المُشغّل الوحيد
+  // لهذا، فبدونه تبقى نسبةً قديمة يفيض بها نصٌّ أو يُقصّ مشهد.
+  assert.equal(
+    harness.observedTargets.indexOf(slideBody) !== -1,
+    true,
+    'slides-player.js must observe the slide body box'
+  );
+
+  layout['slides-body'] = { clientHeight: 1000, scrollHeight: 1000 };
+  harness.triggerResize();
+  await flushAsyncWork();
+
+  assert.equal(slideBody.style.transform, '');
+});
+
+test('navigating between expanded slides never scrolls the container', async () => {
+  const { harness, card } = await expandedSlideWith(
+    { 'slides-body': { clientHeight: 800, scrollHeight: 1000 } },
+    {
+      deck: {
+        version: 1,
+        sections: [{
+          title: 'Section',
+          slides: [
+            { id: 'slide-1', title: 'الأولى', text_md: 'نص' },
+            { id: 'slide-2', title: 'الثانية', text_md: 'نص' }
+          ]
+        }]
+      }
+    }
+  );
+
+  // الرسم الأول تمّ في الوضع العادي (والتمرير إليه مقصود)، فلا يُحسب هنا.
+  // العبرة بالرسم التالي وأنت في الوضع الموسّع.
+  const container = harness.elements.get('course-lesson-body');
+  const callsBeforeNavigation = container.scrollIntoViewCalls;
+
+  const nav = card.querySelector('.slides-nav');
+  const next = nav.children.filter(function (child) {
+    return child.classList.contains('primary');
+  })[0];
+  next.click();
+  await flushAsyncWork();
+
+  // شريحة ثانية مرسومة فعلًا (العدّاد تقدّم)…
+  const drawnCard = container.children[0];
+  const counter = drawnCard.querySelector('.slides-top').children[0];
+  assert.equal(counter.textContent, 'شريحة 2 من 2');
+
+  // …وفي الوضع الموسّع البطاقة هي الشاشة نفسها، فـscrollIntoView يزيح موضع
+  // التمرير عن الملاءمة التي بُنيت عليه توًّا فيكشف فجوة أسفل الشريحة.
+  assert.equal(container.scrollIntoViewCalls, callsBeforeNavigation);
+});
+
+test('a normal unexpanded slide still scrolls into view so the page follows it', async () => {
+  const { elements } = createHarness({
+    course: makeCourse({ id: 'unit-01', slug: 'unit-01' })
+  });
+
+  await flushAsyncWork();
+  await flushAsyncWork();
+  elements.get('course-cards').children[0].click();
+  await flushAsyncWork();
+  await flushAsyncWork();
+  elements.get('mode-slides').click();
+  await flushAsyncWork();
+  await flushAsyncWork();
+
+  // بلا توسيع: الشريحة جزءٌ من صفحة أطول، فالتمرير إلىها سلوك مقصود.
+  assert.equal(elements.get('course-lesson-body').scrollIntoViewCalls, 1);
+});
+
+test('a slide is left unmeasured when the browser reports no layout box', async () => {
+  // لا قياس (clientHeight/scrollHeight = 0) ⇒ لا تحجيم مصطنع، ويبقى
+  // التمرير هو السلوك الاحتياطي.
+  const { slideBody } = await expandedSlideWith({});
+
+  assert.equal(slideBody.style.transform, '');
 });
 
 test('slide mode keeps the normal site layout until the expand button is pressed', async () => {

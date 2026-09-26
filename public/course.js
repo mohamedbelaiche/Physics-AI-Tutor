@@ -409,7 +409,8 @@
   // التوسيع قرار تخطيطي داخل الموقع: صنف واحد على body يجعل الشريحة تملأ
   // مساحة الموقع (تُخفى الترويسة والتابات والشات وبقية أدوات الدرس)، ولا
   // علاقة له بملء الشاشة الأصلي للمتصفح. الحالة تُقرأ من الصنف لتبقى
-  // aria-pressed صادقة بعد أي إعادة رسم.
+  // aria-pressed صادقة بعد أي إعادة رسم. تبديل الوضع يغيّر المتاح على
+  // الشاشة، فيعاد ملاءمة الشريحة المعروضة (نصغّرها فتتسع كاملةً).
   function setSlidesExpand(on) {
     slidesExpanded = !!on;
     document.body.classList.toggle('slides-focus', slidesExpanded);
@@ -423,6 +424,9 @@
         'title',
         slidesExpanded ? 'تصغير عرض الشرائح' : 'توسيع عرض الشرائح'
       );
+    }
+    if (window.SlidesPlayer && window.SlidesPlayer.refit) {
+      window.SlidesPlayer.refit();
     }
   }
 

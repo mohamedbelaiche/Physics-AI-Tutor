@@ -1449,7 +1449,13 @@ body.slides-focus main {
 }
 
 /* عرض الشرائح يملأ مساحة الموقع بالكامل (صنف على body، لا Fullscreen API). */
-body.slides-focus { overflow: hidden; }
+body.slides-focus {
+  overflow: hidden;
+  /* ارتفاع أدوات العرض العائمة فوق البطاقة: حشوة 0.85rem×2 + أطول عنصر
+     فيها (مبدّل الوضع ≈ 43px) ⇒ ≈ 70px. يُحجز أعلى البطاقة وحده كي لا
+     تركب الأدوات على عدّاد الشريحة وعنوانها. */
+  --slide-controls-h: 4.5rem;
+}
 
 body.slides-focus > .site-header,
 body.slides-focus nav.view-tabs,
@@ -1468,12 +1474,21 @@ body.slides-focus main {
   padding: 0;
 }
 
-/* الوضع الموسّع: لا تُصفَّر حشوة الحاوية — احتواء النص تكفل به المساحة
-   الآمنة على .slides-wrap، وتصفيرها هنا كان يجعل العمود يمتد على الحواف. */
+/* الوضع الموسّع: سلسلة واحدة تقسم الشاشة ولا تكدّس شاشات. المستوى الأعلى
+   (المجموعة والعرض) يحمل الشاشة، وما تحته يأخذ المتبقّي فقط؛ لو حمل كل
+   مستوى 100dvh لتجاوز المجموع الشاشةَ بمقدار الحشوة والشريط، فخرج شريط
+   «التالي» (الملتصق بأسفل البطاقة) تحت حافة الشاشة بلا وسيلة للوصول إليه. */
 body.slides-focus #courses-group,
-body.slides-focus #course-lesson-view,
-body.slides-focus .course-content.slides-mode {
+body.slides-focus #course-lesson-view {
   min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* لا تُصفَّر حشوة الحاوية — احتواء النص تكفل به مساحة الحاوية نفسها. */
+body.slides-focus .course-content.slides-mode {
+  flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
 }
@@ -1486,7 +1501,9 @@ body.slides-focus #lesson-presentation-controls {
   z-index: 40;
   margin: 0;
   padding: 0.85rem clamp(0.75rem, 2vw, 2rem);
-  background: linear-gradient(to bottom, rgba(240, 244, 248, 0.96), rgba(240, 244, 248, 0));
+  /* التلاشي من لون البطاقة (أبيض) لا من لون الصفحة (رمادي): الشريط كان
+     يلقي شريطًا قذرًا على رأس الشريحة البيضاء فيبدو العرض معطوبًا. */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0));
   pointer-events: none;
 }
 
@@ -1494,21 +1511,27 @@ body.slides-focus #lesson-presentation-controls > * {
   pointer-events: auto;
 }
 
-/* البطاقة تملأ الارتفاع المتاح وتحتفظ بمساحتها الآمنة، والمحتوى الأطول
-   يُمرَّر داخلها بدل أن يُقصّ (الجسم أصلًا overflow: hidden). */
+/* البطاقة تملأ الارتفاع المتاح بالضبط (لا 100dvh: البطاقة أطول من الشاشة)،
+   وتحتفظ بمساحتها الآمنة، والمحتوى الأطول يُمرَّر داخلها بدل أن يُقصّ
+   (الجسم أصلًا overflow: hidden). الحيّز أعلى الأدوات العائمة فقط. */
 body.slides-focus .slides-wrap {
   flex: 1;
-  min-height: 100dvh;
+  min-height: 0;
+  padding-block: var(--slide-controls-h) 0;
   overflow-y: auto;
   scrollbar-gutter: stable;
   overscroll-behavior: contain;
 }
 
-/* المشاهد تتوقف عند حدود المساحة الآمنة ولا تتجاوزها، فتبقى متمركزة
-   ومتّسقة مع النص في كل حجم شاشة. */
+/* المشهد لا يُصغَّر مرّتين. الكعب كان max-height محسوبًا من 100dvh، أي
+   سقفٌ يُطبَّق قبل تحجيم جسم الشريحة، فتنكمش الصورة مرّتين ويصير التوضيح
+   غير مقروء بلا داع. سقفها الآن صندوق جسم الشريحة وحده (وهو مقيس على
+   المتاح بعد حشوة الأدوات والشريط)، والتحجيم الواحد في slides-player.js
+   يكفي. min-height:0 على الصندوقين ضروري ليعترف flex بارتفاعٍ منكمش
+   فيتّسع له max-height بدل أن يبقى height:auto ويcircي فيُهمل. */
 body.slides-focus .slides-scene-img {
   width: 100%;
-  max-height: calc(100dvh - (2 * var(--slide-safe-block) + 6rem));
+  max-height: 100%;
   object-fit: contain;
 }
 
@@ -1526,8 +1549,14 @@ body.slides-focus .slides-nav {
   box-shadow: 0 -1px 0 #e5ebf1;
 }
 
+/* جسم الشريحة: صندوقه هو المساحة المتاحة بالضبط. min-height: 0 ضروري —
+   بـ min-height:auto (الافتراضي في عناصر flex) لا ينكمش الصندوق عن ارتفاع
+   محتواه، فيفيض النص خارجًا ويبقى التمرير هو السلوك الوحيد. به 0 يتجاوز
+   المحتوى الصندوق فيُقاس (scrollHeight) وتُبنى عليه ملاءمة الشريحة
+   للشاشة في slides-player.js. */
 .slides-wrap > .slides-body {
   flex: 1;
+  min-height: 0;
 }
 
 .slides-top {
@@ -1577,8 +1606,10 @@ body.slides-focus .slides-nav {
 
 .slides-text {
   /* قِيس قراءة متناسب: 68ch يتتبّع عرض المحرف وحجم الخط ولغة النص، فلا
-     يطول السطر على الشاشات الكبيرة ولا ينكمش على الصغيرة. */
+     يطول السطر على الشاشات الكبيرة ولا ينكمش على الصغيرة. min-height:0
+     يسمح لها بالانكماش داخل جسم الشريحة فيتّسع لها المشهد المجاور. */
   max-width: 68ch;
+  min-height: 0;
   line-height: 1.9;
   overflow-wrap: break-word;
 }
@@ -1624,6 +1655,7 @@ body.slides-focus .slides-nav {
   flex-direction: column;
   gap: 0.7rem;
   align-items: center;
+  min-height: 0;
   border: 1px solid #e5ebf1;
   border-radius: 12px;
   padding: 1rem;
@@ -1642,13 +1674,23 @@ body.slides-focus .slides-nav {
   justify-content: center;
 }
 
+/* زرّ «إعادة الحركة» تحكّمٌ في المشهد لا تنقّل. كان بلون .nav-btn الأزرق
+   المصمتّ نفسه، فيُقرأ كزرّ انتقال ويختلط على التلميذ أزرارُ التنقّل
+   الثلاثة (السابقة/التالي/المقطع السابق). الإطار أبيض بحافة زرقاء يفصله
+   شكلًا لا لونًا وحده، ويبقى مقروءًا فوق أي مشهد. */
 .slides-scene-actions .nav-btn {
-  padding: 0.45rem 1.1rem;
-  font-size: 0.85rem;
-  background: #2a6db5;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.9rem;
+  background: #fff;
+  color: #1f5aa0;
+  border: 1px solid #2a6db5;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-.slides-scene-actions .nav-btn:hover { background: #1f5390; }
+.slides-scene-actions .nav-btn:hover {
+  background: #eaf3fd;
+  color: #1a4a80;
+}
 
 .slides-steps {
   width: 100%;

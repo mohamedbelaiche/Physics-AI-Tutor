@@ -14,6 +14,7 @@
     sectionIdx: 0,
     slideIdx: 0,
     container: null,
+    card: null,
     deck: null
   };
   var slideProgressHandler = null;
@@ -43,6 +44,70 @@
 
   function hasDeck(slug) {
     return decks[slug] ? true : false;
+  }
+
+  /* ---------- ملاءمة الشريحة للشاشة ---------- */
+
+  // في الوضع الموسّع يجب أن تظهر الشريحة كاملة على الشاشة بلا نزول. نقيس
+  // فيضَ محتوى جسم الشريحة (scroll*) وما يتّسع له داخل الشاشة
+  // (client*) فنصغّر المحتوى بمقدار النقص فنضبط الشريحة. 0.55 حدّ أدنى:
+  // نصٌّ أطول من أن يبقى مقروءًا مصغّرًا يظلّ قابلًا للتمرير (وهو ما يبقى
+  // فعّالًا في .slides-wrap) بدل أن يصير غير مقروء. الصنف على body هو مصدر
+  // الحقيقة الوحيد، فيتبع القياسُ حالةَ الوضع كما هي بعد أي إعادة رسم.
+  var MIN_FIT_SCALE = 0.55;
+
+  function slidesAreExpanded() {
+    return !!(document.body && document.body.classList &&
+      document.body.classList.contains('slides-focus'));
+  }
+
+  function fitCard() {
+    var card = current.card;
+    if (!card || !card.querySelector) return;
+    var slideBody = card.querySelector('.slides-body');
+    if (!slideBody || !slideBody.style) return;
+    // نبدأ من الحجم الطبيعي: التحويل لا يغيّر التخطيط، فالقياس لا يتأثر
+    // به، فيمكن إعادة الحساب في أي وقت (شريحة جديدة، تكبير، تغيير حجم).
+    slideBody.style.transform = '';
+    slideBody.style.transformOrigin = '';
+    if (!slidesAreExpanded()) return;
+    var scale = fitRatio(slideBody);
+    // بلا قياس صالح نترك CSS يقرر: التمرير صمّام أمان لا سلوك معتاد.
+    if (!(scale > 0) || scale >= 1) return;
+    var applied = Math.max(MIN_FIT_SCALE, scale);
+    slideBody.style.transformOrigin = 'top center';
+    slideBody.style.transform = 'scale(' + (Math.round(applied * 1000) / 1000) + ')';
+  }
+
+  // أصغر نسبة فيضٍ على محورَين لهما قياس صالح، أو 0 إن لا قياس أصلًا.
+  // المحوران معًا: بالارتفاع وحده يفيض النص الطويل، وبالعرض وحده يُقصّ
+  // المحتوى العريض (جدولٌ عريض، مشهدٌ بعرض ثابت) جانبيًا. محورٌ بلا قياس
+  // (0) لا يُحتسب، فلا يُسقط قياسًا صحيحًا للآخر.
+  function fitRatio(box) {
+    var ratios = [];
+    var roomH = Number(box.clientHeight) || 0;
+    var naturalH = Number(box.scrollHeight) || 0;
+    if (roomH > 0 && naturalH > 0) ratios.push(roomH / naturalH);
+    var roomW = Number(box.clientWidth) || 0;
+    var naturalW = Number(box.scrollWidth) || 0;
+    if (roomW > 0 && naturalW > 0) ratios.push(roomW / naturalW);
+    if (!ratios.length) return 0;
+    return Math.min.apply(null, ratios);
+  }
+
+  // المساحة المتاحة تتغيّر بأشياء لا تُطلق حدث نافذة: فتح لوحة المحادثة،
+  // انطواء شريط المتصفح على الجوال، تبديل الأدوات. نراقب صندوق الشريحة
+  // فنعيد القياس عند كل تغيّر. التحويل لا يغيّر التخطيط، فلا حلقة لا نهائية.
+  var slideResizeObserver = null;
+
+  function observeSlideBody(card) {
+    if (typeof window === 'undefined' || typeof window.ResizeObserver !== 'function') return;
+    if (slideResizeObserver) slideResizeObserver.disconnect();
+    slideResizeObserver = new window.ResizeObserver(function () {
+      fitCard();
+    });
+    var slideBody = card && card.querySelector ? card.querySelector('.slides-body') : null;
+    if (slideBody) slideResizeObserver.observe(slideBody);
   }
 
   /* ---------- بناء DOM شريحة ---------- */
@@ -90,6 +155,9 @@
       img.alt = slide.scene.alt || 'مشهد تفاعلي';
       img.setAttribute('role', 'img');
       img.loading = 'lazy';
+      // المشهد يصل بعد الرسم، فحتى بلوغه لا يُعرف ارتفاعه الحقيقي: نعيد
+      // الملاءمة عند وصوله، وإلا بقيت الشريحة تفيض بلا سبب.
+      img.addEventListener('load', fitCard);
 
       var actions = document.createElement('div');
       actions.className = 'slides-scene-actions';
@@ -165,11 +233,13 @@
     var section = deck.sections[current.sectionIdx];
     var slide = section && section.slides[current.slideIdx] ? section.slides[current.slideIdx] : null;
     current.container.innerHTML = '';
+    current.card = null;
     var card = buildSlideCard(deck);
     if (!card) {
       current.container.innerHTML = '<p>لا توجد شرائح لهذا القسم.</p>';
       return;
     }
+    current.card = card;
     current.container.appendChild(card);
 
     // كل شريحة تُعرض تُبلَّغ كمقطع/جزء مكتمل (يستخدمه course.js لحفظ التقدم والموقع).
@@ -177,7 +247,14 @@
       slideProgressHandler(current.sectionIdx, current.slideIdx, slide.id);
     }
 
-    current.container.scrollIntoView({ block: 'start' });
+    // في الوضع العادي الشريحة جزءٌ من صفحة أطول فالتمرير إليها سلوك مقصود.
+    // في الوضع الموسّع البطاقة هي الشاشة نفسها: scrollIntoView يزيح موضع
+    // التمرير عن الملاءمة التي بُنيت عليه توًّا فيكشف فجوة أسفل الشريحة.
+    if (!slidesAreExpanded() && current.container.scrollIntoView) {
+      current.container.scrollIntoView({ block: 'start' });
+    }
+    observeSlideBody(card);
+    fitCard();
   }
 
   /* ---------- واجهة عامة ---------- */
@@ -215,6 +292,22 @@
     return { sectionIdx: current.sectionIdx, slideIdx: current.slideIdx };
   }
 
+  /* إعادة ملاءمة الشريحة المعروضة للشاشة — يستدعيها course.js بعد تبديل
+     وضع التوسيع، حين تتغيّر مقاسات الشريحة ولا تُعاد رسمها. */
+  function refit() {
+    fitCard();
+  }
+
+  // تغيّر حجم النافذة يغيّر المتاح: نعيد القياس. وكذلك اكتمال تحميل الخطوط
+  // (ارتفاع الأسطر يتبدّل) وبلوغ المشهد.
+  if (typeof window !== 'undefined' && window.addEventListener) {
+    window.addEventListener('resize', fitCard);
+  }
+  if (document.fonts && document.fonts.ready &&
+      typeof document.fonts.ready.then === 'function') {
+    document.fonts.ready.then(fitCard, function () {});
+  }
+
   /* مسجّل تقدم: fn(sectionIdx, slideIdx, slideId) يُستدعى عند كل شريحة تُعرض. */
   function setSlideProgressHandler(fn) {
     slideProgressHandler = typeof fn === 'function' ? fn : null;
@@ -226,6 +319,7 @@
     playSection: playSection,
     reset: reset,
     getPos: getPos,
+    refit: refit,
     setSlideProgressHandler: setSlideProgressHandler
   };
 })();
