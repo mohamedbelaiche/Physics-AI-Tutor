@@ -440,6 +440,40 @@ function cssBlock(css, selector) {
   return css.slice(start, close);
 }
 
+test('the design tokens the whole theme depends on are defined once', () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'style.css'), 'utf8');
+  const root = cssBlock(css, ':root');
+
+  // هذه الرموز هي أساس المظهر الجديد: حذفها يكسر الألوان والظلال والقياس.
+  [
+    '--font', '--ink', '--muted', '--line', '--surface', '--canvas',
+    '--brand', '--brand-dark', '--brand-tint', '--accent', '--accent-tint',
+    '--success', '--success-tint', '--on-brand',
+    '--r-sm', '--r-md', '--r-lg', '--r-xl', '--r-pill',
+    '--shadow-sm', '--shadow-md', '--shadow-lg',
+    '--shell', '--measure'
+  ].forEach((token) => {
+    assert.match(root, new RegExp(token + ':'), ':root must define ' + token);
+  });
+
+  // الخط العربي أولًا في المكدس، مع بديل نظامي إن تعذّر تحميله.
+  assert.match(root, /--font:\s*'Cairo'/);
+  assert.match(root, /Tahoma/);
+});
+
+test('every unit number gets a generated cover, so no image file is needed', () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'style.css'), 'utf8');
+
+  // الأغلفة مولَّدة داخل CSS: إن غاب أي رقم فبقيت البطاقة بلا هوية بصرية.
+  for (let unit = 1; unit <= 5; unit += 1) {
+    const cover = cssBlock(css, '.course-card[data-unit="' + unit + '"] .course-card-cover');
+    assert.match(cover, /background-image:\s*url\("data:image\/svg\+xml,/, 'unit ' + unit + ' needs a cover');
+    // محرف # داخل data-URI يجب أن يبقى مُرمَّزًا، وإلا انقطع التدرّج.
+    assert.doesNotMatch(cover, /stop-color='#/, 'unit ' + unit + ' must encode # as %23');
+    assert.match(cover, /stop-color='%23/, 'unit ' + unit + ' must encode # as %23');
+  }
+});
+
 test('the slide controls markup matches the ids course.js looks up', () => {
   const html = fs.readFileSync(path.join(__dirname, '..', 'public', 'index.html'), 'utf8');
   [

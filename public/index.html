@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>المدرس الشخصي للفيزياء</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.18.6/katex.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -13,8 +16,18 @@
   <header class="site-header">
     <div class="header-inner">
       <div class="header-title">
-        <h1>المدرس الشخصي للفيزياء</h1>
-        <p>منصة تعلّم تكيفية للبكالوريا</p>
+        <span class="header-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="2.4"></circle>
+            <ellipse cx="12" cy="12" rx="10" ry="4.4"></ellipse>
+            <ellipse cx="12" cy="12" rx="10" ry="4.4" transform="rotate(60 12 12)"></ellipse>
+            <ellipse cx="12" cy="12" rx="10" ry="4.4" transform="rotate(-60 12 12)"></ellipse>
+          </svg>
+        </span>
+        <div class="header-text">
+          <h1>المدرس الشخصي للفيزياء</h1>
+          <p>منصة تعلّم تكيفية للبكالوريا</p>
+        </div>
       </div>
       <div id="auth-area" class="auth-area">
         <button id="auth-btn" class="auth-btn hidden"></button>
@@ -62,10 +75,10 @@
 
     <div id="courses-group" class="view-group hidden">
       <section id="course-dashboard-view" class="view">
-        <h2 class="section-title">كورسات منظمة</h2>
-        <p id="course-intro" class="course-intro">خمسة كورسات مرتبة — أتبع المستوى وأكمل كل كورس لتفتح الذي يليه. تقدمك محفوظ عند تسجيل الدخول.</p>
+        <h2 class="section-title">المسار الكامل</h2>
+        <p id="course-intro" class="course-intro">خمسة كورسات مرتبة حسب وحدات المنهاج، تغطي الفيزياء والكيمياء معًا. جميع الكورسات مفتوحة، وتُكملها بأي ترتيب تشاء، ويبدأ كل كورس من حيث توقفت.</p>
         <div id="course-gate" class="gate-banner hidden">
-          سجّل الدخول من الزر أعلى الصفحة لحفظ تقدمك وإتمام الكورسات بالترتيب. في وضع الزائر يمكنك تصفح كورس واحد فقط.
+          سجّل الدخول من الزر أعلى الصفحة لحفظ تقدّمك وموقع القراءة داخل الكورسات على كل أجهزتك. بدون حساب يمكنك تصفح الكورسات كاملة، لكن التقدّم لن يُحفظ بعد إغلاق الصفحة.
         </div>
         <div id="course-overall-wrap" class="course-overall-wrap hidden">
           <div class="course-overall-label">
@@ -111,7 +124,8 @@
     </main>
 
   <footer class="site-footer">
-    <p>تطبيق عرض ملخصات الفيزياء</p>
+    <p class="footer-brand">المدرس الشخصي للفيزياء</p>
+    <p class="footer-note">ملخصات وكورسات للبكالوريا — العلوم الفيزيائية</p>
   </footer>
 
   <button id="chat-btn" class="chat-btn" aria-label="اسأل المدرس الذكي">

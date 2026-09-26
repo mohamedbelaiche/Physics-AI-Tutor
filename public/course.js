@@ -26,7 +26,6 @@
   var modeTextBtn = document.getElementById('mode-text');
   var modeSlidesBtn = document.getElementById('mode-slides');
   var slidesExpandBtn = document.getElementById('slides-expand-btn');
-  var slidesView = document.getElementById('slides-view');
   var currentMode = 'text';
   var slidesExpanded = false;   // الشريحة ملأت مساحة الموقع (صنف body.slides-focus)
   var sectionsBar = document.getElementById('course-sections-bar');
@@ -288,88 +287,128 @@
     return map[code] || code.replace(/^sk_/, '');
   }
 
+  // سجل التقدّم لكورس واحد، أو null إن لم يكن هناك تقدّم محفوظ.
+  function courseProgressRec(courseId) {
+    if (!progress || !progress.courses) return null;
+    var rec = progress.courses.find(function (c) { return c.id === courseId; });
+    return rec || null;
+  }
+
+  function metaItem(value, label) {
+    var li = document.createElement('li');
+    li.className = 'course-meta-item';
+    var num = document.createElement('strong');
+    num.textContent = String(value);
+    var cap = document.createElement('span');
+    cap.textContent = label;
+    li.appendChild(num);
+    li.appendChild(cap);
+    return li;
+  }
+
   function buildCard(course, idx) {
-    var card = document.createElement('div');
+    var card = document.createElement('article');
     var state = courseState(idx, course);
+    var unitNo = String(course.order || idx + 1);
     card.className = 'course-card ' + state;
+    // الغلاف يُولَّد في CSS من data-unit: لا صور ولا ملفات جديدة.
+    card.setAttribute('data-unit', unitNo);
+    card.setAttribute('data-state', state);
 
-    var top = document.createElement('div');
-    top.className = 'course-card-top';
+    /* الغلاف */
+    var cover = document.createElement('div');
+    cover.className = 'course-card-cover';
+    var coverUnit = document.createElement('span');
+    coverUnit.className = 'course-cover-unit';
+    coverUnit.textContent = 'الوحدة ' + unitNo;
+    cover.appendChild(coverUnit);
+    card.appendChild(cover);
 
-    var order = document.createElement('span');
-    order.className = 'course-order';
-    order.textContent = 'الكورس ' + String(course.order || idx + 1);
+    /* الجسم */
+    var body = document.createElement('div');
+    body.className = 'course-card-body';
 
     var stateLabel = document.createElement('span');
     stateLabel.className = 'course-state ' + state;
-    if (state === 'completed') stateLabel.textContent = '✓ مكتمل';
-    else if (state === 'available') stateLabel.textContent = 'متاح';
-    else stateLabel.textContent = '🔒 مقفول';
-    top.appendChild(order);
-    top.appendChild(stateLabel);
-    card.appendChild(top);
+    stateLabel.textContent = state === 'completed' ? '✓ مكتمل' : 'ابدأ من حيث توقفت';
+    body.appendChild(stateLabel);
 
     var title = document.createElement('h3');
     title.textContent = course.title_ar;
-    card.appendChild(title);
+    body.appendChild(title);
 
     if (course.description) {
       var desc = document.createElement('p');
       desc.className = 'course-desc';
       desc.textContent = course.description;
-      card.appendChild(desc);
+      body.appendChild(desc);
     }
 
-    var meta = document.createElement('div');
+    // أرقام مشتقّة من البيانات الموجودة — تُشتقّ لا تُخترع.
+    var meta = document.createElement('ul');
     meta.className = 'course-meta';
-    meta.appendChild(textSpan((course.sections || []).length + ' مقاطع'));
-    (course.skills || []).slice(0, 4).forEach(function (sk) {
-      var tag = document.createElement('span');
-      tag.className = 'skill-tag';
-      tag.textContent = skillLabel(sk);
-      meta.appendChild(tag);
-    });
-    card.appendChild(meta);
+    meta.appendChild(metaItem((course.sections || []).length, 'مقطع'));
+    meta.appendChild(metaItem((course.formulas || []).length, 'صيغة'));
+    meta.appendChild(metaItem((course.concepts || []).length, 'مفهوم'));
+    body.appendChild(meta);
 
-    var cta = document.createElement('button');
-    cta.className = 'course-cta';
-    cta.setAttribute('type', 'button');
-    if (state === 'completed') {
-      cta.textContent = 'مراجعة الكورس';
-    } else if (state === 'available') {
-      cta.textContent = 'ابدأ الدرس';
-    } else {
-      cta.textContent = 'أتمم الكورس السابق';
-      cta.disabled = true;
-      card.setAttribute('role', 'note');
-      card.setAttribute('aria-disabled', 'true');
-      card.title = 'هذا الكورس مقفول حتى إتمام الكورس السابق';
+    var skills = (course.skills || []).slice(0, 3);
+    if (skills.length) {
+      var tags = document.createElement('div');
+      tags.className = 'course-tags';
+      skills.forEach(function (sk) {
+        var tag = document.createElement('span');
+        tag.className = 'skill-tag';
+        tag.textContent = skillLabel(sk);
+        tags.appendChild(tag);
+      });
+      body.appendChild(tags);
     }
-    card.appendChild(cta);
+
+    card.appendChild(body);
+
+    /* التذييل: التقدّم + دعوة الفتح */
+    var foot = document.createElement('div');
+    foot.className = 'course-card-foot';
+
+    var rec = courseProgressRec(course.id);
+    var doneN = rec ? rec.completedSections || 0 : 0;
+    var totalN = rec ? rec.totalSections || 0 : 0;
+    if (totalN > 0) {
+      var pct = Math.round((doneN / totalN) * 100);
+      var track = document.createElement('div');
+      track.className = 'course-card-track';
+      var fill = document.createElement('div');
+      fill.className = 'course-card-fill';
+      fill.style.width = pct + '%';
+      track.appendChild(fill);
+      foot.appendChild(track);
+
+      var cap = document.createElement('span');
+      cap.className = 'course-card-pct';
+      cap.textContent = doneN + ' من ' + totalN + ' مقطع';
+      foot.appendChild(cap);
+    }
+
+    // البطاقة كلها هي العنصر التفاعلي؛ الدعوة مؤشر بصري لا زر مستقل،
+    // تفاديًا لزر داخل زر ولكلمة نقر مزدوجة على نفس الفعل.
+    var cta = document.createElement('span');
+    cta.className = 'course-cta';
+    cta.textContent = state === 'completed' ? 'مراجعة الكورس' : 'ابدأ الدرس';
+    foot.appendChild(cta);
+
+    card.appendChild(foot);
 
     var open = function () {
       openCourse(course, idx);
     };
-    if (state !== 'locked') {
-      cta.addEventListener('click', open);
-      card.addEventListener('click', open);
-      card.setAttribute('role', 'button');
-      card.setAttribute('tabindex', '0');
-      card.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
-      });
-    } else {
-      cta.addEventListener('click', function () {
-        showDashboardNote('أتمم الكورس السابق أولاً ليُفتح هذا الكورس.', 'info');
-      });
-    }
+    card.addEventListener('click', open);
+    card.setAttribute('role', 'link');
+    card.setAttribute('tabindex', '0');
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+    });
     return card;
-  }
-
-  function textSpan(text) {
-    var s = document.createElement('span');
-    s.textContent = text;
-    return s;
   }
 
   function renderDashboard() {
