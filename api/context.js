@@ -4,9 +4,12 @@
  * (KNOWLEDGE_BASE/), not from the raw sources under api/data.
  *
  * This is the Query half of the LLM Wiki pattern (see AGENTS.md):
- *   - a compact catalog of the whole wiki (units + concepts + formulas),
+ *   - a compact catalog of the whole wiki (units + concepts + formulas +
+ *     every archived baccalaureate exercise),
  *   - the most relevant lesson page(s) for the student's question,
- *   - the most relevant concept/formula pages for that question.
+ *   - the most relevant concept/formula pages for that question,
+ *   - the full text of the baccalaureate exercises the student asked for,
+ *     plus their solutions only when a solution is requested.
  *
  * The wiki structure is parsed once and cached; each request recomposes a
  * context string tailored to the query. If the wiki is absent, we fall back
@@ -19,12 +22,20 @@ const path = require('path');
 const KB_ROOT = path.join(__dirname, '..', 'KNOWLEDGE_BASE');
 const DATA_ROOT = path.join(__dirname, 'data');
 
-const MAX_CATALOG = 7000;
+const MAX_CATALOG = 18000;
 const MAX_LESSON_TOP = 16000;
 const MAX_LESSON_CAPPED = 6000;
 const MAX_EXTRA_PAGE = 2200;
 const MAX_EXTRA_PAGES = 5;
 const MAX_TOTAL = 60000;
+
+// Baccalaureate exams: the catalog lists them all, but their bodies are only
+// injected when the student actually asks for an exam (a year, or a solution).
+const MAX_EXERCISE_BUDGET = 12000;
+const MAX_EXERCISES = 3;
+const MAX_SOLUTIONS = 2;
+const MAX_EXERCISE_PAGE = 3000;
+const MAX_SOLUTION_PAGE = 2600;
 
 let wikiPromise = null;
 
@@ -72,14 +83,73 @@ function parseFrontmatter(content) {
       fm[key].push(line.replace(/^\s*-\s+/, '').trim().replace(/^"(.*)"$/, '$1'));
     }
   }
-  return { fm, body: content.slice(m[0][0].length).trim() };
+  return { fm, body: content.slice(m[0].length).trim() };
 }
 
 function typeFromRel(rel) {
   if (rel.startsWith('lessons/')) return 'lesson';
   if (rel.startsWith('concepts/')) return 'concept';
   if (rel.startsWith('formulas/')) return 'formula';
+  if (rel.startsWith('exercises/')) return 'exercise';
+  if (rel.startsWith('solutions/')) return 'solution';
   return null;
+}
+
+// Arabic-Indic digits -> ASCII, so "بكالوريا ٢٠٠٨" resolves like "2008".
+function normalizeDigits(text) {
+  return String(text || '').replace(/[\u0660-\u0669\u06f0-\u06f9]/g, function (d) {
+    const code = d.charCodeAt(0);
+    const base = code >= 0x06f0 ? 0x06f0 : 0x0660;
+    return String(code - base);
+  });
+}
+
+const UNIT_LABELS = {
+  unit1: 'الوحدة الأولى',
+  unit2: 'الوحدة الثانية',
+  unit3: 'الوحدة الثالثة',
+  unit4: 'الوحدة الرابعة',
+  unit5: 'الوحدة الخامسة'
+};
+
+// The ordinal stem carries no article of its own: the optional (?:ال)? before it
+// has to be able to consume "ال", otherwise "الوحدة الثانية" cannot match.
+const UNIT_ALIASES = [
+  [/(?:ال)?وحدة\s*(?:ال)?(?:اولى|أولى|1)(?![0-9])/u, 'unit1'],
+  [/(?:ال)?وحدة\s*(?:ال)?(?:ثانية|2)(?![0-9])/u, 'unit2'],
+  [/(?:ال)?وحدة\s*(?:ال)?(?:ثالثة|3)(?![0-9])/u, 'unit3'],
+  [/(?:ال)?وحدة\s*(?:ال)?(?:رابعة|4)(?![0-9])/u, 'unit4'],
+  [/(?:ال)?وحدة\s*(?:ال)?(?:خامسة|5)(?![0-9])/u, 'unit5'],
+  [/\bunit[_\s-]?0?([1-5])(?![0-9])/iu, function (m) { return 'unit' + m[1]; }]
+];
+
+// "حل" / "الحل" / "حلول" as a standalone word — must not match "تحليل".
+const SOLUTION_INTENT = /(^|[\s،.:؛?!])(?:ال)?حل(?:و|ول)?(?:ه|ها|اً|ً)?(?=[\s،.:؛?!]|$)/u;
+
+function unitOf(page) {
+  if (page.fm.unit) return String(page.fm.unit);
+  // No trailing \b: in "unit_02_bac2008" the digit is followed by "_", so there
+  // is no word boundary there and \b would reject every exercise id.
+  const m = /\bunit[_\s-]?0?([1-5])(?![0-9])/i.exec(page.fm.id || page.rel || '');
+  return m ? 'unit' + m[1] : '';
+}
+
+function wantsSolutions(query) {
+  return SOLUTION_INTENT.test(normalizeDigits(query));
+}
+
+function queryYears(query) {
+  const found = normalizeDigits(query).match(/(?:19|20)\d{2}/g);
+  return found ? Array.from(new Set(found)) : [];
+}
+
+function queryUnit(query) {
+  const q = normalizeDigits(query);
+  for (const [re, unit] of UNIT_ALIASES) {
+    const m = re.exec(q);
+    if (m) return typeof unit === 'function' ? unit(m) : unit;
+  }
+  return '';
 }
 
 function tokens(text) {
@@ -132,6 +202,12 @@ function renderCatalog(pages) {
   const lessons = pages.filter((p) => p.type === 'lesson');
   const concepts = pages.filter((p) => p.type === 'concept');
   const formulas = pages.filter((p) => p.type === 'formula');
+  const exercises = pages
+    .filter((p) => p.type === 'exercise')
+    .sort((a, b) => exerciseSortKey(a) - exerciseSortKey(b) || String(a.fm.id).localeCompare(String(b.fm.id)));
+  const withSolution = new Set(
+    pages.filter((p) => p.type === 'solution' && p.fm.exercise_ref).map((p) => p.fm.exercise_ref)
+  );
   const lines = [];
 
   lines.push(
@@ -139,7 +215,8 @@ function renderCatalog(pages) {
     'العلوم الفيزيائية، بكالوريا الجزائر، السنة الثالثة ثانوي (علوم تجريبية، رياضيات، تقني رياضي).'
   );
   lines.push('الويكي يضم: ' + lessons.length + ' درسًا، ' + concepts.length + ' مفهومًا، ' +
-    formulas.length + ' صيغة، وتمارين بكالوريا مع حلول موثقة.');
+    formulas.length + ' صيغة، و' + exercises.length + ' تمرين بكالوريا' +
+    (withSolution.size ? ' (مع ' + withSolution.size + ' حلًا موثقًا).' : '.'));
   lines.push('');
 
   lines.push('### الدروس (وحدات)');
@@ -159,8 +236,28 @@ function renderCatalog(pages) {
   for (const p of formulas) {
     lines.push('- `' + p.fm.id + '` — ' + (p.fm.title_ar || p.rel) + (p.fm.symbol ? ' — ' + p.fm.symbol : ''));
   }
+  lines.push('');
+
+  lines.push('### تمارين بكالوريا (مخزّنة كاملة — أَعِد نصَّ التمرين المطلوب منها حرفيًا، وحلّه فقط عند الطلب)');
+  for (const p of exercises) {
+    const unit = unitOf(p);
+    const meta = [];
+    if (p.fm.year) meta.push(String(p.fm.year));
+    if (p.fm.stream) meta.push(String(p.fm.stream));
+    if (unit) meta.push(UNIT_LABELS[unit] || unit);
+    if (p.fm.topic) meta.push(String(p.fm.topic));
+    const mark = withSolution.has(p.fm.id) ? ' ✓(له حل)' : '';
+    lines.push(
+      '- `' + p.fm.id + '` — ' + (meta.length ? meta.join(' · ') : (p.fm.title_ar || p.rel)) + mark
+    );
+  }
 
   return lines.join('\n');
+}
+
+function exerciseSortKey(page) {
+  const y = parseInt(page.fm.year, 10);
+  return Number.isFinite(y) ? y : 9999;
 }
 
 function sliceTo(lines, head, max) {
@@ -172,7 +269,7 @@ function sliceTo(lines, head, max) {
 
 function buildWikiContext(query) {
   const wiki = loadWiki();
-  const qTokens = tokens(query);
+  const qTokens = tokens(normalizeDigits(query));
 
   const lessons = wiki.pages.filter((p) => p.type === 'lesson');
   const concepts = wiki.pages.filter((p) => p.type === 'concept');
@@ -223,11 +320,121 @@ function buildWikiContext(query) {
     used += cap.length;
   }
 
+  // Baccalaureate exams. Their bodies stay out of the context until the
+  // student asks for an exam, so a normal physics question keeps its budget
+  // and an exam request gets the real archived text instead of a hallucination.
+  const exam = buildExamContext(wiki.pages, query, qTokens, MAX_TOTAL - used);
+  for (const block of [exam.header].concat(exam.blocks)) {
+    if (!block || exam.budgetLeft < 400) break;
+    const cap = block.slice(0, Math.min(block.length, exam.budgetLeft));
+    exam.budgetLeft -= cap.length;
+    parts.push(cap);
+    used += cap.length;
+  }
+
   let ctx = parts.join('\n');
   if (ctx.length > MAX_TOTAL) {
     ctx = ctx.slice(0, MAX_TOTAL) + '\n…(مقتطع لضيق المساحة)';
   }
   return ctx;
+}
+
+/* ---------- baccalaureate exams ---------- */
+
+// Ranks exercises for a query. A stated year and a stated unit are both hard
+// filters — "the 2015 exam of unit 2" must never return a 2016 paper — and
+// free-text matches only order what is left.
+function rankExercises(pages, qTokens, years, unit) {
+  const byYear = new Set(years);
+  return pages
+    .filter(function (p) {
+      if (unit && unitOf(p) !== unit) return false;
+      if (byYear.size && !byYear.has(String(p.fm.year || ''))) return false;
+      return true;
+    })
+    .map(function (p) {
+      return { p: p, s: scorePage(p, qTokens) * 5, unit: unitOf(p) };
+    })
+    .filter((x) => x.s > 0)
+    .sort((a, b) => b.s - a.s || String(a.p.fm.id).localeCompare(String(b.p.fm.id)));
+}
+
+// When the student names no unit, take one exercise per unit, walking the
+// units in syllabus order, so a bare "exam 2008" spans the year instead of
+// returning three exercises from whichever unit happened to score highest.
+function pickExercises(ranked, limit, diversify) {
+  const out = [];
+  if (diversify) {
+    const groups = new Map();
+    for (const x of ranked) {
+      const key = x.unit || '';
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(x);
+    }
+    for (const key of Array.from(groups.keys()).sort()) {
+      if (out.length >= limit) break;
+      out.push(groups.get(key)[0]);
+    }
+  }
+  for (const x of ranked) {
+    if (out.length >= limit) break;
+    if (out.indexOf(x) === -1) out.push(x);
+  }
+  return out;
+}
+
+function buildExamContext(pages, query, qTokens, budgetLeft) {
+  const result = { header: null, blocks: [], budgetLeft: Math.min(budgetLeft, MAX_EXERCISE_BUDGET) };
+  if (result.budgetLeft < 800) return result;
+
+  const years = queryYears(query);
+  const unit = queryUnit(query);
+  const withSolution = wantsSolutions(query);
+  // An exam is requested by naming a year, or by asking for a solution.
+  if (!years.length && !withSolution) return result;
+
+  const exercises = pages.filter((p) => p.type === 'exercise' && p.fm.year);
+  if (!exercises.length) return result;
+
+  const ranked = rankExercises(exercises, qTokens, years, unit);
+
+  const solutionsByExercise = new Map();
+  if (withSolution) {
+    for (const s of pages) {
+      if (s.type === 'solution' && s.fm.exercise_ref) {
+        solutionsByExercise.set(String(s.fm.exercise_ref), s);
+      }
+    }
+  }
+
+  // Asking for a solution means the student expects one: prefer exercises whose
+  // solution is archived, otherwise the model would answer "no solution" for an
+  // exam that does have one under a different unit.
+  const solved = ranked.filter((x) => solutionsByExercise.has(String(x.p.fm.id)));
+  const pool = withSolution && solved.length ? solved : ranked;
+
+  const chosen = pickExercises(pool, MAX_EXERCISES, !unit);
+  if (!chosen.length) return result;
+
+  result.header =
+    '\n\n## تمارين بكالوريا المطلوبة\n' +
+    'النصوص التالية من أرشيف المشروع verbatim. أَعِد نص التمرين كما هو، ولا تضف ولا تحذف. ' +
+    'الحلول أدناه للطلب فقط — لا تعطِ الحل إن لم يُطلب.';
+
+  let solutionsUsed = 0;
+  for (const x of chosen) {
+    const head = '`' + x.p.fm.id + '` — ' + (x.p.fm.title_ar || x.p.rel);
+    result.blocks.push(('\n\n## تمرين: ' + head + '\n' + x.p.body).slice(0, MAX_EXERCISE_PAGE));
+
+    const solution = solutionsByExercise.get(String(x.p.fm.id));
+    if (solution && solutionsUsed < MAX_SOLUTIONS) {
+      const sBlock = '\n\n## حل: `' + solution.fm.id + '`\n' + solution.body;
+      result.blocks.push(sBlock.slice(0, MAX_SOLUTION_PAGE));
+      solutionsUsed++;
+    }
+  }
+
+  return result;
 }
 
 /* ---------- legacy fallback (raw files) ---------- */
