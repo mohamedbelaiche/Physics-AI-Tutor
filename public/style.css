@@ -556,8 +556,22 @@ main {
   unicode-bidi: isolate;
 }
 
+/* حبر KaTeX يفيض عن صندوق العرض عمدًا: صندوق ‎.katex-display‎ يُقاس على
+   ‎.katex-html‎، فيرسم الكسرُ أطرافَه فوق ذلك الصندوق وتحتَه. ومع
+   ‎overflow-y:hidden‎ يُقصّ هذا الحبر ولا يُرى (قِسناه: 13px في 177 شريحة،
+   و125 صندوقًا من 125 يفيض رأسيًا). والحشو هو ما يصلح ذلك: اتّساع الصندوق
+   يقرّب حدّ القصّ من الحبر فيغطّيه. فنمنحه حشوًا رأسيًّا 0.75em يتّسع
+   للفيض — قِيسنا فالحدّ 10px عند خطّ 16px، فجعلناه 12px هامشَ أمان.
+   ولا يكلّف الشريحة شيئًا: ارتفاع جسم الشريحة لم يتغيّر في أي مقاس
+   (slideRise = 0)، لأن ‎fitCard‎ يصغّرها ملاءمةً للشاشة على أي حال.
+
+   ولا نكتب ‎overflow-y:visible‎: حسب المواصفة، حين يكون المحور الآخر
+   ‎auto‎ يصير ‎visible‎ هو ‎auto‎، فيظهر شريط تمرير عمودي على كل معادلة.
+   جرّبنا ‎overflow-clip-margin‎ فلم ينفع هنا (Chromium لا يوسّع منطقة القصّ
+   حين يكون المحور الآخر scroll container). */
 .chat-msg .katex-display {
   margin: 0.4rem 0;
+  padding: 0.75em 0;
   text-align: center;
   overflow-x: auto;
   overflow-y: hidden;
@@ -1539,8 +1553,11 @@ main {
   font-weight: 700;
 }
 
+/* الحشو الرأسي لـ .katex-display: انظر شرح ‎.chat-msg .katex-display‎ —
+   هو نفس القصّ: حبرُ الكسور يفيض عن الصندوق فيُمحى إن لم نُفسح له. */
 .course-content .katex-display {
   margin: var(--sp-4) 0;
+  padding: 0.75em 0;
   overflow-x: auto;
   overflow-y: hidden;
   direction: ltr;
@@ -1757,6 +1774,11 @@ body.slides-focus {
   --slide-controls-h: 4.5rem;
 }
 
+/* أدوات وضع القراءة تُخفى كلها: ما يبقى منها تحت البطاقة يضيف ارتفاعًا
+   إلى المستند فيصير أطول من الشاشة، فيتمرّر المتصفح من تلقاءه ويُقصّ أعلى
+   الشريحة. ومنه شريطُ الدرس (#course-lesson-nav): ‎~49px‎ تحت البطاقة،
+   أي كان المستند ‎871px‎ في شاشة ‎1366×768‎ فقُصّ العدّاد والعنوان.
+   ووضع الشرائح له شريطه الخاص (.slides-nav) مثبَّت أسفل البطاقة. */
 body.slides-focus > .site-header,
 body.slides-focus nav.view-tabs,
 body.slides-focus > .site-footer,
@@ -1764,7 +1786,8 @@ body.slides-focus .chat-panel,
 body.slides-focus .chat-fab,
 body.slides-focus #course-lesson-back,
 body.slides-focus #course-lesson-head,
-body.slides-focus #course-sections-bar {
+body.slides-focus #course-sections-bar,
+body.slides-focus #course-lesson-nav {
   display: none;
 }
 
@@ -1777,18 +1800,31 @@ body.slides-focus main {
 /* الوضع الموسّع: سلسلة واحدة تقسم الشاشة ولا تكدّس شاشات. المستوى الأعلى
    (المجموعة والعرض) يحمل الشاشة، وما تحته يأخذ المتبقّي فقط؛ لو حمل كل
    مستوى 100dvh لتجاوز المجموع الشاشةَ بمقدار الحشوة والشريط، فخرج شريط
-   «التالي» (الملتصق بأسفل البطاقة) تحت حافة الشاشة بلا وسيلة للوصول إليه. */
+   «التالي» (الملتصق بأسفل البطاقة) تحت حافة الشاشة بلا وسيلة للوصول إليه.
+
+   min-height حدٌّ أدنى فقط، وحدُه يبقى بلا سقف: البطاقة تنمو مع محتواها
+   فوق حافة الشاشة (741px في شاشة 720px) فيصير المستند أطول من الشاشة
+   فيتمرّر المتصفح من تلقاءه ويُقصّ أعلى الشريحة. والأسوأ أن ذلك لا يُنتج
+   تمريرًا داخل البطاقة، فلا يرى fitCard ما يتجاوزها فلا يصغّرها.
+   max-height هو ما يجعل المحتوى يفيض داخل البطاقة فيُقاس على محورها
+   فتُصغَّر الشريحة ملاءمةً للشاشة (وهو المقصود من fitCard أصلًا). */
 body.slides-focus #courses-group,
 body.slides-focus #course-lesson-view {
   min-height: 100dvh;
+  max-height: 100dvh;
   display: flex;
   flex-direction: column;
 }
 
-/* لا تُصفَّر حشوة الحاوية — احتواء النص تكفل به مساحة الحاوية نفسها. */
+/* لا تُصفَّر حشوة الحاوية — احتواء النص تكفل به مساحة الحاوية نفسها.
+   قِيس القراءة (72ch) كان يرثه الوضع الموسّع فيضيّق الشريحة إلى نحو
+   579px من 1920 (30% فقط). الشريحة رسمٌ بعرض الشاشة لا مِقياس قراءة،
+   فالسقف هنا سعة شاشة؛ ويبقى النصّ محصورًا بـ max-width على .slides-text
+   (68ch) فلا يمتد إلى الحافة، والحشوة باقية كما هي. */
 body.slides-focus .course-content.slides-mode {
   flex: 1;
   min-height: 0;
+  max-width: min(1400px, 100%);
   display: flex;
   flex-direction: column;
 }
@@ -1941,8 +1977,11 @@ body.slides-focus .slides-nav {
   text-align: right;
 }
 .slides-text th { background: #eaf3fd; color: #16213e; }
+/* الحشو الرأسي لـ .katex-display: انظر شرح ‎.chat-msg .katex-display‎ —
+   هو نفس القصّ: حبرُ الكسور يفيض عن الصندوق فيُمحى إن لم نُفسح له. */
 .slides-text .katex-display {
   margin: 0.6rem 0;
+  padding: 0.75em 0;
   overflow-x: auto;
   overflow-y: hidden;
   direction: ltr;

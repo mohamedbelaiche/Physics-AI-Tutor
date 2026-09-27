@@ -9,10 +9,14 @@
     "build:course": "node scripts/build-course-content.js",
     "check:course": "node scripts/smoke-course.js",
     "check:slides": "node scripts/smoke-slides.js",
+    "check:slides-layout": "node scripts/check-slides-layout.js",
     "test": "node --test scripts/course-slides-ui.test.js scripts/context-bac-exams.test.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.116.0",
     "marked": "^12.0.2"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
   }
 }

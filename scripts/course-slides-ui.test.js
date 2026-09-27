@@ -569,6 +569,39 @@ test('slide prose keeps a proportional reading measure', () => {
   assert.match(text, /line-height:\s*1\.[6-9]/);
 });
 
+test('display equations keep the fraction bars that overflow their box', () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'style.css'), 'utf8');
+
+  // صندوق ‎.katex-display‎ يُقاس على ‎.katex-html‎، فيرسم الكسرُ أطرافَه فوق
+  // الصندوق وتحتَه. ومع ‎overflow-y:hidden‎ يُمحى ذلك الحبر ولا يُرى: قِسناه
+  // 13px في 177 شريحة، و125 صندوقًا من 125 يفيض رأسيًا. حدُّ القصّ عند حدّ
+  // الحشو، فكلما اتّسع الحشو اقترّب الحدّ من الحبر. فنتحقّق أن القواعد الثلاث
+  // تُعطيه.
+  const RULES = ['.chat-msg .katex-display', '.course-content .katex-display', '.slides-text .katex-display'];
+  RULES.forEach((sel) => {
+    const rule = cssBlock(css, sel);
+    const pad = /padding:\s*([\d.]+)(em|rem|px)\s+(?:0|auto)\s*;/.exec(rule);
+    assert.notEqual(
+      pad, null,
+      sel + ' must pad the box vertically, or overflow-y:hidden clips the fraction bars'
+    );
+    assert.notEqual(
+      pad[2], 'px',
+      sel + ' must express the padding in em so it keeps tracking the font size'
+    );
+  });
+
+  // ولا نصلحه ‎overflow-y:visible‎: حين يكون المحور الآخر ‎auto‎ يصير
+  // ‎visible‎ هو ‎auto‎، فيظهر شريط تمرير عمودي على كل معادلة. جرّبنا
+  // ‎overflow-clip-margin‎ فلم ينفع هنا. فالحشو هو الحلّ وحده.
+  RULES.forEach((sel) => {
+    assert.doesNotMatch(
+      cssBlock(css, sel), /overflow-y:\s*visible/,
+      sel + ' must not use overflow-y:visible — it makes every equation scroll vertically'
+    );
+  });
+});
+
 test('a scene is not shrunk twice in the expanded slide', async () => {
   const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'style.css'), 'utf8');
   const scene = cssBlock(css, 'body.slides-focus .slides-scene-img');
@@ -636,6 +669,42 @@ test('the floating toolbar does not tint the white slide card grey', () => {
   assert.notEqual(background, null, 'the floating controls need a background');
   assert.doesNotMatch(background[1], /240,\s*244,\s*248/);
   assert.match(background[1], /255,\s*255,\s*255/);
+});
+
+test('the redundant lesson pager is hidden while the slide is expanded', () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'style.css'), 'utf8');
+
+  // شريط «السابق/التالي» الخاص بالدرس يبقى في التدفّق بارتفاع ‎~49px‎
+  // (+ حشوته) تحت البطاقة، فيصير المستند أطول من الشاشة (‎871px‎ في
+  // ‎1366×768‎ مقابل ‎768px‎)، فيتمرّر المتصفح من تلقاءه ويُقصّ أعلى الشريحة:
+  // عدّاد الشرائح وعنوانها يختفيان تحت حافة الشاشة. ووضع الشرائح له شريطه
+  // الخاص (.slides-nav) مثبَّت أسفل البطاقة، فيكفي أن يختفي هذا.
+  const chrome = /body\.slides-focus > \.site-header[\s\S]*?\n\}/.exec(css);
+  assert.notEqual(chrome, null, 'the focus-mode chrome rule list must exist');
+  assert.match(
+    chrome[0],
+    /#course-lesson-nav/,
+    'the lesson pager must be hidden in focus mode or it pushes the document past the viewport'
+  );
+  assert.match(chrome[0], /display:\s*none/);
+});
+
+test('the expanded slide is capped to the viewport so it can scale instead of overflow', () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'style.css'), 'utf8');
+
+  // min-height وحدها لا تقيّد شيئًا: البطاقة تنمو مع محتواها فوق حافة
+  // الشاشة (741px في شاشة 720px)، فيصير المستند أطول من الشاشة فيتمرّر
+  // المتصفح من تلقاءه ويُقصّ أعلى الشريحة. والأسوأ أن ذلك لا يُنتج تمريرًا
+  // داخليًا، فلا يرى fitCard في slides-player.js ما يتجاوز البطاقة فلا
+  // يصغّرها أصلًا. السقف (max-height) هو ما يجعل المحتوى يفيض *داخل*
+  // البطاقة فيُقاس على محورها فتُصغَّر الشريحة ملاءمةً للشاشة.
+  const chain = /body\.slides-focus #courses-group[\s\S]*?\n\}/.exec(css);
+  assert.notEqual(chain, null, 'the focus-mode height chain must exist');
+  assert.match(
+    chain[0],
+    /max-height:\s*100dvh/,
+    'the focus-mode chain must be capped to the viewport, not merely given a min-height'
+  );
 });
 
 test('the slide next button stays reachable without covering the slide', () => {
@@ -1255,4 +1324,21 @@ test('switching to text while the deck is loading keeps text mode', async () => 
   assert.equal(modeSlides.classList.contains('active'), false);
   assert.equal(body.classList.contains('slides-focus'), false);
   assert.equal(lessonBody.classList.contains('slides-mode'), false);
+});
+
+test('the server serves .svg as image/svg+xml so the scenes can load', () => {
+  // بدون هذا النوع يقدّم server.js ملفّات المشاهد octet-stream، فيرفض
+  // Chromium عرضها في <img> (حدث error) وتظهر الشريحة بمشهد مكسور.
+  const server = fs.readFileSync(path.join(__dirname, '..', 'server.js'), 'utf8');
+  assert.match(server, /'\.svg':\s*'image\/svg\+xml'/);
+});
+
+test('the expanded slide is not clamped by the reading measure', () => {
+  // .course-content يحمل max-width للقراءة (72ch). لولا سعةٌ شاشة في الوضع
+  // الموسّع لضاقت الشريحة إلى نحو 579px من 1920 (30% فقط)، فخسرنا
+  // «تغطية نسبة كبيرة من الشاشة». يبقى النصّ محصورًا بـ .slides-text وحده.
+  const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'style.css'), 'utf8');
+  const block = cssBlock(css, 'body.slides-focus .course-content.slides-mode');
+  assert.doesNotMatch(block, /\d+ch/);
+  assert.match(block, /max-width:\s*min\(\s*\d+px\s*,\s*100%\s*\)/);
 });
